@@ -8,12 +8,12 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
-		<properties>
+	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
+		<org.springframework-version>5.0.7.RELEASE</org.springframework-version> <!-- 스프링 -->
 		<org.aspectj-version>1.9.0</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
-		<org.security-version>5.0.6.RELEASE</org.security-version>
+		<org.security-version>5.0.6.RELEASE</org.security-version> <!-- Spring Security: 스프링 버전보다 아래 낮게 할것  -->
 	</properties>
 	
 	<repositories>
@@ -25,7 +25,7 @@
 	
 	<dependencies>
 	
-				<!-- Spring Security -->
+		<!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -48,8 +48,7 @@
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>${org.security-version}</version>
-		</dependency>  
-	
+		</dependency>   	
 		<!-- 오라클 JDBC 드라이버 -->
 		<dependency>
 		    <groupId>oracle</groupId>
@@ -62,7 +61,8 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
-			<exclusions>
+			<exclusions>	
+			
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -78,17 +78,10 @@
 
 		<!-- AspectJ -->
 		<dependency>
-			<groupId>org.aspectj</groupId> <!--이것이 AOP 지원하기 위한 라이브러리  -->
+			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-      <dependency>
-          <groupId>org.aspectj</groupId> <!--AOP의 위버 설정  -->
-          <artifactId>aspectjweaver</artifactId>
-          <version>${org.aspectj-version}</version>
-      </dependency>   
 
 		<!-- Logging -->
 		<dependency>
@@ -184,6 +177,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!--히카리 커넥션풀 -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
@@ -191,14 +185,14 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<!--마이바티스 필요부분 https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.4.6</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<!--마이바티스와 스프링을 연결을 위한 필요부분 https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
@@ -226,16 +220,13 @@
 			<version>2.9.6</version>
 		</dependency>
 
-
-		<!--자바객체를 xml로 바꾸는것  -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 			<version>2.9.6</version>
 		</dependency>
-		
-		<!--자바객체를 json로 바꾸는것  -->
+
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -282,6 +273,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	
 </project>
