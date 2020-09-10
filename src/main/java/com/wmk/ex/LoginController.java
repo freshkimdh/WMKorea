@@ -19,7 +19,7 @@ public class LoginController {
 	
 	@GetMapping("/login/loginForm")
 	public void loginFor() {
-		log.info("adminHome...");
+		log.info("loginFor...");
 	}
 	
 	@GetMapping("/login/accessDenied")

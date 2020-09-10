@@ -10,6 +10,6 @@ public class AdminController {
 	
 	@GetMapping("/admin/adminHome")
 	public void adminhome() {
-		log.info("Welcome Access Denied!");
+		log.info("Welcome admin!");
 	}
 }

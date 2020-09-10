@@ -22,22 +22,22 @@ public class HomeController {
 	
 	@GetMapping("/intro/introduction")
 	public void introduction() { 
-		log.info("loginForm...");
+		log.info("introduction...");
 	}
 	
 	@GetMapping("/index")
 	public void index() { 
-		log.info("loginForm...");
+		log.info("index...");
 	}
 	
 	@GetMapping("/login")
 	public void login() { 
-		log.info("loginForm...");
+		log.info("login...");
 	}
 	
 	@GetMapping("/join")
 	public void join() { 
-		log.info("loginForm...");
+		log.info("join...");
 	}
 	
 }
