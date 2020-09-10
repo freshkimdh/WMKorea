@@ -25,4 +25,19 @@ public class HomeController {
 		log.info("loginForm...");
 	}
 	
+	@GetMapping("/index")
+	public void index() { 
+		log.info("loginForm...");
+	}
+	
+	@GetMapping("/login")
+	public void login() { 
+		log.info("loginForm...");
+	}
+	
+	@GetMapping("/join")
+	public void join() { 
+		log.info("loginForm...");
+	}
+	
 }

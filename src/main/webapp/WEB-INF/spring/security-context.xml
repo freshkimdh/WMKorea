@@ -12,6 +12,12 @@
         <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />
         
+        <intercept-url pattern="/index" access="permitAll" />
+        <intercept-url pattern="/join" access="permitAll" />
+        <intercept-url pattern="/login" access="permitAll" />
+        
+        
+        
         <form-login login-page="/login/loginForm"
                     default-target-url="/home"
                     authentication-failure-url="/login/loginForm?error"
