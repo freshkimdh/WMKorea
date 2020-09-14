@@ -1,0 +1,32 @@
+create table wmk_users(
+   id varchar2(50) not null primary key,
+   pw varchar2(100) not null,
+    nickname varchar2(50),
+    email varchar2(50),
+    nationality varchar2(50), 
+   enabled char(1) DEFAULT '1'
+);
+
+create table wmk_authorities (
+   id varchar2(50) not null,
+   authority varchar2(50) not null,
+   constraint fk_authorities_wmk_users foreign key(id) references wmk_users(id)
+);
+
+
+create unique index ix_auth_id on wmk_authorities (id,authority);
+
+commit;
+
+-------------------------------------------------------------------------------
+create table MVC_BOARD(
+	bId NUMBER(4) PRIMARY KEY,
+	bNAME VARCHAR2(20),
+	bTitle VARCHAR2(100),
+	bContent VARCHAR2(300),
+	bDate DATE DEFAULT SYSDATE,
+	dHit NUMBER(4) DEFAULT 0,
+	bGroup NUMBER(4),
+	bStep NUMBER(4),
+	bIndent NUMBER(4)
+);
