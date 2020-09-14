@@ -56,7 +56,7 @@ public class BoardController {
 	   return "write_view";
 	}
 	
-	@PostMapping("/write")
+	@RequestMapping("/write")
 	public String write(BoardVO boardVO) {
 		
 		log.info("write");
@@ -89,7 +89,7 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	@PostMapping("/modify")
+	@RequestMapping("/modify")
 	public String modify(BoardVO boardVO) {
 		
 		log.info("modify");

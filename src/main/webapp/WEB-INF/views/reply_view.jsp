@@ -9,7 +9,7 @@
 <body>
 
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
-		<form action="reply" method="post"> <!--원본글에 대한 것을 보낸다. 원리 꼭 알아야 한다!!-->
+		<form action="reply" method="get"> <!--원본글에 대한 것을 보낸다. 원리 꼭 알아야 한다!!-->
 			<input type="hidden" name="bId" value="${reply_view.bId}">
 			<input type="hidden" name="bGroup" value="${reply_view.bGroup}">
 			<input type="hidden" name="bStep" value="${reply_view.bStep}">
