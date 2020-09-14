@@ -22,7 +22,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.wmk.ex" />
+	<context:component-scan base-package="com.wmk.ex" /> <!-- 클래스위에 @ 떄려박은거에 대해서 객체를 생성해서 스프링 ioc 컨테이너에 넣는다. (@component, repository, service, controller 등.. -->
 	
 	
 	

@@ -6,15 +6,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/login/loginForm" access="permitAll" />
-		<intercept-url pattern="/home" access="permitAll" />
-		
-		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />
+		<intercept-url pattern="/**" access="permitAll" />
 	
 		
 		<form-login login-page="/login/loginForm"
-					default-target-url="/home"
+					default-target-url="/index"
 					authentication-failure-url="/loginForm?error"
 					username-parameter="id"
                     password-parameter="password" 
@@ -25,6 +21,10 @@
         <access-denied-handler error-page="/accessDenied" />          
                     
 	</http>
+
+
+		<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
 	
 	<authentication-manager>
 		<authentication-provider>

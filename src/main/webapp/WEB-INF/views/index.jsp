@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>   
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>  
+<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
 
 
 
@@ -146,10 +148,21 @@
 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
  	<ul class="navbar-nav"> 
 	<div class="btn-group btn-group-sm">
-<!-- <a class="btn btn-dark">반갑습니다, 김대환 님!</a> -->
-   		<a href="login" class="btn btn-secondary" type="button">Login</a>
-		<a href="join" class="btn btn-secondary" type="button">Join</a> 
+	
+<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
+   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
 		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>
+   		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+   			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
+   		</form:form> 
+		<a href="mypage" class="btn btn-secondary" type="button">My Page</a>
+</sec:authorize>
+
 	</div>
 
  	</ul>
