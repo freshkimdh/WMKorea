@@ -19,7 +19,7 @@ create unique index ix_auth_id on wmk_authorities (id,authority);
 commit;
 
 -------------------------------------------------------------------------------
-create table MVC_BOARD(
+create table WMK_MVC_BOARD(
 	bId NUMBER(4) PRIMARY KEY,
 	bNAME VARCHAR2(20),
 	bTitle VARCHAR2(100),
