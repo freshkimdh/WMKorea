@@ -16,7 +16,7 @@ public interface BoardMapper {
 
 	public BoardVO read(int bno);
 	
-	@Delete("Delete from mvc_board where bid = #{bno}")
+	@Delete("Delete from wmk_mvc_board where bid = #{bno}")
 	public void delete(int bno);
 
 	public void insertBoard(BoardVO boardvo);
