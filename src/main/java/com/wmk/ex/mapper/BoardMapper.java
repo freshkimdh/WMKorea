@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
 
 
@@ -28,5 +29,9 @@ public interface BoardMapper {
 	public void updateModify(BoardVO boardVO);
 	
 	public void addUphit(int bno);
+	
+	//페이징 처리
+	public List<BoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.wmk.ex.mapper.BoardMapper;
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
 
 import lombok.AllArgsConstructor;
@@ -72,6 +73,20 @@ public class BoardServiceImpl implements BoardService {
 		
 		mapper.updateModify(boardVO);
 		
+	}
+	
+	
+	//∆‰¿Ã¬° √≥∏Æ
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<BoardVO> getList(Criteria criteria) {
+		log.info("get List with criteria"  + criteria);
+		return mapper.getListWithPaging(criteria);
 	}
 
 	

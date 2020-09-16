@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.wmk.ex.page.Criteria;
+import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.BoardService;
 import com.wmk.ex.vo.BoardVO;
 
@@ -24,12 +26,17 @@ public class BoardController {
 	//스프링 5는 생성자가 있으면 Auto(자동으로 넣어줌) 
 	private BoardService service;
 	
-	@GetMapping("/list") // get 방식으로 받아서 getmapping "@RequestMapping" 이것도 상관없음
-	public void list(Model model) { // 비지니스 로직이 들어간다 "BoardService"
-	   log.info("list");
-	   model.addAttribute("list", service.getList());
-
-	}	
+	 @GetMapping("/list") // get 방식으로 받아서 getmapping "@RequestMapping" 이것도 상관없음
+	 public void list(Criteria cri, Model model) {	// 비지니스 로직이 들어간다 "BoardService"
+		 log.info("list");
+		 log.info(cri);
+		 model.addAttribute("list", service.getList(cri));	
+		 
+		 int total = service.getTotal(cri);
+		 log.info("total" + total);
+		 
+		 model.addAttribute("pageMaker", new PageDTO(cri,total));	
+	 }
 	
 	@GetMapping("/content_view") 
 	public String content_view(BoardVO boardVO, Model model) {

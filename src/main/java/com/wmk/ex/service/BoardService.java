@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
 
 
@@ -22,6 +23,10 @@ public interface BoardService {
 	public void writeReply(BoardVO boardVO);
 
 	public void modify(BoardVO boardVO);
+	
+	//페이징 처리
+	public int getTotal(Criteria cri);
+	public List<BoardVO> getList(Criteria criteria);
 	
 
 	
