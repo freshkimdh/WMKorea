@@ -7,7 +7,9 @@
     
     <!-- 검사 URL -->
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/**" access="permitAll" />
+        
+        <intercept-url pattern="/write_view" access="hasAnyRole('USER, ADMIN')" />
+        <intercept-url pattern="/" access="permitAll" />
         
  		<form-login login-page="/loginForm"
 					default-target-url="/index"
@@ -49,7 +51,8 @@
 			<user-service> 
 				<user name="member" password="{noop}member" authorities="ROLE_MEMBER" />
 				<user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN" />
-				<user name="user" password="{noop}user" authorities="ROLE_USER" /> 			
+				<user name="user" password="{noop}user" authorities="ROLE_USER" />
+				<user name="Ejshd" password="{noop}1234" authorities="ROLE_USER" />  			
 			</user-service> 
 		</authentication-provider>
 	</authentication-manager>
@@ -58,7 +61,6 @@
        	<authentication-manager>
         <authentication-provider user-service-ref="customUserDetailService">
         <password-encoder ref="bcryptPasswordEncoder"/>
-        
         </authentication-provider>
     </authentication-manager>
 		
