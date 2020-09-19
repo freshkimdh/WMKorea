@@ -30,8 +30,12 @@ public interface BoardMapper {
 	
 	public void addUphit(int bno);
 	
+	
 	//페이징 처리
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 
+	//검색기능
+	public List<BoardVO> findBoardByTitle(String bTitle);
+	
 }

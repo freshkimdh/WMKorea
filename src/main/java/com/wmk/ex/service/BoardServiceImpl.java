@@ -16,7 +16,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
 	
-	
 	private BoardMapper mapper; // DAO 레포지토리
 	
 	public List<BoardVO> getList() {
@@ -73,6 +72,16 @@ public class BoardServiceImpl implements BoardService {
 		
 		mapper.updateModify(boardVO);
 		
+	}
+	
+	
+	//검색기능
+	@Override
+	public List<BoardVO> BoardByTitle(String bTitle) {
+		
+		log.info("BoardByTitle........");
+		
+		return mapper.findBoardByTitle(bTitle);
 	}
 	
 	

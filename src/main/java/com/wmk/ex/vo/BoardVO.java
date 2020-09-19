@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor 
 @AllArgsConstructor
@@ -74,6 +75,13 @@ public class BoardVO {
 	}
 	public void setbIndent(int bIndent) {
 		this.bIndent = bIndent;
+	}
+	
+	//참조값(주소)를 보는 것이 아니라, Text로 보고싶을 때 toString()을 사용한다.
+	@Override
+	public String toString() {
+		return "BoardVO [bId=" + bId + ", bName=" + bName + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bDate="
+				+ bDate + ", bHit=" + bHit + ", bGroup=" + bGroup + ", bStep=" + bStep + ", bIndent=" + bIndent + "]";
 	}
 	
 	

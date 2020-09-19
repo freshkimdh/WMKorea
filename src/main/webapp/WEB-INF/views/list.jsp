@@ -25,17 +25,35 @@
          <td>날짜</td>
          <td>히트</td>
       </tr>
-      <c:forEach items="${list}" var="dto">
-      <tr>
-         <td>${dto.bId}</td>
-         <td>${dto.bName}</td>
-         <td>
-            <c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
-            <a href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
-         <td>${dto.bDate}</td>
-         <td>${dto.bHit}</td>
-      </tr>
-      </c:forEach>
+      <!-- 검색어의 값이 null일 경우  -->
+      <c:if test="${BoardByTitle eq null }">
+	      <c:forEach items="${list}" var="dto">
+	      <tr>
+	         <td>${dto.bId}</td>
+	         <td>${dto.bName}</td>
+	         <td>
+	            <c:forEach begin="1" end="${dto.bIndent}">-</c:forEach>
+	            <a href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+	         <td>${dto.bDate}</td>
+	         <td>${dto.bHit}</td>
+	      </tr>
+	      </c:forEach>
+      </c:if>
+      
+      <!-- 검색어가 null값이 아닐 경우 -->
+      <c:if test="${BoardByTitle ne null }">
+	      <c:forEach items="${BoardByTitle}" var="BoardByTitle">
+	      <tr>
+	         <td>${BoardByTitle.bId}</td>
+	         <td>${BoardByTitle.bName}</td>
+	         <td>
+	            <c:forEach begin="1" end="${BoardByTitle.bIndent}">-</c:forEach>
+	            <a href="content_view?bId=${BoardByTitle.bId}">${BoardByTitle.bTitle}</a></td>
+	         <td>${BoardByTitle.bDate}</td>
+	         <td>${BoardByTitle.bHit}</td>
+	      </tr>
+	      </c:forEach>
+      </c:if>
       <tr>
          <td colspan="5"> <a href="write_view">글작성</a> </td>
       </tr>
@@ -54,8 +72,21 @@
          <a href="list${pageMaker.makeQuery(pageMaker.endPage +1) }"> » </a>
       </c:if> <br>
       
-      <button type="submit">글쓰기</button>
+      <!-- <button type="submit">글쓰기</button> -->
    
+   
+   		<!-- 검색 -->
+   		<form action="BoardByTitle" method="get">
+
+		    <select name="searchCondition" id="">
+				
+		        <option value="bTitle">제목</option>
+		       
+		    </select>
+			    <input type="text" name="bTitle" id="bTitle" placeholder="검색어를 입력하세요">
+				<input class="btn btn-sm btn-default" type="submit" value="검색">
+			
+		</form>
    
 </body>
 </html>

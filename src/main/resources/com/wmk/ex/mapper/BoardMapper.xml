@@ -68,9 +68,28 @@
 	</select>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*)	from wmk_mvc_board
+		select count(*)	from wmk_mvc_board where bId>0
 	</select>
 	
+	<!-- 게시글 서치 -->
+	<!-- <select id="findBoardByTitle" parameterType="String" resultMap="boardResult">
+        select *from wmk_mvc_board where name like #{btitle}
+	</select>
+	
+	<select id="findBoardByWriter" parameterType="String" resultMap="boardResult">
+        select *from wmk_mvc_board where name like #{bname}
+	</select>
+	     
+	<select id="findBoardByContent" parameterType="String" resultMap="boardResult">
+	       select *from wmk_mvc_board where content like #{bcontent}
+	</select>
+ -->
+	
+	<!-- 게시글 서치 -->
+	<select id="findBoardByTitle" parameterType="String" resultType="com.wmk.ex.vo.BoardVO">
+		<!-- select *from wmk_mvc_board where bTitle like #{bTitle}  --> <!-- 유저가 입력한 정확한 검색어와 매칭되는 것만 출력됨 -->
+		select *from wmk_mvc_board where bTitle like '%'||#{bTitle}||'%' <!-- 유저가 입력한 검색어가 포함된 리스트가 출력됨 -->
+	</select>
 	
 	 
 

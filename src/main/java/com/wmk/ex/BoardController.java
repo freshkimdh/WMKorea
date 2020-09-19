@@ -23,6 +23,8 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardController {
 	
+	
+
 	//스프링 5는 생성자가 있으면 Auto(자동으로 넣어줌) 
 	private BoardService service;
 	
@@ -31,7 +33,7 @@ public class BoardController {
 		 log.info("list");
 		 log.info(cri);
 		 model.addAttribute("list", service.getList(cri));	
-		 
+			System.out.println("미투");
 		 int total = service.getTotal(cri);
 		 log.info("total" + total);
 		 
@@ -67,6 +69,8 @@ public class BoardController {
 	public String write(BoardVO boardVO) {
 		
 		log.info("write");
+		
+		System.out.println("쓰자");
 		
 		service.writeBoard(boardVO);
 		
@@ -106,6 +110,21 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
+	//검색기능
+	@RequestMapping("/BoardByTitle")
+	public String BoardByTitle(BoardVO boardVO, Model model) {  //무엇이든(제목이든, 이름이던...등등) 출력하고자 봉투를 인자로 넣음.
+		
+		System.out.println("나야나");
+		System.out.println(boardVO.toString());  //BoardVO.java 에 있는 toString()을 출력하기 위해.(test용)
+		log.info("BoardByTitle");
+		
+		service.BoardByTitle(boardVO.getbTitle());  //유저가 입력한 것을 서비스에서 받아주기위함.( 유저가 입력한 제목을 서비스로 넘기기 위함)
+		System.out.println(service.BoardByTitle(boardVO.getbTitle()));
+		
+		model.addAttribute("BoardByTitle", service.BoardByTitle(boardVO.getbTitle()));
+		
+		return "list";
+	}
 	
 	
 }

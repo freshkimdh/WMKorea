@@ -24,6 +24,8 @@ public interface BoardService {
 
 	public void modify(BoardVO boardVO);
 	
+	public List<BoardVO> BoardByTitle(String bTitle);
+	
 	//페이징 처리
 	public int getTotal(Criteria cri);
 	public List<BoardVO> getList(Criteria criteria);
