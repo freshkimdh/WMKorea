@@ -1,3 +1,5 @@
+테스트 유저 가입 테이블 작성 쿼리 (20.09.20 기준)
+
 create table wmk_users(
    id varchar2(50) not null primary key,
    pw varchar2(100) not null,
@@ -19,7 +21,10 @@ create unique index ix_auth_id on wmk_authorities (id,authority);
 commit;
 
 -------------------------------------------------------------------------------
-create table WMK_MVC_BOARD(
+
+테스트 게시판 작성 쿼리 (20.09.20 기준)
+
+create table wmk_mvc_board(
 	bId NUMBER(4) PRIMARY KEY,
 	bNAME VARCHAR2(20),
 	bTitle VARCHAR2(100),
@@ -30,6 +35,17 @@ create table WMK_MVC_BOARD(
 	bStep NUMBER(4),
 	bIndent NUMBER(4)
 );
+
+create sequence wmk_mvc_board_seq; 
+
+commit;
+
+insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent)
+values (wmk_mvc_board_seq.nextval, 'abcd', 'is title', 'is content', 0, wmk_mvc_board_seq.currval, 0, 0);
+
+
+select * from wmk_mvc_board;
+select * from wmk_mvc_board order by bGroup desc, bStep asc;
 
 -------------------------------------------------------------------------------
 

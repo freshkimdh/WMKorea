@@ -142,7 +142,8 @@
     </c:if>
     <c:if test="${param.logout != null}">
         <p>로그아웃 하였습니다.</p>
-    </c:if>  
+    </c:if>
+      
     <div class="form-group">
       <label for="id">아이디 (ID):</label>
       <input type="id" class="form-control" id="id" placeholder="아이디를 입력해주세요" name="id">
