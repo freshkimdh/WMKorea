@@ -26,7 +26,7 @@
          <td>히트</td>
       </tr>
       <!-- 검색어의 값이 null일 경우  -->
-      <c:if test="${BoardByTitle eq null }">
+      <c:if test="${boardByTitle eq null }">
 	      <c:forEach items="${list}" var="dto">
 	      <tr>
 	         <td>${dto.bId}</td>
@@ -41,16 +41,16 @@
       </c:if>
       
       <!-- 검색어가 null값이 아닐 경우 -->
-      <c:if test="${BoardByTitle ne null }">
-	      <c:forEach items="${BoardByTitle}" var="BoardByTitle">
+      <c:if test="${boardByTitle ne null }">
+	      <c:forEach items="${boardByTitle}" var="boardByTitle">
 	      <tr>
-	         <td>${BoardByTitle.bId}</td>
-	         <td>${BoardByTitle.bName}</td>
+	         <td>${boardByTitle.bId}</td>
+	         <td>${boardByTitle.bName}</td>
 	         <td>
-	            <c:forEach begin="1" end="${BoardByTitle.bIndent}">-</c:forEach>
-	            <a href="content_view?bId=${BoardByTitle.bId}">${BoardByTitle.bTitle}</a></td>
-	         <td>${BoardByTitle.bDate}</td>
-	         <td>${BoardByTitle.bHit}</td>
+	            <c:forEach begin="1" end="${boardByTitle.bIndent}">-</c:forEach>
+	            <a href="content_view?bId=${boardByTitle.bId}">${boardByTitle.bTitle}</a></td>
+	         <td>${boardByTitle.bDate}</td>
+	         <td>${boardByTitle.bHit}</td>
 	      </tr>
 	      </c:forEach>
       </c:if>
@@ -76,7 +76,7 @@
    
    
    		<!-- 검색 -->
-   		<form action="BoardByTitle" method="get">
+   		<form action="boardByTitle" method="get">
 
 		    <select name="searchCondition" id="">
 				

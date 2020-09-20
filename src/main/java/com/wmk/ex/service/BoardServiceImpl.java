@@ -77,11 +77,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	//검색기능
 	@Override
-	public List<BoardVO> BoardByTitle(String bTitle) {
+	public List<BoardVO> boardByTitle(BoardVO boardVO) {
 		
-		log.info("BoardByTitle........");
+		log.info("boardByTitle........");
 		
-		return mapper.findBoardByTitle(bTitle);
+		return mapper.findBoardByTitle(boardVO);
 	}
 	
 	
