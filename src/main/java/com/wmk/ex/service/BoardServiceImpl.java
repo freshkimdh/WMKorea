@@ -104,6 +104,13 @@ public class BoardServiceImpl implements BoardService {
 	public List<ReplyVO> readReply(int bid) {
 		return mapper.readReply(bid);
 	}
+	
+	//¥Ò±€ ¿€º∫ 
+	@Override
+	public void writeReply(ReplyVO vo) {
+		mapper.writeReply(vo);
+		
+	}
 
 	
 }

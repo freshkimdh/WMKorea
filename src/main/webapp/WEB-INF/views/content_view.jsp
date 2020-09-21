@@ -43,6 +43,7 @@
       </form>
    </table>
    
+   <!--댓글 목록  -->
        <tr>
 	    <div id="reply">
 		  <ol class="replyList">
@@ -59,6 +60,27 @@
 		  </ol>
 		</div>
 		</tr> 
+		
+	<!--댓글 작성 -->
+	<table width="500" cellpadding="0" cellspacing="0" border="1" align="center">
+		<form action="replyWrite" method="get">
+		<input type="hidden" id="bId" name="bId" value="${content_view.bId}" />
+			<tr>
+				<td> 댓글 작성자 </td>
+				<td> <input type="text" name="Writer" size = "50"> </td>
+			</tr>
+			<tr>
+				<td> 댓글 내용 </td>
+				<td> <textarea name="Content" rows="10" ></textarea> </td>
+			</tr>
+			
+			<tr>
+				<td colspan="2"> 
+					<input type="submit" value="작성"> &nbsp;&nbsp;
+				</td>
+			</tr>
+		</form>
+	</table>
    
    
    </body>

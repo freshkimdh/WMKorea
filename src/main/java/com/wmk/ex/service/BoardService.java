@@ -35,6 +35,8 @@ public interface BoardService {
 	//¥Ò±€ ∏Ò∑œ
 	public List<ReplyVO> readReply(int bid);
 	
+	//¥Ò±€ ¿€º∫
+	public void writeReply(ReplyVO vo);
 
 	
 	

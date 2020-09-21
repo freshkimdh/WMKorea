@@ -100,6 +100,20 @@
     	WHERE BID = #{bid}
 	</select>
 	
+	
+	<insert id="writeReply">
+		INSERT INTO WMK_MVC_BOARD_REPLY(
+			BID,
+			RID,
+			CONTENT,
+			WRITER
+		)
+		VALUES(  #{bId},
+				 MVC_BOARD_REPLY_SEQ.NEXTVAL,
+			 	#{Content},
+			 	#{Writer}	)
+	</insert>
+	
 	 
 
 </mapper>

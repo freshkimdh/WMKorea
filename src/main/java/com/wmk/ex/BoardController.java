@@ -131,6 +131,16 @@ public class BoardController {
 		return "list";
 	}
 	
+	@RequestMapping("/replyWrite")
+	public String replyWrite(ReplyVO vo) {
+		
+		log.info("replyWrite..");
+	
+		service.writeReply(vo);
+		
+		return "redirect:content_view";
+	}
+	
 	/////////////This controller is written by Chaddy ///////////////////
 	/////////////정경채가 새로운 게시판에 작업한 컨트롤러 부분///////////////////
 	
