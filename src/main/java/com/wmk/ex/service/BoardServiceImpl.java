@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.wmk.ex.mapper.BoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -96,6 +97,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getList(Criteria criteria) {
 		log.info("get List with criteria"  + criteria);
 		return mapper.getListWithPaging(criteria);
+	}
+	
+	//댓글 목록 기능
+	@Override
+	public List<ReplyVO> readReply(int bid) {
+		return mapper.readReply(bid);
 	}
 
 	

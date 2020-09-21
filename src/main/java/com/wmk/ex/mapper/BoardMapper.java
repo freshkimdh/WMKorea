@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.ReplyVO;
 
 
 public interface BoardMapper {
@@ -36,6 +37,9 @@ public interface BoardMapper {
 	//페이징 처리
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
+	
+	//댓글 목록 기능
+	public List<ReplyVO> readReply(int bid);
 
 	
 }

@@ -91,6 +91,15 @@
 		select *from wmk_mvc_board where bTitle like '%'||#{bTitle}||'%' <!-- 유저가 입력한 검색어가 포함된 리스트가 출력됨 -->
 	</select>
 	
+	
+	<!--댓글 목록  -->
+	<select id="readReply" resultType="com.wmk.ex.vo.ReplyVO">
+    	SELECT
+    		  RID, CONTENT, WRITER, REGDATE
+    	 FROM wmk_mvc_board_reply
+    	WHERE BID = #{bid}
+	</select>
+	
 	 
 
 </mapper>

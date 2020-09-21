@@ -74,3 +74,35 @@ DECLARE
     END;
     
  commit;
+ 
+ -------------------------------------------------------------------------------
+ 
+ 댓글 목록 
+ 
+ create table wmk_mvc_board_reply (
+    bId number not null,
+    rId number not null,
+    content varchar2(1000) not null,
+    writer varchar2(50) not null,
+    regdate date default sysdate,
+    primary key(bId, rId)
+);
+
+alter table wmk_mvc_board_reply add constraint wmk_mvc_board_reply_bId foreign key(bId)
+references wmk_mvc_board(bId);
+
+create sequence wmk_mvc_board_reply_seq START WITH 1 MINVALUE 0;
+
+commit;
+
+------------------------------------------------------
+--db 댓글 insert test
+
+insert into wmk_mvc_board_reply(bId, rId, content, writer)
+    values(1850, wmk_mvc_board_reply_seq.nextval, '테스트댓글', '테스트 작성자');
+
+select rId, content, writer, regdate
+  from wmk_mvc_board_reply
+ where bId = 1850;
+ 
+ commit;

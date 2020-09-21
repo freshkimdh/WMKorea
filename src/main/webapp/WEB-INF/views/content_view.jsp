@@ -43,5 +43,23 @@
       </form>
    </table>
    
+       <tr>
+	    <div id="reply">
+		  <ol class="replyList">
+		    <c:forEach items="${replyList}" var="replyList">
+		      <li>
+		        <p>
+			        작성자 : ${replyList.writer}<br />
+			       작성 날짜 : ${replyList.regDate}
+		        </p>
+		
+		        <p>${replyList.content}</p>
+		      </li>
+		    </c:forEach>   
+		  </ol>
+		</div>
+		</tr> 
+   
+   
    </body>
 </html>

@@ -1,5 +1,7 @@
 package com.wmk.ex;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.BoardService;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -44,6 +47,9 @@ public class BoardController {
 	public String content_view(BoardVO boardVO, Model model) {
 	   log.info("content_view");
 	   model.addAttribute("content_view", service.get(boardVO.getbId()));
+	   
+	   List<ReplyVO> replyList = service.readReply(boardVO.getbId());
+	   model.addAttribute("replyList", replyList);
 
 	   
 	   return "content_view";

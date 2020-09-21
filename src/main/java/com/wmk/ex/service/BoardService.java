@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.ReplyVO;
 
 
 public interface BoardService {
@@ -30,6 +31,9 @@ public interface BoardService {
 	//其捞隆 贸府
 	public int getTotal(Criteria cri);
 	public List<BoardVO> getList(Criteria criteria);
+	
+	//瘩臂 格废
+	public List<ReplyVO> readReply(int bid);
 	
 
 	
