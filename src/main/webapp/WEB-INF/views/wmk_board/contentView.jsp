@@ -49,40 +49,31 @@
 	
 	</style>
 	
-	
+	<!-- Banner style tag -->
 	<style>
-	
-	.img-container{
-	position:relative;
+	body, html {
+  height: 100%;
+  margin: 0;
+/*    font-family: Arial, Helvetica, sans-serif; */
+}
 
-	/*  display:table; */
-	}
-	.img-container img{
-	/* display:block; */
-	isplay: table-cell;
-	text-align: center;
- 	}
-	.img-container .overlay{
-	  position:absolute;
-	  top:0;
-	  left:0;
-	  width:100%;
-	  height:100%;
-	  background:rgb(0,0,0);
-	  opacity:0;
-	  transition:opacity 500ms ease-in-out;
-	}
-	.img-container:hover .overlay{
-	  opacity:60%;
-	}
-	.overlay span{
-	  position:absolute;
-	  top:50%;
-	  left:50%;
-	  transform:translate(-50%,-50%);
-	  color:#fff;
-	}
-		
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
+  height: 20%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
 	</style>
 
 </head>
@@ -127,19 +118,33 @@
 	<ul class="navbar-nav">
 
 		<li class="nav-item">
-			<a class="nav-link" href="${pageContext.request.contextPath}/index">메인</a>
+			<a class="nav-link" href="index">메인</a>
 		</li>
 				
 		<li class="nav-item">
 			<a class="nav-link" href="#">핫플레이스</a>
 		</li>
 				
-		<li class="nav-item">
-			<a class="nav-link" href="#">내 캐릭터 만들기</a>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			내 캐릭터 만들기
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
+        	<a class="dropdown-item" href="#">굿즈</a>
+      		</div>
 		</li>
-						
-		<li class="nav-item">
-			<a class="nav-link" href="boardList">커뮤니티</a>
+		
+		<!-- Dropdown -->				
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			커뮤니티
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="#">여행후기 게시판</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
+      		</div>
 		</li>
 		
 	</ul>
@@ -171,12 +176,14 @@
 
 </nav>
 
-<!-- <div id="demo" class="carousel-inner" data-ride="carousel">
-<img src="img/banner.jpg" width="800" height="250">
-</div> -->
-
-
-
+<!-- This is banner -->
+<!-- <div class="hero-image">
+  <div class="hero-text">
+<p style="font-size:60px" class="display-3">Community</p>
+	<p>We Make Our World</p>
+  </div>
+</div>
+<p><br> -->
 
 
 <p>

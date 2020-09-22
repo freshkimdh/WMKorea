@@ -109,7 +109,7 @@
 			WRITER
 		)
 		VALUES(  #{bId},
-				 MVC_BOARD_REPLY_SEQ.NEXTVAL,
+				 WMK_MVC_BOARD_REPLY_SEQ.NEXTVAL,
 			 	#{Content},
 			 	#{Writer}	)
 	</insert>

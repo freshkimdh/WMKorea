@@ -79,7 +79,7 @@ DECLARE
  
  ´ñ±Û ¸ñ·Ï 
  
- create table wmk_mvc_board_reply (
+create table wmk_mvc_board_reply (
     bId number not null,
     rId number not null,
     content varchar2(1000) not null,

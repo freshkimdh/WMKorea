@@ -133,12 +133,26 @@
 			<a class="nav-link" href="#">핫플레이스</a>
 		</li>
 				
-		<li class="nav-item">
-			<a class="nav-link" href="#">내 캐릭터 만들기</a>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			내 캐릭터 만들기
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
+        	<a class="dropdown-item" href="#">굿즈</a>
+      		</div>
 		</li>
-						
-		<li class="nav-item">
-			<a class="nav-link" href="boardList">커뮤니티</a>
+		
+		<!-- Dropdown -->				
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			커뮤니티
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="#">여행지 게시판</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
+      		</div>
 		</li>
 		
 	</ul>
