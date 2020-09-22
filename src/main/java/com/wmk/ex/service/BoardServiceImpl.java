@@ -17,62 +17,59 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
 	
-	private BoardMapper mapper; // DAO 레포지토리
+	private BoardMapper mapper; 
+	
 	
 	public List<BoardVO> getList() {
-		log.info("getList........"); // syso 의 차이점 알기! syso 쓰면 안된다.
+		
+		log.info("getList..."); 
 		
 		return mapper.getList();
 	}
 
+	
 	@Override
 	public BoardVO get(int bno) {
 		
-		log.info("get........");
-		
+		log.info("get...");
 		BoardVO boardVO = mapper.read(bno);
 						mapper.addUphit(bno);
 		
-		return boardVO;
-				
+		return boardVO;	
 	}
 
+	
 	@Override
 	public void remove(int bno) {
 		
 		log.info("remove........");
-		
 		mapper.delete(bno);
-		
 	}
 
+	
 	@Override
 	public void writeBoard(BoardVO boardVO) {
 		
 		log.info("write........");
-		
 		mapper.insertBoard(boardVO);
 	}
 
+	
 	@Override
 	public void writeReply(BoardVO boardVO) {
 		
-		log.info("writeReply........");
-		
-		
+		log.info("writeReply...");	
 		mapper.updateShape(boardVO);
 		mapper.insertReply(boardVO);
 		//mapper.updateShape(boardVO);
-		
 	}
 
+	
 	@Override
 	public void modify(BoardVO boardVO) {
 		
-		log.info("modify........");
-		
-		mapper.updateModify(boardVO);
-		
+		log.info("modify...");
+		mapper.updateModify(boardVO);	
 	}
 	
 	
@@ -80,8 +77,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> boardByTitle(BoardVO boardVO) {
 		
-		log.info("boardByTitle........");
-		
+		log.info("boardByTitle...");
+
 		return mapper.findBoardByTitle(boardVO);
 	}
 	
@@ -89,30 +86,37 @@ public class BoardServiceImpl implements BoardService {
 	//페이징 처리
 	@Override
 	public int getTotal(Criteria cri) {
-		log.info("get total count");
+		
+		log.info("get total count...");
 		return mapper.getTotalCount(cri);
 	}
 
+	
 	@Override
 	public List<BoardVO> getList(Criteria criteria) {
+		
 		log.info("get List with criteria"  + criteria);
 		return mapper.getListWithPaging(criteria);
 	}
 	
+	
 	//댓글 목록 기능
 	@Override
 	public List<ReplyVO> readReply(int bid) {
+		
+		log.info("readReply...");
 		return mapper.readReply(bid);
 	}
+	
 	
 	//댓글 작성 
 	@Override
 	public void writeReply(ReplyVO vo) {
-		mapper.writeReply(vo);
 		
+		log.info("writeReply...");
+		mapper.writeReply(vo);
 	}
 
-	
 }
 
 

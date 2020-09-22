@@ -10,15 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor 
 @AllArgsConstructor
 public class ReplyVO {
-
-//    bId number not null,
-//    rId number not null,
-//    content varchar2(1000) not null,
-//    writer varchar2(50) not null,
-//    regdate date default sysdate,
-//    primary key(bId, rId)
-	
-	
 	
 	int bId;
 	int rId;

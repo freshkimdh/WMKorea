@@ -7,8 +7,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml
-					  <!-- /WEB-INF/spring/security-context.xml -->
- 					 /WEB-INF/spring/security-context_custom_db.xml
+					 /WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
 	

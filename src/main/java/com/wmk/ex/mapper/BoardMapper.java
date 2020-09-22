@@ -3,12 +3,10 @@ package com.wmk.ex.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.ReplyVO;
-
 
 public interface BoardMapper {
 	
