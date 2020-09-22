@@ -78,6 +78,20 @@
 
 </head>
 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//댓글작성
+			$(".replyWriteBtn").on("click", function(){
+				  var formObj = $("form[name='replyForm']");
+				  formObj.attr("action", "replyWrite");
+				  formObj.submit();
+			});		
+		})
+	</script>
+
+
+
 <body>
 
 <div class="container"> <!-- table -->
@@ -244,50 +258,30 @@
 <hr> <br>
 
 <!-- 댓글 -->
-<div class="container" id="comment_view">
-
- 	<table>     
-		<tr>
-		<div class="row">
-		<div class="col-md-1" align="right">
-			<img src="img/avatar2.jpg" width="50"/>
-		</div>
-		<div class="col-md-11">
-			<strong>김대환</strong> <span class="badge badge-secondary"><a href="http://google.com" class="text-white">삭제</a></span><br>
-			<p>이 곳은 댓글을 남기는 곳입니다.<br>글을 남기면 다음과 같이 보입니다.</p>
-			<p class="text-dark" align="right">${contentView.bDate}</p>					
-		</div>
-					
-
-		</div>
-		</tr>
-	</table>
-	
+<c:forEach items="${replyList}" var="replyList">
+	<div class="container" id="comment_view">
 	 	<table>     
-		<tr>
-		<div class="row">
-		<div class="col-md-1" align="right">
-			<img src="img/avatar2.jpg" width="50"/>
-		</div>
-		<div class="col-md-11">
-			<strong>정경채</strong> <span class="badge badge-secondary"><a href="http://google.com" class="text-white">삭제</a></span><br>
-			<p>이 곳은 댓글을 남기는 곳입니다.<br>두번쨰 댓글을 남기면 다음과 같이 보입니다..</p>
-			<p class="text-dark" align="right">${contentView.bDate}</p>					
-		</div>
+			<tr>
+			<div class="row">
+				<div class="col-md-1" align="right">
+					<img src="img/avatar2.jpg" width="50"/>
+				</div>					
+				<div class="col-md-11">
+					<strong>작성자: ${replyList.writer}</strong> 
 					
-
-		</div>
-		</tr>
-	</table>
-	
-
-	
-</div>
+					<span class="badge badge-secondary"><a href="http://google.com" class="text-white">삭제</a></span><br>
+					
+					<p>내용: ${replyList.content}</p>
+					<p class="text-dark" align="right">${replyList.regDate}</p>					
+				</div>  			
+			</div>
+			</tr>
+		</table>
+	</div>
+</c:forEach>  
 
 
 <!-- 댓글 작성 -->
-<div class="container" id="comment_write">
-
 <%-- <form class="form-inline" action="/action_page.php">
     <label for="email2" class="mb-2 mr-sm-2">이름:</label>
     <input type="text" class="form-control mb-2 mr-sm-2" id="email2" placeholder="Enter email" name="email">
@@ -295,14 +289,15 @@
     <input type="text" class="form-control mb-2 mr-sm-2" id="pwd2" placeholder="Enter password" name="pswd">
 </form> --%> 
 
-
-<form action="">
+<form name="replyForm" method="get">
+<div class="container" id="comment_write">
+<input type="hidden" id="bId" name="bId" value="${contentView.bId}" />
 <br>
 	<div class="row">
     	<div class="col">
     
-		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="bName">
+		<label for="Writer">이름:</label>
+      	<input type="text" class="form-control" id="Writer" placeholder="" name="Writer">
     
     	</div>
     	
@@ -313,15 +308,17 @@
 	</div>
 
     <div class="form-group">
-      <label for="comment">댓글:</label>
-      <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+      <label for="Content">댓글:</label>
+      <textarea class="form-control" rows="5" id="Content" name="Content"></textarea>
     </div>
-    
-    <!-- <button type="submit" class="btn btn-outline-dark btn-sm">등록</button> -->
-    <a href="" class="btn btn-outline-dark btn-sm" role="button">등록</a>
-</form>
+	
+	 <div>
+ 	 	<button type="button" class="replyWriteBtn">등록</button>
+ 	 </div>
 
 </div>
+</form>
+
 
 <hr>
 <br> 

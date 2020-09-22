@@ -1,9 +1,11 @@
 package com.wmk.ex.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import com.wmk.ex.vo.UserVO;
 
+@Mapper
 public interface UserMapper {
 
 	@Insert("insert into wmk_users(id,pw,nickname,email,nationality,enabled)"

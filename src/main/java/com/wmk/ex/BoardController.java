@@ -1,5 +1,7 @@
 package com.wmk.ex;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wmk.ex.service.BoardService;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,9 +20,6 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	
 	private BoardService service;
-	
-	/////////////This controller is written by Chaddy ///////////////////
-	/////////////정경채가 새로운 게시판에 작업한 컨트롤러 부분///////////////////
 	
 	@RequestMapping("/boardList")
 	public String boardList(BoardVO boardVO,Model model) {
@@ -56,6 +56,9 @@ public class BoardController {
 	   log.info("content_view");
 	   model.addAttribute("contentView", service.get(boardVO.getbId()));
 	   model.addAttribute("list", service.getList());
+	   
+	   List<ReplyVO> replyList = service.readReply(boardVO.getbId());
+	   model.addAttribute("replyList", replyList);
 	   
 	   return "/wmk_board/contentView";
 	}
@@ -108,6 +111,17 @@ public class BoardController {
 		service.modify(boardVO);
 		
 		return "redirect:boardList";
+	}
+	
+	//댓글작성
+	@RequestMapping("/replyWrite")
+	public String replyWrite(ReplyVO vo) {
+		
+		log.info("replyWrite..");
+	
+		service.writeReply(vo);
+		
+		return "redirect:contentView";
 	}
 	
 }

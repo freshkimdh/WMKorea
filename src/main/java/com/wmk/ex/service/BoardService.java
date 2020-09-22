@@ -38,4 +38,7 @@ public interface BoardService {
 	//¥Ò±€ ¿€º∫
 	public void writeReply(ReplyVO vo);
 	
+//	//¥Ò±€ ªË¡¶
+//	public void deleteReply(ReplyVO vo);
+	
 }

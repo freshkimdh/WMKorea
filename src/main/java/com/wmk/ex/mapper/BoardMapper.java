@@ -41,6 +41,9 @@ public interface BoardMapper {
 	
 	//¥Ò±€ ¿€º∫
 	public void writeReply(ReplyVO vo);
+	
+//	//¥Ò±€ ªË¡¶
+//	public void deleteReply(ReplyVO vo);
 
 	
 }

@@ -125,15 +125,17 @@ public class Basics_BoardController {
 	}
 	
 	
-	@RequestMapping("/replyWrite")
-	public String replyWrite(ReplyVO vo) {
-		
-		log.info("replyWrite..");
+//	//¥Ò±€ ªË¡¶
+//	@RequestMapping("/replyDelete")
+//	public String replyDelete(ReplyVO vo)  {
+//		
+//		log.info("replyDelete...");
+//		
+//		service.deleteReply(vo);
+//		
+//		return "redirect:contentView";
+//	}
 	
-		service.writeReply(vo);
-		
-		return "redirect:content_view";
-	}
 	
 }
 

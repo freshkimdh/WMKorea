@@ -117,6 +117,15 @@ public class BoardServiceImpl implements BoardService {
 		mapper.writeReply(vo);
 	}
 
+	
+//	//¥Ò±€ ªË¡¶
+//	@Override
+//	public void deleteReply(ReplyVO vo) {
+//		
+//		log.info("deleteReply...");
+//		mapper.deleteReply(vo);
+//	}
+
 }
 
 

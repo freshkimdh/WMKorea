@@ -114,6 +114,11 @@
 			 	#{Writer}	)
 	</insert>
 	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="com.wmk.ex.vo.ReplyVO">
+		DELETE FROM WMK_MVC_BOARD_REPLY
+		WHERE RID = #{rid}
+	</delete>
 	 
 
 </mapper>
