@@ -233,8 +233,8 @@
 	
 	<div class="col-sm-4">
 	
-	<div class="img-container">
-	<p align="center"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></p><p>
+	<div class="img-container" onclick="location.href='seoulList'">
+	<p align="center"><a href="http://google.com"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
 		<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>

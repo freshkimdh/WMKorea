@@ -124,6 +124,36 @@ public class BoardController {
 		return "redirect:contentView";
 	}
 	
+	
+	//////////////관리자 여행지게시판 페이지 (09/23: 정경채 추가)////////////
+	
+	@GetMapping("/seoulList") 
+	public String seoulList(Model model) {
+		
+		log.info("seoulList...");
+		return "/admin_travel_board/seoulList";
+
+	}
+	
+	@GetMapping("/seoulCotentView") 
+	public String seoulCotentView(Model model) {
+		
+		log.info("seoulList...");
+		return "/admin_travel_board/seoulCotentView";
+
+	}
+	
+	
+	@RequestMapping("/travelWriteView")
+	public String travelWriteView(BoardVO boardVO) {
+		
+		log.info("/travelWriteView");
+		
+		return "/admin_travel_board/travelWriteView";
+		
+
+	}
+	
 }
 
 
