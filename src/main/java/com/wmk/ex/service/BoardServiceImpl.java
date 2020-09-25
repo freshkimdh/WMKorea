@@ -1,5 +1,6 @@
 package com.wmk.ex.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -102,10 +103,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	//´ñ±Û ¸ñ·Ï ±â´É
 	@Override
-	public List<ReplyVO> readReply(int bid) {
+	public List<ReplyVO> readReply(int bId) {
 		
 		log.info("readReply...");
-		return mapper.readReply(bid);
+		return mapper.readReply(bId);
 	}
 	
 	
@@ -115,6 +116,21 @@ public class BoardServiceImpl implements BoardService {
 		
 		log.info("writeReply...");
 		mapper.writeReply(vo);
+	}
+	
+	//Ajax ´ñ±Û ÀÛ¼º
+	@Override
+	public void writeReply(HashMap<String, String> comment) {
+		log.info("writeReply2...");
+		mapper.writeReply(comment);
+		
+	}
+
+	//Ajax ´ñ±Û ¸ñ·Ï
+	@Override
+	public List<ReplyVO> readReply(ReplyVO replyVO) {
+		
+		return mapper.readReply(replyVO);
 	}
 
 	

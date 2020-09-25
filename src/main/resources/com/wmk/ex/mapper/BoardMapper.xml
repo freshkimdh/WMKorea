@@ -97,7 +97,7 @@
     	SELECT
     		  RID, CONTENT, WRITER, REGDATE
     	 FROM wmk_mvc_board_reply
-    	WHERE BID = #{bid}
+    	WHERE BID = #{bId}
 	</select>
 	
 	

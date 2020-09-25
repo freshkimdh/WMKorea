@@ -1,5 +1,6 @@
 package com.wmk.ex.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -37,10 +38,16 @@ public interface BoardMapper {
 	public int getTotalCount(Criteria cri);
 	
 	//´ñ±Û ¸ñ·Ï ±â´É
-	public List<ReplyVO> readReply(int bid);
+	public List<ReplyVO> readReply(int bId);
 	
 	//´ñ±Û ÀÛ¼º
 	public void writeReply(ReplyVO vo);
+	
+	//Ajax ´ñ±Û ÀÛ¼º
+	public void writeReply(HashMap<String, String> comment);
+	
+	//Ajax ´ñ±Û ¸ñ·Ï
+	public List<ReplyVO> readReply(ReplyVO replyVO);
 	
 //	//´ñ±Û »èÁ¦
 //	public void deleteReply(ReplyVO vo);
