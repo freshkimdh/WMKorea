@@ -19,7 +19,7 @@ public interface UserMapper {
 	@Select("select * from wmk_users where id = #{id}")
 	public UserVO readUser(String id);
 	
-	//íšŒì› íƒˆí‡´ 
+	 //È¸¿ø Å»Åğ 
 	@Delete("delete from wmk_authorities where id = #{id}")
 	public void authori(String id);
 	@Delete("delete from wmk_users where id = #{id} and pw = #{pw}")

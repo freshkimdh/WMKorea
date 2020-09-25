@@ -36,47 +36,47 @@ public class UserController {
 	      
 	    return "redirect:/loginForm";	      
 	}
-	//delete view í˜ì´ì§€ 
-	@GetMapping("/userDeleteView")
-    public String userDeleteView() {
-        log.info("welcome userDeleteView!");
-        return "user/UserDeleteView";
-    }
-	//íšŒì› íƒˆí‡´
-	 @PostMapping("user/userDelete")
-	    @ResponseBody
-	    public String userDelete(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception {
-	    	Gson gson = new Gson();//** Gsonìœ¼ë¡œ ì¼ì¼íˆ ë¡œê·¸ë¥¼ ì°ì§€ì•Šê³  í•œë²ˆì— ì •ë³´ë¥¼ ë³¼ìˆ˜ìˆìŒ..
-	    	// ë¡œê·¸ì¸ëœ ìœ ì €ì˜ ì •ë³´
-	        CustomUser loginInfo = (CustomUser) authentication.getPrincipal();
-	        //loginInfo ìœ ì € ì •ë³´ 
-	        log.info("loginInfo:  "+loginInfo);
-	        // DBì— ì €ì¥ë˜ì–´ìˆëŠ” ë¹„ë°€ë²ˆí˜¸ì™€ ì•”í˜¸í™”ë˜ì–´ìˆëŠ” ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¹„êµ 
-	        boolean isValidPassword = passEncoder.matches(userVO.getPw(), loginInfo.getUser().getPw());
-	    	log.info("true & fail isValidPassword	:  "+isValidPassword);
-	    	log.info("login ID		:  "+loginInfo.getUser().getId());
-	    	log.info("login password	:  "+userVO.getPw());
-	    	log.info("login Encoding password	:  "+loginInfo.getUser().getPw()); 
-	    	log.info(" true & fail   : "+isValidPassword+"  matches   :  "+userVO.getPw()+"     :     "+ loginInfo.getUser().getPw()); //matches(1234,$2a$10$R4UGHuNESie7gjG2TQhp9OHHHlfxUdWDyMKhXAj5lP8tECLORmIgW)
-	    	
-	        if (isValidPassword) { 							//ê²°ê³¼ ê°’ì€ true
-	            userVO.setId(loginInfo.getUser().getId());	//userVOì— ë¡œê·¸ì¸í•œ ì•„ì´ë””ì •ë³´ë¥¼ ë„£ì–´ì¤Œ
-	            userVO.setPw(loginInfo.getUser().getPw());	//userVOì— ë¡œê·¸ì¸í•œ ì•”í˜¸í™” ëœ passwordë¥¼ ë„£ì–´ì¤Œ 
-	            
-	            //deleteì¿¼ë¦¬ë¬¸ ìˆ˜í–‰ 
-	            userService.userDelete(userVO);
-	            log.info("Delete success");
-	            // ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
-	            request.getSession().invalidate();//ì´ˆê¸°í™” 
-	            log.info("logout success ");
-
-	            //@RequestBodyì´ê¸° ë•Œë¬¸ì— ê²°ê³¼ê°’ë§Œ ajaxì— ë¦¬í„´
-	            //matchesí•¨ìˆ˜ ê²°ê³¼ ì°¸ì¼ ê²½ìš° ê²°ê³¼ê°’ 200,successë§Œ ajaxì— ë¦¬í„´ 
-	            return gson.toJson(new ResponseVO<>(200, "success"));    
-	        }
-	        //matchesí•¨ìˆ˜ ê²°ê³¼ ê±°ì§“ì¼ ê²½ìš° ê²°ê³¼ê°’ 400,failë§Œ ajaxì— ë¦¬í„´ 
-	        log.info("notValidPassword");
-	        return gson.toJson(new ResponseVO<>(400, "fail"));
-
+	 //delete view ÆäÀÌÁö 
+	   @GetMapping("/userDeleteView")
+	    public String userDeleteView() {
+	        log.info("welcome userDeleteView!");
+	        return "user/UserDeleteView";
 	    }
-}
+	   //È¸¿ø Å»Åğ
+	    @PostMapping("user/userDelete")
+	       @ResponseBody
+	       public String userDelete(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception {
+	          Gson gson = new Gson();//** GsonÀ¸·Î ÀÏÀÏÈ÷ ·Î±×¸¦ ÂïÁö¾Ê°í ÇÑ¹ø¿¡ Á¤º¸¸¦ º¼¼öÀÖÀ½..
+	          // ·Î±×ÀÎµÈ À¯ÀúÀÇ Á¤º¸
+	           CustomUser loginInfo = (CustomUser) authentication.getPrincipal();
+	           //loginInfo À¯Àú Á¤º¸ 
+	           log.info("loginInfo:  "+loginInfo);
+	           // DB¿¡ ÀúÀåµÇ¾îÀÖ´Â ºñ¹Ğ¹øÈ£¿Í ¾ÏÈ£È­µÇ¾îÀÖ´Â ºñ¹Ğ¹øÈ£¸¦ ºñ±³ 
+	           boolean isValidPassword = passEncoder.matches(userVO.getPw(), loginInfo.getUser().getPw());
+	          log.info("true & fail isValidPassword   :  "+isValidPassword);
+	          log.info("login ID      :  "+loginInfo.getUser().getId());
+	          log.info("login password   :  "+userVO.getPw());
+	          log.info("login Encoding password   :  "+loginInfo.getUser().getPw()); 
+	          log.info(" true & fail   : "+isValidPassword+"  matches   :  "+userVO.getPw()+"     :     "+ loginInfo.getUser().getPw()); //matches(1234,$2a$10$R4UGHuNESie7gjG2TQhp9OHHHlfxUdWDyMKhXAj5lP8tECLORmIgW)
+	          
+	           if (isValidPassword) {                      //°á°ú °ªÀº true
+	               userVO.setId(loginInfo.getUser().getId());   //userVO¿¡ ·Î±×ÀÎÇÑ ¾ÆÀÌµğÁ¤º¸¸¦ ³Ö¾îÁÜ
+	               userVO.setPw(loginInfo.getUser().getPw());   //userVO¿¡ ·Î±×ÀÎÇÑ ¾ÏÈ£È­ µÈ password¸¦ ³Ö¾îÁÜ 
+	               
+	               //deleteÄõ¸®¹® ¼öÇà 
+	               userService.userDelete(userVO);
+	               log.info("Delete success");
+	               // ·Î±×¾Æ¿ô Ã³¸®
+	               request.getSession().invalidate();//ÃÊ±âÈ­ 
+	               log.info("logout success ");
+
+	               //@RequestBodyÀÌ±â ¶§¹®¿¡ °á°ú°ª¸¸ ajax¿¡ ¸®ÅÏ
+	               //matchesÇÔ¼ö °á°ú ÂüÀÏ °æ¿ì °á°ú°ª 200,success¸¸ ajax¿¡ ¸®ÅÏ 
+	               return gson.toJson(new ResponseVO<>(200, "success"));    
+	           }
+	           //matchesÇÔ¼ö °á°ú °ÅÁşÀÏ °æ¿ì °á°ú°ª 400,fail¸¸ ajax¿¡ ¸®ÅÏ 
+	           log.info("notValidPassword");
+	           return gson.toJson(new ResponseVO<>(400, "fail"));
+
+	       }
+	}
