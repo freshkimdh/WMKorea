@@ -152,7 +152,7 @@
 <p>유저 국적: <sec:authentication property="principal.user.nationality"/></p>
 
 <h3>[<a href="<c:url value="/index" />">메인으로</a>]</h3>
-
+<h3>[<a href="<c:url value="/userDeleteView" />">회원탈퇴</a>]</h3>
 
   
   	</div>

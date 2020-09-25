@@ -1,5 +1,6 @@
 package com.wmk.ex.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,6 +18,11 @@ public interface UserMapper {
 	
 	@Select("select * from wmk_users where id = #{id}")
 	public UserVO readUser(String id);
-	  
+	
+	//회원 탈퇴 
+	@Delete("delete from wmk_authorities where id = #{id}")
+	public void authori(String id);
+	@Delete("delete from wmk_users where id = #{id} and pw = #{pw}")
+	public void delMember(UserVO userVO);
 	}
 	
