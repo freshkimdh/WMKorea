@@ -162,7 +162,7 @@
 
     <br><br>
     <label for="email">간편 로그인 (Login with SNS):</label>
-    	<a href="index.html" class="btn btn-warning btn-user btn-block">
+    	<a href="https://kauth.kakao.com/oauth/authorize?client_id=af9546b83fbd65051801d2e327f8c259&redirect_uri=http://localhost:8282/ex/auth/kakao/callback&response_type=code" class="btn btn-warning btn-user btn-block">
 			<i class="fab fa-google fa-fw"></i> <img src="img/kakao_icon.jpg" width="25"><strong> 카카오톡 로그인 </strong>
 		</a>
 	
