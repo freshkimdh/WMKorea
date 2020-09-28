@@ -133,11 +133,12 @@
 <div class="col-sm-8">
 
 
-<form:form name="join_member" action="addUser" method="POST">
+<form:form name="join_member" action="addUser" method="POST"  onsubmit="return checkJoinform();">
   
   	<div class="form-group">
   		<label for="id">아이디 (ID):</label>
-  		<input type="text" class="form-control" id="id" name="id">
+  		<input type="text" class="form-control" id="id" name="id" >
+  		<button class="btn btn-danger" id="duplicate_check" type="button"  onclick="check();">중복체크</button>
 	</div>
 	<div class="form-group">
   		<label for="pw">비밀번호 (Password):</label>
@@ -208,4 +209,58 @@
 
 
 </body>
+<script>
+	// 중복 체크 검사 유무 검사하는 값
+	var isCheckIdCheck = false;
+	var isEmptyUserInformation = false;
+	
+ 	// 회원가입 하기 전 중복 로그인 체크 검사
+	function checkJoinform(){
+		if(isCheckIdCheck === false) {
+			alert('아이디 중복체크를 해주세요.');
+			console.log("12123  :"+isCheckIdCheck);
+			return false;
+		}
+		console.log("99999  :"+isCheckIdCheck);
+		return true;
+	}
+ 	
+ 	
+ 	
+	
+	function check(){
+		var id = $("#id").val();
+		
+		$.ajax({
+		    url: 'user/check',
+		    type: 'GET',
+		    dataType: 'text', //서버로부터 내가 받는 데이터의 타입
+		    contentType : 'text/plain; charset=utf-8;',//내가 서버로 보내는 데이터의 타입
+		    data: { id },
+		    success: function(data){
+		    	var res = JSON.parse(data);
+		    	console.log("12  :"+res);
+		    	var isCheckSuccess = res.statusCode === 200 ;
+		    	console.log(isCheckSuccess);
+		    	var isEnteryourID = res.statusCode === 700; // 바꾸기 
+		    	
+		         if(isCheckSuccess){
+		        	 isCheckIdCheck = true;
+			    	alert("아이디 사용이 가능합니다.");
+		         }else{
+		        	 isCheckIdCheck = false;
+		         	alert("중복된 아이디가 존재합니다.");
+		         }
+		    },
+		    error: function (){        
+		                      
+		    }
+	  });
+
+
+}
+</script>
+
+
+
 </html>

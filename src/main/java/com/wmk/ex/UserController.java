@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -51,22 +52,19 @@ public class UserController {
 	      
 	    return "redirect:/loginForm";	      
 	}
-	 //delete view ÆäÀÌÁö 
+	 //delete view ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	   @GetMapping("/userDeleteView")
 	    public String userDeleteView() {
 	        log.info("welcome userDeleteView!");
 	        return "user/UserDeleteView";
 	    }
-	   //È¸¿ø Å»Åğ
+	   //íšŒì›íƒˆí‡´
 	    @PostMapping("user/userDelete")
 	       @ResponseBody
 	       public String userDelete(@RequestBody UserVO userVO, Authentication authentication, HttpServletRequest request) throws Exception {
-	          Gson gson = new Gson();//** GsonÀ¸·Î ÀÏÀÏÈ÷ ·Î±×¸¦ ÂïÁö¾Ê°í ÇÑ¹ø¿¡ Á¤º¸¸¦ º¼¼öÀÖÀ½..
-	          // ·Î±×ÀÎµÈ À¯ÀúÀÇ Á¤º¸
+	          Gson gson = new Gson();
 	           CustomUser loginInfo = (CustomUser) authentication.getPrincipal();
-	           //loginInfo À¯Àú Á¤º¸ 
 	           log.info("loginInfo:  "+loginInfo);
-	           // DB¿¡ ÀúÀåµÇ¾îÀÖ´Â ºñ¹Ğ¹øÈ£¿Í ¾ÏÈ£È­µÇ¾îÀÖ´Â ºñ¹Ğ¹øÈ£¸¦ ºñ±³ 
 	           boolean isValidPassword = passEncoder.matches(userVO.getPw(), loginInfo.getUser().getPw());
 	          log.info("true & fail isValidPassword   :  "+isValidPassword);
 	          log.info("login ID      :  "+loginInfo.getUser().getId());
@@ -74,51 +72,70 @@ public class UserController {
 	          log.info("login Encoding password   :  "+loginInfo.getUser().getPw()); 
 	          log.info(" true & fail   : "+isValidPassword+"  matches   :  "+userVO.getPw()+"     :     "+ loginInfo.getUser().getPw()); //matches(1234,$2a$10$R4UGHuNESie7gjG2TQhp9OHHHlfxUdWDyMKhXAj5lP8tECLORmIgW)
 	          
-	           if (isValidPassword) {                      //°á°ú °ªÀº true
-	               userVO.setId(loginInfo.getUser().getId());   //userVO¿¡ ·Î±×ÀÎÇÑ ¾ÆÀÌµğÁ¤º¸¸¦ ³Ö¾îÁÜ
-	               userVO.setPw(loginInfo.getUser().getPw());   //userVO¿¡ ·Î±×ÀÎÇÑ ¾ÏÈ£È­ µÈ password¸¦ ³Ö¾îÁÜ 
+	           if (isValidPassword) {                 
+	               userVO.setId(loginInfo.getUser().getId());  
+	               userVO.setPw(loginInfo.getUser().getPw());  
 	               
-	               //deleteÄõ¸®¹® ¼öÇà 
 	               userService.userDelete(userVO);
 	               log.info("Delete success");
-	               // ·Î±×¾Æ¿ô Ã³¸®
-	               request.getSession().invalidate();//ÃÊ±âÈ­ 
+	               
+	               request.getSession().invalidate();
 	               log.info("logout success ");
 
-	               //@RequestBodyÀÌ±â ¶§¹®¿¡ °á°ú°ª¸¸ ajax¿¡ ¸®ÅÏ
-	               //matchesÇÔ¼ö °á°ú ÂüÀÏ °æ¿ì °á°ú°ª 200,success¸¸ ajax¿¡ ¸®ÅÏ 
 	               return gson.toJson(new ResponseVO<>(200, "success"));    
 	           }
-	           //matchesÇÔ¼ö °á°ú °ÅÁşÀÏ °æ¿ì °á°ú°ª 400,fail¸¸ ajax¿¡ ¸®ÅÏ 
 	           log.info("notValidPassword");
 	           return gson.toJson(new ResponseVO<>(400, "fail"));
 
 	       }
-	    
+	    //íšŒì›ê°€ì… ì•„ì´ë”” ì¤‘ë³µì²´í¬ 
+	    @GetMapping(value = "/user/check")
+	    @ResponseBody
+	    public String checkSameId(@RequestParam("id") String id) {
+	        Gson gson = new Gson();
+	        log.info("Login ID  :  "+id);
+	        try {
+	            if (id.isEmpty()) {
+	            	log.info("id.isEmpty :  "+id.isEmpty());
+	                return gson.toJson(new ResponseVO<>(400, false));
+	            }
+	            
+	            UserVO userVO = userService.getUserById(id);
+	            log.info("UserVO = null ? notnull? : "+userVO);
+	            if (userVO != null) { 
+	                return gson.toJson(new ResponseVO<>(400, false));
+	            }
+
+	        } catch (Exception e) {
+	            return gson.toJson(new ResponseVO<>(500,false));
+	        }
+	        return gson.toJson(new ResponseVO<>(200, true));
+
+	    }
 	    
 	    
 	    
 	    @GetMapping("/auth/kakao/callback")
-	    public @ResponseBody String kakaoCallback(String code) { //@ResponseBody data¸¦ ¸®ÅÏÇØÁÖ´Â ÄÁÆ®·Ñ·¯ ÇÔ¼ö
+	    public @ResponseBody String kakaoCallback(String code) { //@ResponseBody dataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½Ô¼ï¿½
 	    	
-	    	//POST ¹æ½ÄÀ¸·Î key=value µ¥ÀÌÅÍ¸¦ ¿äÃ» (Ä«Ä«¿ÀÂÊÀ¸·Î)
+	    	//POST ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ key=value ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ã» (Ä«Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	    	RestTemplate rt = new RestTemplate();
 	    	
-	    	//HttpHeaders ¿ÀºêÁ§Æ® »ı¼º
+	    	//HttpHeaders ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	    	HttpHeaders headers = new HttpHeaders();
  	    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 	    	
-	    	//HttpBody ¿ÀºêÁ§Æ® »ı¼º
+	    	//HttpBody ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	    	MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
  	    	params.add("grant_type", "authorization_code");
 	    	params.add("client_id", "af9546b83fbd65051801d2e327f8c259");
 	    	params.add("redirect_uri", "http://localhost:8282/ex/auth/kakao/callback");
 	    	params.add("code", code);
 	    	
-	    	//HttpHeader¿Í HttpBody¸¦ ÇÏ³ªÀÇ ¿ÀºêÁ§Æ®¿¡ ´ã±â
+	    	//HttpHeaderï¿½ï¿½ HttpBodyï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params, headers);
 	    	
-	    	//Http ¿äÃ»ÇÏ±â - post ¹æ½ÄÀ¸·Î - ±×¸®°í response º¯¼öÀÇ ÀÀ´ä ¹ŞÀ½.
+	    	//Http ï¿½ï¿½Ã»ï¿½Ï±ï¿½ - post ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½×¸ï¿½ï¿½ï¿½ response ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	    	ResponseEntity<String> response = rt.exchange(
 	    			"https://kauth.kakao.com/oauth/token",
 	    			HttpMethod.POST,
@@ -138,21 +155,21 @@ public class UserController {
 				e.printStackTrace();
 			}
 	    	
-	    	System.out.println("Ä«Ä«¿À ¿¢¼¼½º ÅäÅ«:" + oauthToken.getAccess_token());
+	    	System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å«:" + oauthToken.getAccess_token());
 	    	
 	    	
 	    	
 	    	RestTemplate rt2 = new RestTemplate();
 	    	
-	    	//HttpHeaders ¿ÀºêÁ§Æ® »ı¼º
+	    	//HttpHeaders ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	    	HttpHeaders headers2 = new HttpHeaders();
 	    	headers2.add("Authorization", "Bearer " + oauthToken.getAccess_token());
  	    	headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 	    	
-	    	//HttpHeader¿Í HttpBody¸¦ ÇÏ³ªÀÇ ¿ÀºêÁ§Æ®¿¡ ´ã±â
+	    	//HttpHeaderï¿½ï¿½ HttpBodyï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	HttpEntity<MultiValueMap<String,String>> kakaoProfileRequest2 = new HttpEntity<>(headers2);
 	    	
-	    	//Http ¿äÃ»ÇÏ±â - post ¹æ½ÄÀ¸·Î - ±×¸®°í response º¯¼öÀÇ ÀÀ´ä ¹ŞÀ½.
+	    	//Http ï¿½ï¿½Ã»ï¿½Ï±ï¿½ - post ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½×¸ï¿½ï¿½ï¿½ response ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	    	ResponseEntity<String> response2 = rt2.exchange(
 	    			"https://kapi.kakao.com/v2/user/me",
 	    			HttpMethod.POST,
@@ -175,14 +192,14 @@ public class UserController {
 				e.printStackTrace();
 			}
 	    	
-	    	//User ¿ÀºêÁ§Æ®: id, pw, email
-	    	System.out.println("Ä«Ä«¿À ¾ÆÀÌµğ(¹øÈ£): " + kakaoProfile.getId());
-	    	System.out.println("Ä«Ä«¿À ¾ÆÀÌµğ(ÀÌ¸ŞÀÏ): " + kakaoProfile.getKakao_account().getEmail());
+	    	//User ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®: id, pw, email
+	    	System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½(ï¿½ï¿½È£): " + kakaoProfile.getId());
+	    	System.out.println("Ä«Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½(ï¿½Ì¸ï¿½ï¿½ï¿½): " + kakaoProfile.getKakao_account().getEmail());
 	    	
-	    	System.out.println("ºí·Î±×¼­¹ö À¯Àú³×ÀÓ:" + kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId());
-	    	System.out.println("ºí·Î±×¼­¹ö ÀÌ¸ŞÀÏ: " + kakaoProfile.getKakao_account().getEmail());
+	    	System.out.println("ï¿½ï¿½Î±×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId());
+	    	System.out.println("ï¿½ï¿½Î±×¼ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½: " + kakaoProfile.getKakao_account().getEmail());
 	    	UUID garbagePassword = UUID.randomUUID();
-	    	System.out.println("ºí·Î±×¼­¹ö ÆĞ½º¿öµå: " + garbagePassword);
+	    	System.out.println("ï¿½ï¿½Î±×¼ï¿½ï¿½ï¿½ ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½ï¿½: " + garbagePassword);
 	    	
 //	    	User user = User.builder()
 //	    			.id(kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId())
@@ -190,10 +207,10 @@ public class UserController {
 //	    			.email(kakaoProfile.getKakao_account().getEmail())
 //	    			.build();
 //	    	
-//	    	userService.È¸¿øÃ£±â();
+//	    	userService.È¸ï¿½ï¿½Ã£ï¿½ï¿½();
 //	    	
 //	    	
-//	    	userService.È¸¿ø°¡ÀÔ(user);
+//	    	userService.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(user);
 //	    	
 //	    	
 	    	return response2.getBody(); 

@@ -28,30 +28,30 @@ public interface BoardService {
 
 	public void modify(BoardVO boardVO);
 	
-	//°Ë»ö±â´É
+	//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½
 	public List<BoardVO> boardByTitle(BoardVO boardVO);
 	
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public int getTotal(Criteria cri);
 	public List<BoardVO> getList(Criteria criteria);
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<ReplyVO> readReply(int bId);
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void writeReply(ReplyVO vo);
 	
-	//Ajax ´ñ±Û ÀÛ¼º
+	//Ajax ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void writeReply(HashMap<String, String> comment);
 	
-	//Ajax ´ñ±Û ¸ñ·Ï
+	//Ajax ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<ReplyVO> readReply(ReplyVO replyVO);
 	
-	//Ã·ºÎÆÄÀÏ Á¶È¸
+	//Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public List<Map<String, Object>> selectFileList(int bId) throws Exception;
 
 	
-//	//´ñ±Û »èÁ¦
+//	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	public void deleteReply(ReplyVO vo);
 	
 }
