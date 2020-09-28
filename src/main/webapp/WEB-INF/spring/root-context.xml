@@ -27,6 +27,10 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+	
 		<!-- Mapper Interface -->
 	<mybatis-spring:scan base-package="com.wmk.ex.mapper" /> <!-- 마이바티스 매퍼 리딩 부분 -->
 	
@@ -35,5 +39,7 @@
 	
 	<context:component-scan 
 		base-package="com.wmk.ex.util"></context:component-scan>
+		
+	<context:component-scan base-package="com.wmk.ex.persistence" />
 			
 </beans>

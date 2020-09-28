@@ -139,7 +139,7 @@
 			</a>
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
-        	<a class="dropdown-item" href="#">굿즈</a>
+        	<a class="dropdown-item" href="/ex">굿즈</a>
       		</div>
 		</li>
 		

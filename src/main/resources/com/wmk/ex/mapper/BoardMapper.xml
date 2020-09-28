@@ -157,6 +157,24 @@
 		 WHERE bId = #{bId}
 		   AND DEL_GB = 'N'
 	</select>
+	
+	
+	
+	<!--쇼핑몰  -->
+	<insert id="signup">
+	 	insert into tbl_member(userId, userPass, userName, userPhon)
+	  	values(#{userId}, #{userPass}, #{userName}, #{userPhon}) 
+	</insert>
+	
+	
+	<!-- 로그인 -->
+	<select id="signin" resultType="com.wmk.ex.vo.MemberVO">
+		 select
+		     userId, userName, userPass, userPhon, userAddr1, userAddr2, userAddr3, regiDate, verify
+		 from
+		     tbl_member
+		 where userId = #{userId}
+	</select>
 	 
 
 </mapper>
