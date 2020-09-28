@@ -97,7 +97,7 @@ public class UserController {
 	        try {
 	            if (id.isEmpty()) {
 	            	log.info("id.isEmpty :  "+id.isEmpty());
-	                return gson.toJson(new ResponseVO<>(400, false));
+	                return gson.toJson(new ResponseVO<>(401, false));
 	            }
 	            
 	            UserVO userVO = userService.getUserById(id);

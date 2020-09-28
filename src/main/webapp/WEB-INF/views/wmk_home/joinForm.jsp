@@ -218,10 +218,10 @@
 	function checkJoinform(){
 		if(isCheckIdCheck === false) {
 			alert('아이디 중복체크를 해주세요.');
-			console.log("12123  :"+isCheckIdCheck);
+			console.log("CheckID  :"+isCheckIdCheck);
 			return false;
 		}
-		console.log("99999  :"+isCheckIdCheck);
+		console.log("CheckID  :"+isCheckIdCheck);
 		return true;
 	}
  	
@@ -241,16 +241,27 @@
 		    	var res = JSON.parse(data);
 		    	console.log("12  :"+res);
 		    	var isCheckSuccess = res.statusCode === 200 ;
-		    	console.log(isCheckSuccess);
-		    	var isEnteryourID = res.statusCode === 700; // 바꾸기 
+		    	console.log("isCheckSuccess :	"+isCheckSuccess);
+		    	var isEnteryourID = res.statusCode === 401; // 바꾸기 
+		    	console.log("isEnteryourID :	"+isEnteryourID);
+		    	var isCheckfalse = res.statusCode === 400; // 바꾸기 
+		    	console.log("isCheckfalse :	"+isEnteryourID);
 		    	
-		         if(isCheckSuccess){
+		         if(isCheckSuccess ){
 		        	 isCheckIdCheck = true;
 			    	alert("아이디 사용이 가능합니다.");
-		         }else{
-		        	 isCheckIdCheck = false;
+		         }
+		         if(isCheckfalse){
+		        	 isCheckfalse = false;
 		         	alert("중복된 아이디가 존재합니다.");
 		         }
+		         if(isEnteryourID){
+	                  isEnteryourID = false;
+	                  alert("아이디를 입력해주세요");
+	             }if(isPwCheckfalse){
+	            	 isPwCheckfalse = false;
+	            	 alert("비밀번호를 입력해 주세요 ");
+	             }
 		    },
 		    error: function (){        
 		                      
