@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.service.BoardService;
 import com.wmk.ex.vo.BoardVO;
@@ -41,10 +42,10 @@ public class BoardController {
 	
 	
 	@RequestMapping("/write2")
-	public String write2(BoardVO boardVO) {
+	public String write2(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		log.info("write2");
-		service.writeBoard(boardVO);
+		service.writeBoard(boardVO, mpRequest);
 		
 		return "redirect:boardList";
 	}

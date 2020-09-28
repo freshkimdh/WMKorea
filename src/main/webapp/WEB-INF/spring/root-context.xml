@@ -32,5 +32,8 @@
 	
 	<context:component-scan
 		base-package="com.wmk.ex.service"></context:component-scan>
-		
+	
+	<context:component-scan 
+		base-package="com.wmk.ex.util"></context:component-scan>
+			
 </beans>

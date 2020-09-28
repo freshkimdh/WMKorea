@@ -119,6 +119,44 @@
 		DELETE FROM WMK_MVC_BOARD_REPLY
 		WHERE RID = #{rid}
 	</delete>
+	
+	<!-- 첨부파일 업로드    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
+	<insert id="insertFile" parameterType="hashMap" >
+		<![CDATA[
+		insert into wmk_board_FILE (
+	        file_no
+	        , bId
+	        , ORIGINAL_FILE_NAME
+	        , STORED_FILE_NAME
+	        , FILE_SIZE
+	        , regdate
+	        , DEL_GB
+	    ) values (
+	        wmk_board_file_no_seq.nextval
+	        , mvc_board_seq.currval   
+	        , #{ORIGINAL_FILE_NAME ,jdbcType=VARCHAR}
+	        , #{STORED_FILE_NAME ,jdbcType=VARCHAR}
+	        , #{FILE_SIZE, jdbcType=VARCHAR}
+	        , sysdate
+	        , 'N'
+	    )
+		]]>
+	
+	</insert>
+	
+	<!-- bid 현재값을 집어 넣어준다. -->
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORIGINAL_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+			   STORED_FILE_NAME
+			   
+		  FROM WMK_BOARD_FILE
+		 WHERE bId = #{bId}
+		   AND DEL_GB = 'N'
+	</select>
 	 
 
 </mapper>

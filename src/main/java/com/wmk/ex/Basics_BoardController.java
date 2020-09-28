@@ -1,11 +1,14 @@
 package com.wmk.ex;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
@@ -38,13 +41,16 @@ public class Basics_BoardController {
 	
 	 
 	@GetMapping("/content_view") 
-	public String content_view(BoardVO boardVO, Model model) {
+	public String content_view(BoardVO boardVO, Model model)throws Exception {
 		
 	   log.info("content_view");
 	   model.addAttribute("content_view", service.get(boardVO.getbId()));
 	   
 	   List<ReplyVO> replyList = service.readReply(boardVO.getbId());
 	   model.addAttribute("replyList", replyList);
+	   
+	   List<Map<String, Object>> fileList = service.selectFileList(boardVO.getbId());
+		model.addAttribute("file", fileList);
 	   
 	   return "content_view";
 	}
@@ -70,13 +76,14 @@ public class Basics_BoardController {
 	
 	
 	@RequestMapping("/write")
-	public String write(BoardVO boardVO) {
+	public String write(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		log.info("write");
-		service.writeBoard(boardVO);
+		service.writeBoard(boardVO, mpRequest);
 
 		return "redirect:list";
 	}
+	
 	
 	
 	@GetMapping("/reply_view") 
@@ -123,6 +130,8 @@ public class Basics_BoardController {
 		
 		return "list";
 	}
+	
+	
 	
 	
 //	//¥Ò±€ ªË¡¶

@@ -2,6 +2,7 @@ package com.wmk.ex.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 
@@ -48,6 +49,13 @@ public interface BoardMapper {
 	
 	//Ajax 댓글 목록
 	public List<ReplyVO> readReply(ReplyVO replyVO);
+	
+	//첨부파일 업로드
+	public void insertFile(Map<String, Object> map); 
+		
+	//첨부파일 조회
+	public List<Map<String, Object>> selectFileList(int bId);
+
 	
 //	//댓글 삭제
 //	public void deleteReply(ReplyVO vo);

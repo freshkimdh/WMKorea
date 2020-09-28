@@ -2,8 +2,10 @@ package com.wmk.ex.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
@@ -20,7 +22,7 @@ public interface BoardService {
 	@Delete("Delete from mvc_board where bid = #{bno}")
 	public void remove(int bno);
 
-	public void writeBoard(BoardVO boardVO);
+	public void writeBoard(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception;
 
 	public void writeReply(BoardVO boardVO);
 
@@ -44,6 +46,10 @@ public interface BoardService {
 	
 	//Ajax ¥Ò±€ ∏Ò∑œ
 	public List<ReplyVO> readReply(ReplyVO replyVO);
+	
+	//√∑∫Œ∆ƒ¿œ ¡∂»∏
+	public List<Map<String, Object>> selectFileList(int bId) throws Exception;
+
 	
 //	//¥Ò±€ ªË¡¶
 //	public void deleteReply(ReplyVO vo);

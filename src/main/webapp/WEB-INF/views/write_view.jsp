@@ -9,7 +9,7 @@
 <body>
 
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
-		<form action="write" method="get">
+		<form action="write" method="post" enctype="multipart/form-data">
 			<tr>
 				<td> 이름 </td>
 				<td> <input type="text" name="bName" size = "50"> </td>
@@ -21,6 +21,10 @@
 			<tr>
 				<td> 내용 </td>
 				<td> <textarea name="bContent" rows="10" ></textarea> </td>
+			</tr>
+			<tr>
+				<td> 이미지 첨부 </td>
+				<td> <input type= "file" name="uploadFile" accept="image/*" /> </td>
 			</tr>
 			<tr >
 				<td colspan="2"> 

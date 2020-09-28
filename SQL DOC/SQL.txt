@@ -106,3 +106,66 @@ select rId, content, writer, regdate
  where bId = 1850;
  
  commit;
+ 
+ ------------------------------------------------------------------------
+**이미지 경로 설정을 위해 톰캣에 있는 server.xml에 다음과 같이 설정해줍니다. (보안상의 이유로 웹에서 로컬폴더로 접근 불가합니다.)
+<!-- 업로드한 파일 불러오기 --> 
+<Host>  </Host>  태그 안 가장 하단에 추가해주세요!!
+
+<Context docBase="C:\Users\Administrator\Documents\workspace-sts-3.9.13.RELEASE\WMKorea\src\main\webapp\resources\img\" path="/filePath" reloadable="true"/>
+
+	<!-- <Context docBase="C:\Users\Administrator\Documents\workspace-sts-3.9.13.RELEASE\WMKorea\src\main\webapp\resources\img\" path="/filePath" reloadable="true"/>
+	이렇게 설정해 놓으면 /filePath 라는 논리적 경로를 C:\Users\Administrator\Documents\workspace-sts-3.9.13.RELEASE\WMKPracticeSun\src\main\webapp\resources\img\ 물리적인 경로에서 찾게된다.-->
+  
+ <Context docBase="WMKorea" path="/ex" reloadable="true" source="org.eclipse.jst.jee.server:WMKorea"/>
+
+
+ --파일 테이블 생성
+
+CREATE TABLE wmk_board_file 
+(  
+file_no NUMBER,  --파일 번호
+bId NUMBER NOT NULL,    --게시판 번호
+ORIGINAL_FILE_NAME VARCHAR2(260 BYTE) NOT NULL,  --원본 파일 이름
+STORED_FILE_NAME VARCHAR2(500 BYTE) NOT NULL,  --변경된 파일 이름
+FILE_SIZE NUMBER,   --파일 크기
+regdate DATE DEFAULT SYSDATE NOT NULL,   --파일등록일
+DEL_GB VARCHAR2(1 BYTE) DEFAULT 'N' NOT NULL,   --삭제구분
+PRIMARY KEY (file_no)  --기본키 FILE_NO
+);
+
+commit;
+
+--시퀀스 생성--
+create sequence wmk_board_file_no_seq
+start with 1
+increment by 1
+nomaxvalue 
+nocache;
+
+commit;    
+------------------------------------------------------------------------
+--파일 db 테스트
+insert into 
+    wmk_board_file (
+        file_no
+        , bId
+        , ORIGINAL_FILE_NAME
+        , STORED_FILE_NAME
+        , FILE_SIZE
+        , regdate
+        , DEL_GB
+    ) values (
+        wmk_board_file_no_seq.nextval
+        , 1032
+        , '원래 파일명.jpg'
+        , '변경된 파일명.jpg'
+        , 파일크기
+        , sysdate
+        , 'N');
+        
+    
+
+select * from  wmk_board_file;
+-----------------------------------------------------------------------
+ 

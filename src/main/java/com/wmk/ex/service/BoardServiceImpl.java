@@ -2,11 +2,16 @@ package com.wmk.ex.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.mapper.BoardMapper;
 import com.wmk.ex.page.Criteria;
+import com.wmk.ex.util.FileUtils;
 import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.ReplyVO;
 
@@ -20,6 +25,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	private BoardMapper mapper; 
 	
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
 	
 	public List<BoardVO> getList() {
 		
@@ -49,10 +56,22 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public void writeBoard(BoardVO boardVO) {
+	public void writeBoard(BoardVO boardVO, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		log.info("write........");
+		
 		mapper.insertBoard(boardVO);
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(boardVO, mpRequest); 
+		
+		System.out.println("listlist" + list);
+		
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			mapper.insertFile(list.get(i)); 
+			
+			System.out.println("list.get(i)" + list.get(i));
+		}
 	}
 
 	
@@ -131,6 +150,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<ReplyVO> readReply(ReplyVO replyVO) {
 		
 		return mapper.readReply(replyVO);
+	}
+	
+	// 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> selectFileList(int bId) {
+		return mapper.selectFileList(bId);
 	}
 
 	
