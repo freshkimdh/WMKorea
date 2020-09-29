@@ -143,6 +143,8 @@
 	<div class="form-group">
   		<label for="pw">비밀번호 (Password):</label>
   		<input type="password" class="form-control" id="pw" name="pw">
+  		<label for="pw">비밀번호 확인 (CheckPassword):</label>
+  		<input type="password" class="form-control" id="pw2" name="pw2">
 	</div>
 	
 	 <div class="form-group">
@@ -210,10 +212,54 @@
 
 </body>
 <script>
-	// 중복 체크 검사 유무 검사하는 값
-	var isCheckIdCheck = false;
-	var isEmptyUserInformation = false;
+//중복 체크 검사 유무 검사하는 값 12
+var isCheckIdCheck = false;
+
+function isValidJoinForm() {
 	
+	var id = $("#id").val() || '';
+	var pw = $("#pw").val() || '';
+	var checkPw = $("#pw2").val() || '';
+	var email = $("#email").val() || '';
+	var nickname = $("#nickname").val() || '';
+	console.log("id:	"+id);
+	console.log("pw:	"+pw);
+	console.log("checkPw:	"+checkPw);
+	
+	
+	if(id.trim() === '') {
+		console.log("id:	"+id);
+		alert('아이디를 입력해 주세요');
+		return false;
+	}
+	
+	if(pw.trim() === '') {
+		console.log("Pw:	"+pw);
+		alert('비밀번호를 입력해 주세요');
+		return false;
+	}
+	
+	if(nickname.trim() === '') {
+		console.log("nickname:	"+nickname);
+		alert('닉네임을 입력해 주세요');
+		return false;
+	}
+	if(email.trim() === '') {
+		console.log("email:	"+email);
+		alert('이메일을 입력해 주세요');
+		return false;
+	}
+	if(pw == checkPw){
+	
+	return true;
+	}else{
+		console.log("pw:	"+pw);
+		console.log("checkpw:	"+checkPw);
+		alert('비밀번호가 일치하지않습니다.');
+		return false;
+	}
+	
+}
  	// 회원가입 하기 전 중복 로그인 체크 검사
 	function checkJoinform(){
 		if(isCheckIdCheck === false) {
@@ -221,8 +267,9 @@
 			console.log("CheckID  :"+isCheckIdCheck);
 			return false;
 		}
-		console.log("CheckID  :"+isCheckIdCheck);
-		return true;
+		var isValidJoin = isValidJoinForm();
+		console.log(" isValidJoin   :"+isValidJoin);
+		return isValidJoin;
 	}
  	
  	
@@ -258,9 +305,6 @@
 		         if(isEnteryourID){
 	                  isEnteryourID = false;
 	                  alert("아이디를 입력해주세요");
-	             }if(isPwCheckfalse){
-	            	 isPwCheckfalse = false;
-	            	 alert("비밀번호를 입력해 주세요 ");
 	             }
 		    },
 		    error: function (){        
