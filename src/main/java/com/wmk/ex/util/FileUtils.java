@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 public class FileUtils {
 	
 	//파일 저장
-	private static final String filePath = "C:\\Users\\Administrator\\Documents\\workspace-sts-3.9.13.RELEASE\\WMKPracticeSun\\src\\main\\webapp\\resources\\img\\"; // 파일이 저장될 위치
+	private static final String filePath = "C:\\Users\\Administrator\\git\\WMKorea\\src\\main\\webapp\\resources\\img\\"; // 파일이 저장될 위치
 	
 	
 	public List<Map<String, Object>> parseInsertFileInfo(BoardVO boardVO, 

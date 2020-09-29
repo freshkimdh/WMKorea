@@ -5,9 +5,14 @@
 <mapper namespace="com.wmk.ex.mapper.BoardMapper">
 	
 	<select id="getList" resultType="com.wmk.ex.vo.BoardVO">
-	<!--여기에 sql 구문이 들어가며, 끝에 반드시 ; 없어야 한다!  -->
+	<!--여기에 sql 구문이 들어가며, 끝에 반드시 ; 없어야 한다! wmk_mvc_board와 wmk_board_file join. -->
 	<![CDATA[ 
-		select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from wmk_mvc_board order by bGroup desc, bStep asc
+		select 
+     		a.bId, bName, bTitle, bContent,  bDate, bHit, bGroup, bStep, bIndent, b.stored_file_name as storedFileName
+	    from wmk_mvc_board a
+       		left join wmk_board_FILE b
+	        on( a.bId = b.bId)
+			order by bGroup desc, bStep asc
 	]]>
  	</select>
 	
@@ -57,11 +62,12 @@
 		<![CDATA[
 			SELECT * FROM (
 			     SELECT ROWNUM AS RNUM, A.* FROM (
-			        		SELECT
-			                    *
-			                FROM
-			                    wmk_mvc_board 
-			                order by bGroup desc, bStep asc   
+	               		select 
+	               			a.bId, bName, bTitle, bContent,  bDate, bHit, bGroup, bStep, bIndent, b.stored_file_name as storedFileName
+					    from wmk_mvc_board a
+				       		left join wmk_board_FILE b
+					        on( a.bId = b.bId)
+							order by bGroup desc, bStep asc
 			    ) A WHERE ROWNUM <= #{pageNum} * #{amount}
 			) WHERE RNUM > (#{pageNum}-1) * #{amount}
 		]]>

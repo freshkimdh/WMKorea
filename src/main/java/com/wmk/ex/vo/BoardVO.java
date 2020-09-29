@@ -18,6 +18,7 @@ public class BoardVO {
 	int bGroup;
 	int bStep;
 	int bIndent;
+	String storedFileName;
 	
 	public int getbId() {
 		return bId;
@@ -73,11 +74,22 @@ public class BoardVO {
 	public void setbIndent(int bIndent) {
 		this.bIndent = bIndent;
 	}
+	public String getStoredFileName() {
+		return storedFileName;
+	}
+	public void setStoredFileName(String storedFileName) {
+		this.storedFileName = storedFileName;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardVO [bId=" + bId + ", bName=" + bName + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bDate="
-				+ bDate + ", bHit=" + bHit + ", bGroup=" + bGroup + ", bStep=" + bStep + ", bIndent=" + bIndent + "]";
+				+ bDate + ", bHit=" + bHit + ", bGroup=" + bGroup + ", bStep=" + bStep + ", bIndent=" + bIndent
+				+ ", storedFileName=" + storedFileName + "]";
 	}
+	
+	
+	
+	
 	
 }

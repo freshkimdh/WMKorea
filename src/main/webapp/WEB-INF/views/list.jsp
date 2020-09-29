@@ -24,6 +24,7 @@
          <td>제목</td>
          <td>날짜</td>
          <td>히트</td>
+         <td>썸네일</td>
       </tr>
       <!-- 검색어의 값이 null일 경우  -->
       <c:if test="${boardByTitle eq null }">
@@ -36,6 +37,9 @@
 	            <a href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
 	         <td>${dto.bDate}</td>
 	         <td>${dto.bHit}</td>
+	         <td>
+	       		<img src= "/filePath/${dto.storedFileName ne null? dto.storedFileName : 'avatar.png'}" style="width: 50px; height: 50px;"></img>
+	      	 </td>
 	      </tr>
 	      </c:forEach>
       </c:if>
@@ -51,6 +55,7 @@
 	            <a href="content_view?bId=${boardByTitle.bId}">${boardByTitle.bTitle}</a></td>
 	         <td>${boardByTitle.bDate}</td>
 	         <td>${boardByTitle.bHit}</td>
+	         <td>${boardByTitle.storedFileName}</td>
 	      </tr>
 	      </c:forEach>
       </c:if>

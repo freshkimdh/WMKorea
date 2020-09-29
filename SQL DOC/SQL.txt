@@ -168,4 +168,11 @@ insert into
 
 select * from  wmk_board_file;
 -----------------------------------------------------------------------
+--select id= "getList" 부분에 sql문 수정했음. 보드 테이블과 파일 테이블 조인 (stored_file_name _로 다른 컬럼이름들과 설정이 맞지 않아 as storedFileName라고 별명 지어줌.)
+
+select a.bId, bName, bTitle, bContent,  bDate, bHit, bGroup, bStep, bIndent, b.stored_file_name as storedFileName
+        from wmk_mvc_board a
+        left join wmk_board_FILE b
+        on( a.bId = b.bId)
+		order by bGroup desc, bStep asc
  

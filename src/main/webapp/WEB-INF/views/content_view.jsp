@@ -133,7 +133,7 @@
          		<c:forEach var="files" items="${file}" >
 	  			   <img src="/filePath/${files.STORED_FILE_NAME}" style="width: 100%; height: auto;"></img>
 				</c:forEach>
-			</td>
+			</td>	
 		</tr>
          <tr >
             <td colspan="2"> <input type="submit" value="수정"> &nbsp;&nbsp; 
