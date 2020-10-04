@@ -18,7 +18,8 @@
 	<resources mapping="/wmk_board/img/**" location="/resources/img/" />
 	<resources mapping="/wmk_home/img/**" location="/resources/img/" />
 	<resources mapping="/admin_travel_board/img/travel_board_img/**" location="/resources/img/travel_board" />
-
+	<resources mapping="/wmk_home/img/character/**" location="/resources/img/character" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

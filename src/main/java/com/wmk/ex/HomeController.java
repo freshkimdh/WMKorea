@@ -22,6 +22,13 @@ public class HomeController {
 		return "/wmk_home/index";
 	}
 	
+	@GetMapping("/characterMaking")
+	public String character(Model model) {
+		log.info("character...");
+		return "/wmk_home/characterMaking";
+	}
+	
+	
 	@GetMapping("/loginForm") 
 	public String login(Model model) {
 		log.info("loginForm...");
