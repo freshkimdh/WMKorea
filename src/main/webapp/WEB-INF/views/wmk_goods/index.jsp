@@ -67,12 +67,6 @@
 			<%@ include file="include/header.jsp" %>
 		</div>
 	</header>
-
-	<nav id="nav">
-		<div id="nav_box">
-			<%@ include file="include/nav.jsp" %>
-		</div>
-	</nav>
 	
 	<section id="container">
 		<div id="container_box">
