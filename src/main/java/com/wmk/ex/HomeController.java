@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
 
-<<<<<<< HEAD
-//브랜치 test
-=======
-//브랜치 test 진행
->>>>>>> origin/DawHwan
 @Log4j
 @Controller
 public class HomeController {
