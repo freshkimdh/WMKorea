@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import com.wmk.ex.vo.UserVO;
 
 @Mapper
@@ -19,10 +21,18 @@ public interface UserMapper {
 	@Select("select * from wmk_users where id = #{id}")
 	public UserVO readUser(String id);
 	
-	 //È¸¿ø Å»Åð 
+	
+	//DeleteUsers
 	@Delete("delete from wmk_authorities where id = #{id}")
 	public void authori(String id);
 	@Delete("delete from wmk_users where id = #{id} and pw = #{pw}")
 	public void delMember(UserVO userVO);
+	
+	//UpdateUsers
+	@Update("update wmk_users set pw = #{pw}, nickname = #{nickname}, email =#{email}, nationality =#{nationality}  where id = #{id}")
+	public void modifyUser(UserVO userVO);
+	//UserIdCheck
+	@Select("select count(*) from wmk_users where id = #{id}")
+	public int idChk(String id);
 	}
 	

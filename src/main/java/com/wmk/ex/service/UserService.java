@@ -61,5 +61,23 @@ public class UserService {
 	      log.info("pw"+pw);
 	      return passEncoder.encode(pw);
 	   }
+	   
+	   public void modifyUser(UserVO userVO) {
+			
+			String pw = userVO.getPw(); 
+			log.info(pw);
+			String encode = passEncoder.encode(pw);
+			  
+			userVO.setPw(encode);
+			
+			userMapper.modifyUser(userVO);; 
+			
+			log.info(userVO);
+			
+		}
+		public int getUser(String member_id) {
+		
+			return userMapper.idChk(member_id);
+		}
 
 	}

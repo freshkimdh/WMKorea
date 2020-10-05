@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -217,6 +218,33 @@ public class UserController {
 	    	
 	    }
 	    
+	    
+	    @GetMapping("/userModify")
+		public String modify() {
+			log.info("modify personal information");
+			return "user/userModify";
+		}
+	    @GetMapping("/userPwModify")
+	   	public String Pwmodify() {
+	   		log.info("modify personal information");
+	   		return "user/userPwModify";
+	   	}
+	    
+	    @PostMapping("/update")
+		public String userModify(UserVO userVO, HttpSession session) {
+			log.info("to Modify user information");
+			
+			log.info(userVO.getId()); 
+			log.info(userVO.getPw());
+			log.info(userVO.getNickname());
+			log.info(userVO.getEmail()); 
+			log.info(userVO.getNationality()); 
+			
+			userService.modifyUser(userVO);
+			session.invalidate();
+			
+			return "redirect:/index";
+		}
 	    
 	    
 	    
