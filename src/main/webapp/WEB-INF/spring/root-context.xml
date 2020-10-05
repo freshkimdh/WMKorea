@@ -34,12 +34,9 @@
 		<!-- Mapper Interface -->
 	<mybatis-spring:scan base-package="com.wmk.ex.mapper" /> <!-- 마이바티스 매퍼 리딩 부분 -->
 	
-	<context:component-scan
-		base-package="com.wmk.ex.service"></context:component-scan>
-	
-	<context:component-scan 
-		base-package="com.wmk.ex.util"></context:component-scan>
-		
+	<context:component-scan base-package="com.wmk.ex.service"/>
+	<context:component-scan base-package="com.wmk.ex.util"/>
+	<context:component-scan base-package="com.wmk.ex.domain" />
 	<context:component-scan base-package="com.wmk.ex.persistence" />
 			
 </beans>
