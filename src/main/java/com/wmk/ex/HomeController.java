@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
 
+//�귣ġ test
 @Log4j
 @Controller
 public class HomeController {
