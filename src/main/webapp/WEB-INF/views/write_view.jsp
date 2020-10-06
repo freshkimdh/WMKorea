@@ -6,24 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>write view</title>
 
-<script> 
-	  function setThumbnail(event) { 
-		var reader = new FileReader(); 
-		reader.onload = function(event) {
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			document.querySelector("div#image_container").appendChild(img);
-		};
-			
-			reader.readAsDataURL(event.target.files[0]); 
-	  }
-</script>
-
+<script type="text/javascript" src="resources/ckeditor/ckeditor.js"></script>
 
 </head>
 <body>
 
-	<table width="500" cellpadding="0" cellspacing="0" border="1">
+	<table width="800" cellpadding="0" cellspacing="0" border="1">
 		<form action="write" method="post" enctype="multipart/form-data">
 			<tr>
 				<td> 이름 </td>
@@ -35,17 +23,15 @@
 			</tr>
 			<tr>
 				<td> 내용 </td>
-				<td> <textarea name="bContent" rows="10" ></textarea> </td>
+				<td> 
+				<textarea id = "bContent" name = "bContent"></textarea>
+
+					 <script>
+					 	CKEDITOR.replace('bContent',{filebrowserUploadUrl:'${pageContext.request.contextPath}/img/imageUpload.do'});
+					 </script>
+				</td>
 			</tr>
 			<tr>
-				<td> 이미지 첨부 </td>
-				<td> <input type= "file" name="uploadFile" accept="image/*" onchange="setThumbnail(event);" /> </td>
-			</tr>
-			<tr>
-				<td> 이미지 미리보기 </td>
-				<td> <div id="image_container"> </div> </td>
-			</tr>
-			<tr >
 				<td colspan="2"> 
 					<input type="submit" value="입력"> &nbsp;&nbsp;
 					<a href="list">목록보기</a>

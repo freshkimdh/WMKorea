@@ -125,16 +125,11 @@
          </tr>
          <tr>
             <td> 내용 </td>
-            <td> <textarea rows="10" name="bContent" >${content_view.bContent}</textarea></td>
+            <td>
+            	${content_view.bContent} 
+            	<textarea style="display: none;"  name="bContent" >${content_view.bContent}</textarea>
+            </td>
          </tr>
-         <tr>
-         	<td> 이미지 </td>
-         	<td class= "form-group"> 
-         		<c:forEach var="files" items="${file}" >
-	  			   <img src="/filePath/${files.STORED_FILE_NAME}" style="width: 100%; height: auto;"></img>
-				</c:forEach>
-			</td>	
-		</tr>
          <tr >
             <td colspan="2"> <input type="submit" value="수정"> &nbsp;&nbsp; 
             <a href="list">목록보기</a> &nbsp;&nbsp; 
@@ -143,6 +138,10 @@
          </tr>
       </form>
    </table>
+   <br>
+   <br>
+   <br>
+   
    
    <!--댓글 목록  -->
    
