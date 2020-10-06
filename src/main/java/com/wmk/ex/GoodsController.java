@@ -1,10 +1,12 @@
 package com.wmk.ex;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wmk.ex.service.AdminService;
+import com.wmk.ex.util.UploadFileUtils;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -27,6 +31,9 @@ public class GoodsController {
 	
 	@Inject
 	AdminService adminService;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	//상품 메인 페이지
 	@RequestMapping(value = "/goodsIndex", method = RequestMethod.GET)
@@ -64,7 +71,21 @@ public class GoodsController {
 	
 	//상품 등록
 	@RequestMapping(value = "/admin_goods/goods/register", method = RequestMethod.POST)
-	public String postGoodsRegister(GoodsVO vo) throws Exception {
+	public String postGoodsRegister(GoodsVO vo, MultipartFile file) throws Exception {
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file != null) {
+		 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		vo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
 		adminService.register(vo);
 		
 		return "redirect:/admin_goods/index";

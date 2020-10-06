@@ -49,6 +49,10 @@ insert into goods_category (cateName, cateCode) values ('Æ¼¼ÅÃ÷', '300');
 insert into goods_category (cateName, cateCode) values ('½Å¹ß', '400');
 
 
+--½æ³×ÀÏ vo Ãß°¡
+alter table tbl_goods add (gdsThumbImg varchar(200));
+
+
 
 
 
