@@ -11,15 +11,21 @@ import com.wmk.ex.vo.UserVO;
 @Mapper
 public interface UserMapper {
 
-	@Insert("insert into wmk_users(id,pw,nickname,email,nationality,enabled)"
-			+ "values(#{id},#{pw},#{nickname},#{email},#{nationality},#{enabled})")	
+	@Insert("insert into wmk_users(id,pw,nickname,email,nationality,enabled,login_Type)"
+			+ "values(#{id},#{pw},#{nickname},#{email},#{nationality},#{enabled},#{login_Type})")	
 	public int insertUser(UserVO userVO);
 	
 	@Insert("insert into wmk_authorities (id, authority) values(#{id}, 'ROLE_USER')") 
 	public void insertAuthorities(UserVO userVO);
 	
+	//kakao social
 	@Select("select * from wmk_users where id = #{id}")
 	public UserVO readUser(String id);
+	@Select("select * from wmk_users where login_Type = #{login_Type}")
+	public UserVO readUserLoginType(String login_Type);
+	@Select("select * from wmk_users where id = #{id} and login_Type = #{login_Type}")
+	public UserVO readUserByIdAndLoginType(String id);
+	
 	
 	
 	//DeleteUsers

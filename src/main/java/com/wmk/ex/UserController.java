@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -30,6 +31,7 @@ import com.google.gson.Gson;
 import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.CustomUser;
 import com.wmk.ex.vo.KakaoProfile;
+import com.wmk.ex.vo.KakaoProfile.KakaoAccount;
 import com.wmk.ex.vo.OAuthToken;
 import com.wmk.ex.vo.ResponseVO;
 import com.wmk.ex.vo.UserVO;
@@ -117,26 +119,22 @@ public class UserController {
 	    
 	    
 	    @GetMapping("/auth/kakao/callback")
-	    public @ResponseBody String kakaoCallback(String code) { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
+	    public @ResponseBody String kakaoCallback(String code) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
 	    	
-	    	//POST ������� key=value �����͸� ��û (īī��������)
+	    	Gson gson = new Gson();
 	    	RestTemplate rt = new RestTemplate();
 	    	
-	    	//HttpHeaders ������Ʈ ����
 	    	HttpHeaders headers = new HttpHeaders();
  	    	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 	    	
-	    	//HttpBody ������Ʈ ����
 	    	MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
  	    	params.add("grant_type", "authorization_code");
 	    	params.add("client_id", "af9546b83fbd65051801d2e327f8c259");
 	    	params.add("redirect_uri", "http://localhost:8282/ex/auth/kakao/callback");
 	    	params.add("code", code);
 	    	
-	    	//HttpHeader�� HttpBody�� �ϳ��� ������Ʈ�� ���
 	    	HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = new HttpEntity<>(params, headers);
 	    	
-	    	//Http ��û�ϱ� - post ������� - �׸��� response ������ ���� ����.
 	    	ResponseEntity<String> response = rt.exchange(
 	    			"https://kauth.kakao.com/oauth/token",
 	    			HttpMethod.POST,
@@ -155,10 +153,8 @@ public class UserController {
 			} catch (IOException e) {	
 				e.printStackTrace();
 			}
-	    	
-	    	System.out.println("īī�� ������ ��ū:" + oauthToken.getAccess_token());
-	    	
-	    	
+	    		    	
+	  
 	    	
 	    	RestTemplate rt2 = new RestTemplate();
 	    	
@@ -184,7 +180,9 @@ public class UserController {
 	    	ObjectMapper objectMapper2 = new ObjectMapper();	    	
 	    	KakaoProfile kakaoProfile = null;    	
 	    	try {
+	    		// 카카오 로그인 정보 받은 곳
 	    		kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
+	    		log.info(gson.toJson(kakaoProfile));
 			} catch (JsonParseException e) {			
 				e.printStackTrace();
 			} catch (JsonMappingException e) {		
@@ -193,29 +191,34 @@ public class UserController {
 				e.printStackTrace();
 			}
 	    	
-	    	//User ������Ʈ: id, pw, email
-	    	System.out.println("īī�� ���̵�(��ȣ): " + kakaoProfile.getId());
-	    	System.out.println("īī�� ���̵�(�̸���): " + kakaoProfile.getKakao_account().getEmail());
+	    	// 카카오톡 고유 아이디값
+	    	String socialUserId = kakaoProfile.getId().toString();
+	    	// 우리서비스 회원가입 여부 판단
+	    	// 이제 로그인 타입까지 추가로 비교를 해야해 (카카오만의 아이디 검증을 해야하니(
+	    	UserVO loginUserInfo = userService.getUserByIdAndLoginType(socialUserId);
 	    	
-	    	System.out.println("��α׼��� ��������:" + kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId());
-	    	System.out.println("��α׼��� �̸���: " + kakaoProfile.getKakao_account().getEmail());
-	    	UUID garbagePassword = UUID.randomUUID();
-	    	System.out.println("��α׼��� �н�����: " + garbagePassword);
+	    	if(loginUserInfo == null) {
+	    		// 여기도 카카오 로그인 타입을 추가해야지
+	    		UserVO socialRegisterUser = UserVO.builder()
+		    			.id(socialUserId)
+		    			.pw(kakaoProfile.getId() + "kakao")
+		    			.nickname(kakaoProfile.getProperties().getNickname())
+//		    			.email(kakaoProfile.getKakao_account().getEmail())
+		    			.email(" ")
+		    			.nationality("nationality")
+		    			.enabled(1)
+		    			.login_Type("kakao")
+		    			.build();
+	    		log.info("  여기까지 왔낭  	;" +gson.toJson(socialRegisterUser));
+	    		userService.addUser(socialRegisterUser);
+	    		log.info("이번엔 여기당 !		;"+gson.toJson(socialRegisterUser));
+	    	}
 	    	
-//	    	User user = User.builder()
-//	    			.id(kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId())
-//	    			.pw(garbagePassword.toString())
-//	    			.email(kakaoProfile.getKakao_account().getEmail())
-//	    			.build();
-//	    	
-//	    	userService.ȸ��ã��();
-//	    	
-//	    	
-//	    	userService.ȸ������(user);
-//	    	
-//	    	
-	    	return response2.getBody(); 
+	    	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
+	    	// 여기서 로그인 처리
 	    	
+	    	
+	    	return response2.getBody();  // 여기서 홈으로 리다리엑트 하면 됨
 	    }
 	    
 	    
