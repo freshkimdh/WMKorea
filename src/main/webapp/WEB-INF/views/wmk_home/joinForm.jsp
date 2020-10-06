@@ -50,7 +50,7 @@
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-			<img src="img/main_logo2.png">
+			<a href="index"><img src="img/main_logo2.png"></a>
 		</div> <!-- tr -->
 		
 		<div class="col-sm-6" id="s2">
