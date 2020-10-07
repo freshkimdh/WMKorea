@@ -65,7 +65,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-
+}
 </style>
 	
 	
@@ -240,7 +240,7 @@
 		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
 	  <div class="card shadow-sm">
 	  	<div class="list_picture">
-		<a href="seoulCotentView"><img src="img/travel_board_img/kyungbok.jpg" class="img-fluid mx-auto d-block rounded"></a>
+		<a href="seoulCotentView"><img src="others/s1.PNG" class="img-fluid mx-auto d-block rounded"></a>
 	    </div>
 	    <div class="card-body">
 	      <p class="card-text"><strong>경복궁</strong><br>투어 & 박물관이 있는 역사적인 궁전</p>
@@ -347,7 +347,7 @@
 	<br>
 	</div>
 
-
+<img src="others/s1.PNG">
 
 <div class="jumbotron text-center" style="margin-bottom:0">
 <p>Copyright © 2020 Wemade Korea All rights reserved</p>
