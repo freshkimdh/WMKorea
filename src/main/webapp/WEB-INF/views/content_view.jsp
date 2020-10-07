@@ -105,7 +105,7 @@
    
    <body>
      <table width="500" cellpadding="0" cellspacing="0" border="1" align="center">
-      <form action="modify" method="get">      
+      <form action="goToModify" method="get">      
          <input type="hidden" name="bId" value="${content_view.bId}">
          <tr>
             <td> 번호 </td>

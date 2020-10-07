@@ -8,7 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+  <script type="text/javascript" src="../../resources/ckeditor/ckeditor.js"></script> 
+  	
 <style>
 	body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
 	ul { padding:0; margin:0; list-style:none;  }
@@ -72,7 +73,7 @@ textarea#gdsDes { width:400px; height:180px; }
 		<div id="container_box">
 			<h2>상품 등록</h2>
 			
-			<form role="form" method="post" autocomplete="off">
+			<form role="form" method="post" enctype="multipart/form-data">
 
 				<div class="inputArea"> 
 				 <label>1차 분류</label>
@@ -103,7 +104,11 @@ textarea#gdsDes { width:400px; height:180px; }
 				
 				<div class="inputArea">
 				 <label for="gdsDes">상품소개</label>
-				 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+				 <textarea id = "gdsDes" name = "gdsDes"></textarea>
+
+					 <script>
+					 	CKEDITOR.replace('gdsDes',{filebrowserUploadUrl:'${pageContext.request.contextPath}/goods/img/imageUpload.do'});
+					 </script>
 				</div>
 				
 				<div class="inputArea">
@@ -203,8 +208,6 @@ textarea#gdsDes { width:400px; height:180px; }
 		
 		
 	</script>
-
-
 
 
 
