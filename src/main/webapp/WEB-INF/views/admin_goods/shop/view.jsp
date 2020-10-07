@@ -2,6 +2,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <html>
@@ -157,6 +159,39 @@
 			 
 			 <div class="gdsDes">${view.gdsDes}</div>
 		</div>
+		
+			<div id="reply">
+
+			 <c:if test="${member == null }">
+			  <p>소감을 남기시려면 <a href="/ex/member/signin">로그인</a>해주세요</p>
+			 </c:if>
+			 
+			 <c:if test="${member != null}">
+				 <section class="replyForm">
+					  <form role="form" method="post" autocomplete="off">
+					  
+					  <input type="hidden" name="gdsNum" value="${view.gdsNum}">
+					  
+						   <div class="input_area">
+						    <textarea name="repCon" id="repCon"></textarea>
+						   </div>
+						   
+						   <div class="input_area">
+						    <button type="submit" id="reply_btn">소감 남기기</button>
+						   </div>
+					   
+					  </form>
+				 </section>
+			 </c:if>
+			 
+			 <section class="replyList">
+			  <ol>
+			   <li>댓글 목록</li>
+			   </ol>    
+			 </section>
+			</div>
+		
+		
 	</section>
 
 	<footer id="footer">

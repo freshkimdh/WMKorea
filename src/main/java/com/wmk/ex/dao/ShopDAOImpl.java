@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
 
 @Repository
@@ -42,6 +43,18 @@ public class ShopDAOImpl implements ShopDAO {
 		return sql.selectOne("com.wmk.ex.mapper.AdminMapper"
 				+ ".goodsView", gdsNum);
 	}
+	
+	
+	//상품 댓글 작성
+	@Override
+	public void registReply(CommentVO comment) throws Exception {
+		
+		sql.insert(namespace + ".registReply", comment);
+		
+	}
+
+
+	
 	
 
 
