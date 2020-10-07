@@ -37,6 +37,6 @@
 	<context:component-scan base-package="com.wmk.ex.service"/>
 	<context:component-scan base-package="com.wmk.ex.util"/>
 	<context:component-scan base-package="com.wmk.ex.domain" />
-	<context:component-scan base-package="com.wmk.ex.persistence" />
+	<context:component-scan base-package="com.wmk.ex.dao" />
 			
 </beans>

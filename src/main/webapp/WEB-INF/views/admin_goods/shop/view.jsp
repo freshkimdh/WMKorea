@@ -3,10 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <html>
 <head>
 	<title>wmk</title>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	<style>
 	
@@ -58,6 +59,19 @@
 		
 	</style>
 	
+	<style>
+	 div.goods div.goodsImg { float:left; width:350px; }
+	 div.goods div.goodsImg img { width:350px; height:auto; }
+	 
+	 div.goods div.goodsInfo { float:right; width:330px; font-size:22px; }
+	 div.goods div.goodsInfo p { margin:0 0 20px 0; }
+	 div.goods div.goodsInfo p span { display:inline-block; width:100px; margin-right:15px; }
+	 
+	 div.goods div.goodsInfo p.cartStock input { font-size:22px; width:50px; padding:5px; margin:0; border:1px solid #eee; }
+	 div.goods div.goodsInfo p.cartStock button { font-size:26px; border:none; background:none; }
+	 div.goods div.goodsInfo p.addToCart { text-align:right; }
+	 div.goods div.gdsDes { font-size:18px; clear:both; padding-top:30px; }
+	</style>
 	
 <style>
 	section#content ul li { display:inline-block; margin:10px; }
@@ -70,9 +84,9 @@
 <body>
 <div id="root">
 	<header id="header">
-		<h1 class="title">
-			<a href="/ex/goodsIndex">WMK Admin</a>
-		</h1>
+		<div id="header_box">
+			<%@ include file="../include/header.jsp" %>
+		</div>
 	</header>
 
 	<nav id="nav">
@@ -82,48 +96,66 @@
 	</nav>
 	
 	<section id="container">
-		<div id="container_box">
-		
-			<section id="content">
-				
-				<ul>
-					<c:forEach items="${list}" var="list">
-					<li>
-						<div class="goodsThumb">
-							<img src="${list.gdsThumbImg}">
-						</div>	
-						<div class="goodsName">
-							<a href="/ex/shop/view?n=${list.gdsNum}">${list.gdsName}</a>
-						</div>
-					</li>
-					</c:forEach>
-				</ul>
-
-			</section>
+		<form role="form" method="post">
+			 <input type="hidden" name="gdsNum" value="${view.gdsNum}" />
+			</form>
 			
-			<aside id="aside">
-				<h3>카테고리</h3>
-
-				<ul>
-					<li><a href="/ex/shop/list?c=100&l=1">무기</a>
-					
-						<ul class="low">
-							<li><a href="/ex/shop/list?c=101&l=2">돌격소총</a></li>
-							<li><a href="/ex/shop/list?c=102&l=2">기관단총</a></li>
-							<li><a href="/ex/shop/list?c=103&l=2">경기관총</a></li>
-							<li><a href="/ex/shop/list?c=104&l=2">산탄총</a></li>
-							<li><a href="/ex/shop/list?c=105&l=2">지정사수소총</a></li>
-							<li><a href="/ex/shop/list?c=106&l=2">저격소총</a></li>
-							<li><a href="/ex/shop/list?c=107&l=2">기타</a></li>
-						</ul>
-						
-					</li>
-					<li><a href="/ex/shop/list?c=200&l=1">탄약</a></li>
-					<li><a href="/ex/shop/list?c=300&l=1">방어구</a></li>
-					<li><a href="/ex/shop/list?c=400&l=1">회복제</a></li>
-				</ul>
-			</aside>
-			
+			<div class="goods">
+			 <div class="goodsImg">
+			  <img src="${view.gdsImg}">
+			 </div>
+			 
+			 <div class="goodsInfo">
+			  <p class="gdsName"><span>상품명</span>${view.gdsName}</p>
+			  
+			  <p class="cateName"><span>카테고리</span>${view.cateName}</p>
+			  
+			  <p class="gdsPrice">
+			   <span>가격 </span><fmt:formatNumber pattern="###,###,###" value="${view.gdsPrice}" /> 원
+			  </p>
+			  
+			  <p class="gdsStock">
+			   <span>재고 </span><fmt:formatNumber pattern="###,###,###" value="${view.gdsStock}" /> EA
+			  </p>
+			  
+			 <p class="cartStock">
+				 <span>구입 수량</span>
+				 <button type="button" class="plus">+</button>
+				 <input type="number" class="numBox" min="1" max="${view.gdsStock}" value="1" readonly="readonly"/>
+				 <button type="button" class="minus">-</button>
+				 
+				 <script>
+					  $(".plus").click(function(){
+					   var num = $(".numBox").val();
+					   var plusNum = Number(num) + 1;
+					   
+						   if(plusNum >= ${view.gdsStock}) {
+						    $(".numBox").val(num);
+						   } else {
+						    $(".numBox").val(plusNum);          
+						   }
+					  });
+					  
+					  $(".minus").click(function(){
+					   var num = $(".numBox").val();
+					   var minusNum = Number(num) - 1;
+					   
+						   if(minusNum <= 0) {
+						    $(".numBox").val(num);
+						   } else {
+						    $(".numBox").val(minusNum);          
+						   }
+					  });
+				 </script>
+				 
+				</p>
+			  
+			  <p class="addToCart">
+			   <button type="button">카트에 담기</button>
+			  </p>
+			 </div>
+			 
+			 <div class="gdsDes">${view.gdsDes}</div>
 		</div>
 	</section>
 

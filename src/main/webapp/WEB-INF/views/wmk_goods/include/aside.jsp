@@ -6,13 +6,13 @@
 	<li><a href="/ex/shop/list?c=100&l=1">무기</a>
 	
 		<ul class="low">
-			<li><a href="/shop/list?c=101&l=2">돌격소총</a></li>
-			<li><a href="/shop/list?c=102&l=2">기관단총</a></li>
-			<li><a href="/shop/list?c=103&l=2">경기관총</a></li>
-			<li><a href="/shop/list?c=104&l=2">산탄총</a></li>
-			<li><a href="/shop/list?c=105&l=2">지정사수소총</a></li>
-			<li><a href="/shop/list?c=106&l=2">저격소총</a></li>
-			<li><a href="/shop/list?c=107&l=2">기타</a></li>
+			<li><a href="/ex/shop/list?c=101&l=2">돌격소총</a></li>
+			<li><a href="/ex/shop/list?c=102&l=2">기관단총</a></li>
+			<li><a href="/ex/shop/list?c=103&l=2">경기관총</a></li>
+			<li><a href="/ex/shop/list?c=104&l=2">산탄총</a></li>
+			<li><a href="/ex/shop/list?c=105&l=2">지정사수소총</a></li>
+			<li><a href="/ex/shop/list?c=106&l=2">저격소총</a></li>
+			<li><a href="/ex/shop/list?c=107&l=2">기타</a></li>
 		</ul>
 		
 	</li>

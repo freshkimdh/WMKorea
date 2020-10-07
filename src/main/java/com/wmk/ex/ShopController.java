@@ -31,7 +31,7 @@ public class ShopController {
 		  log.info("get llist");
 		  
 		  List<GoodsViewVO> list = null;
-		  list = service.list(cateCode);
+		  list = service.list(cateCode, level);
 		 
 		  model.addAttribute("list", list);
 		  
@@ -39,6 +39,17 @@ public class ShopController {
 	  
 	 }
 	 
+	 @RequestMapping(value = "/shop/view", method = RequestMethod.GET)
+	 public String getView(@RequestParam("n") int gdsNum, Model model) throws Exception{
+		 log.info("get view");
+		 
+		 GoodsViewVO view = service.goodsView(gdsNum);
+		 model.addAttribute("view", view);
+		 
+		 return "/admin_goods/shop/view";
+	 }
+	 
+
 	 
 	 
 	 
