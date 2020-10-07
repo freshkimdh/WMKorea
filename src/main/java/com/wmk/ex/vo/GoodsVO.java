@@ -19,12 +19,26 @@ public class GoodsVO {
 	private String gdsImg;       //varchar(200)
 	private Date gdsDate;      //date
 	
+	private String gdsThumbImg;
+	
 	
 	public GoodsVO() {
 		
 	}
 	
 	
+	
+	
+	public String getGdsThumbImg() {
+		return gdsThumbImg;
+	}
+
+
+	public void setGdsThumbImg(String gdsThumbImg) {
+		this.gdsThumbImg = gdsThumbImg;
+	}
+
+
 	public int getGdsNum() {
 		return gdsNum;
 	}

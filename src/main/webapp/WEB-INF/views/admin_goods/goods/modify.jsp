@@ -43,7 +43,7 @@ label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
 
-.select_img img { margin:20px 0; }
+.select_img img { height:400px; margin:20px 0; }
 
 </style>
 
@@ -70,9 +70,9 @@ textarea#gdsDes { width:400px; height:180px; }
 			<%@ include file="../include/aside.jsp" %>
 		</aside>
 		<div id="container_box">
-			<h2>상품 등록</h2>
+			<h2>상품 수정</h2>
 			
-			<form role="form" method="post" autocomplete="off">
+			<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 
 				<input type="hidden" name="gdsNum" value="${goods.gdsNum}" />
 				
@@ -102,13 +102,39 @@ textarea#gdsDes { width:400px; height:180px; }
 				 <label for="gdsDes">상품소개</label>
 				 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes">${goods.gdsDes}</textarea>
 				</div>
+				
+				<div class="inputArea">
+					 <label for="gdsImg">이미지</label>
+					 <input type="file" id="gdsImg" name="file" />
+					 <div class="select_img">
+					  <img src="${goods.gdsImg}" />
+					  <input type="hidden" name="gdsImg" value="${goods.gdsImg}" />
+					  <input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}" /> 
+					 </div>
+					 
+					 <script>
+					  $("#gdsImg").change(function(){
+					   if(this.files && this.files[0]) {
+					    var reader = new FileReader;
+					    reader.onload = function(data) {
+					     $(".select_img img").attr("src", data.target.result).width(500);        
+					    }
+					    reader.readAsDataURL(this.files[0]);
+					   }
+					  });
+					 </script>
+					 <%=request.getRealPath("/") %>
+				</div>
+				
+				
+				
 				<div class="inputArea">
 				 <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
 				 <button type="submit" id="back_Btn" class="btn btn-warning">취소</button>
 					<script>
 					 $("#back_Btn").click(function(){
 					  //history.back();
-					  location.href = "/ex/admin/goods/view?n=" + ${goods.gdsNum};
+					  location.href = "/ex/admin_goods/goods/view?n=" + ${goods.gdsNum};
 					 }); 
 					 
 					</script>		 
@@ -124,40 +150,52 @@ textarea#gdsDes { width:400px; height:180px; }
 	</footer>
 </div>
 
- <script>
+	 <script>
+	
+	 var select_cateCode = '${goods.cateCode}';
+	 var select_cateCodeRef = '${goods.cateCodeRef}';
+	 var select_cateName = '${goods.cateName}';
+	
+	 console.log("select_cateCode = " + select_cateCode);
+	 console.log("select_cateCodeRef = " + select_cateCodeRef);
+	
+	
+	 if(select_cateCodeRef != null && select_cateCodeRef != "") {
+	 	
+	 	console.log("값이 없으면");
+	 	
+	 	$(".category1").val(select_cateCodeRef);
+	 	$(".category2").val(select_cateCode);
+	 	$(".category2").children().remove();
+	 	$(".category2").append("<option value='"
+	 							+ select_cateCode + "'>" + select_cateName + "</option>");
+	
+	
+	 	
+	 	
+	 } else {
+	 	
+	 	console.log("값이 있으면");
+	 	
+	 	$(".category1").val(select_cateCode);
+	 	//$(".category2").val(select_cateCode);
+	 	$(".category2").append("<option value='"
+	 			+ select_cateCode + "' selected='selected'>전체</option>");
+	 }
+	
+	</script> 
 
- var select_cateCode = '${goods.cateCode}';
- var select_cateCodeRef = '${goods.cateCodeRef}';
- var select_cateName = '${goods.cateName}';
-
- console.log("select_cateCode = " + select_cateCode);
- console.log("select_cateCodeRef = " + select_cateCodeRef);
-
-
- if(select_cateCodeRef != null && select_cateCodeRef != "") {
- 	
- 	console.log("값이 없으면");
- 	
- 	$(".category1").val(select_cateCodeRef);
- 	$(".category2").val(select_cateCode);
- 	$(".category2").children().remove();
- 	$(".category2").append("<option value='"
- 							+ select_cateCode + "'>" + select_cateName + "</option>");
-
-
- 	
- 	
- } else {
- 	
- 	console.log("값이 있으면");
- 	
- 	$(".category1").val(select_cateCode);
- 	//$(".category2").val(select_cateCode);
- 	$(".category2").append("<option value='"
- 			+ select_cateCode + "' selected='selected'>전체</option>");
- }
-
-</script> 
+	<script>
+		var regExp = /[^0-9]/gi;
+		
+		$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+		$("#gdsStock").keyup(function(){ numCheck($(this)); });
+		
+		function numCheck(selector) {
+		 var tempVal = selector.val();
+		 selector.val(tempVal.replace(regExp, ""));
+		}
+	</script>
 
 
 
