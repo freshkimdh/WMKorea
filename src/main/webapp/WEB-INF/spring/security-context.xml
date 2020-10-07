@@ -34,7 +34,7 @@
 		
 		<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> <!-- 스프링에서 제공하는 인코더 객체생성 -->
      
- 		<beans:bean id="customUserDetailService" class="com.wmk.ex.security.CustomUserDetailsService" /> <!-- 객체생성  -->
+ 		<beans:bean id="customUserDetailService" class="com.wmk.ex.security.CustomUserDetailService" /> <!-- 객체생성  -->
 		
 <!--      <jdbc-user-service 
             data-source-ref="dataSource"

@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 	
 	@Inject
 	private UserMapper userMapper;
@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		com.wmk.ex.vo.UserVO vo = userMapper.readUser(id);
 		log.warn("queried by UserVO mapper: " + vo);		
 		
-		return vo == null ? null : new CustomUser(vo); //Á¤±Ô Ç¥Çö½Ä
+		return vo == null ? null : new CustomUser(vo); //ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½
 	}
 	
 	

@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,6 +30,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.wmk.ex.security.CustomUserDetailService;
 import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.CustomUser;
 import com.wmk.ex.vo.KakaoProfile;
@@ -46,6 +49,9 @@ public class UserController {
 	private UserService userService;
 	@Inject
     private BCryptPasswordEncoder passEncoder;
+	
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
 	 
 	@PostMapping("/addUser")
 	public String adduser(UserVO userVO) {
@@ -119,7 +125,7 @@ public class UserController {
 	    
 	    
 	    @GetMapping("/auth/kakao/callback")
-	    public @ResponseBody String kakaoCallback(String code) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
+	    public String kakaoCallback(String code) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
 	    	
 	    	Gson gson = new Gson();
 	    	RestTemplate rt = new RestTemplate();
@@ -195,7 +201,10 @@ public class UserController {
 	    	String socialUserId = kakaoProfile.getId().toString();
 	    	// 우리서비스 회원가입 여부 판단
 	    	// 이제 로그인 타입까지 추가로 비교를 해야해 (카카오만의 아이디 검증을 해야하니(
-	    	UserVO loginUserInfo = userService.getUserByIdAndLoginType(socialUserId);
+	    	UserVO loginUserInfo = userService.getUserByIdAndLoginType(socialUserId,"kakao");
+	    	
+	    	log.info("테스트");
+	    	log.info(loginUserInfo);
 	    	
 	    	if(loginUserInfo == null) {
 	    		// 여기도 카카오 로그인 타입을 추가해야지
@@ -211,14 +220,16 @@ public class UserController {
 		    			.build();
 	    		log.info("  여기까지 왔낭  	;" +gson.toJson(socialRegisterUser));
 	    		userService.addUser(socialRegisterUser);
-	    		log.info("이번엔 여기당 !		;"+gson.toJson(socialRegisterUser));
 	    	}
 	    	
+	    	
+	    	customUserDetailService.loadUserByUsername(socialUserId);
 	    	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
 	    	// 여기서 로그인 처리
 	    	
-	    	
-	    	return response2.getBody();  // 여기서 홈으로 리다리엑트 하면 됨
+	    
+	    	//return response2.getBody();  // 여기서 홈으로 리다리엑트 하면 됨
+	    	return "redirect:/index";  // 여기서 홈으로 리다리엑트 하면 됨
 	    }
 	    
 	    
