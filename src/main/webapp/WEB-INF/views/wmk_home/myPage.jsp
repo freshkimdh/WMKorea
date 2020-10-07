@@ -112,7 +112,7 @@
 <sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
    		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
 		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
+		<a href="loginForm" class="btn btn-secondary" type="button">My Page</a>
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
@@ -152,7 +152,10 @@
 <p>유저 국적: <sec:authentication property="principal.user.nationality"/></p>
 
 <h3>[<a href="<c:url value="/index" />">메인으로</a>]</h3>
+<h3>[<a href="<c:url value="/userPwModify" />">비밀번호 수정</a>]</h3>
+<h3>[<a href="<c:url value="/userModify" />">회원정보 수정</a>]</h3>
 <h3>[<a href="<c:url value="/userDeleteView" />">회원탈퇴</a>]</h3>
+
 
   
   	</div>

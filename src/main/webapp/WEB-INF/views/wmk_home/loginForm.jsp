@@ -111,7 +111,7 @@
 <!-- 	<a class="btn btn-dark">반갑습니다, 김대환 님!</a> -->
   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
 		<a href="joinForm" class="btn btn-secondary" type="button">Join</a>
-		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
+		<a href="loginForm" class="btn btn-secondary" type="button">My Page</a>
 	</div>
 
  	</ul>
