@@ -79,7 +79,7 @@ public class GoodsController {
 	public void getGoodList(Model model) throws Exception {
 		log.info("get goods list");
 		
-		List<GoodsVO> list = adminService.goodslist();
+		List<GoodsViewVO> list = adminService.goodslist();
 		
 		model.addAttribute("list", list);
 	
