@@ -208,23 +208,11 @@
 	<div class="btn-group btn-group-sm">
 	
 
-	<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
-	<c:if test="${member == null}">
+	<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->	
 	   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
 			<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-			<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
-	</c:if>
-	
-	<c:if test="${member != null}">
-			<a href="/ex/admin/index" class="btn btn-secondary" type="button">관리자 화면</a>	
-	   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
-			<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-			<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
-	</c:if>
-	
+			<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>		
 	</sec:authorize>
-
-
 
 	<sec:authorize access="isAuthenticated()">
 			<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>

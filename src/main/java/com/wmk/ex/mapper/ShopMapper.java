@@ -5,6 +5,7 @@ import java.util.List;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
+import com.wmk.ex.vo.UserVO;
 
 public interface ShopMapper {
 	
@@ -14,5 +15,7 @@ public interface ShopMapper {
 //	//상품조회
 //	public GoodsViewVO goodslist(int gdsNum) throws Exception;
 	
-	
+
+	public UserVO userIdread(String id) throws Exception;
+
 }

@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.wmk.ex.dao.ShopDAO;
-
-
+import com.wmk.ex.mapper.ShopMapper;
+import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CommentListVO;
+import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
-
+import com.wmk.ex.vo.UserVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +26,8 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Inject
 	private ShopDAO dao;
+	
+	private ShopMapper shopmapper;
 
 	@Override
 	public List<GoodsViewVO> list(int cateCode, int level) throws Exception {
@@ -48,7 +52,42 @@ public class ShopServiceImpl implements ShopService {
 		return dao.goodsView(gdsNum);
 	}
 
+	@Override
+	public void registReply(CommentVO comment) throws Exception {
+		dao.registReply(comment);
+		
+	}
 
+	@Override
+	public List<CommentListVO> commentList(int gdsNum) throws Exception {
+		
+		return dao.commentList(gdsNum);
+	}
+
+	@Override
+	public void deleteReply(CommentVO comment) throws Exception {
+		
+		dao.deleteReply(comment);
+		
+	}
+
+	@Override
+	public String idCheck(int repNum) throws Exception {
+		
+		return dao.idCheck(repNum);
+	}
+
+
+	
+//	@Override
+//	public UserVO userIdread(String id) {
+//		
+//		log.info("get id...");
+//		UserVO userVO = shopmapper.userIdread(id);
+//
+//		
+//		return userVO;	
+//	}
 
 
 	

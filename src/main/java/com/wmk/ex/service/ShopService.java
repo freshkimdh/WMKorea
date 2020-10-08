@@ -3,8 +3,11 @@ package com.wmk.ex.service;
 import java.util.List;
 
 import com.wmk.ex.vo.CategoryVO;
+import com.wmk.ex.vo.CommentListVO;
+import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
+import com.wmk.ex.vo.UserVO;
 
 
 
@@ -15,5 +18,18 @@ public interface ShopService {
 	
 	//상품 조회
 	public GoodsViewVO goodsView(int gdsNum) throws Exception;
+	
+	//상품 댓글 작성
+	public void registReply(CommentVO comment) throws Exception;
+	
+	//상품 소감(댓글) 리스트
+	public List<CommentListVO> commentList(int gdsNum) throws Exception;
+	
+	//상품 소감(댓글) 삭제
+	public void deleteReply(CommentVO comment) throws Exception;
+	
+	//아이디 체크
+	public String idCheck(int repNum) throws Exception;
+	
 
 }
