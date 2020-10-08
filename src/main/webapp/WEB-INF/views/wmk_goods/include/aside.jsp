@@ -3,7 +3,7 @@
 <h3>카테고리</h3>
 
 <ul>
-	<li><a href="/shop/list?c=100&l=1">무기</a>
+	<li><a href="/ex/shop/list?c=100&l=1">무기</a>
 	
 		<ul class="low">
 			<li><a href="/shop/list?c=101&l=2">돌격소총</a></li>
