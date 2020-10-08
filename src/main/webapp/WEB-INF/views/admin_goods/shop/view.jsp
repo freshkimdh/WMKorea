@@ -95,6 +95,8 @@
 	 section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
 	 section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
 	 section.replyList div.replyContent { padding:10px; margin:20px 0; }
+	 
+	 section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 	</style>
 	
 	
@@ -120,6 +122,12 @@
 					     + "<span class='date'>" + repDate + "</span>"
 					     + "</div>"
 					     + "<div class='replyContent'>" + this.repCon + "</div>"
+					     
+					      + "<div class='replyFooter'>"
+					      + "<button type='button' class='modify' data-repNum='" + this.repNum + "'>수정</button>"
+					      + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+					      + "</div>"
+					     
 					     + "</li>";           
 					  });
 					  
@@ -209,7 +217,7 @@
 			  </p>
 			 </div>
 			 
-			 <div class="gdsDes">${view.gdsDes}</div>
+			 <div class="gdsDes">상품 설명 : ${view.gdsDes}</div>
 		</div>
 		
 			<div id="reply">
@@ -281,6 +289,43 @@
 				<script> 
 					replyList();
 				</script>
+				
+				<script>
+					 $(document).on("click", ".delete", function(){
+					  
+						 
+						var deletCoinfirm = confirm("정말로 삭제하시겠습니까?");
+						 
+						if(deletCoinfirm) {
+							 
+						  var data = {repNum : $(this).attr("data-repNum")};
+						   
+						  $.ajax({
+						   url : "${pageContext.request.contextPath}/shop/view/deleteReply",
+						   type : "post",
+						   data : data,
+						   success : function(result){
+							   console.log(result);
+							   
+							   replyList();
+							   
+							/*    if(result = 1){
+								   replyList();
+							   } else {
+								   alert("작성자 본인만 할 수 있습니다.");
+							   } */
+							   
+							
+						   } 
+						  });
+						}
+					});
+					 
+					 
+				</script>
+				
+				
+				
 			</section>
 			</div>
 		

@@ -25,5 +25,11 @@ public interface ShopService {
 	//상품 소감(댓글) 리스트
 	public List<CommentListVO> commentList(int gdsNum) throws Exception;
 	
+	//상품 소감(댓글) 삭제
+	public void deleteReply(CommentVO comment) throws Exception;
+	
+	//아이디 체크
+	public String idCheck(int repNum) throws Exception;
+	
 
 }

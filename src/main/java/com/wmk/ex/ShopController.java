@@ -104,6 +104,28 @@ public class ShopController {
 	 
 	 
 	 
+	// 상품 소감(댓글) 삭제
+	 @ResponseBody
+	 @RequestMapping(value = "/shop/view/deleteReply", method = RequestMethod.POST)
+	 public int getReplyList(CommentVO comment, HttpSession session) throws Exception {
+	  log.info("post delete reply");
+
+	  int result = 0;
+	  
+	  MemberVO member = (MemberVO)session.getAttribute("member");
+	  String userId = service.idCheck(comment.getRepNum());
+	    
+	  if(member.getUserId().equals(userId)) {
+	   
+	   comment.setUserId(member.getUserId());
+	   service.deleteReply(comment);
+	   
+	   result = 1;
+	  }
+	  
+	  return result; 
+	 }
+	 
 //		@GetMapping("/reply_view") 
 //		public String reply_view(BoardVO boardVO, Model model) {
 //		

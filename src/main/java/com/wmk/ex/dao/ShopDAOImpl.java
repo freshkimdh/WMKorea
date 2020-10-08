@@ -60,6 +60,19 @@ public class ShopDAOImpl implements ShopDAO {
 		return sql.selectList(namespace + ".commentList", gdsNum);
 	}
 
+	@Override
+	public void deleteReply(CommentVO comment) throws Exception {
+		
+		sql.delete(namespace + ".deleteReply", comment);
+		
+	}
+
+	@Override
+	public String idCheck(int repNum) throws Exception {
+		
+		return sql.selectOne(namespace + ".replyUserIdCheck", repNum);
+	}
+
 
 	
 	

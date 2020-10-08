@@ -64,6 +64,19 @@ public class ShopServiceImpl implements ShopService {
 		return dao.commentList(gdsNum);
 	}
 
+	@Override
+	public void deleteReply(CommentVO comment) throws Exception {
+		
+		dao.deleteReply(comment);
+		
+	}
+
+	@Override
+	public String idCheck(int repNum) throws Exception {
+		
+		return dao.idCheck(repNum);
+	}
+
 
 	
 //	@Override
