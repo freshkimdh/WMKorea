@@ -217,6 +217,8 @@
       </tr>
     </thead>
     <tbody>
+    <!-- 검색어의 값이 null일 경우  -->
+    <c:if test="${boardByTitle eq null }">
 <c:forEach items="${list}" var="dto">
       <tr>
         <td align="center">${dto.bId}</td>
@@ -228,6 +230,7 @@
         <td align="center">${dto.bDate}</td>
       </tr>
 </c:forEach>
+</c:if>
       <tr>
         <td align="center">2</td>
         <td align="center">잡담</td>
@@ -244,6 +247,23 @@
         <td align="center">14</td>
         <td align="center">2020.09.16</td>
       </tr>
+      
+      <!-- 검색어가 null값이 아닐 경우 -->
+      <c:if test="${boardByTitle ne null }">
+	      <c:forEach items="${boardByTitle}" var="boardByTitle">
+	      <tr>
+	         <td>${boardByTitle.bId}</td>
+	         <td align="center">잡담</td>
+	         <td>${boardByTitle.bName}</td>
+	         <td>
+	            <c:forEach begin="1" end="${boardByTitle.bIndent}">-</c:forEach>
+	            <a href="content_view?bId=${boardByTitle.bId}">${boardByTitle.bTitle}</a></td>
+	         <td>${boardByTitle.bDate}</td>
+	         <td>${boardByTitle.bHit}</td>
+	         <td>${boardByTitle.storedFileName}</td>
+	      </tr>
+	      </c:forEach>
+      </c:if>
     </tbody>
   </table>
 
@@ -279,8 +299,8 @@
 
 		<div class="col-sm-4">
 <!-- Board Search Bar -->
- 			<div class="input-group mb-3">
-  				<input type="text" class="form-control" placeholder="">
+ 			<div class="input-group mb-3" action="boardByTitle" method="get">
+  				<input type="text" class="form-control" name="bTitle" id="bTitle" placeholder="">
   				<div class="input-group-append">
     				<button class="btn btn-danger btn-dark" type="submit">검색</button>
   				</div>
@@ -294,6 +314,19 @@
 	</div>
 <br>
 </div>
+
+<!-- 검색 -->
+<form action="boardByTitle" method="get">
+
+    <select name="searchCondition" id="">
+				
+        <option value="bTitle">제목</option>
+		       
+    </select>
+	    <input type="text" name="bTitle" id="bTitle" placeholder="검색어를 입력하세요">
+				<input class="btn btn-sm btn-default" type="submit" value="검색">
+			
+</form>
 
 
 

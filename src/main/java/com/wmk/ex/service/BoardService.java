@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.LikeVO;
 import com.wmk.ex.vo.ReplyVO;
 
 
@@ -28,30 +29,41 @@ public interface BoardService {
 
 	public void modify(BoardVO boardVO);
 	
-	//�˻����
+	//占싯삼옙占쏙옙占�
 	public List<BoardVO> boardByTitle(BoardVO boardVO);
 	
-	//����¡ ó��
+	//占쏙옙占쏙옙징 처占쏙옙
 	public int getTotal(Criteria cri);
 	public List<BoardVO> getList(Criteria criteria);
 	
-	//��� ���
+	//占쏙옙占� 占쏙옙占�
 	public List<ReplyVO> readReply(int bId);
 	
-	//��� �ۼ�
+	//占쏙옙占� 占쌜쇽옙
 	public void writeReply(ReplyVO vo);
 	
-	//Ajax ��� �ۼ�
+	//Ajax 占쏙옙占� 占쌜쇽옙
 	public void writeReply(HashMap<String, String> comment);
 	
-	//Ajax ��� ���
+	//Ajax 占쏙옙占� 占쏙옙占�
 	public List<ReplyVO> readReply(ReplyVO replyVO);
 	
-	//÷������ ��ȸ
+	//첨占쏙옙占쏙옙占쏙옙 占쏙옙회
 	public List<Map<String, Object>> selectFileList(int bId) throws Exception;
 
+	//좋아요 데이터 추가
+	public void insertLike(Map<Integer, String> map);
 	
-//	//��� ����
+	//좋아요 데이터 삭제
+	public void deleteLike(Map<Integer, String> map);
+	
+	//좋아요 여부 확인
+	public LikeVO getLike(LikeVO likeVO);
+
+	//좋아요 카운트
+	public int likeCnt(int bId);
+	
+//	//占쏙옙占� 占쏙옙占쏙옙
 //	public void deleteReply(ReplyVO vo);
 	
 }

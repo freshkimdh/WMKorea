@@ -1,11 +1,17 @@
 package com.wmk.ex;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.service.BoardService;
@@ -125,6 +131,67 @@ public class BoardController {
 		return "redirect:contentView";
 	}
 	
+	//검색기능 
+	@RequestMapping("/boardByTitle")
+	public String boardByTitle(BoardVO boardVO, Model model) {  
+		
+		System.out.println(boardVO.toString());  
+		log.info("boardByTitle");
+		
+		service.boardByTitle(boardVO); 
+		System.out.println(service.boardByTitle(boardVO));
+		
+		model.addAttribute("boardByTitle", service.boardByTitle(boardVO));
+		
+		return "boardList";
+	}
+	
+	
+	///////////////////////////////////////////////좋아요 기능
+/*		
+	//게시판 좋아요 활성화
+	@ResponseBody
+	@RequestMapping(value = "boardLike", method = RequestMethod.POST)
+	public String boardLike(@RequestParam Map<Integer, String> map, HttpSession session) {	
+		
+		String str = "success";
+		
+		service.insertLike(map);
+	
+		return str;
+	}
+	
+	//게시판 좋아요 취소
+	@ResponseBody
+	@RequestMapping(value = "deleteLike", method = RequestMethod.POST)
+	public String deleteLike(@RequestParam Map<Integer, String> map) {	
+	service.deleteLike(map);		
+	return "success";
+	}
+	
+	//게시판 좋아요	여부 확인
+	@ResponseBody
+	@RequestMapping(value = "board/GetLike", method = RequestMethod.POST)
+	public LikeVO getLike(@RequestParam int bId, String id){
+	LikeVO likeVO = new LikeVO();
+	likeVO.setbId(bId);
+	likeVO.setid(id);
+	
+	likeDTO = boardService.getLike(likeDTO);
+	int like_number = likeDTO.getLike_number();
+	
+	return likeDTO;
+	}
+	
+	//게시판 좋아요	여부 확인
+	@ResponseBody
+	@RequestMapping(value = "board/LikeCnt", method = RequestMethod.POST)
+	public int likeCnt(@RequestParam int b_number){
+	int a = boardService.likeCnt(b_number);
+	
+	return a;
+	}
+	
 	
 	//////////////관리자 여행지게시판 페이지 (09/23: 정경채 추가)////////////
 	
@@ -154,7 +221,7 @@ public class BoardController {
 		
 
 	}
-	
+*/	
 }
 
 

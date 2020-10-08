@@ -13,6 +13,7 @@ import com.wmk.ex.mapper.BoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.util.FileUtils;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.LikeVO;
 import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
@@ -157,6 +158,37 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> selectFileList(int bId) {
 		return mapper.selectFileList(bId);
 	}
+	
+	// 좋아요 활성화
+	@Override
+	public void insertLike(Map<Integer, String> map) {
+		mapper.insertLike(map);
+	}
+	
+	// 좋아요 취소
+	@Override
+	public void deleteLike(Map<Integer, String> map) {
+		mapper.deleteLike(map);
+	}
+	
+	//좋아요 여부 확인
+	@Override
+	public LikeVO getLike(LikeVO likeVO) {
+		likeVO = mapper.getLike(likeVO);
+		
+		return likeVO;
+	}
+	
+	//좋아요 카운트
+	@Override
+	public int likeCnt(int bId) {
+		
+		return mapper.likeCnt(bId);
+	}
+	
+	
+	
+	
 
 	
 //	//댓글 삭제

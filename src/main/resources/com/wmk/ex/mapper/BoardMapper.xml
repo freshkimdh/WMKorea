@@ -181,6 +181,27 @@
 		     tbl_member
 		 where userId = #{userId}
 	</select>
+	
+	
+	<!-- 게시글 좋아요 -->
+    <insert id= "insertLike" parameterType="java.util.Map" >
+    	insert into likes(bId, id) value(#{bId}, #{id})
+    </insert>
+    
+    <!-- 게시글 좋아요 취소 -->
+    <delete id="deleteLike" parameterType="java.util.Map" >
+    	delete from likes where bId = #{bId} and id= #{id}
+    </delete>
+    
+    <!-- 좋아요 여부 --> 
+    <select id="getLike" parameterType="com.wmk.ex.vo.LikeVO" resultType="com.wmk.ex.vo.LikeVO" >
+    	select bLikeNumber from likes where bId= #{bId} and id= #{id}
+    </select>
+    
+    <!-- 좋아요 카운트 -->
+    <select id= "likeCnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    	select count(*) from likes where bId= #{bId}
+    </select>
 	 
 
 </mapper>

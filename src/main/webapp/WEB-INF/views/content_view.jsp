@@ -94,6 +94,116 @@
 
          });//ajax end
    	} // reply() method end
+  /*  	
+   	$(document).ready(function(){
+		getlike();
+		likecnt();
+	});
+   	
+   	
+   	
+   	//게시글 좋아요
+   	function likes_func(){
+			if("${user.member_id}" == "")
+			{
+				alert("로그인하세요");
+				return false;
+			}
+			var url = "${contextPath}/boardLike";			
+			var paramData = {
+					 "bId": "${content_view.bId}",
+					 "id" : "${user.member_id}"
+					   };
+		   $.ajax({
+			    url: url,
+		        type: 'POST',		        
+		        data : paramData,
+		        success: function(str){
+		        	likecnt();
+		        	getlike();
+		        },
+		        error:function(str){
+		        	
+		      }
+		   });
+		}
+		
+		//좋아요버튼을 누른 상태인지 아닌지에 따라 다른 이미지 보여주기
+		//빈 하트 일 경우 like_func() 호출
+		//빨간 하트일 경우 deletelike() 호출
+		function getlike()
+		{
+			var htmls ="";
+			var url = "${contextPath}/getLike";
+			var paramData = {
+					"bId": "${content_view.bId}",
+					 "id" :"${user.member_id}"
+					};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(result){
+					if(result != null){
+		        		like_img = "<a href='javascript: deletelike();' id='hate_img'><img src='img/like.png' style = 'width : 30px'></a>";
+		        		$('#hate_img').replaceWith(like_img);		        		
+		        		}					
+					
+				},
+				erorr : function(){
+				}
+				
+			});//Ajax End//////////////	
+		}
+		
+		//좋아요 취소 
+		function deletelike()
+		{
+			var like_img ="";
+			var url = "${contextPath}/deleteLike";
+			var paramData = {
+					"bId": "${content_view.bId}",
+					"id" :"${user.member_id}"
+					};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(){
+					likecnt();	//카운팅 함수 호출
+					like_img = "<a href='javascript: like_func();' id='hate_img'><img src='img/hate.png' style = 'width : 30px'></a>";
+			        $('#hate_img').replaceWith(like_img);
+					getlike();					
+					
+				},
+				erorr : function(){
+					
+				}
+						
+			});//Ajax End//////////////	
+		}
+		
+		//좋아요 카운팅
+		function likecnt()
+		{
+			var like_cnt ="";
+			var url = "${contextPath}/likeCnt";
+			var paramData = {"bId": "${content_view.bId}"};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(result){
+					like_cnt = '<span id="likecnt">'+ result + '</span>';
+					$("#likecnt").replaceWith(like_cnt);
+					
+				},
+				erorr : function(){					
+				}
+						
+			});//Ajax End//////////////	
+		} */
+	
       
    </script>
    
@@ -104,6 +214,117 @@
    </head>
    
    <body>
+   <script>
+   $(document).ready(function(){
+		getlike();
+		likecnt();
+	});
+   	
+   	
+   	
+   	//게시글 좋아요
+   	function likes_func(){
+			if("${user.member_id}" == "")
+			{
+				alert("로그인하세요");
+				return false;
+			}
+			var url = "${contextPath}/boardLike";			
+			var paramData = {
+					 "bId": "${content_view.bId}",
+					 "id" : "${user.member_id}"
+					   };
+		   $.ajax({
+			    url: url,
+		        type: 'POST',		        
+		        data : paramData,
+		        success: function(str){
+		        	likecnt();
+		        	getlike();
+		        },
+		        error:function(str){
+		        	
+		      }
+		   });
+		}
+		
+		//좋아요버튼을 누른 상태인지 아닌지에 따라 다른 이미지 보여주기
+		//빈 하트 일 경우 like_func() 호출
+		//빨간 하트일 경우 deletelike() 호출
+		function getlike()
+		{
+			var htmls ="";
+			var url = "${contextPath}/getLike";
+			var paramData = {
+					"bId": "${content_view.bId}",
+					 "id" :"${user.member_id}"
+					};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(result){
+					if(result != null){
+		        		like_img = "<a href='javascript: deletelike();' id='hate_img'><img src='img/like.png' style = 'width : 30px'></a>";
+		        		$('#hate_img').replaceWith(like_img);		        		
+		        		}					
+					
+				},
+				erorr : function(){
+				}
+				
+			});//Ajax End//////////////	
+		}
+		
+		//좋아요 취소 
+		function deletelike()
+		{
+			var like_img ="";
+			var url = "${contextPath}/deleteLike";
+			var paramData = {
+					"bId": "${content_view.bId}",
+					"id" :"${user.member_id}"
+					};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(){
+					likecnt();	//카운팅 함수 호출
+					like_img = "<a href='javascript: like_func();' id='hate_img'><img src='img/hate.png' style = 'width : 30px'></a>";
+			        $('#hate_img').replaceWith(like_img);
+					getlike();					
+					
+				},
+				erorr : function(){
+					
+				}
+						
+			});//Ajax End//////////////	
+		}
+		
+		//좋아요 카운팅
+		function likecnt()
+		{
+			var like_cnt ="";
+			var url = "${contextPath}/likeCnt";
+			var paramData = {"bId": "${content_view.bId}"};
+			$.ajax({
+				type : 'POST',
+				url : url,
+				data : paramData,
+				success : function(result){
+					like_cnt = '<span id="likecnt">'+ result + '</span>';
+					$("#likecnt").replaceWith(like_cnt);
+					
+				},
+				erorr : function(){					
+				}
+						
+			});//Ajax End//////////////	
+		}
+		
+		</script>
      <table width="500" cellpadding="0" cellspacing="0" border="1" align="center">
       <form action="modify" method="get">      
          <input type="hidden" name="bId" value="${content_view.bId}">
@@ -142,6 +363,12 @@
             <a href="reply_view?bId=${content_view.bId}">답변</a></td> <!-- //몇번에 답변을 달것인가? -->
          </tr>
       </form>
+      <tr>
+      <td style = "border : 1px solid; width : 55px; float : left;" >			
+				<a href='javascript: like_func();' id='hate_img'><img src='img/hate.png' style = 'width : 30px'></a>
+				<span id = "likecnt"></span>
+	 </td>	
+	 </tr>
    </table>
    
    <!--댓글 목록  -->

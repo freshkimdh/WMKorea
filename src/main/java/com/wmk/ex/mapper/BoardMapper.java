@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Delete;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.LikeVO;
 import com.wmk.ex.vo.ReplyVO;
 
 public interface BoardMapper {
@@ -56,6 +57,19 @@ public interface BoardMapper {
 	//첨부파일 조회
 	public List<Map<String, Object>> selectFileList(int bId);
 
+	
+	//좋아요 데이터
+	public void insertLike(Map<Integer, String> map); 
+	
+	// 좋아요 취소
+	public void deleteLike(Map<Integer, String> map);
+	
+	//좋아요 여부
+	public LikeVO getLike(LikeVO likeVO);
+
+	//좋아요 카운트
+	public int likeCnt(int bId);
+		
 	
 //	//댓글 삭제
 //	public void deleteReply(ReplyVO vo);
