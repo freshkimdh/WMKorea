@@ -168,8 +168,9 @@
 <!-- This is banner -->
 <div class="hero-image">
   <div class="hero-text">
-	<p style="font-size:60px" class="display-3">굿즈 (Goods)</p>
-	<p style="font-size:20px" class="display-3">나의 캐릭터로 만드는 내 손 안의 프린팅 아이템</p>
+	<p style="font-size:60px" class="display-3">Goods</p>
+	<p>We Make Our World</p>
+<!-- 	<p style="font-size:20px" class="display-3">나의 캐릭터로 만드는 내 손 안의 프린팅 아이템</p> -->
 <!-- 	<p>나의 캐릭터로 만드는 내 손 안의 프린팅 아이템!</p> -->
   </div>
 </div>
@@ -188,10 +189,13 @@
 <!--  	<p>
 	<p align="center" class="display-3" id="login_f">Goods</p><br> -->
 	
-	
+
+<!-- 	<h2 align="center">나의 캐릭터로 만드는 내 손 안의 프린팅 아이템</h2> -->
+	<h2 align="center"><strong>나의 캐릭터로 만드는 내 손 안의 프린팅 아이템</strong></h2>
+
+	<br><br>
 
 
-		
 	<!-- Select Goods -->
 	<div class="container">
 	
@@ -202,7 +206,7 @@
 		
 		<div class="col-sm-4">
 		
-		<img src="goods/picture_frame.png" class="img-fluid mx-auto d-block rounded" width="275">
+		<a href=""><img src="goods/picture_frame.png" class="img-fluid mx-auto d-block rounded" width="275"></a>
 		<h1 align="center">Picture frame</h1>
 		<h1 align="center">(&#8361;30,000~)</h1> <br>
 		<p align="center" style="font-size:20px">나만의 홈인테리어를 꾸며줄 작은 데코레이션</p>
@@ -215,7 +219,7 @@
 		<div class="col-sm-4">
 		
 		
-		<a href="goodsDetails"><img src="goods/t-shirts.png" class="img-fluid mx-auto d-block rounded" width="275"></a>
+		<a href="goodsDetails2"><img src="goods/t-shirts.png" class="img-fluid mx-auto d-block rounded" width="275"></a>
 		
 		<h1 align="center">T-shirts</h1>
 		<h1 align="center">(&#8361;15,000~)</h1> <br>

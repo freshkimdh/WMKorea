@@ -13,6 +13,7 @@
   <title>굿즈: 상세보기</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+
 <%-- <style>
 
 .out {
@@ -37,6 +38,35 @@
 
 </style> --%>
 
+	<style>
+   	.image-stack {
+	  display: grid;
+	  grid-template-columns: repeat(12, 1fr);
+	  position: relative;
+	}
+	
+/* 	   	.image-stack img {
+    width: 100%;
+     height: 100%;
+  	} */
+
+	
+	.layer0 {
+	grid-column: 1 / span 8;
+	grid-row: 1; // make this image be on the same row
+	  }	
+	
+	.layer1 {
+	
+	  grid-column: 11 / span 12;
+      grid-row: 1; 
+      padding-top: 350%; 
+      z-index: 1;
+	
+	</style>
+	
+	
+
 
 
 </head>
@@ -44,7 +74,7 @@
 <body onload="init();">
 
 <div id="root">
-	<header id="header">
+ 	<header id="header">
 		<div id="header_box">
 			<%@ include file="include/header2.jsp" %>
 		</div>
@@ -62,24 +92,26 @@
 				
 			<div class="col-sm-6">
 			
-			<img src="goods/white_shirts_550.png" class="img-fluid mx-auto d-block" width="400">
+				<div class="image-stack col-sm-6" id="example"> <!-- character viewer -->
 			
-<!-- 			<div style="width:200px; height:150px; border:1px solid red; float:left; margin-right:10px;">
-			첫번째 영역:
-			왼쪽에 위치시킴 =>  float:left
-			오른쪽에 바깥여백을 줌 =>  margin-right:10px;
-			여기에 그림이나 글자 또는 광고 등을 넣음
-			</div>
-			<div style="width:200px; height:150px; border:1px solid green; float:left;">
-			두번째 영역:
-			첫번째 영역 옆에 나란히 붙임 => float:left
-			여기에 그림이나 글자 또는 광고 등을 넣음
-			</div> -->
-			
+				<div class="layer0">	
+				<img id="bg" alt="" src="goods/white_shirts_550.png">
+				</div>
+				
+				<div class="layer1">
+				<img id="faces" alt="" src="goods/profile.png" width="150">
+				</div>
+				
+				
+				</div>
+		
 
-			<img src="goods/white_shirts_550.png" class="img-fluid float-left" width="100">
+			
+					
+
+<!--  			<img src="goods/white_shirts_550.png" class="img-fluid float-left" width="100">
 			<img src="goods/black_shirts_550.png" class="img-fluid float-left" width="100">
-			<img src="goods/gray_shirts_550.PNG" class="img-fluid float-left" width="100">
+			<img src="goods/gray_shirts_550.PNG" class="img-fluid float-left" width="100">  -->
 				
 	
 			</div>
@@ -197,6 +229,7 @@
 			}
 		sum.value = parseInt(hm.value) * sell_price;
 	} 
+	
 	
 	</script>
 

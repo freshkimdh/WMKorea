@@ -157,11 +157,27 @@ public class GoodsController {
 
 	}
 	
+	@GetMapping("/goodsDetails2") 
+	public String goodsDetails2(Model model) {
+		
+		log.info("goodsDetails");
+		return "/wmk_goods/goodsDetails2";
+
+	}
+	
 	@GetMapping("/goodsOrder") 
 	public String goodsOrder(Model model) {
 		
 		log.info("goodsOrder");
 		return "/wmk_goods/goodsOrder";
+
+	}
+	
+	@GetMapping("/goodsOrderComplete") 
+	public String goodsOrderComplete(Model model) {
+		
+		log.info("/goodsOrderComplete");
+		return "/wmk_goods/goodsOrderComplete";
 
 	}
 	
