@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -114,7 +115,7 @@ public class BoardController {
 		return "redirect:boardList";
 	}
 	
-	//´ñ±ÛÀÛ¼º
+	//ï¿½ï¿½ï¿½ï¿½Û¼ï¿½
 	@RequestMapping("/replyWrite")
 	public String replyWrite(ReplyVO vo) {
 		
@@ -126,7 +127,7 @@ public class BoardController {
 	}
 	
 	
-	//////////////°ü¸®ÀÚ ¿©ÇàÁö°Ô½ÃÆÇ ÆäÀÌÁö (09/23: Á¤°æÃ¤ Ãß°¡)////////////
+	//////////////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (09/23: ï¿½ï¿½ï¿½ï¿½Ã¤ ï¿½ß°ï¿½)////////////
 	
 	@GetMapping("/seoulList") 
 	public String seoulList(Model model) {
@@ -145,15 +146,8 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping("/travelWriteView")
-	public String travelWriteView(BoardVO boardVO) {
-		
-		log.info("/travelWriteView");
-		
-		return "/admin_travel_board/travelWriteView";
-		
-
-	}
+	
+	
 	
 }
 

@@ -166,9 +166,7 @@
 			<i class="fab fa-google fa-fw"></i> <img src="img/kakao_icon.jpg" width="25"><strong> 카카오톡 로그인 </strong>
 		</a>
 	
-		<a href="index.html" class="btn btn-success btn-user btn-block">
-			<i class="fab fa-facebook-f fa-fw"></i> <img src="img/naver_icon.png" width="25"><strong> 네이버 로그인 </strong>
-		</a>
+		
 		
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 

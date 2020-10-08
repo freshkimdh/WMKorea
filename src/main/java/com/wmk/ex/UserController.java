@@ -13,9 +13,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -125,7 +130,7 @@ public class UserController {
 	    
 	    
 	    @GetMapping("/auth/kakao/callback")
-	    public String kakaoCallback(String code) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
+	    public String kakaoCallback(String code, HttpServletRequest request) throws Exception { //@ResponseBody data�� �������ִ� ��Ʈ�ѷ� �Լ�
 	    	
 	    	Gson gson = new Gson();
 	    	RestTemplate rt = new RestTemplate();
@@ -222,14 +227,23 @@ public class UserController {
 	    		userService.addUser(socialRegisterUser);
 	    	}
 	    	
+	    	// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
+	    	UserDetails userDetails = customUserDetailService.loadUserByUsername(socialUserId);
 	    	
-	    	customUserDetailService.loadUserByUsername(socialUserId);
 	    	log.info(" 로그인처리 직전 	;" +gson.toJson(loginUserInfo));
 	    	// 여기서 로그인 처리
-	    	
 	    
-	    	//return response2.getBody();  // 여기서 홈으로 리다리엑트 하면 됨
-	    	return "redirect:/index";  // 여기서 홈으로 리다리엑트 하면 됨
+	    	// 유저정보 + 비밀번호(2번쨰 파라미터) 를 통한 로그인 권한정보 생성
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, socialUserId + "kakao", userDetails.getAuthorities());
+    		// 로그인 정보를 스프링 시큐리티 컨텍스트에 넣기 위해 컨텍스트 정보 가져오기
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            // 스프링 시큐리티 권한정보에 위에서 만든 권한정보를 넣어준다.
+            securityContext.setAuthentication(authentication);
+            HttpSession session = request.getSession(true);
+            // 시큐리티 로그인 세션을 생성
+            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+            return "redirect:/index";  // 여기서 홈으로 리다리엑트 하면 됨
 	    }
 	    
 	    
