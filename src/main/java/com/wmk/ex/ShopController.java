@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.ShopService;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.MemberVO;
@@ -52,24 +54,54 @@ public class ShopController {
 		 GoodsViewVO view = service.goodsView(gdsNum);
 		 model.addAttribute("view", view);
 		 
+//		 List<CommentListVO> reply = service.commentList(gdsNum);
+//		 model.addAttribute("reply", reply);
+		 
 		 return "/admin_goods/shop/view";
 	 }
 	 
 	 
 	 
-	// 상품 조회 - 소감(댓글) 작성
-	 @RequestMapping(value = "/shop/view", method = RequestMethod.POST)
-	 public String registReply(CommentVO comment, HttpSession session) throws Exception {
-		 log.info("regist reply");
-		 
-		 MemberVO member = (MemberVO)session.getAttribute("member");
-		 comment.setUserId(member.getUserId());
-		 
-		 service.registReply(comment);
+//	// 상품 조회 - 소감(댓글) 작성
+//	 @RequestMapping(value = "/shop/view", method = RequestMethod.POST)
+//	 public String registReply(CommentVO comment, HttpSession session) throws Exception {
+//		 log.info("regist reply");
+//		 
+//		 MemberVO member = (MemberVO)session.getAttribute("member");
+//		 comment.setUserId(member.getUserId());
+//		 
+//		 service.registReply(comment);
+//	  
+//	  
+//	  return "redirect:/shop/view?n=" + comment.getGdsNum();
+//	 }
+	 
+	// 상품 소감(댓글) 작성
+	 @ResponseBody
+	 @RequestMapping(value = "/shop/view/registReply", method = RequestMethod.POST)
+	 public void registReply(CommentVO comment, HttpSession session) throws Exception {
+	  log.info("regist reply");
 	  
+	  MemberVO member = (MemberVO)session.getAttribute("member");
+	  comment.setUserId(member.getUserId());
 	  
-	  return "redirect:/shop/view?n=" + comment.getGdsNum();
-	 }
+	  service.registReply(comment);
+	  
+
+	 } 
+	 
+	 
+	 // 상품 소감(댓글) 목록
+	 @ResponseBody
+	 @RequestMapping(value = "/shop/view/replyList", method = RequestMethod.GET)
+	 public List<CommentListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception {
+	  log.info("get reply list");
+	    
+	  List<CommentListVO> reply = service.commentList(gdsNum);
+	  
+	  return reply;
+	 } 
+	 
 	 
 	 
 //		@GetMapping("/reply_view") 

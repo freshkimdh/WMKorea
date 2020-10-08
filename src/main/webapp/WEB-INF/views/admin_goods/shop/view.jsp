@@ -75,12 +75,64 @@
 	 div.goods div.gdsDes { font-size:18px; clear:both; padding-top:30px; }
 	</style>
 	
-<style>
-	section#content ul li { display:inline-block; margin:10px; }
-	section#content div.goodsThumb img { width:200px; height:200px; }
-	section#content div.goodsName { padding:10px 0; text-align:center; }
-	section#content div.goodsName a { color:#000; }
-</style>
+	<style>
+		section#content ul li { display:inline-block; margin:10px; }
+		section#content div.goodsThumb img { width:200px; height:200px; }
+		section#content div.goodsName { padding:10px 0; text-align:center; }
+		section#content div.goodsName a { color:#000; }
+	</style>
+
+	<style>
+	 section.replyForm { padding:30px 0; }
+	 section.replyForm div.input_area { margin:10px 0; }
+	 section.replyForm textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px;; height:150px; }
+	 section.replyForm button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+	 
+	 section.replyList { padding:30px 0; }
+	 section.replyList ol { padding:0; margin:0; }
+	 section.replyList ol li { padding:10px 0; border-bottom:2px solid #eee; }
+	 section.replyList div.userInfo { }
+	 section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
+	 section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
+	 section.replyList div.replyContent { padding:10px; margin:20px 0; }
+	</style>
+	
+	
+	<!--댓글 ajax -->
+		<script> 
+				
+				function replyList() {
+				
+					 var gdsNum = ${view.gdsNum};
+					 $.getJSON("${pageContext.request.contextPath}/shop/view/replyList" + "?n=" + gdsNum, function(data){
+					  var str = "";
+					  
+					  $(data).each(function(){
+					   
+					   console.log(data);
+					   
+					   var repDate = new Date(this.repDate);
+					   repDate = repDate.toLocaleDateString("ko-US")
+					   
+					   str += "<li data-gdsNum='" + this.gdsNum + "'>"
+					     + "<div class='userInfo'>"
+					     + "<span class='userName'>" + this.userName + "</span>"
+					     + "<span class='date'>" + repDate + "</span>"
+					     + "</div>"
+					     + "<div class='replyContent'>" + this.repCon + "</div>"
+					     + "</li>";           
+					  });
+					  
+					  $("section.replyList ol").html(str);
+					 });
+				}
+				</script>
+	
+	
+	
+	
+	
+	
 	
 </head>
 <body>
@@ -170,14 +222,42 @@
 				 <section class="replyForm">
 					  <form role="form" method="post" autocomplete="off">
 					  
-					  <input type="hidden" name="gdsNum" value="${view.gdsNum}">
+					  <input type="hidden" name="gdsNum" id="gdsNum" value="${view.gdsNum}">
 					  
 						   <div class="input_area">
 						    <textarea name="repCon" id="repCon"></textarea>
 						   </div>
 						   
 						   <div class="input_area">
-						    <button type="submit" id="reply_btn">소감 남기기</button>
+						    <button type="button" id="reply_btn">소감 남기기</button>
+						    
+						    <script>
+					 			 $("#reply_btn").click(function(){
+								  
+								  var formObj = $(".replyForm form[role='form']");
+								  var gdsNum = $("#gdsNum").val();
+								  var repCon = $("#repCon").val()
+								  
+								  var data = {
+								    gdsNum : gdsNum,
+								    repCon : repCon
+								    };
+								  
+								  $.ajax({
+								   url : "${pageContext.request.contextPath}/shop/view/registReply",
+								   type : "post",
+								   data : data,
+								   success : function(){
+									   
+									   console.log(data);
+									   
+								    replyList();
+								    $("#repCon").val("");
+								   }
+								  });
+								 }); 
+							</script>
+	    
 						   </div>
 					   
 					  </form>
@@ -185,10 +265,23 @@
 			 </c:if>
 			 
 			 <section class="replyList">
-			  <ol>
-			   <li>댓글 목록</li>
-			   </ol>    
-			 </section>
+				 <ol>
+			<%-- 		 <c:forEach items="${reply}" var="reply">
+					
+					  <li>
+					      <div class="userInfo">
+					       <span class="userName">${reply.userName}</span>
+					       <span class="date"><fmt:formatDate value="${reply.repDate}" pattern="yyyy-MM-dd" /></span>
+					      </div>
+					      <div class="replyContent">${reply.repCon}</div>
+					    </li>
+					   </c:forEach> --%>  
+				  </ol>
+				  
+				<script> 
+					replyList();
+				</script>
+			</section>
 			</div>
 		
 		
@@ -203,3 +296,4 @@
 </div>
 </body>
 </html>
+

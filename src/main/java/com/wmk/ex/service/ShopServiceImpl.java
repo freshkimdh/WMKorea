@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.wmk.ex.dao.ShopDAO;
 import com.wmk.ex.mapper.ShopMapper;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.UserVO;
@@ -55,6 +56,12 @@ public class ShopServiceImpl implements ShopService {
 	public void registReply(CommentVO comment) throws Exception {
 		dao.registReply(comment);
 		
+	}
+
+	@Override
+	public List<CommentListVO> commentList(int gdsNum) throws Exception {
+		
+		return dao.commentList(gdsNum);
 	}
 
 

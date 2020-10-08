@@ -3,6 +3,7 @@ package com.wmk.ex.dao;
 import java.util.List;
 
 import com.wmk.ex.vo.CommentVO;
+import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.UserVO;
 
@@ -21,6 +22,8 @@ public interface ShopDAO {
 	//상품 댓글 작성
 	public void registReply(CommentVO comment) throws Exception;
 	
+	//상품 소감(댓글) 리스트
+	public List<CommentListVO> commentList(int gdsNum) throws Exception;
 	
 		
 }  

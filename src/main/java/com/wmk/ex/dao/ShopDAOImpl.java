@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
 
@@ -51,6 +52,12 @@ public class ShopDAOImpl implements ShopDAO {
 		
 		sql.insert(namespace + ".registReply", comment);
 		
+	}
+
+	@Override
+	public List<CommentListVO> commentList(int gdsNum) throws Exception {
+		
+		return sql.selectList(namespace + ".commentList", gdsNum);
 	}
 
 
