@@ -13,13 +13,11 @@
 		     start with cateCodeRef is null connect by prior cateCode = cateCodeRef
 	</select>
 	
-	<!-- 상품 등록 -->
-	<insert id="register">
-	 insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,
-	       gdsImg, gdsThumbImg)
-	     values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
-	        #{gdsImg}, #{gdsThumbImg})
-	</insert>
+<!-- 상품 등록 -->
+<insert id="register">
+insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,gdsImg, gdsThumbImg) 
+	values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg})
+</insert>
 
 	<!-- 상품 목록 --> 
 	<select id="goodslist" resultType="com.wmk.ex.vo.GoodsViewVO">
