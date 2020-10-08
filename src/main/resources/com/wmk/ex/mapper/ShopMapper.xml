@@ -61,6 +61,11 @@ select
       where repNum = #{repNum}
 </select>
 
+<!-- 장바구니 담기 -->
+<insert id="addCart">
+	insert into tbl_cart (cartNum, userId, gdsNum, cartStock)
+		values (tbl_cart_seq.nextval, #{userId}, #{gdsNum}, #{cartStock})
+</insert>	
 
 
 </mapper>

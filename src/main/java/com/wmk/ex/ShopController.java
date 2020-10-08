@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.ShopService;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -134,6 +135,18 @@ public class ShopController {
 //			
 //			return "reply_view";
 //		}
+	 
+	// 카트 담기
+	 @ResponseBody
+	 @RequestMapping(value = "/wmk_goods/addCart", method = RequestMethod.POST)
+	 public void addCart(CartVO cart, HttpSession session) throws Exception {
+	  
+	  UserVO member = (UserVO)session.getAttribute("member");
+	  cart.setUserId(member.getId());
+
+	  service.addCart(cart);
+	  
+	 }
 	 
 
 
