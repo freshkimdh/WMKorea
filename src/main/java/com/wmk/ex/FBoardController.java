@@ -6,10 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.wmk.ex.page.Criteria;
+import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.FBoardService;
-import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.FBoardVO;
 
 import lombok.AllArgsConstructor;
@@ -24,10 +24,16 @@ public class FBoardController {
 	
 	//게시판 목록
 	@RequestMapping("/free_boardList")
-	public String boardList(FBoardVO fboardVO, Model model) {
+	public String boardList(FBoardVO fboardVO, Model model, Criteria cri) {
 		
 		log.info("boardList...");
-		model.addAttribute("list", service.getList());
+		log.info(cri);
+		model.addAttribute("list", service.getListWithPaging(cri));
+		
+		int total = service.getTotalCount(cri);
+		log.info("total" + total);
+		 
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
 		return "/free_board/boardList";
 	}

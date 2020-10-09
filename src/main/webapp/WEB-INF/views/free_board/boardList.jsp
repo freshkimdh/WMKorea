@@ -227,6 +227,23 @@
 
 <p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
 
+
+
+<%--       <c:if test="${pageMaker.prev}">
+         <a href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a>
+      </c:if>
+
+      <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+         <c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+         <a href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a>
+      </c:forEach>
+      
+      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+         <a href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }"> Next </a>
+      </c:if> <br> --%>
+
+
+
 </div>
 
 
@@ -235,13 +252,18 @@
 
 	<ul class="pagination justify-content-center">
     	
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">Previous</a></li>
-    
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">1</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">2</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">3</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">Next</a></li> <br>
-    
+    	<c:if test="${pageMaker.prev}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
+    	</c:if>
+    	
+    	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+    		<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	</c:forEach>
+    	
+    	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
+    	</c:if>
  
 	</ul>
   

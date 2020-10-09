@@ -3,6 +3,7 @@ package com.wmk.ex.service;
 
 import java.util.List;
 
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FBoardVO;
 
 
@@ -26,4 +27,9 @@ public interface FBoardService {
 	
 	//게시판 삭제
 	public void deleteBoard(int fBoard_Num);
+	
+	//페이징 처리
+	public List<FBoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
+
 }

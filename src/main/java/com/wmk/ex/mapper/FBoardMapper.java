@@ -1,6 +1,8 @@
 package com.wmk.ex.mapper;
 
 import java.util.List;
+
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FBoardVO;
 
 
@@ -22,6 +24,12 @@ public interface FBoardMapper {
 	
 	//게시판 삭제
 	public void deleteBoard(int fBoard_Num);
-
+	
+	//조회수
+	public void addUphit(int fBoard_Num);
+	
+	//페이징 처리
+	public List<FBoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
 	
 }

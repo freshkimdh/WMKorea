@@ -4,6 +4,7 @@ package com.wmk.ex.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.wmk.ex.mapper.FBoardMapper;
+import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.FBoardVO;
 
@@ -29,6 +30,8 @@ public class FBoardServiceImpl implements FBoardService {
 	@Override
 	public FBoardVO getNum(int fBoard_Num) {
 		FBoardVO fboardVO = mapper.getNum(fBoard_Num);
+							mapper.addUphit(fBoard_Num);
+		
 		log.info("getNum..."); 
 		
 		return fboardVO;
@@ -38,6 +41,7 @@ public class FBoardServiceImpl implements FBoardService {
 	@Override
 	public FBoardVO getfId(String fId) {
 		FBoardVO fboardVO = mapper.getfId(fId);
+							
 		return fboardVO;
 	}	
 	
@@ -63,6 +67,22 @@ public class FBoardServiceImpl implements FBoardService {
 	public void deleteBoard(int fBoard_Num) {
 		
 		mapper.deleteBoard(fBoard_Num);		
+	}
+	
+	//∆‰¿Ã¬° √≥∏Æ
+	@Override
+	public int getTotalCount(Criteria cri) {
+		
+		log.info("get total count...");
+		return mapper.getTotalCount(cri);
+	}
+
+	
+	@Override
+	public List<FBoardVO> getListWithPaging(Criteria criteria) {
+		
+		log.info("get List with criteria"  + criteria);
+		return mapper.getListWithPaging(criteria);
 	}
 
 
