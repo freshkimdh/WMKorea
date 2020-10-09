@@ -247,8 +247,13 @@
     </tbody>
   </table>
 
-
-<p align="right"><a href="writeView" class="btn btn-dark" role="button">글 작성</a></p>
+		<sec:authorize access="isAnonymous()">
+			<p align="right"><a href="" class="btn btn-dark" role="button" onclick="return confirm('회원가입시 이용가능합니다.');">글 작성</a></p>
+		</sec:authorize>
+		
+		<sec:authorize access="isAuthenticated()">	
+			<p align="right"><a href="writeView" class="btn btn-dark" role="button">글 작성</a></p>
+		</sec:authorize>
 
 </div>
 

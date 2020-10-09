@@ -303,10 +303,19 @@
 <br> 
 
 <p align="right">
+<sec:authorize access="isAnonymous()">
+<a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a>
+</sec:authorize>
+
+
+<sec:authorize access="isAuthenticated()">
 <a href="free_writeView" class="btn btn-dark" role="button">글 작성</a>
+</sec:authorize>
+
 <a href="free_boardList" class="btn btn-dark" role="button">목록</a>
 </p>
 <br>
+
   
           
     <table class="table table-hover">
@@ -334,7 +343,13 @@
     </tbody>
   </table>
 
-<p align="right"><a href="writeView" class="btn btn-dark" role="button">글 작성</a></p>
+<sec:authorize access="isAnonymous()">
+	<p align="right"><a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a></p>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">	
+	<p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
+</sec:authorize>
 
 </div>
 
