@@ -4,7 +4,7 @@
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -49,110 +49,45 @@
 	
 	</style>
 	
-	
+	<!-- Banner style tag -->
 	<style>
-	
-	.img-container{
-	position:relative;
+	body, html {
+  height: 100%;
+  margin: 0;
+/*    font-family: Arial, Helvetica, sans-serif; */
+}
 
-	/*  display:table; */
-	}
-	.img-container img{
-	/* display:block; */
-	isplay: table-cell;
-	text-align: center;
- 	}
-	.img-container .overlay{
-	  position:absolute;
-	  top:0;
-	  left:0;
-	  width:100%;
-	  height:100%;
-	  background:rgb(0,0,0);
-	  opacity:0;
-	  transition:opacity 500ms ease-in-out;
-	}
-	.img-container:hover .overlay{
-	  opacity:60%;
-	}
-	.overlay span{
-	  position:absolute;
-	  top:50%;
-	  left:50%;
-	  transform:translate(-50%,-50%);
-	  color:#fff;
-	}
-		
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
+  height: 20%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
 	</style>
 
-
- 	<script type="text/javascript">
-
-	function validateForm() {
-		
-		var name = document.forms["boardForm"]["bName"].value;
-		if (name == "" || name == null){
-	    alert("이름을 입력해주세요.");
-		return false;
-		}
-	  
-	}
 	
-/* 	function validateForm2() {
-		
-		var pw = document.forms["boardForm"]["bPw"].value;
-		if (pw == "" || pw == null){
-	    alert("비밀번호를 입력해주세요.");
-		return false;
-		}
-	  
-	} */
-	
-	function validateForm3() {
-		
-		var title = document.forms["boardForm"]["bTitle"].value;
-		if (title == "" || title == null){
-	    alert("제목을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
-	function validateForm4() {
-		
-		var con = document.forms["boardForm"]["bContent"].value;
-		if (con == "" || con == null){
-	    alert("내용을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
-	function removeCheck() {
-		
-		if (confirm("목록으로 돌아가겠습니까?") == true){
-
-		document.form.submit();
-
-		 }else {
-			 return false;
-		}
-
-	}
-
- 	</script> 
-		
 
 
 </head>
-</head>
+
 <body>
 
 <div class="container"> <!-- table -->
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-			<img src="img/main_logo2.png">
+			<a href="index"><img src="img/main_logo2.png"></a>
 		</div> <!-- tr -->
 		
 		<div class="col-sm-6" id="s2">
@@ -210,7 +145,7 @@
 			</a>
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="boardList">자유 게시판</a>
-        	<a class="dropdown-item" href="#">여행후기 게시판</a>
+        	<a class="dropdown-item" href="#">여행지 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
 		</li>
@@ -245,110 +180,119 @@
 </nav>
 
 
-
-
-
-
-<p>
-<div class="container">
-<p align="center" class="display-3" id="disf">Community</p>
+<!-- This is banner -->
+<div class="hero-image">
+  <div class="hero-text">
+	<p style="font-size:60px" class="display-3">Community</p>
+	<p>We Make Our World</p>
+  </div>
 </div>
 
 
+<p><br>
 
 
-<div class="container" id="write_view">
-  <h2>자유게시판</h2> <br>
- 
 
-
-<form name="boardForm" action="write2" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
-
-<sec:authorize access="isAnonymous()">
-	<div class="row">
-    	<div class="col">
-    
-		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="bName">
-    
-    	</div>
-    	
-<!--     	<div class="col">
-    	<label for="bPw">비밀번호:</label>
-      	<input type="password" class="form-control" id="pw" placeholder="" name="bPw"> <p>
-    	</div> -->
-	</div>
-</sec:authorize>
-
-<sec:authorize access="isAuthenticated()">
-    <div class="row">
-    	<div class="col">
-    
-<!-- 		<label for="bName"></label> -->
-      	<input type="hidden" class="form-control" id="name" placeholder="" name="bName" 
-      	value='<sec:authentication property="principal.user.nickname"/> (회원)' >
-    
-    	</div>
-    	
-    	<div class="col">
-<!--     	<label for="bPw"></label> -->
-      	<input type="hidden" class="form-control" id="pw" placeholder="" name="bPw" value="<sec:authentication property="principal.user.pw"/>"> <p>
-    	</div>
-		</div>
-
-</sec:authorize>
-	
-		<div class="form-group">
-    	<label for="bTitle">제목:</label>
-      	<input type="text" class="form-control" id="title" placeholder="" name="bTitle"> <p>
-		</div>
-	
-	<div>구분:</div>
-	<div class="form-check-inline">
- 	<label class="form-check-label">
-    	<input type="radio" class="form-check-input" name="bCartegory" checked="checked">잡담
-	</label> 	
-	</div>
-	<div class="form-check-inline">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory">질문
-	</label>
-	</div>
-	<div class="form-check-inline">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory" disabled>답변
-	</label>
-	</div>
-	<div class="form-check-inline disabled">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory" disabled>공지
-	</label>
-	</div><p>
-
-  	
-    <div class="form-group">
-      <label for="content">내용:</label>
-      <textarea class="form-control" rows="10" id="content" name="bContent"></textarea>
-    </div>
+<div class="container" id="free_board">
+  <h2>자유게시판</h2> 
   
-	<p align="center"><button type="submit" class="btn btn-dark">등록</button> 
-<!-- 	<a href="boardList" class="btn btn-dark" role="button" onclick="removeCheck()">취소</a></p> -->
-	<a href="boardList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
+  <br>
+          
+  <table class="table table-hover">
+    <thead class="thead-light" align="center">
+      <tr>
+        <th>No</th>
+       <!--  <th>구분</th> -->
+        <th>작성자</th>
+        <th>제목</th>
+        <th>조회수</th>
+        <th>등록일</th>
+      </tr>
+    </thead>
+    <tbody>
+<c:forEach items="${list}" var="list">
+      <tr>
+        <td align="center">${list.fBoard_Num}</td>
+        <%-- <td align="center">잡담</td>
+        <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach> --%>
+        <td align="center">${list.fId}</td>
+        <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
+        <td align="center">${list.fHit}</td>
+        <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
+      </tr>
+</c:forEach>
+    </tbody>
+  </table>
+
+
+<p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
 
 
 
+<%--       <c:if test="${pageMaker.prev}">
+         <a href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a>
+      </c:if>
 
-	<br>
-	
-</form>
+      <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+         <c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+         <a href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a>
+      </c:forEach>
+      
+      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+         <a href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }"> Next </a>
+      </c:if> <br> --%>
+
+
 
 </div>
 
 
 
+<div class="container" id="board_pagination">
 
+	<ul class="pagination justify-content-center">
+    	
+    	<c:if test="${pageMaker.prev}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
+    	</c:if>
+    	
+    	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+    		<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	</c:forEach>
+    	
+    	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
+    	</c:if>
+ 
+	</ul>
+  
+</div>
 
+<div class="container" id="board_search_bar">
 
+	<div class="row">
+		
+		<div class="col-sm-4">
+		</div>
+
+		<div class="col-sm-4">
+<!-- Board Search Bar -->
+ 			<div class="input-group mb-3">
+  				<input type="text" class="form-control" placeholder="">
+  				<div class="input-group-append">
+    				<button class="btn btn-danger btn-dark" type="submit">검색</button>
+  				</div>
+			</div>
+<!-- Board Search Bar End -->
+		</div>
+	
+		<div class="col-sm-4">
+		</div>
+		
+	</div>
+<br>
+</div>
 
 
 

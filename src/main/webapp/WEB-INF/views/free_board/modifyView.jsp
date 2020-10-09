@@ -186,33 +186,19 @@
 	<ul class="navbar-nav">
 
 		<li class="nav-item">
-			<a class="nav-link" href="index">메인</a>
+			<a class="nav-link" href="${pageContext.request.contextPath}/index">메인</a>
 		</li>
 				
 		<li class="nav-item">
 			<a class="nav-link" href="#">핫플레이스</a>
 		</li>
 				
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			내 캐릭터 만들기
-			</a>
-			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
-        	<a class="dropdown-item" href="#">굿즈</a>
-      		</div>
+		<li class="nav-item">
+			<a class="nav-link" href="#">내 캐릭터 만들기</a>
 		</li>
-		
-		<!-- Dropdown -->				
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			커뮤니티
-			</a>
-			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="boardList">자유 게시판</a>
-        	<a class="dropdown-item" href="#">여행후기 게시판</a>
-        	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
-      		</div>
+						
+		<li class="nav-item">
+			<a class="nav-link" href="boardList">커뮤니티</a>
 		</li>
 		
 	</ul>
@@ -262,76 +248,39 @@
  
 
 
-<form name="boardForm" action="write2" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
-
-<sec:authorize access="isAnonymous()">
-	<div class="row">
+<form name="boardForm" action="free_modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
+	
+	<input type="hidden" name="fId" value="${modifyView.fId}">
+	<input type="hidden" name="fBoard_Num" value="${modifyView.fBoard_Num}">
+<%-- 	<input type="hidden" name="fGroup" value="${modifyView.fGroup}">
+	<input type="hidden" name="fStep" value="${modifyView.fStep}">
+	<input type="hidden" name="fIndent" value="${modifyView.fIndent}"> --%>
+	
+<%-- 	<div class="row">
     	<div class="col">
     
 		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="bName">
+      	<input type="text" class="form-control" id="name" placeholder="" name="bName" value="${modifyView.fId}">
     
     	</div>
     	
-<!--     	<div class="col">
-    	<label for="bPw">비밀번호:</label>
-      	<input type="password" class="form-control" id="pw" placeholder="" name="bPw"> <p>
-    	</div> -->
-	</div>
-</sec:authorize>
 
-<sec:authorize access="isAuthenticated()">
-    <div class="row">
-    	<div class="col">
-    
-<!-- 		<label for="bName"></label> -->
-      	<input type="hidden" class="form-control" id="name" placeholder="" name="bName" 
-      	value='<sec:authentication property="principal.user.nickname"/> (회원)' >
-    
-    	</div>
-    	
-    	<div class="col">
-<!--     	<label for="bPw"></label> -->
-      	<input type="hidden" class="form-control" id="pw" placeholder="" name="bPw" value="<sec:authentication property="principal.user.pw"/>"> <p>
-    	</div>
-		</div>
-
-</sec:authorize>
+	</div> --%>
 	
 		<div class="form-group">
     	<label for="bTitle">제목:</label>
-      	<input type="text" class="form-control" id="title" placeholder="" name="bTitle"> <p>
+      	<input type="text" class="form-control" id="fTitle" placeholder="" name="fTitle" value="${modifyView.fTitle}"> <p>
 		</div>
 	
-	<div>구분:</div>
-	<div class="form-check-inline">
- 	<label class="form-check-label">
-    	<input type="radio" class="form-check-input" name="bCartegory" checked="checked">잡담
-	</label> 	
-	</div>
-	<div class="form-check-inline">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory">질문
-	</label>
-	</div>
-	<div class="form-check-inline">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory" disabled>답변
-	</label>
-	</div>
-	<div class="form-check-inline disabled">
-	<label class="form-check-label">
-    <input type="radio" class="form-check-input" name="bCartegory" disabled>공지
-	</label>
-	</div><p>
+
 
   	
     <div class="form-group">
       <label for="content">내용:</label>
-      <textarea class="form-control" rows="10" id="content" name="bContent"></textarea>
+      <textarea class="form-control" rows="10" id="fContent" name="fContent">${modifyView.fContent}</textarea>
     </div>
   
-	<p align="center"><button type="submit" class="btn btn-dark">등록</button> 
+	<p align="center"><button type="submit" class="btn btn-dark">수정</button> 
 <!-- 	<a href="boardList" class="btn btn-dark" role="button" onclick="removeCheck()">취소</a></p> -->
 	<a href="boardList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
 
