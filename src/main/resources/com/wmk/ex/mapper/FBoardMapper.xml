@@ -10,21 +10,47 @@
 		select 
      		fBoard_Num, fId, fTitle, fContent, fDate, fHit, fGroup, fStep, fIndent
 	    from FREE_BOARD
+	    	order by fGroup desc, fStep asc
 	]]>
  	</select>
+ 	
  	
  	<!--게시판 번호-->
  	<select id="getNum" resultType="com.wmk.ex.vo.FBoardVO">
 	<![CDATA[ 
 		select * from FREE_BOARD where fBoard_Num = #{fBoard_Num} 
 	]]>
-	</select>
+	</select>	
 	
+	<!--게시판 VO의 회원 get id  -->
+	<select id="getfId" resultType="com.wmk.ex.vo.FBoardVO">
+	<![CDATA[ 
+		select * from FREE_BOARD where fId = #{fId} 
+	]]>
+	</select> 
+
 	<!--게시판 작성-->
 	<insert id="writeBoard" >
 		insert into FREE_BOARD (fBoard_Num, fId, fTitle, fContent, fHit, fGroup, fStep, fIndent) 
-			values (free_board_seq.nextval, #{fId}, #{fTitle}, #{fContent}, 0, mvc_board_seq.currval, 0, 0)
+			values (free_board_seq.nextval, #{fId}, #{fTitle}, #{fContent}, 0, free_board_seq.currval, 0, 0)
 	</insert> 
+	
+	
+	<!--게시판 수정  -->
+	<insert id="updateModify" >
+	<![CDATA[
+		update FREE_BOARD set fTitle = #{fTitle}, fContent = #{fContent} where fId = #{fId} and fBoard_Num = #{fBoard_Num}
+	]]>
+	</insert>
+	
+	
+	<!--게시판 삭제  -->
+	<insert id="deleteBoard" >
+	<![CDATA[
+		delete from FREE_BOARD where fBoard_Num = #{fBoard_Num}
+	]]>
+	</insert>
+
 	 
 
 </mapper>

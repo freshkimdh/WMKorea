@@ -251,8 +251,8 @@
   <!-- <hr> -->
  
 <p align="right">
-<a href="modifyView?bId=${contentView.fId}" class="btn btn-outline-dark btn-sm" role="button">수정</a>
-<a href="delete2?bId=${contentView.fId}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
+<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">수정</a>
+<a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
 </p>
  
 <hr> <br>
@@ -303,7 +303,7 @@
 <br> 
 
 <p align="right">
-<a href="writeView" class="btn btn-dark" role="button">글 작성</a>
+<a href="free_writeView" class="btn btn-dark" role="button">글 작성</a>
 <a href="free_boardList" class="btn btn-dark" role="button">목록</a>
 </p>
 <br>
@@ -326,7 +326,7 @@
 		        <%-- <td align="center">잡담</td>
 		        <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach> --%>
 		        <td align="center">${list.fId}</td>
-		        <td align="center"><a class="text-dark" href="contentView?fId=${list.fBoard_Num}">${list.fTitle}</a></td>
+		        <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
 		        <td align="center">${list.fHit}</td>
 		        <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
 		      </tr>
