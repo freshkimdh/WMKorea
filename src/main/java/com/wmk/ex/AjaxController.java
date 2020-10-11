@@ -19,7 +19,7 @@ import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-
+//testì‹œìœ¤
 @Controller
 @AllArgsConstructor
 @Log4j
@@ -27,7 +27,7 @@ public class AjaxController {
 	
 	private BoardService service;
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@PostMapping("/comment")
 	@ResponseBody
 	public List<ReplyVO>  comment(@RequestBody HashMap<String, String> comment) {
@@ -35,11 +35,11 @@ public class AjaxController {
 		System.out.println(comment.toString());
 		System.out.println(comment.get("bId"));
 		
-		//´ñ±Û ÀÛ¼º
+		//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 		service.writeReply(comment);	
 		
 		
-		//´ñ±Û ¸ñ·Ï
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		ReplyVO replyVO = new ReplyVO();
 		
 		replyVO.setbId(Integer.parseInt(comment.get("bId")));
