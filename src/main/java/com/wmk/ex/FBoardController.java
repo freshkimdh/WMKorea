@@ -58,9 +58,9 @@ public class FBoardController {
 	   model.addAttribute("contentView", service.getNum(fboardVO.getfBoard_Num()));
 	   model.addAttribute("list", service.getList());
 	   
-	   List<FReplyVO> reply = service.replyList(fBoard_Num);
-	   model.addAttribute("reply", reply);
-	   log.info("reply...");
+//	   List<FReplyVO> reply = service.replyList(fBoard_Num);
+//	   model.addAttribute("reply", reply);
+//	   log.info("reply...");
 	   
 	   return "/free_board/contentView";
 	   
@@ -117,9 +117,35 @@ public class FBoardController {
 	}
 	
 	
-	// 댓글 작성
-	@RequestMapping(value = "/free_contentView", method = RequestMethod.POST)
-	public String registReply(FReplyVO reply) throws Exception {
+//	// 댓글 작성
+//	@RequestMapping(value = "/free_contentView", method = RequestMethod.POST)
+//	public String registReply(FReplyVO reply) throws Exception {
+//	 log.info("regist reply...");
+//	 
+//	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//	 if (principal instanceof UserDetails) { // 로그인 했을 경우
+//	   String username = ((UserDetails)principal).getUsername();
+//	   log.info(username);
+//	   reply.setId(username);
+//	   
+//	 } else { //로그인 안했을 경우
+//	   String username = principal.toString();
+//	   log.info("로그인 안해서 그래요. 로그인 하세요.");
+//	   
+//	 }
+//	 
+//	 service.registReply(reply);
+//	 
+//	 log.info("댓글 입력 성공");
+//	 
+//	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
+//	}
+	
+	// 댓글 작성/free_contentView/registReply
+	@ResponseBody
+	@RequestMapping(value = "/free_contentView/registReply", method = RequestMethod.POST)
+	public void registReply(FReplyVO reply) throws Exception {
 	 log.info("regist reply...");
 	 
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -139,23 +165,20 @@ public class FBoardController {
 	 
 	 log.info("댓글 입력 성공");
 	 
-	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
+//	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
 	}
 	
 	
-	
-	
-	
-//	//댓글 목록
-//	@ResponseBody
-//	@RequestMapping("/free_contentView/replyList")
-//	public List<FReplyVO> getReplyList(@RequestParam("n") int fBoard_Num) throws Exception {
-//	 log.info("get reply list");
-//	    
-//	 List<FReplyVO> reply = service.replyList(fBoard_Num);
-//	  
-//	 return reply;
-//	} 
+	//댓글 목록
+	@ResponseBody
+	@RequestMapping("/free_contentView/replyList")
+	public List<FReplyVO> getReplyList(@RequestParam("n") int fBoard_Num) throws Exception {
+	 log.info("get reply list");
+	    
+	 List<FReplyVO> reply = service.replyList(fBoard_Num);
+	  
+	 return reply;
+	} 
 }
 
 

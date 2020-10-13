@@ -94,51 +94,33 @@
 
 
 
-	<script> 			
-		function replyList() {
-				
-			var fBoard_Num = ${contentView.fBoard_Num};
-			$.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
-			var str = "";
-					  console.log(data)
-			$(data).each(function(){
-					   
-				console.log(data);
-					   
-				var repDate = new Date(this.repDate);
-				repDate = repDate.toLocaleDateString("ko-US")
-					   
-					   str += "<li data-fBoard_Num='" + this.fBoard_Num + "'>"
-					     + "<div class='userInfo'>"
-					     + "<span class='id'>" + this.id + "</span>"
-					     + "<span class='date'>" + repDate + "</span>"
-					     + "</div>"
-					     + "<div class='replyContent'>" + this.repCon + "</div>"
-					     
-					      + "<div class='replyFooter'>"
-					      + "<button type='button' class='modify' data-repNum='" + this.repNum + "'>수정</button>"
-					      + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-					      + "</div>"
-					     
-					     + "</li>";           
-					  });
-					  
-					  $("section.replyList ol").html(str);
-					 });
-				}
-				</script>
-
-
-
-
-
-
-
-
-
-
-
-
+  <script> 
+  
+  function replyList() {
+	 var fBoard_Num = ${contentView.fBoard_Num};
+	 $.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
+	  var str = "";
+	  
+	  $(data).each(function(){
+	   
+	   console.log(data);
+	   
+	   var repDate = new Date(this.repDate);
+	   repDate = repDate.toLocaleDateString("ko-US")
+	   
+	   str += "<li data-fBoard_Num='" + this.fBoard_Num + "'>"
+	     + "<div class='userInfo'>"
+	     + "<span class='id'>" + this.id + "</span>"
+	     + "<span class='date'>" + repDate + "</span>"
+	     + "</div>"
+	     + "<div class='replyContent'>" + this.repCon + "</div>"
+	     + "</li>";           
+	  });
+	  
+	  $("section.replyList ol").html(str);
+	 });
+  }
+	</script>
 
 
 
@@ -376,14 +358,38 @@
 <c:if test="${id != null}"> --%>
  <section class="replyForm">
   <form role="form" method="post" autocomplete="off">
-  	<input type="hidden" name="fBoard_Num" value="${contentView.fBoard_Num}">
+  	<input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
   	
    <div class="input_area">
     <textarea name="repCon" id="repCon"></textarea>
    </div>
    
    <div class="input_area">
-    <button type="submit" id="reply_btn">소감 남기기</button>
+    <button type="button" id="reply_btn">댓글 등록</button>
+    	<script>
+		 $("#reply_btn").click(function(){
+		  
+		  var formObj = $(".replyForm form[role='form']");
+		  var fBoard_Num = $("#fBoard_Num").val();
+		  var repCon = $("#repCon").val()
+		  
+		  var data = {
+			fBoard_Num : fBoard_Num,
+		    repCon : repCon
+		    };
+		  
+		  $.ajax({
+		   url : "${pageContext.request.contextPath}/free_contentView/registReply",
+		   type : "post",
+		   data : data,
+		   success : function(){
+			   console.log(data);
+		    replyList();
+		   }
+		  });
+		 });
+		</script>
+    
    </div>
    
   </form>
@@ -392,7 +398,8 @@
  
 <section class="replyList">
  <ol>
- <c:forEach items="${reply}" var="reply">
+ 
+<%--  <c:forEach items="${reply}" var="reply">
 
   <li>
       <div class="userInfo">
@@ -401,8 +408,20 @@
       </div>
       <div class="replyContent">${reply.repCon}</div>
     </li>
-   </c:forEach>
+   </c:forEach> --%>
+   
   </ol>    
+  
+  
+	<script> 
+		replyList() 
+	</script>
+  
+  
+  
+  
+  
+  
 </section>
 </div>
 
