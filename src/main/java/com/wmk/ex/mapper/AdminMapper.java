@@ -2,6 +2,7 @@ package com.wmk.ex.mapper;
 
 import java.util.List;
 
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -25,6 +26,9 @@ public interface AdminMapper {
 	
 	//상품 삭제
 	public void goodsDelete(int gdsNum) throws Exception;
+	
+	//장바구니 담기
+	public void addCart(CartVO cart) throws Exception; 
 	
 	
 }

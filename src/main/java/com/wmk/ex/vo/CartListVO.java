@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CartVO {
+public class CartListVO {
 
 //    cartNum     number          not null,
 //    userId      varchar2(50)    not null,
@@ -27,11 +27,18 @@ public class CartVO {
 	private int cartNum;
 	private String userId;
 	private int gdsNum;
+	private int cartStock;
+	private Date addDate;
+	private int num;
+	private String gdsName;
+	private int gdsPrice;
+	private String gdsImg;
+	
+
 	private String gdsColor;
 	private String gdsSize;
 	private String gdsText;
-	private int cartStock;
-	private Date addDate;
+
 	
 
 

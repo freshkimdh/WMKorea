@@ -13,20 +13,36 @@
 		     start with cateCodeRef is null connect by prior cateCode = cateCodeRef
 	</select>
 	
-	<!-- 상품 등록 -->
-<insert id="register">
+	<!-- 상품 등록 (김대환)-->
+<!-- <insert id="register">
 insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg) 
 values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg})
+</insert> -->
+
+	<!-- 상품 등록 (경채)-->
+<insert id="register">
+insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
+values (wmk_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg})
 </insert>
 
-	<!-- 상품 목록 --> 
-	<select id="goodslist" resultType="com.wmk.ex.vo.GoodsViewVO">
+
+	<!-- 상품 목록  (김대환)--> 
+<!-- 	<select id="goodslist" resultType="com.wmk.ex.vo.GoodsViewVO">
 	 select
 	     g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 	     g.gdsImg, g.gdsThumbImg
 	         from tbl_goods g
 	             inner join goods_category c
 	                 on g.cateCode = c.cateCode
+	</select> -->
+	
+
+	<!-- 상품 목록 (경채)--> 
+ 	<select id="goodslist" resultType="com.wmk.ex.vo.GoodsViewVO">
+	 select
+	  gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+	    from wmk_goods
+	        order by gdsNum desc
 	</select>
 	 
 
@@ -36,8 +52,8 @@ values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}
 		         where gdsNum = #{gdsNum}
 	</select>  -->
 
-	<!-- 상품 조회 + 카테고리 조인-->
-	<select id="goodsView" resultType="com.wmk.ex.vo.GoodsViewVO">
+	<!-- 상품 조회 + 카테고리 조인 : 김대환-->
+<!-- 	<select id="goodsView" resultType="com.wmk.ex.vo.GoodsViewVO">
 	 select
 	     g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 	     g.gdsImg, g.gdsThumbImg
@@ -45,7 +61,24 @@ values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}
 	             inner join goods_category c
 	                 on g.cateCode = c.cateCode           
 	            where g.gdsNum = #{gdsNum}
+	</select> -->
+	
+		 <!-- 상품 보기: 정경채 -->
+	<select id="goodsView" resultType="com.wmk.ex.vo.GoodsViewVO">
+		 select gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		     from wmk_goods
+		         where gdsNum = #{gdsNum}
 	</select>
+	
+	
+	<!-- 장바구니 담기: 정경채 -->
+	<insert id="addCart">
+		insert into tbl_cart (cartNum, userId, gdsNum, gdsColor, gdsSize, gdsText, cartStock)
+			values (tbl_cart_seq.nextval, #{userId}, #{gdsNum}, #{gdsColor}, #{gdsSize}, #{gdsText}, #{cartStock})
+	</insert>	
+	
+	
+	
 	
 		<!-- 상품 수정 -->
 		<update id="goodsModify">

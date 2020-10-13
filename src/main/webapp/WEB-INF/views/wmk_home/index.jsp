@@ -139,7 +139,7 @@
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
         	<a class="dropdown-item" href="goodsIndex">굿즈</a>
-        	<a class="dropdown-item" href="goodsIndex2">굿즈(정경채)</a>
+        	<a class="dropdown-item" href="goodsList">굿즈(정경채)</a>
       		</div>
 		</li>
 		

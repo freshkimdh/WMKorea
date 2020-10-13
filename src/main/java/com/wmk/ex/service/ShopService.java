@@ -2,6 +2,7 @@ package com.wmk.ex.service;
 
 import java.util.List;
 
+import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.CommentListVO;
@@ -34,5 +35,11 @@ public interface ShopService {
 	
 	//장바구니 담기
 	public void addCart(CartVO cart) throws Exception;
+	
+	//장바구니 보기
+	public List<CartListVO> cartList(String username) throws Exception;
+	
+	//장바구니 삭제
+	public void deleteCart (CartVO cart) throws Exception;
 
 }

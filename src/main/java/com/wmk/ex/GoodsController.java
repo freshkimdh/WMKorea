@@ -6,15 +6,21 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.AdminService;
+import com.wmk.ex.service.ShopService;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -28,6 +34,9 @@ public class GoodsController {
 	
 	@Inject
 	AdminService adminService;
+	
+	 @Inject
+	 ShopService shopService;
 	
 	//상품 메인 페이지
 	@RequestMapping(value = "/goodsIndex", method = RequestMethod.GET)
@@ -68,9 +77,10 @@ public class GoodsController {
 	//상품 등록
 	@RequestMapping(value = "/admin_goods/goods/register", method = RequestMethod.POST)
 	public String postGoodsRegister(GoodsVO vo) throws Exception {
+		
 		adminService.register(vo);
 		
-		return "redirect:/admin_goods/index";
+		return "redirect:/admin_goods/list";
 	
 	}
 	
@@ -133,21 +143,67 @@ public class GoodsController {
 	}
 	
 	
-	//상품 메인 페이지(정경채)
+	//굿즈 페이지 시작 (정경채)
 	
-	  @RequestMapping(value = "/goodsIndex2", method = RequestMethod.GET) public
-	  String home2(Locale locale, Model model) {
-	  log.info("Welcome home! The client locale is {}.");
-	  
-	  Date date = new Date(); DateFormat dateFormat =
-	  DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-	  
-	  String formattedDate = dateFormat.format(date);
-	  
-	  model.addAttribute("serverTime", formattedDate );
-	  
-	  return "/wmk_goods/goods_index2"; }
+	
+	// 상품 등록
+	@RequestMapping(value = "/goods_register", method = RequestMethod.GET)
+	public String getGoodsRegister2(Model model) throws Exception {
+		log.info("get goods register");
+
+		List<CategoryVO> category = null;
+		category = adminService.category();
+		model.addAttribute("category", JSONArray.fromObject(category));
+		
+		return "/wmk_goods/goods_register";
+
+	}
+	
+	// 상품 등록(post)
+	@RequestMapping(value = "/goods_register", method = RequestMethod.POST)
+	public String postGoodsRegister2(GoodsVO vo) throws Exception {
+		
+		adminService.register(vo);
+
+		return "redirect:/goodsList";
+
+	}
+	
 	 
+	// 상품 리스트  
+	@GetMapping("/goodsList") 
+	public String goodsList(Model model) throws Exception {
+		
+		log.info("goodList");
+		
+		
+		 List<GoodsViewVO> list = adminService.goodslist();
+		 
+		 model.addAttribute("list", list);
+		
+		
+		return "/wmk_goods/goodsList";
+
+	}
+	
+	//상품 상세보기
+	 @RequestMapping(value = "/goodsView", method = RequestMethod.GET)
+	 public String goodsView(@RequestParam("n") int gdsNum, Model model) throws Exception{
+		 log.info("get view");
+		 
+		 GoodsViewVO view = adminService.goodsView(gdsNum);
+		 model.addAttribute("view", view);
+		 
+//			List<CategoryVO> category = null;
+//			category = adminService.category();
+//			model.addAttribute("category", JSONArray.fromObject(category));
+		 
+		 
+		 
+		 return "/wmk_goods/goodsView";
+	 }
+	 
+
 	
 	@GetMapping("/goodsDetails") 
 	public String goodsDetails(Model model) {
