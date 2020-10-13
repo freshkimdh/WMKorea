@@ -2,7 +2,12 @@ package com.wmk.ex.service;
 
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.wmk.ex.mapper.FBoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.BoardVO;
@@ -18,7 +23,7 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	private FBoardMapper mapper; 
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<FBoardVO> getList() {
 		log.info("getList..."); 
@@ -26,7 +31,7 @@ public class FBoardServiceImpl implements FBoardService {
 		return mapper.getList();
 	}
 	
-	//°Ô½ÃÆÇ ¹øÈ£ get
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ get
 	@Override
 	public FBoardVO getNum(int fBoard_Num) {
 		FBoardVO fboardVO = mapper.getNum(fBoard_Num);
@@ -46,7 +51,7 @@ public class FBoardServiceImpl implements FBoardService {
 	}	
 	
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@Override
 	public void writeBoard(FBoardVO fboardVO) {
 		
@@ -55,21 +60,21 @@ public class FBoardServiceImpl implements FBoardService {
 		mapper.writeBoard(fboardVO);		
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void updateModify(FBoardVO fboardVO) {
 		
 		mapper.updateModify(fboardVO);	
 	}
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void deleteBoard(int fBoard_Num) {
 		
 		mapper.deleteBoard(fBoard_Num);		
 	}
 	
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	@Override
 	public int getTotalCount(Criteria cri) {
 		
@@ -85,7 +90,48 @@ public class FBoardServiceImpl implements FBoardService {
 		return mapper.getListWithPaging(criteria);
 	}
 
+	@Override
+	public int updateLike(int fBoard_Num) {
+		// TODO Auto-generated method stub
+		return mapper.updateLike(fBoard_Num);
+	}
 
+	@Override
+	public int insertLike(int fBoard_Num, String id) {
+		// TODO Auto-generated method stub
+		return mapper.insertLike(fBoard_Num, id);
+	}
+
+	@Transactional
+	public void updateInsertLike(int fBoard_Num,String id) {
+//		log.info("updateLike 	:"  + mapper.updateLike(fBoard_Num));
+//		log.info("insertLike	:"  + mapper.insertLike(fBoard_Num, id));
+		mapper.updateLike(fBoard_Num);
+		mapper.insertLike(fBoard_Num, id);
+	}
+
+	@Override
+	public int updateUnLike(int fBoard_Num) {
+		// TODO Auto-generated method stub
+		return mapper.updateUnLike(fBoard_Num);
+	}
+	@Override
+	public int deleteLike(int fBoard_Num, String id) {
+		// TODO Auto-generated method stub
+		return mapper.deleteLike(fBoard_Num, id);
+	}
+	
+	@Transactional
+	public void deleteUnlike(int FBOARD_NUM,String id) {
+		mapper.updateUnLike(FBOARD_NUM);
+		mapper.deleteLike(FBOARD_NUM, id);
+	}
+
+	@Override
+	public int getLikeCount(int fBoard_Num, String id) {
+		return mapper.getCountLike(fBoard_Num, id);
+	}
+	
 
 	
 	

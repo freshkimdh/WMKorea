@@ -2,34 +2,56 @@ package com.wmk.ex.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FBoardVO;
+
+import lombok.Delegate;
 
 
 public interface FBoardMapper {
 	
 	public List<FBoardVO> getList();
 
-	//°Ô½ÃÆÇ ¹øÈ£ get
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ get
 	public FBoardVO getNum(int fBoard_Num);
 	
 	//FBoardVO fid = UserVO id >> get id
 	public FBoardVO getfId(String fId);
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void writeBoard(FBoardVO fboardVO);
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateModify(FBoardVO fboardVO);
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteBoard(int fBoard_Num);
 	
-	//Á¶È¸¼ö
+	//ï¿½ï¿½È¸ï¿½ï¿½
 	public void addUphit(int fBoard_Num);
 	
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 	
+	@Update("update FREE_BOARD set LIKE_CNT = LIKE_CNT + 1 where fBoard_Num = #{fBoard_Num}")
+	public int updateLike(int fBoard_Num);
+	@Insert("insert into likeTo(likeNo, fBoard_Num, id) values(like_to_seq.nextval, #{fBoard_Num},#{id})")
+	public int insertLike(@Param("fBoard_Num")int fBoard_Num,@Param("id")String id);
+	
+	@Select("select count(*) from likeTo where id = #{id} and fBoard_Num = #{fBoard_Num}")
+	public int getCountLike(@Param("fBoard_Num")int fBoard_Num,@Param("id")String id);
+	
+	
+	@Update("update FREE_BOARD set LIKE_CNT = LIKE_CNT - 1 where fBoard_Num = #{fBoard_Num}")
+	public int updateUnLike (int fBoard_Num);
+	@Delete("Delete from likeTo where id = #{id} and fBoard_Num = #{fBoard_Num}")
+	public int deleteLike(@Param("fBoard_Num") int fBoard_Num, @Param("id") String id);
 }

@@ -2,6 +2,7 @@ package com.wmk.ex;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.FBoardService;
+import com.wmk.ex.vo.CustomUser;
 import com.wmk.ex.vo.FBoardVO;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +24,7 @@ public class FBoardController {
 	
 	private FBoardService service;
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/free_boardList")
 	public String boardList(FBoardVO fboardVO, Model model, Criteria cri) {
 		
@@ -38,10 +40,21 @@ public class FBoardController {
 		return "/free_board/boardList";
 	}
 	
-	//°Ô½ÃÆÇ ³»¿ë
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/free_contentView") 
-	public String contentView(FBoardVO fboardVO, Model model) {
+	public String contentView(FBoardVO fboardVO, Model model, Authentication authentication) {
 		
+		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
+		if(loginInfo == null) {
+			// ë¡œê·¸ì¸ ì•ˆëœì‚¬ëžŒì€ ì¢‹ì•„ìš” ëˆŒë¥´ì§€ ëª»í•˜ë‹ˆ falseë¦¬í„´
+			model.addAttribute("isSelectLike", false);
+		} else {
+			// ë¡œê·¸ì¸ ìœ ì €ê°€ í•´ë‹¹ ê²Œì‹œê¸€ ì¢‹ì•„ìš” ë²„íŠ¼ ëˆŒë €ëŠ”ì§€ ì•Œê¸° ìœ„í•´ í•´ë‹¹ í…Œì´ë¸” ì¡°íšŒ
+			int likeCount = service.getLikeCount(fboardVO.getfBoard_Num(), loginInfo.getUser().getId());
+			model.addAttribute("isSelectLike", likeCount > 0);
+
+		}
+        
 	   log.info("content_view...");
 	   model.addAttribute("contentView", service.getNum(fboardVO.getfBoard_Num()));
 	   model.addAttribute("list", service.getList());
@@ -49,7 +62,7 @@ public class FBoardController {
 	   return "/free_board/contentView";
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º view
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ view
 	@RequestMapping("/free_writeView")
 	public String writeView() {
 		
@@ -58,7 +71,7 @@ public class FBoardController {
 		return "/free_board/writeView";
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º 
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ 
 	@RequestMapping("/free_write")
 	public String write(FBoardVO fboardVO) throws Exception {
 		
@@ -68,7 +81,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/free_modifyView") 
 	public String modifyView(FBoardVO fboardVO, Model model) {
 	
@@ -78,7 +91,7 @@ public class FBoardController {
 		return "/free_board/modifyView";
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/free_modify")
 	public String modify(FBoardVO fboardVO) {
 		
@@ -88,7 +101,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/free_delete") 
 	public String delete(FBoardVO fboardVO) {
 		
