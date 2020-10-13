@@ -1,82 +1,155 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html>
-<html lang="ko">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Wemade Korea</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
+      
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
 	
-<style>
-#container_box table td { width:100px; }
-</style>
-
-<style>
- /*
- section#content ul li { display:inline-block; margin:10px; }
- section#content div.goodsThumb img { width:200px; height:200px; }
- section#content div.goodsName { padding:10px 0; text-align:center; }
- section#content div.goodsName a { color:#000; }
- */
- section#content ul li { margin:10px 0; }
- section#content ul li img { width:250px; height:250px; }
- section#content ul li::after { content:""; display:block; clear:both; }
- section#content div.thumb { float:left; width:250px; }
- section#content div.gdsInfo { float:right; width:calc(100% - 270px); }
- section#content div.gdsInfo { font-size:20px; line-height:2; }
- section#content div.gdsInfo span { display:inline-block; width:100px; font-weight:bold; margin-right:10px; }
- section#content div.gdsInfo .delete { text-align:right; }
- section#content div.gdsInfo .delete button { font-size:22px;
-            padding:5px 10px; border:1px solid #eee; background:#eee;}
  
-</style>
+	<style>
+ 	#s1 {
+	/* background: blue; */
+	line-height:55px;
+	}
 
+ 	#s1 img {
+ 	vertical-align:middle;
+	}
+	
+	</style>
+	
+	
 
-<!-- 장바구니 체크 부분 스타일 -->
-<style>
-.allCheck { float:left; width:200px; }
-.allCheck input { width:16px; height:16px; }
-.allCheck label { margin-left:10px; }
-.delBtn { float:right; width:300px; text-align:right; }
-.delBtn button { font-size:18px; padding:5px 10px; border:1px solid #eee; background:#eee;}
-
-.checkBox { float:left; width:30px; }
-.checkBox input { width:16px; height:16px; }
-
-</style>
 
 </head>
-
 <body>
 
-<div class="container">
-
-<sec:authorize access="isAuthenticated()">
-		<a>환영합니다, <sec:authentication property="principal.user.nickname"/> 님의 장바구니 입니다.</a>
-</sec:authorize> <br>
-<h2>나의 장바구니</h2> <br>
-
+<div class="container"> <!-- table -->
+	<div class="row"> <!-- td -->
+	
+		<div class="col-sm-6" id="s1">
+			<a href="index"><img src="img/main_logo2.png"></a>
+		</div> <!-- tr -->
+		
+		<div class="col-sm-6" id="s2">
+			<!-- Search Bar -->
+<!-- 			<p>Search Bar</p> -->
+		<p>
+ 		<div class="input-group mb-3">
+  			<input type="text" class="form-control" placeholder="Search">
+  			<div class="input-group-append">
+    			<button class="btn btn-danger" type="submit">Go</button>
+  			</div>
+		</div>
+			<!-- Search Bar End -->
+		</div>
+	</div>
 </div>
 
-<div class="container" id="container_box">
- <ul>
- 
+<!-- <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top"> -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+	
+	<!-- Brand Logo -->
+	<a class="navbar-brand" href="#">MENU</a>
+	
+	<!-- Toggler -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<!-- Content -->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+	<ul class="navbar-nav">
+
+		<li class="nav-item">
+			<a class="nav-link" href="index">메인</a>
+		</li>
+				
+		<li class="nav-item">
+			<a class="nav-link" href="#">핫플레이스</a>
+		</li>
+				
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			내 캐릭터 만들기
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
+        	<a class="dropdown-item" href="goodsIndex">굿즈</a>
+        	<a class="dropdown-item" href="goodsList">굿즈(정경채)</a>
+      		</div>
+		</li>
+		
+		<!-- Dropdown -->				
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			커뮤니티
+			</a>
+			<div class="dropdown-menu">
+        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="#">여행지 게시판</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
+      		</div>
+		</li>
+		
+	</ul>
+	
+	</div>
+
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+ 	<ul class="navbar-nav"> 
+	<div class="btn-group btn-group-sm">
+	
+<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
+   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
+		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>
+   		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+   			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
+   		</form:form> 
+		<a href="mypage" class="btn btn-secondary" type="button">My Page</a>
+</sec:authorize>
+
+	</div>
+
+ 	</ul>
+</div>
+
+</nav>
+
+<p>
+<div class="container">
+<p align="center" class="display-3" id="disf">My Cart</p>
+</div>
+
  	<!--  장바구니 전체체크 -->
-	 <li>
+	 <div class="container">
 	  <div class="allCheck">
-	   <input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck">모두 선택</label> 
+	   <input type="checkbox" name="allCheck" id="allCheck" /><label for="allCheck"> 모두 선택</label> 
 	  </div>
 	  
 	  <!--  장바구니에서 상품 선택 후 삭제 -->
 	  <div class="delBtn">
 	  <a href="goodsList" class="btn btn-dark" role="button">쇼핑 계속하기</a>
-	   <button type="button" class="selectDelete_btn" align="right">선택 삭제</button> 
+	   <button type="button" class="btn btn-dark selectDelete_btn" align="right">선택 삭제</button> 
 	   
 		<script>
 			 $(".selectDelete_btn").click(function(){
@@ -122,14 +195,33 @@
 	});
 	</script>
 	  
-	 </li>
- 
-  <hr>
-  
-  <c:forEach items="${cartList}" var="cartList">
-  <li>
-  
-  <!-- 장바구니 단일 체크 -->
+	</div> <br>
+
+<div class="container">
+
+		  <table class="table">
+
+		    <tbody>
+		    
+		      <tr>
+		        <td align="center">상품 정보</td>
+		        <td>상품 금액</td>
+		        <td>할인 금액</td>
+		        <td>배송비</td>
+		        <td>주문 금액</td>
+		        
+
+		      </tr>		    
+		    
+
+<c:forEach items="${cartList}" var="cartList">	    
+		      <tr>
+		      	<td>
+		      	
+		      	<div class="container">
+		      		<div class="row">
+		      		
+
 	<div class="checkBox">
    <input type="checkbox" name="chBox" class="chBox" data-cartNum="${cartList.cartNum}" />
    
@@ -140,60 +232,87 @@
 	</script>
   </div>
   
-  
-   <div class="thumb">
-    <img src="${pageContext.request.contextPath}/${cartList.gdsImg}" width="150"/>
-   </div>
-   <div class="gdsInfo">
-    <p>
-     <span>상품명 : </span>${cartList.gdsName}<br />
-     <span>개당 가격 : </span><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice}" /> 원 <br />
-     <span>선택수량 : </span>${cartList.cartStock}<br />
-     <span>최종 가격 : </span><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}" /> 원
-    </p>
-    
-    <div class="delete">
-     <button type="button" class="delete_${cartList.cartNum}_btn" data-cartNum="${cartList.cartNum}">삭제</button> <br>
-		
-		<script>
-		  $(".delete_${cartList.cartNum}_btn").click(function(){
-		   var confirm_val = confirm("정말 삭제하시겠습니까?");
-		   
-		   if(confirm_val) {
-		    var checkArr = new Array();
-		    
-		    checkArr.push($(this).attr("data-cartNum"));
-		               
-		    $.ajax({
-		     url : "${pageContext.request.contextPath}/shop/cartList/deleteCart",
-		     type : "post",
-		     data : { chbox : checkArr },
-		     success : function(result){
-		    	 
-			    if(result == 1 ){	
-				     location.href = "${pageContext.request.contextPath}/cartList";
-				    } else {
-				    	/* alert("삭제 실패"); */
-				    	location.href = "${pageContext.request.contextPath}/cartList";
-				    }
+
+		      		<div class="col-sm-3">
+		      		
+		      		<img src="${pageContext.request.contextPath}/${cartList.gdsImg}" class="mx-auto d-block" width="100">
+		      		</div>
+		      		
+					<div class="col-sm-7">
+		      		<h5>${cartList.gdsName}</h5>
+		      		색상: ${cartList.gdsColor}  / 사이즈: ${cartList.gdsSize} / 수량: ${cartList.cartStock}개 <br>
+		      		
+					<div class="delete">
+				     <button type="button" class="btn btn-secondary btn-sm delete_${cartList.cartNum}_btn" data-cartNum="${cartList.cartNum}">삭제</button> <br>
+						
+						<script>
+						  $(".delete_${cartList.cartNum}_btn").click(function(){
+						   var confirm_val = confirm("정말 삭제하시겠습니까?");
+						   
+						   if(confirm_val) {
+						    var checkArr = new Array();
+						    
+						    checkArr.push($(this).attr("data-cartNum"));
+						               
+						    $.ajax({
+						     url : "${pageContext.request.contextPath}/shop/cartList/deleteCart",
+						     type : "post",
+						     data : { chbox : checkArr },
+						     success : function(result){
+						    	 
+							    if(result == 1 ){	
+								     location.href = "${pageContext.request.contextPath}/cartList";
+								    } else {
+								    	/* alert("삭제 실패"); */
+								    	location.href = "${pageContext.request.contextPath}/cartList";
+								    }
+						      
+						     }
+						    });
+						   } 
+						  });
+						 </script>
+				     
+				    </div>
+		      		
+		      		
+		      		
+		      		</div>
+		      	
+		      		</div>
+		      	</div>
+		      	
+		      	</td>
 		      
-		     }
-		    });
-		   } 
-		  });
-		 </script>
-     
-    </div>
-        
-    
-   </div>
-   <hr>
-   <br>
-   
-  </li>
+		        <td><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice}" /> 원</td>
+		        <td>0 원</td>
+		        <td>무료 배송</td>
+		        <td><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}" /> 원</td> 
+		      </tr>
   </c:forEach>
- </ul>
+		    </tbody>
+		    
+		  </table>
+
 </div>
+
+
+<br><br>
+
+
+
+	<footer id="footer">
+		<div id="footer_box">
+			<%@ include file="include/footer.jsp" %>
+		</div>		
+	</footer>
+
+
+
+
+	
+	
+
 </body>
 </html>
 

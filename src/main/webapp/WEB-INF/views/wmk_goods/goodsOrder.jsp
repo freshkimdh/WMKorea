@@ -11,7 +11,7 @@
 
 <head>
   <title>굿즈: 구매하기</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
 </head>
