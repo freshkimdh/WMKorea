@@ -76,6 +76,71 @@
   color: white;
 }
 	</style>
+	
+	<style>
+	 section.replyForm { padding:30px 0; }
+	 section.replyForm div.input_area { margin:10px 0; }
+	 section.replyForm textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px;; height:150px; }
+	 section.replyForm button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+	 
+	 section.replyList { padding:30px 0; }
+	 section.replyList ol { padding:0; margin:0; }
+	 section.replyList ol li { padding:10px 0; border-bottom:2px solid #eee; }
+	 section.replyList div.userInfo { }
+	 section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
+	 section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
+	 section.replyList div.replyContent { padding:10px; margin:20px 0; }
+	</style>
+
+
+
+	<script> 			
+		function replyList() {
+				
+			var fBoard_Num = ${contentView.fBoard_Num};
+			$.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
+			var str = "";
+					  console.log(data)
+			$(data).each(function(){
+					   
+				console.log(data);
+					   
+				var repDate = new Date(this.repDate);
+				repDate = repDate.toLocaleDateString("ko-US")
+					   
+					   str += "<li data-fBoard_Num='" + this.fBoard_Num + "'>"
+					     + "<div class='userInfo'>"
+					     + "<span class='id'>" + this.id + "</span>"
+					     + "<span class='date'>" + repDate + "</span>"
+					     + "</div>"
+					     + "<div class='replyContent'>" + this.repCon + "</div>"
+					     
+					      + "<div class='replyFooter'>"
+					      + "<button type='button' class='modify' data-repNum='" + this.repNum + "'>수정</button>"
+					      + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+					      + "</div>"
+					     
+					     + "</li>";           
+					  });
+					  
+					  $("section.replyList ol").html(str);
+					 });
+				}
+				</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -268,7 +333,7 @@
     <input type="text" class="form-control mb-2 mr-sm-2" id="pwd2" placeholder="Enter password" name="pswd">
 </form> --%> 
 
-<form name="replyForm" method="get">
+<%-- <form name="replyForm" method="get">
 <div class="container" id="comment_write">
 <input type="hidden" id="bId" name="bId" value="${contentView.fId}" />
 <br>
@@ -296,7 +361,51 @@
  	 </div>
 
 </div>
-</form>
+</form>--%>
+
+
+
+<div id="reply">
+
+<%--  <c:if test="${id == null }">
+  <p>소감을 남기시려면 <a href="{pageContext.request.contextPath}/loginForm">로그인</a>해주세요</p>
+ </c:if>
+
+
+
+<c:if test="${id != null}"> --%>
+ <section class="replyForm">
+  <form role="form" method="post" autocomplete="off">
+  	<input type="hidden" name="fBoard_Num" value="${contentView.fBoard_Num}">
+  	
+   <div class="input_area">
+    <textarea name="repCon" id="repCon"></textarea>
+   </div>
+   
+   <div class="input_area">
+    <button type="submit" id="reply_btn">소감 남기기</button>
+   </div>
+   
+  </form>
+ </section>
+ 
+ 
+<section class="replyList">
+ <ol>
+ <c:forEach items="${reply}" var="reply">
+
+  <li>
+      <div class="userInfo">
+       <span class="userName">${reply.id}</span>
+       <span class="date"><fmt:formatDate value="${reply.repDate}" pattern="yyyy-MM-dd" /></span>
+      </div>
+      <div class="replyContent">${reply.repCon}</div>
+    </li>
+   </c:forEach>
+  </ol>    
+</section>
+</div>
+
 
 
 <hr>

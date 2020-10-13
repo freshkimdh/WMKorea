@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.wmk.ex.mapper.FBoardMapper;
 import com.wmk.ex.page.Criteria;
-import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.FBoardVO;
+import com.wmk.ex.vo.FReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -84,6 +84,24 @@ public class FBoardServiceImpl implements FBoardService {
 		log.info("get List with criteria"  + criteria);
 		return mapper.getListWithPaging(criteria);
 	}
+	
+	
+	//¥Ò±€ ¿€º∫
+	@Override
+	public void registReply(FReplyVO reply) throws Exception {
+		mapper.registReply(reply);
+		
+	}
+	
+	//¥Ò±€ ∏Ò∑œ
+	@Override
+	public List<FReplyVO> replyList(int fBoard_Num) throws Exception {
+		
+		log.info("get replyList...");
+		
+		return mapper.replyList(fBoard_Num);
+	}
+	
 
 
 

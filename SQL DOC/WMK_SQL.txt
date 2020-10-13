@@ -26,4 +26,30 @@ create table FREE_BOARD(
 
 --게시판 번호 자동 증가
 create sequence free_board_seq; 
- 
+
+
+
+
+---자유 게시판 댓글 ---
+create table free_reply (
+    fBoard_Num      number          not null, --게시판 번호
+    id      varchar2(50)    not null,
+    repNum      number          not null,
+    repCon      varchar2(2000)  not null,
+    repDate     date            default sysdate,
+    primary key(fBoard_Num, repNum) 
+);
+
+create sequence free_reply_seq;
+
+alter table free_reply
+    add constraint free_reply_fBoard_Num foreign key(fBoard_Num)
+    references FREE_BOARD(fBoard_Num);
+
+alter table free_reply
+    add constraint free_reply_fId foreign key(id)
+    references wmk_users(id);
+
+--test
+insert into free_reply (fBoard_Num, id, repNum, repCon) values (1, 'the3536', tbl_reply_seq.nextval, '테스트내용');
+    

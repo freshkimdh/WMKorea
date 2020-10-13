@@ -3,7 +3,9 @@ package com.wmk.ex.mapper;
 import java.util.List;
 
 import com.wmk.ex.page.Criteria;
+import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.FBoardVO;
+import com.wmk.ex.vo.FReplyVO;
 
 
 public interface FBoardMapper {
@@ -31,5 +33,12 @@ public interface FBoardMapper {
 	//페이징 처리
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
+	
+
+	//상품 댓글 작성
+	public void registReply(FReplyVO reply) throws Exception;
+	
+	//댓글 리스트
+	public List<FReplyVO> replyList(int fBoard_Num) throws Exception;
 	
 }

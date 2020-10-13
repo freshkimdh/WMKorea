@@ -75,6 +75,22 @@
 	<select id="getTotalCount" resultType="int">
 		select count(*)	from FREE_BOARD where fBoard_Num>0
 	</select>
+	
+	
+	
+	<!--댓글 목록-->
+	<select id="replyList" resultType="com.wmk.ex.vo.FReplyVO">	
+	select fBoard_Num, id, repNum, repCon, repDate
+	from free_reply 
+	where fBoard_Num = #{fBoard_Num}
+	</select>
+	
+	<!--댓글 입력  -->
+	<insert id="registReply">
+	insert into free_reply (fBoard_Num, id, repNum, repCon)
+ 		values (#{fBoard_Num}, #{id}, tbl_reply_seq.nextval, #{repCon})
+	</insert>
+	
 
 	 
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FBoardVO;
+import com.wmk.ex.vo.FReplyVO;
 
 
 
@@ -31,5 +32,12 @@ public interface FBoardService {
 	//∆‰¿Ã¬° √≥∏Æ
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
+	
+	
+	//¥Ò±€ ¿€º∫
+	public void registReply(FReplyVO reply) throws Exception;
+	
+	//¥Ò±€ ∏ÆΩ∫∆Æ
+	public List<FReplyVO> replyList(int fBoard_Num) throws Exception;
 
 }
