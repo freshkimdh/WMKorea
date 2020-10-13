@@ -165,7 +165,6 @@ public class FBoardController {
 	 
 	 log.info("댓글 입력 성공");
 	 
-//	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
 	}
 	
 	
@@ -178,7 +177,44 @@ public class FBoardController {
 	 List<FReplyVO> reply = service.replyList(fBoard_Num);
 	  
 	 return reply;
-	} 
+	}
+	
+	
+	//댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/free_contentView/deleteReply", method = RequestMethod.POST)
+	public String getReplyList(FReplyVO reply, UserVO user, HttpSession session) throws Exception {
+	 log.info("post delete reply");
+
+	 int result = 0;
+	 
+	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	 
+	 String username = ((UserDetails)principal).getUsername();
+	 String userId = service.replyUserIdCheck(reply.getRepNum());
+	 log.info(userId);
+	 
+	 if(username.equals(userId)) {
+	  
+		 log.info("성공");
+			 
+		 reply.setId(username); 
+		 service.deleteReply(reply);
+		  
+		 result = 1;
+		  
+		 log.info("if 안에 값: " + result);
+	 }
+	 
+	 log.info("if 밖에 값: " + result);
+	 
+	 return String.valueOf(result);
+	 
+	}
+	
+	
+	
+	
 }
 
 

@@ -91,6 +91,21 @@
  		values (#{fBoard_Num}, #{id}, tbl_reply_seq.nextval, #{repCon})
 	</insert>
 	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+	 delete free_reply
+	     where repNum = #{repNum}
+	         and id = #{id}
+	</delete>
+	
+	<!-- 아이디 체크 -->
+	<select id="replyUserIdCheck" resultType="String">
+	 select id
+	  from free_reply
+	      where repNum = #{repNum}
+	</select>
+	
+
 
 	 
 

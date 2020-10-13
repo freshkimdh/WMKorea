@@ -41,4 +41,10 @@ public interface FBoardMapper {
 	//댓글 리스트
 	public List<FReplyVO> replyList(int fBoard_Num) throws Exception;
 	
+	//댓글 삭제
+	public void deleteReply(FReplyVO reply) throws Exception;
+	
+	//아이디 체크
+	public String replyUserIdCheck(int repNum) throws Exception;
+	
 }

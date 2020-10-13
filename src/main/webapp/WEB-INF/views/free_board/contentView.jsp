@@ -90,6 +90,8 @@
 	 section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
 	 section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
 	 section.replyList div.replyContent { padding:10px; margin:20px 0; }
+	 
+	 section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 	</style>
 
 
@@ -108,13 +110,22 @@
 	   var repDate = new Date(this.repDate);
 	   repDate = repDate.toLocaleDateString("ko-US")
 	   
-	   str += "<li data-fBoard_Num='" + this.fBoard_Num + "'>"
+	   str += "<div>"
 	     + "<div class='userInfo'>"
 	     + "<span class='id'>" + this.id + "</span>"
 	     + "<span class='date'>" + repDate + "</span>"
 	     + "</div>"
 	     + "<div class='replyContent'>" + this.repCon + "</div>"
-	     + "</li>";           
+	     + "</div>"
+	     
+	     
+	     + "<div class='replyFooter'>"
+	     + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+	     + "</div>"
+	     
+	     + "<hr>"
+	     
+	     ;           
 	  });
 	  
 	  $("section.replyList ol").html(str);
@@ -308,64 +319,34 @@
 
 
 <!-- 댓글 작성 -->
-<%-- <form class="form-inline" action="/action_page.php">
-    <label for="email2" class="mb-2 mr-sm-2">이름:</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="email2" placeholder="Enter email" name="email">
-    <label for="pwd2" class="mb-2 mr-sm-2">비밀번호:</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="pwd2" placeholder="Enter password" name="pswd">
-</form> --%> 
-
-<%-- <form name="replyForm" method="get">
-<div class="container" id="comment_write">
-<input type="hidden" id="bId" name="bId" value="${contentView.fId}" />
-<br>
-	<div class="row">
-    	<div class="col">
-    
-		<label for="Writer">작성자:</label>
-      	<input type="text" class="form-control" id="Writer" placeholder="" name="Writer">
-    
-    	</div>
-    	
-<!--     	<div class="col">
-    	<label for="bPw">비밀번호:</label>
-      	<input type="password" class="form-control" id="pw" placeholder="" name="bPw"> <p>
-    	</div> -->
-	</div>
-
-    <div class="form-group">
-      <label for="Content">댓글 내용:</label>
-      <textarea class="form-control" rows="5" id="Content" name="Content"></textarea>
-    </div>
-	
-	 <div>
- 	 	<button type="button" class="replyWriteBtn">댓글 작성</button>
- 	 </div>
-
-</div>
-</form>--%>
-
-
 
 <div id="reply">
 
-<%--  <c:if test="${id == null }">
-  <p>소감을 남기시려면 <a href="{pageContext.request.contextPath}/loginForm">로그인</a>해주세요</p>
- </c:if>
 
 
 
-<c:if test="${id != null}"> --%>
+
+
  <section class="replyForm">
   <form role="form" method="post" autocomplete="off">
   	<input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
   	
    <div class="input_area">
-    <textarea name="repCon" id="repCon"></textarea>
+   <label for="Content">댓글 내용:</label>
+      <textarea class="form-control" rows="5" id="repCon" name="repCon"></textarea>
    </div>
    
    <div class="input_area">
-    <button type="button" id="reply_btn">댓글 등록</button>
+   <sec:authorize access="isAnonymous()">
+   		<p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">댓글 작성</button></p>
+   </sec:authorize>
+   
+   <sec:authorize access="isAuthenticated()">	
+		<p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">댓글 작성</button></p>
+	</sec:authorize>
+   
+   
+   
     	<script>
 		 $("#reply_btn").click(function(){
 		  
@@ -385,6 +366,7 @@
 		   success : function(){
 			   console.log(data);
 		    replyList();
+		    $("#repCon").val("");
 		   }
 		  });
 		 });
@@ -394,34 +376,52 @@
    
   </form>
  </section>
- 
- 
+
 <section class="replyList">
  <ol>
- 
-<%--  <c:forEach items="${reply}" var="reply">
-
-  <li>
-      <div class="userInfo">
-       <span class="userName">${reply.id}</span>
-       <span class="date"><fmt:formatDate value="${reply.repDate}" pattern="yyyy-MM-dd" /></span>
-      </div>
-      <div class="replyContent">${reply.repCon}</div>
-    </li>
-   </c:forEach> --%>
+  <!--댓글 리스트  -->
    
-  </ol>    
+ </ol>    
   
   
 	<script> 
 		replyList() 
 	</script>
-  
-  
-  
-  
-  
-  
+	
+	<script>
+		 $(document).on("click", ".delete", function(){
+		  
+		  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+			 
+		  if(deleteConfirm){
+		  
+		  var data = {repNum : $(this).attr("data-repNum")};
+		  
+		  $.ajax({
+			  url : "${pageContext.request.contextPath}/free_contentView/deleteReply",
+			  type : "post",
+			  data : data,
+			  success : function(result){
+			   
+			   console.log(result);
+				  
+			   if(result == 1) {
+			    replyList();
+			   }
+			   
+			   if(result == 0) {
+			    alert("작성자 본인만 할 수 있습니다.");    
+			   }
+			  },
+			  error : function(){
+			   alert("로그인하셔야합니다.")
+			  }
+			});
+		}
+	});
+	</script>
+
+
 </section>
 </div>
 

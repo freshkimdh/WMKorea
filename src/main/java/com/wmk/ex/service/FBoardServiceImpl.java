@@ -101,6 +101,23 @@ public class FBoardServiceImpl implements FBoardService {
 		
 		return mapper.replyList(fBoard_Num);
 	}
+
+	@Override
+	public void deleteReply(FReplyVO reply) throws Exception {
+		
+		log.info("deleteReply...");
+		
+		mapper.deleteReply(reply);
+		
+	}
+
+	@Override
+	public String replyUserIdCheck(int repNum) throws Exception {
+		
+		log.info("idCheck...");
+		
+		return mapper.replyUserIdCheck(repNum);
+	}
 	
 
 
