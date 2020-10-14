@@ -215,7 +215,7 @@
 			</a>
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="boardList">자유 게시판</a>
-        	<a class="dropdown-item" href="#">여행후기 게시판</a>
+        	<a class="dropdown-item" href="areaIndex">여행후기 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
 		</li>
