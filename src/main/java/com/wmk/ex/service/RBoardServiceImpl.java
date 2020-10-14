@@ -97,6 +97,23 @@ public class RBoardServiceImpl implements RBoardService {
 		rmapper.registReply(reply);
 		
 	}
+	
+	//댓글 삭제
+	@Override
+	public void deleteReply(RReplyVO reply) throws Exception {
+		log.info("deleteReply...");
+		
+		rmapper.deleteReply(reply);
+		
+	}
+	
+	//댓글 아이디 확인
+	@Override
+	public String replyUserIdCheck(int repNum) throws Exception {
+		log.info("idCheck...");
+		
+		return rmapper.replyUserIdCheck(repNum);
+	}
 	/*
 	//페이징 처리
 	@Override

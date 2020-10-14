@@ -46,6 +46,12 @@ public interface RBoardMapper {
 	//댓글 작성
 	public void registReply(RReplyVO reply) throws Exception;
 	
+	//댓글 삭제
+	public void deleteReply(RReplyVO reply) throws Exception;
+	
+	//아이디 체크
+	public String replyUserIdCheck(int repNum) throws Exception;
+	
 	
 	
 }

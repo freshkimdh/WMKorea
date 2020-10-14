@@ -84,6 +84,19 @@
  		values (#{rBoardNum}, #{id}, review_reply_seq.nextval, #{repCon})
 	</insert>
 	
+		<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+	 delete review_reply
+	     where repNum = #{repNum}
+	         and id = #{id}
+	</delete>
+	
+	<!-- 아이디 체크 -->
+	<select id="replyUserIdCheck" resultType="String">
+	 select id
+	  from review_reply
+	      where repNum = #{repNum}
+	</select>
 	
 
 </mapper>

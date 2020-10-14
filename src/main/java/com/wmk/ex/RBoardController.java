@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.ibatis.annotations.Param;
@@ -31,9 +32,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.service.RBoardService;
+import com.wmk.ex.vo.FReplyVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
 import com.wmk.ex.vo.ReplyVO;
+import com.wmk.ex.vo.UserVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -345,6 +348,37 @@ public class RBoardController {
 	 
 	 return reply;
 	} 
+	
+	@ResponseBody
+	@RequestMapping("/review_contentView/deleteReply")
+	public String getReplyList(RReplyVO reply) throws Exception {
+	 log.info("post delete reply");
+
+	 int result = 0;
+	 
+	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	 
+	 String username = ((UserDetails)principal).getUsername();
+	 String userId = rservice.replyUserIdCheck(reply.getRepNum());
+	 log.info(userId);
+	 
+	 if(username.equals(userId)) {
+	  
+		 log.info("성공");
+			 
+		 reply.setId(username); 
+		 rservice.deleteReply(reply);
+		  
+		 result = 1;
+		  
+		 log.info("if 문 안에: " + result);
+	 }
+	 
+	 log.info("if 문 밖에: " + result);
+	 
+	 return String.valueOf(result);
+	 
+	}
 	
 	
 	

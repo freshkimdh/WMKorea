@@ -118,6 +118,8 @@ hr.new3 {
  section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
+ 
+ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 </style>
 
 
@@ -145,6 +147,12 @@ function replyList() {
 	     + "</div>"
 	     + "<div class='replyContent'>" + this.repCon + "</div>"
 	     + "</div>"   
+	     
+	     
+	     + "<div class='replyFooter'>"
+	     + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+	     + "</div>"
+	     
 	     + "<hr>"
   });
   
@@ -446,7 +454,7 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 <br>
 </div>
 
-<div id="reply">
+<div class="container" id="reply">
 
  <section class="replyForm">
   <form role="form" method="post" autocomplete="off">
@@ -519,6 +527,43 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 </script>
 
 
+<script>
+$(document).on("click", ".delete", function(){
+	  
+	  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+		 
+	  if(deleteConfirm){
+	  
+	  var data = {repNum : $(this).attr("data-repNum")};
+	  
+	  $.ajax({
+		  url : "${pageContext.request.contextPath}/review_contentView/deleteReply",
+		  type : "post",
+		  data : data,
+		  success : function(result){
+		   
+		   console.log(result);
+			  
+		   if(result == 1) {
+		    replyList();
+		   }
+		   
+		   if(result == 0) {
+		    alert("작성자 본인만 할 수 있습니다.");    
+		   }
+		  },
+		  error : function(){
+		   alert("로그인하셔야합니다.")
+		  }
+		});
+	}
+});
+</script>
+
+
+
+
+</div>
 
 <p>
 
