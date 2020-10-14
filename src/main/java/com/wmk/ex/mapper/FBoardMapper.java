@@ -50,7 +50,7 @@ public interface FBoardMapper {
 	public int getCountLike(@Param("fBoard_Num")int fBoard_Num,@Param("id")String id);
 	
 	
-	@Update("update FREE_BOARD set LIKE_CNT = 0 where fBoard_Num = #{fBoard_Num}")
+	@Update("update FREE_BOARD set LIKE_CNT = LIKE_CNt -1 where fBoard_Num = #{fBoard_Num}")
 	public int updateUnLike (int fBoard_Num);
 	@Delete("Delete from likeTo where id = #{id} and fBoard_Num = #{fBoard_Num}")
 	public int deleteLike(@Param("fBoard_Num") int fBoard_Num, @Param("id") String id);
