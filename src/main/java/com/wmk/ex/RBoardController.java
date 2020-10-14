@@ -99,8 +99,8 @@ public class RBoardController {
 		   model.addAttribute("area", area);
 	   }
 	   
-	   List<RReplyVO> reply = rservice.replyList(rBoardNum);
-	   model.addAttribute("reply", reply);
+//	   List<RReplyVO> reply = rservice.replyList(rBoardNum);
+//	   model.addAttribute("reply", reply);
 	   
 	   return "/review_board/reviewContentView";
 	}
@@ -307,8 +307,9 @@ public class RBoardController {
 	
 	
 	//댓글 작성
-	@RequestMapping(value = "/review_contentView", method = RequestMethod.POST)
-	public String registReply(RReplyVO reply) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "/review_contentView/registReply", method = RequestMethod.POST)
+	public void registReply(RReplyVO reply) throws Exception {
 	 log.info("regist reply");
 	 
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -330,9 +331,20 @@ public class RBoardController {
 	 
 	 log.info("성공");
 	 
-	 return "redirect:/review_contentView?rBoardNum=" + reply.getrBoardNum() + "&area=";
+	 //return "redirect:/review_contentView?rBoardNum=" + reply.getrBoardNum() + "&area=";
 	}
 	
+	
+	// 상품 소감(댓글) 목록
+	@ResponseBody
+	@RequestMapping("/review_contentView/replyList")
+	public List<RReplyVO> getReplyList(@RequestParam("n") int rBoardNum) throws Exception {
+	 log.info("get reply list...");
+	   
+	 List<RReplyVO> reply = rservice.replyList(rBoardNum);
+	 
+	 return reply;
+	} 
 	
 	
 	
