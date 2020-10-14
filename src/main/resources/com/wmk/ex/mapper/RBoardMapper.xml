@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmk.ex.mapper.RBoardMapper">
+	
+	<!--게시판 목록  -->
+	<select id="getReviewList" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
+	<![CDATA[ 
+		select 
+     		rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory
+	    from Review_BOARD
+	    	where rArea = #{rArea}
+	    	order by rBoardNum desc
+	]]>
+ 	</select>
+ 	
+ 	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
+	<![CDATA[ 
+		select 
+     		rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory
+	    from Review_BOARD
+	    	where rCategory = #{rCategory}
+	    	and rArea =  #{rArea}
+	    	order by rBoardNum desc
+	]]>
+ 	</select>
+ 	
+ 	
+ 	<!--게시판 번호-->
+ 	<select id="getrBoardNum" resultType="com.wmk.ex.vo.RBoardVO">
+	<![CDATA[ 
+		select * from Review_BOARD where rBoardNum = #{rBoardNum} 
+	]]>
+	</select>	
+	
+	<!--게시판 VO의 회원 get id  -->
+	<select id="getrId" resultType="com.wmk.ex.vo.RBoardVO">
+	<![CDATA[ 
+		select * from Review_BOARD where rId = #{rId} 
+	]]>
+	</select> 
+	
+	<!--게시판 작성-->
+	<insert id="rWriteBoard">
+		insert into Review_BOARD (rBoardNum, rId, rTitle, rInShort, rOpenTime, rArea, rAdress, rContent, rHit, rStep, rIndent, rCategory) 
+			values (review_board_seq.nextval, #{rId}, #{rTitle}, #{rInShort}, #{rOpenTime}, #{rArea}, #{rAdress}, #{rContent}, 0, 0, 0, #{rCategory})
+	</insert> 
+	
+	<!--게시판 수정  -->
+	<insert id="updaterModify" >
+	<![CDATA[
+		update Review_BOARD set rTitle = #{rTitle}, rContent = #{rContent}, rOpenTime = #{rOpenTime}, rInShort= #{rInShort}, rAdress= #{rAdress}, rCategory= #{rCategory} where rId = #{rId} and rBoardNum = #{rBoardNum}
+	]]>
+	</insert>
+	<!-- update Review_BOARD set rId= #{rId}, rTitle = #{rTitle}, rContent = #{rContent}, rOpenTime = #{rOpenTime}, rInShort= #{rInShort}, rAdress= #{rAdress}, rCategory= #{rCategory} where rBoardNum = #{rBoardNum} -->
+	
+	<!--게시판 삭제  -->
+	<insert id="deleterBoard" >
+	<![CDATA[
+		delete from Review_BOARD where rBoardNum = #{rBoardNum}
+	]]>
+	</insert>
+	
+	<!--조회수  -->
+	<insert id="addUprHit" >
+	<![CDATA[
+		update Review_BOARD set rHit = rHit + 1 where rBoardNum = #{rBoardNum}
+	]]>
+	</insert>
+	
+	
+
+</mapper>
