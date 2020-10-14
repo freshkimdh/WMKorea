@@ -3,6 +3,7 @@ package com.wmk.ex.dao;
 import java.util.List;
 
 import com.wmk.ex.vo.CommentVO;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.UserVO;
@@ -30,6 +31,11 @@ public interface ShopDAO {
 	
 	//아이디 체크
 	public String idCheck(int repNum) throws Exception;
+	
+	//카트 담기 (정경채)
+	public void addCart(CartVO cart) throws Exception;
+	
+	
 	
 		
 }  

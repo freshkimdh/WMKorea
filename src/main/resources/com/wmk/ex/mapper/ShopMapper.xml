@@ -61,6 +61,31 @@ select
       where repNum = #{repNum}
 </select>
 
+<!-- 장바구니 담기 -->
+<insert id="addCart">
+insert into wmk_cart (cartNum, userId, gdsNum, gdsColor, gdsSize, gdsText, cartStock)
+			values (wmk_cart_seq.nextval, #{userId}, #{gdsNum}, #{gdsColor}, #{gdsSize}, #{gdsText}, #{cartStock})
+</insert>		
+
+
+<!-- 장바구니 보기 -->
+<select id="cartList" resultType="com.wmk.ex.vo.CartListVO">
+select
+    row_number() over(order by c.cartNum desc) as num,
+    c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate, c.gdsColor, c.gdsSize, c.gdsText,
+    g.gdsName, g.gdsPrice, g.gdsimg
+from wmk_cart c
+    inner join wmk_goods g
+        on c.gdsNum = g.gdsNum
+    where c.userId = #{userId}
+</select>
+
+<!--  장바구니 삭제  -->
+<delete id="deleteCart">
+ delete wmk_cart
+     where cartNum = #{cartNum}
+         and userId = #{userId}
+</delete>
 
 
 </mapper>

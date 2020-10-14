@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>   
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>   
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -10,18 +10,21 @@
 <html lang="en">
 <head>
   <title>Wemade Korea</title>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
       
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- 
-
   
-<style>
+	
 
+
+	<style>
+	
+  
+	<style>
  	#s1 {
 	/* background: blue; */
 	line-height:55px;
@@ -31,35 +34,7 @@
  	vertical-align:middle;
 	}
 	
-</style>
-
-<style>
-
-	body, html {
-  height: 100%;
-  margin: 0;
-/*    font-family: Arial, Helvetica, sans-serif; */
-}
-
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
-  height: 20%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-</style>
-
+	</style>
 	
 </head>
 <body>
@@ -114,8 +89,9 @@
 			내 캐릭터 만들기
 			</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
-        	<a class="dropdown-item" href="/ex">굿즈</a>
+        	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
+        	<a class="dropdown-item" href="goodsIndex">굿즈</a>
+        	<a class="dropdown-item" href="goodsList">굿즈(정경채)</a>
       		</div>
 		</li>
 		
@@ -139,34 +115,19 @@
  	<ul class="navbar-nav"> 
 	<div class="btn-group btn-group-sm">
 	
+<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
+   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
+		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
+</sec:authorize>
 
-	<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
-	<c:if test="${member == null}">
-	   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
-			<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-			<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
-	</c:if>
-	
-	<c:if test="${member != null}">
-			<a href="/ex/admin/index" class="btn btn-secondary" type="button">관리자 화면</a>	
-	   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
-			<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-			<a href="mypage" class="btn btn-secondary" type="button">My Page</a>
-	</c:if>
-	
-	</sec:authorize>
-
-
-
-	<sec:authorize access="isAuthenticated()">
-			<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>
-	   		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-	   			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
-	   		</form:form> 
-			<a href="mypage" class="btn btn-secondary" type="button">My Page</a>	
-			<a href="/ex/admin_goods/index" class="btn btn-secondary" type="button">관리자 화면</a>		
-	</sec:authorize>
-
+<sec:authorize access="isAuthenticated()">
+		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>
+   		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+   			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
+   		</form:form> 
+		<!-- <a href="mypage" class="btn btn-secondary" type="button">My Page</a> -->
+</sec:authorize>
 
 	</div>
 
@@ -174,4 +135,3 @@
 </div>
 
 </nav>
-

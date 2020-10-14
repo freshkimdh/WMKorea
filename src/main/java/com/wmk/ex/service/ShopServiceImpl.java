@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.wmk.ex.dao.ShopDAO;
 import com.wmk.ex.mapper.ShopMapper;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CartListVO;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -75,6 +77,28 @@ public class ShopServiceImpl implements ShopService {
 	public String idCheck(int repNum) throws Exception {
 		
 		return dao.idCheck(repNum);
+	}
+
+	//카트담기
+	@Override
+	public void addCart(CartVO cart) throws Exception {
+		
+		dao.addCart(cart);
+		
+	}
+	
+	//장바구니 보기
+	@Override
+	public List<CartListVO> cartList(String username) throws Exception {
+		
+		return shopmapper.cartList(username);
+	}
+	
+	@Override
+	public void deleteCart(CartVO cart) throws Exception {
+		
+		shopmapper.deleteCart(cart);
+		
 	}
 
 

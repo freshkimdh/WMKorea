@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>   
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>   
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -139,7 +139,7 @@
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
         	<a class="dropdown-item" href="goodsIndex">굿즈</a>
-        	<a class="dropdown-item" href="goodsIndex2">굿즈(정경채)</a>
+        	<a class="dropdown-item" href="goodsList">굿즈(정경채)</a>
       		</div>
 		</li>
 		

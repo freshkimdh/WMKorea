@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.ShopService;
 import com.wmk.ex.vo.BoardVO;
+import com.wmk.ex.vo.CartListVO;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -134,6 +138,67 @@ public class ShopController {
 //			
 //			return "reply_view";
 //		}
+	 
+	 
+	 //장바구니 담기 (스프링 시큐리티 세션값 불러오기): chaddy
+	 @ResponseBody
+	 @RequestMapping(value = "/addCart", method = RequestMethod.POST)
+	 public void addCart(CartVO cart, HttpSession session) throws Exception {
+		 
+ 
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 String username = ((UserDetails)principal).getUsername();
+		 cart.setUserId(username);
+		 service.addCart(cart);
+		 
+		 
+	 }
+	 
+	 //장바구니 보기
+	 @RequestMapping(value = "/cartList", method = RequestMethod.GET)
+	 public String getCartList(HttpSession session, Model model) throws Exception {
+		 log.info("get cart list");
+		 
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 String username = ((UserDetails)principal).getUsername();
+
+	  
+		 List<CartListVO> cartList = service.cartList(username);
+	  
+		 model.addAttribute("cartList", cartList);
+		 
+		 return "/wmk_goods/cartList";
+	  
+	 }
+	 
+	// 장바구니 삭제
+	 @ResponseBody
+	 @RequestMapping(value = "/shop/cartList/deleteCart", method = RequestMethod.POST)
+	 public int deleteCart(HttpSession session,
+	      @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
+		 log.info("delete cart");
+	  	  
+	  
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 String username = ((UserDetails)principal).getUsername();
+	   
+		  int result = 0;
+		  int cartNum = 0;
+		  	  
+		  if(username != null) {
+		   cart.setUserId(username);
+		   
+		   for(String i : chArr) {   
+		    cartNum = Integer.parseInt(i);
+		    cart.setCartNum(cartNum);
+		    service.deleteCart(cart);
+		   }   
+		   result = 1;	
+		  }  
+		  return result;  
+	 }
 	 
 
 

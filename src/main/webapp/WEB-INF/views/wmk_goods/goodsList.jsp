@@ -202,9 +202,28 @@
 		<div class="row">
 		
 		
-		
-		
+		<c:forEach items="${list}" var="list">
 		<div class="col-sm-4">
+		
+
+		
+		<a href="${pageContext.request.contextPath}/goodsView?n=${list.gdsNum}"><img src="${pageContext.request.contextPath}/${list.gdsImg}" class="img-fluid mx-auto d-block rounded" width="275"></a>
+		
+		
+		<h1 align="center">${list.gdsName}</h1>
+		<h1 align="center">(&#8361;${list.gdsPrice}~)</h1>
+		<p align="center" style="font-size:20px">${list.gdsDes}</p>
+		
+		
+		
+		
+		
+		</div>
+		</c:forEach>
+		
+
+		
+<!-- 		<div class="col-sm-4">
 		
 		<a href=""><img src="goods/picture_frame.png" class="img-fluid mx-auto d-block rounded" width="275"></a>
 		<h1 align="center">Picture frame</h1>
@@ -237,13 +256,17 @@
 	
 		
 		
-		</div>
+		</div> -->
 		
 
 		
-		</div>
+		</div> <!-- row end  -->
+		
+	<sec:authorize access="isAuthenticated()">
+	<p align="right"><a href="goods_register" class="btn btn-dark" role="button">제품 등록</a></p>
+	</sec:authorize>
 	
-	</div>
+	</div> <!--  container end -->
 	
 	<br><br>
 

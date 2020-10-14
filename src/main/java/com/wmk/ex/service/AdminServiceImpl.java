@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.wmk.ex.mapper.AdminMapper;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -33,7 +34,8 @@ public class AdminServiceImpl implements AdminService {
 		adminMapper.register(vo);
 		
 	}
-
+	
+	//상품 목록
 	@Override
 	public List<GoodsViewVO> goodslist() throws Exception {
 		log.info("서비스");
@@ -56,6 +58,11 @@ public class AdminServiceImpl implements AdminService {
 	public void goodsDelete(int gdsNum) throws Exception {
 		adminMapper.goodsDelete(gdsNum);
 		
+	}
+
+	@Override
+	public void addCart(CartVO cart) throws Exception {
+		adminMapper.addCart(cart);
 	}
 	
 

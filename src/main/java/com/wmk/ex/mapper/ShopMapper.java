@@ -2,6 +2,8 @@ package com.wmk.ex.mapper;
 
 import java.util.List;
 
+import com.wmk.ex.vo.CartListVO;
+import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -17,5 +19,11 @@ public interface ShopMapper {
 	
 
 	public UserVO userIdread(String id) throws Exception;
+	
+	//장바구니 보기
+	public List<CartListVO> cartList(String username);
+	
+	//장바구니 삭제
+	public void deleteCart(CartVO cart) throws Exception;
 
 }
