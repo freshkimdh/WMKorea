@@ -1,5 +1,7 @@
 package com.wmk.ex;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,6 +27,9 @@ import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.MemberVO;
+import com.wmk.ex.vo.OrderDetailVO;
+import com.wmk.ex.vo.OrderListVO;
+import com.wmk.ex.vo.OrderVO;
 import com.wmk.ex.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -199,6 +204,109 @@ public class ShopController {
 		  }  
 		  return result;  
 	 }
+	 
+	 
+		@GetMapping("/goodsOrder") 
+		public String goodsOrder(Model model) throws Exception {
+			
+			
+			 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			 String username = ((UserDetails)principal).getUsername();
+
+		  
+			 List<CartListVO> cartList = service.cartList(username);
+		  
+			 model.addAttribute("cartList", cartList);
+			
+			log.info("goodsOrder");
+			return "/wmk_goods/goodsOrder";
+
+		}
+	 
+	 	 
+	 
+	// 장바구니에 있는 제품 주문하기
+	 @RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	 public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
+		 
+		 log.info("order");
+		 
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 String username = ((UserDetails)principal).getUsername();
+		 		  
+		  
+		  Calendar cal = Calendar.getInstance();
+		  int year = cal.get(Calendar.YEAR);
+		  String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		  String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		  String subNum = "";
+		  
+		  
+		  for(int i = 1; i <= 6; i ++) {
+		   subNum += (int)(Math.random() * 10);
+		  }
+		  
+		  
+		  String orderId = ymd + "_" + subNum;
+		  
+		  order.setOrderId(orderId);
+		  order.setUserId(username);
+		  
+		  service.orderInfo(order);
+		  
+		  orderDetail.setOrderId(orderId);   
+		  service.orderInfo_Details(orderDetail);
+		  
+		  service.cartAllDelete(username);
+		  
+		  return "redirect:/orderList";
+		  
+	  
+			/* return "/wmk_goods/goodsOrder"; */
+	  
+	 }
+	 
+	 
+	// 특정 유저의 주문 목록보기
+	 @RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	 public String getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
+		
+		 log.info("get order list");
+	  
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 String username = ((UserDetails)principal).getUsername();
+	  
+	  order.setUserId(username);
+	  
+	  List<OrderVO> orderList = service.orderList(order);
+	  
+	  model.addAttribute("orderList", orderList);
+	  
+	  return "/wmk_goods/orderList";
+	  
+	 }
+	 
+	// 큰 주문의 상세 목록 보기
+	 @RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	 public String getOrderList(HttpSession session, @RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
+		 log.info("get order view");
+	  
+		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 String username = ((UserDetails)principal).getUsername();
+	  
+	  order.setUserId(username);
+	  order.setOrderId(orderId);
+	  
+	  List<OrderListVO> orderView = service.orderView(order);
+	  
+	  model.addAttribute("orderView", orderView);
+	  
+	  return "/wmk_goods/orderView";
+	 }
+	 
 	 
 
 

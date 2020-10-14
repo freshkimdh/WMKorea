@@ -115,7 +115,7 @@ public class BoardController {
 		return "redirect:boardList";
 	}
 	
-	//����ۼ�
+	//占쏙옙占쏙옙蒡占�
 	@RequestMapping("/replyWrite")
 	public String replyWrite(ReplyVO vo) {
 		
@@ -127,7 +127,7 @@ public class BoardController {
 	}
 	
 	
-	//////////////������ �������Խ��� ������ (09/23: ����ä �߰�)////////////
+	//////////////占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 (09/23: 占쏙옙占쏙옙채 占쌩곤옙)////////////
 	
 	@GetMapping("/seoulList") 
 	public String seoulList(Model model) {
@@ -136,6 +136,17 @@ public class BoardController {
 		return "/admin_travel_board/seoulList";
 
 	}
+	
+	@RequestMapping("/travelWriteView")
+	public String travelWriteView(ReplyVO vo) {
+		
+		log.info("replyWrite..");
+	
+
+		
+		return "/admin_travel_board/travelWriteView";
+	}	
+	
 	
 	@GetMapping("/seoulCotentView") 
 	public String seoulCotentView(Model model) {

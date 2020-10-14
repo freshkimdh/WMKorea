@@ -15,6 +15,9 @@ import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
+import com.wmk.ex.vo.OrderDetailVO;
+import com.wmk.ex.vo.OrderListVO;
+import com.wmk.ex.vo.OrderVO;
 import com.wmk.ex.vo.UserVO;
 
 import lombok.AllArgsConstructor;
@@ -99,6 +102,40 @@ public class ShopServiceImpl implements ShopService {
 		
 		shopmapper.deleteCart(cart);
 		
+	}
+
+	//주문정보
+	@Override
+	public void orderInfo(OrderVO order) throws Exception {
+		
+		shopmapper.orderInfo(order);
+		
+	}
+
+	//주문 상세정보
+	@Override
+	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception {
+
+		shopmapper.orderInfo_Details(orderDetail);
+		
+	}
+
+	@Override
+	public void cartAllDelete(String userId) throws Exception {
+		shopmapper.cartAllDelete(userId);
+		
+	}
+
+	@Override
+	public List<OrderVO> orderList(OrderVO order) throws Exception {
+		
+		return shopmapper.orderList(order);
+	}
+
+	@Override
+	public List<OrderListVO> orderView(OrderVO order) throws Exception {
+		
+		return shopmapper.orderView(order);
 	}
 
 

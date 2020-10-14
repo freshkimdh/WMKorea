@@ -213,6 +213,7 @@
 
 		      </tr>		    
 		    
+<c:set var="sum" value="0" />
 
 <c:forEach items="${cartList}" var="cartList">	    
 		      <tr>
@@ -289,11 +290,67 @@
 		        <td>무료 배송</td>
 		        <td><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}" /> 원</td> 
 		      </tr>
+  
+  <c:set var="sum" value="${sum + (cartList.gdsPrice * cartList.cartStock)}" />
   </c:forEach>
 		    </tbody>
 		    
 		  </table>
-
+		  
+		  
+		<div class="listResult">
+		 <div class="sum">
+		  <h3 align="right">총 합계 : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원</h3>
+		 </div>
+		 <div class="orderOpne">
+<!-- 		  <button type="button" class="btn btn-dark orderOpne_bnt">주문하기</button> -->
+		  
+		<p align="center">
+			<a href="goodsOrder" class="btn btn-dark btn-lg" role="button">주문하기</a>
+			<a href="goodsList" class="btn btn-dark btn-lg" role="button">취소</a>
+		</p>
+		 </div>
+		</div>
+	
+	<div class="orderInfo">
+ <form role="form" method="post" autocomplete="off">
+    
+  <input type="hidden" name="amount" value="${sum}" />
+    
+  <div class="inputArea">
+   <label for="">수령인</label>
+   <input type="text" name="orderRec" id="orderRec" required="required" />
+  </div>
+  
+  <div class="inputArea">
+   <label for="orderPhon">수령인 연락처</label>
+   <input type="text" name="orderPhon" id="orderPhon" required="required" />
+  </div>
+  
+  <div class="inputArea">
+   <label for="userAddr1">우편번호</label>
+   <input type="text" name="userAddr1" id="userAddr1" required="required" />
+  </div>
+  
+  <div class="inputArea">
+   <label for="userAddr2">1차 주소</label>
+   <input type="text" name="userAddr2" id="userAddr2" required="required" />
+  </div>
+  
+  <div class="inputArea">
+   <label for="userAddr3">2차 주소</label>
+   <input type="text" name="userAddr3" id="userAddr3" required="required" />
+  </div>
+  
+  <div class="inputArea">
+   <button type="submit" class="order_btn">주문</button>
+   <button type="button" class="cancel_btn">취소</button> 
+  </div>
+  
+ </form> 
+</div>
+	
+	
 </div>
 
 

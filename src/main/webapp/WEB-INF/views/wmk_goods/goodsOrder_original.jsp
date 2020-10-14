@@ -189,9 +189,6 @@
 	
 	<br><br>
 
-
-
-
  	<footer id="footer">
 		<div id="footer_box">
 			<%@ include file="include/footer2.jsp" %>
