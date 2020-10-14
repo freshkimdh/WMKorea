@@ -131,6 +131,13 @@ public class FBoardServiceImpl implements FBoardService {
 	public int getLikeCount(int fBoard_Num, String id) {
 		return mapper.getCountLike(fBoard_Num, id);
 	}
+
+	@Override
+	public void cntLike(int fBoard_Num) {
+		// TODO Auto-generated method stub
+		mapper.cntLike(fBoard_Num);
+		
+	}
 	
 
 	

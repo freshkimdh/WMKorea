@@ -358,7 +358,7 @@
                 <td align="center"><a class="text-dark"
                                       href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
                 <td align="center">${list.fHit}</td>
-                <td align="center">${contentView.like_Cnt}</td>
+                <td align="center">${list.like_Cnt}</td>
                 <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
             </tr>
         </c:forEach>

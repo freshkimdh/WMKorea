@@ -46,5 +46,7 @@ public interface FBoardService {
 	public int deleteLike(int fBoard_Num,String id);
 	public void deleteUnlike(int fBoard_Num,String id);
 	public int getLikeCount(int fBoard_Num,String id);
+	public void cntLike(int fBoard_Num);
+	
 
 }
