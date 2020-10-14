@@ -2,12 +2,7 @@ package com.wmk.ex.service;
 
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.wmk.ex.mapper.FBoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FBoardVO;
@@ -91,14 +86,14 @@ public class FBoardServiceImpl implements FBoardService {
 	}
 	
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@Override
 	public void registReply(FReplyVO reply) throws Exception {
 		mapper.registReply(reply);
 		
 	}
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<FReplyVO> replyList(int fBoard_Num) throws Exception {
 		
@@ -125,55 +120,7 @@ public class FBoardServiceImpl implements FBoardService {
 	}
 	
 
-	@Override
-	public int updateLike(int fBoard_Num) {
-		// TODO Auto-generated method stub
-		return mapper.updateLike(fBoard_Num);
-	}
 
-	@Override
-	public int insertLike(int fBoard_Num, String id) {
-		// TODO Auto-generated method stub
-		return mapper.insertLike(fBoard_Num, id);
-	}
-
-	@Transactional
-	public void updateInsertLike(int fBoard_Num,String id) {
-//		log.info("updateLike 	:"  + mapper.updateLike(fBoard_Num));
-//		log.info("insertLike	:"  + mapper.insertLike(fBoard_Num, id));
-		mapper.updateLike(fBoard_Num);
-		mapper.insertLike(fBoard_Num, id);
-	}
-
-	@Override
-	public int updateUnLike(int fBoard_Num) {
-		// TODO Auto-generated method stub
-		return mapper.updateUnLike(fBoard_Num);
-	}
-	@Override
-	public int deleteLike(int fBoard_Num, String id) {
-		// TODO Auto-generated method stub
-		return mapper.deleteLike(fBoard_Num, id);
-	}
-	
-	@Transactional
-	public void deleteUnlike(int FBOARD_NUM,String id) {
-		mapper.updateUnLike(FBOARD_NUM);
-		mapper.deleteLike(FBOARD_NUM, id);
-	}
-
-	@Override
-	public int getLikeCount(int fBoard_Num, String id) {
-		return mapper.getCountLike(fBoard_Num, id);
-	}
-
-	@Override
-	public void cntLike(int fBoard_Num) {
-		// TODO Auto-generated method stub
-		mapper.cntLike(fBoard_Num);
-		
-	}
-	
 
 	
 	

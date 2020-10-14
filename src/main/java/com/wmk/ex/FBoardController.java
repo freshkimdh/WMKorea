@@ -3,15 +3,11 @@ package com.wmk.ex;
 import java.security.Principal;
 import java.util.List;
 
-<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-=======
-import org.springframework.security.core.Authentication;
->>>>>>> SIYUN
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.FBoardService;
-
 import com.wmk.ex.vo.CommentListVO;
-
-import com.wmk.ex.vo.CustomUser;
-
 import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.FReplyVO;
 import com.wmk.ex.vo.UserVO;
@@ -58,22 +50,10 @@ public class FBoardController {
 		return "/free_board/boardList";
 	}
 	
-
 	//�Խ��� ����
 	@RequestMapping(value = "/free_contentView", method = RequestMethod.GET)
-	public String contentView(FBoardVO fboardVO, Model model, int fBoard_Num, Authentication authentication) throws Exception {
+	public String contentView(FBoardVO fboardVO, Model model, int fBoard_Num) throws Exception {
 		
-		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
-		if(loginInfo == null) {
-			// 로그인 안된사람은 좋아요 눌르지 못하니 false리턴
-			model.addAttribute("isSelectLike", false);
-		} else {
-			// 로그인 유저가 해당 게시글 좋아요 버튼 눌렀는지 알기 위해 해당 테이블 조회
-			int likeCount = service.getLikeCount(fboardVO.getfBoard_Num(), loginInfo.getUser().getId());
-			model.addAttribute("isSelectLike", likeCount > 0);
-
-		}
-        
 	   log.info("content_view...");
 	   model.addAttribute("contentView", service.getNum(fboardVO.getfBoard_Num()));
 	   model.addAttribute("list", service.getList());

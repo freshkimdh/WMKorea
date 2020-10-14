@@ -206,7 +206,6 @@
         <th>작성자</th>
         <th>제목</th>
         <th>조회수</th>
-        <th>둏아요</th>
         <th>등록일</th>
       </tr>
     </thead>
@@ -219,7 +218,6 @@
         <td align="center">${list.fId}</td>
         <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
         <td align="center">${list.fHit}</td>
-        <td align="center">${list.like_Cnt}</td>
         <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
       </tr>
 </c:forEach>

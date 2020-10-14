@@ -7,7 +7,9 @@
 	<!--게시판 목록  -->
 	<select id="getList" resultType="com.wmk.ex.vo.FBoardVO">
 	<![CDATA[ 
-		select * from FREE_BOARD
+		select 
+     		fBoard_Num, fId, fTitle, fContent, fDate, fHit, fGroup, fStep, fIndent
+	    from FREE_BOARD
 	    	order by fGroup desc, fStep asc
 	]]>
  	</select>
@@ -29,8 +31,8 @@
 
 	<!--게시판 작성-->
 	<insert id="writeBoard" >
-		insert into FREE_BOARD (fBoard_Num, fId, fTitle, fContent, fHit, fGroup, fStep, fIndent,like_cnt) 
-			values (free_board_seq.nextval, #{fId}, #{fTitle}, #{fContent}, 0, free_board_seq.currval, 0, 0,0)
+		insert into FREE_BOARD (fBoard_Num, fId, fTitle, fContent, fHit, fGroup, fStep, fIndent) 
+			values (free_board_seq.nextval, #{fId}, #{fTitle}, #{fContent}, 0, free_board_seq.currval, 0, 0)
 	</insert> 
 	
 	
@@ -62,7 +64,7 @@
 			SELECT * FROM (
 			     SELECT ROWNUM AS RNUM, A.* FROM (
 	               		select 
-	               			*
+	               			fBoard_Num, fId, fTitle, fContent, fDate, fHit, fGroup, fStep, fIndent
 					    from FREE_BOARD			       		
 							order by fGroup desc, fStep asc
 			    ) A WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -105,27 +107,6 @@
 	
 
 
-<!-- 	<update id="updateLike" parameterType="int">
-		update FREE_BOARD
-		set LIKE_CNT = LIKE_CNT + 1
-		where FBOARD_NUM = #{FBOARD_NUM}
-	</update>
-	<update id="updateHate" parameterType="int">
-		update FREE_BOARD
-		set HATE_CNT = HATE_CNT + 1
-		where FBOARD_NUM = #{FBOARD_NUM}
-	</update> -->
-	<!-- 
-	<update id="updateView">
-		update FREE_BOARD
-		set VIEW_CNT = VIEW_CNT + 1
-		where FBOARD_NUM = #{FBOARD_NUM}
-	</update>
- -->
- 	<!-- <insert id="insertLike" parameterType="int">
-	 	insert into likeTo( FBOARD_NUM, id)
-		values( #{FBOARD_NUM},#{id});
- 	</insert>
-	  -->
+	 
 
 </mapper>
