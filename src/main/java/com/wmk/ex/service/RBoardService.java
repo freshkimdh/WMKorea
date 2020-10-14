@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.vo.RBoardVO;
+import com.wmk.ex.vo.RReplyVO;
 
 
 
@@ -36,5 +37,13 @@ public interface RBoardService {
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 */
+	
+	//¥Ò±€ ∏Ò∑œ
+	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
+	
+	//¥Ò±€ ¿€º∫
+	public void registReply(RReplyVO reply) throws Exception;
+		
+	
 
 }

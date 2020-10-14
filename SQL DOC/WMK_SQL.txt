@@ -90,7 +90,7 @@ create table review_reply (
     repNum number not null,
     repCon varchar2(2000) not null,
     repDate date default sysdate,
-    primary key(fBoard_Num, repNum) 
+    primary key(rBoardNum, repNum) 
 );
 
 create sequence review_reply_seq;
@@ -103,5 +103,7 @@ alter table review_reply
     add constraint review_reply_rId foreign key(id)
     references wmk_users(id);
 
+--test
+insert into review_reply (rBoardNum, id, repNum, repCon) values (22, 'the3536', review_reply_seq.nextval, '테스트내용');
 
     

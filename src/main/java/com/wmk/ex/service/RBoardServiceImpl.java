@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.wmk.ex.mapper.RBoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.RBoardVO;
+import com.wmk.ex.vo.RReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -77,6 +78,24 @@ public class RBoardServiceImpl implements RBoardService {
 	public void deleterBoard(int rBoardNum) {
 		
 		rmapper.deleterBoard(rBoardNum);		
+	}
+	
+	
+	//瘩臂 格废
+	@Override
+	public List<RReplyVO> replyList(int rBoardNum) throws Exception {
+		
+		log.info("get replyList...");
+		
+		return rmapper.replyList(rBoardNum);
+	}
+	
+	//瘩臂 累己
+	@Override
+	public void registReply(RReplyVO reply) throws Exception {
+		
+		rmapper.registReply(reply);
+		
 	}
 	/*
 	//其捞隆 贸府

@@ -391,6 +391,42 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 <br>
 </div>
 
+<div id="reply">
+
+ <section class="replyForm">
+  <form role="form" method="post" autocomplete="off">
+  
+  <input type="hidden" name="rBoardNum" value="${rContentView.rBoardNum}">
+  
+   <div class="input_area">
+    <textarea name="repCon" id="repCon"></textarea>
+   </div>
+   
+   <div class="input_area">
+    <button type="submit" id="reply_btn">소감 남기기</button>
+   </div>
+   
+  </form>
+ </section>
+
+ 
+<section class="replyList">
+ <ol>
+ <c:forEach items="${reply}" var="reply">
+
+  <li>
+      <div class="userInfo">
+       <span class="id">${reply.id}</span>
+       <span class="date"><fmt:formatDate value="${reply.repDate}" pattern="yyyy-MM-dd" /></span>
+      </div>
+      <div class="replyContent">${reply.repCon}</div>
+    </li>
+   </c:forEach>
+  </ol>    
+</section>
+
+
+
 <p>
 
 <div class="jumbotron text-center" style="margin-bottom:0">

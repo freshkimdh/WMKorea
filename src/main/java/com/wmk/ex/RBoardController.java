@@ -17,11 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +32,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.service.RBoardService;
 import com.wmk.ex.vo.RBoardVO;
+import com.wmk.ex.vo.RReplyVO;
+import com.wmk.ex.vo.ReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -84,7 +89,7 @@ public class RBoardController {
 
 	//게시판 내용
 	@GetMapping("/review_contentView") 
-	public String reviewContentView(RBoardVO rboardVO, Model model, String area) {
+	public String reviewContentView(RBoardVO rboardVO, Model model, String area, int rBoardNum) throws Exception {
 		
 	   log.info("review_contentView...");
 	   System.out.println("rboardVO= " + rboardVO);
@@ -93,6 +98,9 @@ public class RBoardController {
 	   if(area != "") {
 		   model.addAttribute("area", area);
 	   }
+	   
+	   List<RReplyVO> reply = rservice.replyList(rBoardNum);
+	   model.addAttribute("reply", reply);
 	   
 	   return "/review_board/reviewContentView";
 	}
@@ -296,6 +304,43 @@ public class RBoardController {
         }
     }
 }
+	
+	
+	//댓글 작성
+	@RequestMapping(value = "/review_contentView", method = RequestMethod.POST)
+	public String registReply(RReplyVO reply) throws Exception {
+	 log.info("regist reply");
+	 
+	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+	 
+	 if (principal instanceof UserDetails) {
+	   String username = ((UserDetails)principal).getUsername();
+	   log.info(username);
+	   reply.setId(username);
+	   
+	 } else { 
+	   String username = principal.toString();
+	   
+	   
+	 }
+	 
+	 
+	 rservice.registReply(reply);
+	 
+	 log.info("성공");
+	 
+	 return "redirect:/review_contentView?rBoardNum=" + reply.getrBoardNum() + "&area=";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

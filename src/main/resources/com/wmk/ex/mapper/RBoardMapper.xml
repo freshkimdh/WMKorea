@@ -70,5 +70,20 @@
 	</insert>
 	
 	
+	<!--아래는 댓글 부분 -->
+	<!--댓글 목록  -->
+	<select id="replyList" resultType="com.wmk.ex.vo.RReplyVO">	
+	select rBoardNum, id, repNum, repCon, repDate
+	from review_reply 
+	where rBoardNum = #{rBoardNum}
+	</select>
+	
+	<!--댓글 작성 -->
+	<insert id="registReply">
+	insert into review_reply (rBoardNum, id, repNum, repCon)
+ 		values (#{rBoardNum}, #{id}, review_reply_seq.nextval, #{repCon})
+	</insert>
+	
+	
 
 </mapper>
