@@ -2,49 +2,77 @@ package com.wmk.ex.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.FReplyVO;
+
+import lombok.Delegate;
 
 
 public interface FBoardMapper {
 	
 	public List<FBoardVO> getList();
 
-	//°Ô½ÃÆÇ ¹øÈ£ get
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ get
 	public FBoardVO getNum(int fBoard_Num);
 	
 	//FBoardVO fid = UserVO id >> get id
 	public FBoardVO getfId(String fId);
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void writeBoard(FBoardVO fboardVO);
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateModify(FBoardVO fboardVO);
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteBoard(int fBoard_Num);
 	
-	//Á¶È¸¼ö
+	//ï¿½ï¿½È¸ï¿½ï¿½
 	public void addUphit(int fBoard_Num);
 	
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 	
 
-	//»óÇ° ´ñ±Û ÀÛ¼º
+
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void registReply(FReplyVO reply) throws Exception;
 	
-	//´ñ±Û ¸®½ºÆ®
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<FReplyVO> replyList(int fBoard_Num) throws Exception;
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteReply(FReplyVO reply) throws Exception;
 	
-	//¾ÆÀÌµð Ã¼Å©
+	//ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å©
 	public String replyUserIdCheck(int repNum) throws Exception;
 	
+
+	@Update("update FREE_BOARD set LIKE_CNT = LIKE_CNT + 1 where fBoard_Num = #{fBoard_Num}")
+	public int updateLike(int fBoard_Num);
+	@Insert("insert into likeTo(likeNo, fBoard_Num, id) values(like_to_seq.nextval, #{fBoard_Num},#{id})")
+	public int insertLike(@Param("fBoard_Num")int fBoard_Num,@Param("id")String id);
+	
+	@Select("select count(*) from likeTo where id = #{id} and fBoard_Num = #{fBoard_Num}")
+	public int getCountLike(@Param("fBoard_Num")int fBoard_Num,@Param("id")String id);
+	
+	
+	@Update("update FREE_BOARD set LIKE_CNT = 0 where fBoard_Num = #{fBoard_Num}")
+	public int updateUnLike (int fBoard_Num);
+	@Delete("Delete from likeTo where id = #{id} and fBoard_Num = #{fBoard_Num}")
+	public int deleteLike(@Param("fBoard_Num") int fBoard_Num, @Param("id") String id);
+	
+	@Select("select Like_CNT from FREE_BOARD where fBoard_Num = #{fBoard_Num}")
+	public void cntLike(int fBoard_Num);
+
 }

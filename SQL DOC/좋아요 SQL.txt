@@ -1,0 +1,40 @@
+
+자유게시판에 like_cnt 컬럼 추가 
+hate,view cnt는 필요없음
+
+create table FREE_BOARD
+(
+	FBOARD_NUM NUMBER(20) not null
+		primary key,
+	FID VARCHAR2(20) not null
+		references WMK_USERS,
+	FTITLE VARCHAR2(100) not null,
+	FCONTENT VARCHAR2(255),
+	FDATE DATE default SYSDATE,
+	FHIT NUMBER(10) default 0,
+	FGROUP NUMBER(4),
+	FSTEP NUMBER(4),
+	FINDENT NUMBER(4),
+	LIKE_CNT NUMBER default 0,
+	HATE_CNT NUMBER,
+	VIEW_CNT NUMBER
+)
+
+ 좋아요 테이블 생성
+ 
+create table LIKETO
+(
+	LIKENO NUMBER(5) not null
+		primary key,
+	FBOARD_NUM NUMBER(4)
+		references FREE_BOARD,
+	ID VARCHAR2(50) not null
+		references WMK_USERS,
+	LIKE_CHECK NUMBER(5) default 0
+)
+
+
+create sequence LIKE_TO_SEQ START WITH 1 INCREMENT BY 1 NOCACHE;
+
+
+

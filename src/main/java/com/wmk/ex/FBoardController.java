@@ -3,11 +3,15 @@ package com.wmk.ex;
 import java.security.Principal;
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+=======
+import org.springframework.security.core.Authentication;
+>>>>>>> SIYUN
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.FBoardService;
+
 import com.wmk.ex.vo.CommentListVO;
+
+import com.wmk.ex.vo.CustomUser;
+
 import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.FReplyVO;
 import com.wmk.ex.vo.UserVO;
@@ -34,7 +42,7 @@ public class FBoardController {
 	
 	private FBoardService service;
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/free_boardList")
 	public String boardList(FBoardVO fboardVO, Model model, Criteria cri) {
 		
@@ -50,10 +58,22 @@ public class FBoardController {
 		return "/free_board/boardList";
 	}
 	
-	//°Ô½ÃÆÇ ³»¿ë
+
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/free_contentView", method = RequestMethod.GET)
-	public String contentView(FBoardVO fboardVO, Model model, int fBoard_Num) throws Exception {
+	public String contentView(FBoardVO fboardVO, Model model, int fBoard_Num, Authentication authentication) throws Exception {
 		
+		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
+		if(loginInfo == null) {
+			// ë¡œê·¸ì¸ ì•ˆëœì‚¬ëžŒì€ ì¢‹ì•„ìš” ëˆŒë¥´ì§€ ëª»í•˜ë‹ˆ falseë¦¬í„´
+			model.addAttribute("isSelectLike", false);
+		} else {
+			// ë¡œê·¸ì¸ ìœ ì €ê°€ í•´ë‹¹ ê²Œì‹œê¸€ ì¢‹ì•„ìš” ë²„íŠ¼ ëˆŒë €ëŠ”ì§€ ì•Œê¸° ìœ„í•´ í•´ë‹¹ í…Œì´ë¸” ì¡°íšŒ
+			int likeCount = service.getLikeCount(fboardVO.getfBoard_Num(), loginInfo.getUser().getId());
+			model.addAttribute("isSelectLike", likeCount > 0);
+
+		}
+        
 	   log.info("content_view...");
 	   model.addAttribute("contentView", service.getNum(fboardVO.getfBoard_Num()));
 	   model.addAttribute("list", service.getList());
@@ -67,7 +87,7 @@ public class FBoardController {
 	  
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º view
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ view
 	@RequestMapping("/free_writeView")
 	public String writeView() {
 		
@@ -76,7 +96,7 @@ public class FBoardController {
 		return "/free_board/writeView";
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º 
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ 
 	@RequestMapping("/free_write")
 	public String write(FBoardVO fboardVO) throws Exception {
 		
@@ -86,7 +106,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/free_modifyView") 
 	public String modifyView(FBoardVO fboardVO, Model model) {
 	
@@ -96,7 +116,7 @@ public class FBoardController {
 		return "/free_board/modifyView";
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/free_modify")
 	public String modify(FBoardVO fboardVO) {
 		
@@ -106,7 +126,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/free_delete") 
 	public String delete(FBoardVO fboardVO) {
 		
@@ -117,32 +137,32 @@ public class FBoardController {
 	}
 	
 	
-//	// ´ñ±Û ÀÛ¼º
+//	// ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 //	@RequestMapping(value = "/free_contentView", method = RequestMethod.POST)
 //	public String registReply(FReplyVO reply) throws Exception {
 //	 log.info("regist reply...");
 //	 
 //	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //
-//	 if (principal instanceof UserDetails) { // ·Î±×ÀÎ ÇßÀ» °æ¿ì
+//	 if (principal instanceof UserDetails) { // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 //	   String username = ((UserDetails)principal).getUsername();
 //	   log.info(username);
 //	   reply.setId(username);
 //	   
-//	 } else { //·Î±×ÀÎ ¾ÈÇßÀ» °æ¿ì
+//	 } else { //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 //	   String username = principal.toString();
-//	   log.info("·Î±×ÀÎ ¾ÈÇØ¼­ ±×·¡¿ä. ·Î±×ÀÎ ÇÏ¼¼¿ä.");
+//	   log.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½×·ï¿½ï¿½ï¿½. ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½.");
 //	   
 //	 }
 //	 
 //	 service.registReply(reply);
 //	 
-//	 log.info("´ñ±Û ÀÔ·Â ¼º°ø");
+//	 log.info("ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 //	 
 //	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
 //	}
 	
-	// ´ñ±Û ÀÛ¼º/free_contentView/registReply
+	// ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½/free_contentView/registReply
 	@ResponseBody
 	@RequestMapping(value = "/free_contentView/registReply", method = RequestMethod.POST)
 	public void registReply(FReplyVO reply) throws Exception {
@@ -150,25 +170,25 @@ public class FBoardController {
 	 
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-	 if (principal instanceof UserDetails) { // ·Î±×ÀÎ ÇßÀ» °æ¿ì
+	 if (principal instanceof UserDetails) { // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	   String username = ((UserDetails)principal).getUsername();
 	   log.info(username);
 	   reply.setId(username);
 	   
-	 } else { //·Î±×ÀÎ ¾ÈÇßÀ» °æ¿ì
+	 } else { //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	   String username = principal.toString();
-	   log.info("·Î±×ÀÎ ¾ÈÇØ¼­ ±×·¡¿ä. ·Î±×ÀÎ ÇÏ¼¼¿ä.");
+	   log.info("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½×·ï¿½ï¿½ï¿½. ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½.");
 	   
 	 }
 	 
 	 service.registReply(reply);
 	 
-	 log.info("´ñ±Û ÀÔ·Â ¼º°ø");
+	 log.info("ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 	 
 	}
 	
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping("/free_contentView/replyList")
 	public List<FReplyVO> getReplyList(@RequestParam("n") int fBoard_Num) throws Exception {
@@ -180,7 +200,7 @@ public class FBoardController {
 	}
 	
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping(value = "/free_contentView/deleteReply", method = RequestMethod.POST)
 	public String getReplyList(FReplyVO reply, UserVO user, HttpSession session) throws Exception {
@@ -196,17 +216,17 @@ public class FBoardController {
 	 
 	 if(username.equals(userId)) {
 	  
-		 log.info("¼º°ø");
+		 log.info("ï¿½ï¿½ï¿½ï¿½");
 			 
 		 reply.setId(username); 
 		 service.deleteReply(reply);
 		  
 		 result = 1;
 		  
-		 log.info("if ¾È¿¡ °ª: " + result);
+		 log.info("if ï¿½È¿ï¿½ ï¿½ï¿½: " + result);
 	 }
 	 
-	 log.info("if ¹Û¿¡ °ª: " + result);
+	 log.info("if ï¿½Û¿ï¿½ ï¿½ï¿½: " + result);
 	 
 	 return String.valueOf(result);
 	 
