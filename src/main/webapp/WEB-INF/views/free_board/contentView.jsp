@@ -97,7 +97,7 @@
 
 
   <script> 
-  
+  //댓글 삭제
   function replyList() {
 	 var fBoard_Num = ${contentView.fBoard_Num};
 	 $.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
@@ -132,7 +132,7 @@
 	 });
   }
 	</script>
-
+	
 
 
 </head>
@@ -157,7 +157,7 @@
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-			<img src="img/main_logo2.png">
+			<a href="index"><img src="img/main_logo2.png"></a>
 		</div> <!-- tr -->
 		
 		<div class="col-sm-6" id="s2">
@@ -214,7 +214,7 @@
 			커뮤니티
 			</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="free_boardList">자유 게시판</a>
         	<a class="dropdown-item" href="areaIndex">여행후기 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
@@ -309,12 +309,14 @@
   <!-- <hr> -->
  
 <p align="right">
-<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">수정</a>
+<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
 <a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
 </p>
  
 <hr> <br>
 
+
+<button type="button" class="boardDelete" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
 
 
 
@@ -328,7 +330,7 @@
 
 
  <section class="replyForm">
-  <form role="form" method="post" autocomplete="off">
+  <form:form role="form" method="post">
   	<input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
   	
    <div class="input_area">
@@ -346,7 +348,7 @@
 	</sec:authorize>
    
    
-   
+   		
     	<script>
 		 $("#reply_btn").click(function(){
 		  
@@ -374,7 +376,7 @@
     
    </div>
    
-  </form>
+  </form:form>
  </section>
 
 <section class="replyList">
@@ -389,7 +391,8 @@
 	</script>
 	
 	<script>
-		 $(document).on("click", ".delete", function(){
+	//댓글 삭제
+		  $(document).on("click", ".delete", function(){
 		  
 		  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
 			 
@@ -420,6 +423,51 @@
 		}
 	});
 	</script>
+	
+	
+	<script>
+		//게시판 삭제
+		
+		$(document).on("click", ".boardDelete", function(){
+		  
+		  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+		
+		  if(deleteConfirm){
+			  
+			  var data = {fBoard_Num : $(this).attr("data-fBoard_Num")};
+			  
+			  
+			  $.ajax({
+				  url : "${pageContext.request.contextPath}/free_delete",
+				  type : "get",
+				  data : data,
+				  success : function(result){
+				   
+				   console.log("result: " + result);
+					
+				   console.log("data: " + data);
+				   
+				   if(result == 1) {
+					  window.location.href = "${pageContext.request.contextPath}/free_boardList";
+				   }
+				   
+				   if(result == 0) {
+				    alert("작성자 본인만 삭제 할 수 있습니다.");    
+				   }
+				  },
+				  error : function(){
+				   alert("로그인하셔야합니다.")
+				  }
+				});
+		 	 }
+		});
+		
+		</script>
+	
+	
+
+
+
 
 
 </section>
@@ -428,7 +476,25 @@
 
 
 <hr>
-<br> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%--<br> 
 
 <p align="right">
 <sec:authorize access="isAnonymous()">
@@ -460,8 +526,8 @@
 		<c:forEach items="${list}" var="list">
 		      <tr>
 		        <td align="center">${list.fBoard_Num}</td>
-		        <%-- <td align="center">잡담</td>
-		        <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach> --%>
+		        <td align="center">잡담</td>
+		        <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach>
 		        <td align="center">${list.fId}</td>
 		        <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
 		        <td align="center">${list.fHit}</td>
@@ -487,13 +553,18 @@
 
 	<ul class="pagination justify-content-center">
     	
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">Previous</a></li>
-    
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">1</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">2</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">3</a></li>
-    	<li class="page-item"><a class="page-link text-dark" href="javascript:void(0);">Next</a></li> <br>
-    
+    	<c:if test="${pageMaker.prev}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
+    	</c:if>
+    	
+    	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+    		<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    	</c:forEach>
+    	
+    	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
+    	</c:if>
  
 	</ul>
   
@@ -524,7 +595,7 @@
 
 </div>
 
-<br>
+<br> --%>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
 <p>Copyright © 2020 Wemade Korea All rights reserved</p>

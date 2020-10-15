@@ -37,19 +37,28 @@
 	
 	
 	<!--게시판 수정  -->
-	<insert id="updateModify" >
+	<update id="updateModify" >
 	<![CDATA[
 		update FREE_BOARD set fTitle = #{fTitle}, fContent = #{fContent} where fId = #{fId} and fBoard_Num = #{fBoard_Num}
 	]]>
-	</insert>
+	</update>
 	
 	
 	<!--게시판 삭제  -->
-	<insert id="deleteBoard" >
+	<delete id="deleteBoard" >
 	<![CDATA[
-		delete from FREE_BOARD where fBoard_Num = #{fBoard_Num}
+		delete FREE_BOARD where fBoard_Num = #{fBoard_Num} and fId = #{fId}
 	]]>
-	</insert>
+	</delete>
+
+	
+	<!-- 게시판 아이디 체크 -->
+	<select id="boardUserIdCheck" resultType="String">
+	<![CDATA[
+	 	select fId from free_board where fBoard_Num = #{fBoard_Num}
+	 ]]>
+	</select>
+	
 	
 	<!--조회수  -->
 	<insert id="addUphit" >
@@ -98,7 +107,7 @@
 	         and id = #{id}
 	</delete>
 	
-	<!-- 아이디 체크 -->
+	<!-- 댓글 아이디 체크 -->
 	<select id="replyUserIdCheck" resultType="String">
 	 select id
 	  from free_reply

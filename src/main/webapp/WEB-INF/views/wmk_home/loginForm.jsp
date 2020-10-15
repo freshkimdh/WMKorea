@@ -135,7 +135,7 @@
 
 
 <c:url value="/login" var="loginUrl" /> <!-- "/login" : 이 경로는 내가 만든 매핑이 아닌 스프링 시큐리티필터가 처리하는 전용매핑이다. -->
-<p>${loginUrl}</p>
+
 <form:form name="f" action="${loginUrl}" method="POST"> <!-- action 은 http://localhost:8282/ex/login 라는 절대경로를 의미.-->
     <c:if test="${param.error != null}">
         <p>아이디와 비밀번호가 잘못되었습니다.</p>

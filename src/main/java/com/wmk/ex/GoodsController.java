@@ -80,7 +80,7 @@ public class GoodsController {
 		
 		adminService.register(vo);
 		
-		return "redirect:/admin_goods/list";
+		return "redirect:/admin_goods/goods/list";
 	
 	}
 	

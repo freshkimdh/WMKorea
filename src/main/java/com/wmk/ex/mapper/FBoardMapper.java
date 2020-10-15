@@ -3,10 +3,10 @@ package com.wmk.ex.mapper;
 import java.util.List;
 
 import com.wmk.ex.page.Criteria;
+import com.wmk.ex.service.FBoardServiceImpl;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.FReplyVO;
-
 
 public interface FBoardMapper {
 	
@@ -25,7 +25,7 @@ public interface FBoardMapper {
 	public void updateModify(FBoardVO fboardVO);
 	
 	//게시판 삭제
-	public void deleteBoard(int fBoard_Num);
+	public void deleteBoard(FBoardVO fboardVO);
 	
 	//조회수
 	public void addUphit(int fBoard_Num);
@@ -44,7 +44,13 @@ public interface FBoardMapper {
 	//댓글 삭제
 	public void deleteReply(FReplyVO reply) throws Exception;
 	
-	//아이디 체크
+	//댓글 아이디 체크
 	public String replyUserIdCheck(int repNum) throws Exception;
+	
+	//게시판 아이디 체크
+	public String boardUserIdCheck(int fBoard_Num) throws Exception;
+	
+	
+	
 	
 }

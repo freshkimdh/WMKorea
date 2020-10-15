@@ -34,7 +34,7 @@ public class FBoardController {
 	
 	private FBoardService service;
 	
-	//�Խ��� ���
+	//占쌉쏙옙占쏙옙 占쏙옙占�
 	@RequestMapping("/free_boardList")
 	public String boardList(FBoardVO fboardVO, Model model, Criteria cri) {
 		
@@ -50,7 +50,7 @@ public class FBoardController {
 		return "/free_board/boardList";
 	}
 	
-	//�Խ��� ����
+	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping(value = "/free_contentView", method = RequestMethod.GET)
 	public String contentView(FBoardVO fboardVO, Model model, int fBoard_Num) throws Exception {
 		
@@ -67,7 +67,7 @@ public class FBoardController {
 	  
 	}
 	
-	//�Խ��� �ۼ� view
+	//占쌉쏙옙占쏙옙 占쌜쇽옙 view
 	@RequestMapping("/free_writeView")
 	public String writeView() {
 		
@@ -76,7 +76,7 @@ public class FBoardController {
 		return "/free_board/writeView";
 	}
 	
-	//�Խ��� �ۼ� 
+	//게시판 작성
 	@RequestMapping("/free_write")
 	public String write(FBoardVO fboardVO) throws Exception {
 		
@@ -86,7 +86,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//�Խ��� ����
+	//게시판 수정 작성
 	@GetMapping("/free_modifyView") 
 	public String modifyView(FBoardVO fboardVO, Model model) {
 	
@@ -96,53 +96,52 @@ public class FBoardController {
 		return "/free_board/modifyView";
 	}
 	
-	//�Խ��� ����
+	//게시판 수정 완료
 	@RequestMapping("/free_modify")
-	public String modify(FBoardVO fboardVO) {
+	public String modify(FBoardVO fboardVO, Model model) {
 		
-		log.info("free_modify...");
+		log.info("게시판 수정 완료...");
 		service.updateModify(fboardVO);
+		
+		//model.addAttribute("modifyView", service.getNum(fboardVO.getfBoard_Num()));
 		
 		return "redirect:free_boardList";
 	}
 	
-	//�Խ��� ����
+	//게시판 삭제
+	@ResponseBody
 	@GetMapping("/free_delete") 
-	public String delete(FBoardVO fboardVO) {
+	public String delete(FBoardVO fboardVO) throws Exception {
+		log.info("free_delete...");
 		
-	    log.info("free_delete...");
-	    service.deleteBoard(fboardVO.getfBoard_Num());
+		int result = 0;
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		String username = ((UserDetails)principal).getUsername();
+		log.info("username:" + username);
+		String userId = service.boardUserIdCheck(fboardVO.getfBoard_Num());
+		log.info("userid:" + userId);
+		
+		if(username.equals(userId)) {
+			 
+			 fboardVO.setfId(username); 
+			 service.deleteBoard(fboardVO);
+			  
+			 result = 1;
+			 
+			 log.info("삭제 성공");
+			 log.info(result);
+		 }
+		
+		log.info(result);
 	   
-	    return "redirect:free_boardList";
+		//return "redirect:free_boardList";
+		return String.valueOf(result);
+
 	}
 	
-	
-//	// ��� �ۼ�
-//	@RequestMapping(value = "/free_contentView", method = RequestMethod.POST)
-//	public String registReply(FReplyVO reply) throws Exception {
-//	 log.info("regist reply...");
-//	 
-//	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//	 if (principal instanceof UserDetails) { // �α��� ���� ���
-//	   String username = ((UserDetails)principal).getUsername();
-//	   log.info(username);
-//	   reply.setId(username);
-//	   
-//	 } else { //�α��� ������ ���
-//	   String username = principal.toString();
-//	   log.info("�α��� ���ؼ� �׷���. �α��� �ϼ���.");
-//	   
-//	 }
-//	 
-//	 service.registReply(reply);
-//	 
-//	 log.info("��� �Է� ����");
-//	 
-//	 return "redirect:/free_contentView?fBoard_Num=" + reply.getfBoard_Num();
-//	}
-	
-	// ��� �ۼ�/free_contentView/registReply
+	//댓글 등록
 	@ResponseBody
 	@RequestMapping(value = "/free_contentView/registReply", method = RequestMethod.POST)
 	public void registReply(FReplyVO reply) throws Exception {
@@ -150,25 +149,25 @@ public class FBoardController {
 	 
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-	 if (principal instanceof UserDetails) { // �α��� ���� ���
+	 if (principal instanceof UserDetails) { // user id 가져오기 성공
 	   String username = ((UserDetails)principal).getUsername();
-	   log.info(username);
+	   log.info("유저 id " + username);
 	   reply.setId(username);
 	   
-	 } else { //�α��� ������ ���
+	 } else { //user id 가져오기 실패
 	   String username = principal.toString();
-	   log.info("�α��� ���ؼ� �׷���. �α��� �ϼ���.");
+	   log.info("유저 id 가져오기 실패");
 	   
 	 }
 	 
 	 service.registReply(reply);
 	 
-	 log.info("��� �Է� ����");
+	 log.info("댓글 등록  메소드 실행 완료");
 	 
 	}
 	
 	
-	//��� ���
+	//댓글 목록
 	@ResponseBody
 	@RequestMapping("/free_contentView/replyList")
 	public List<FReplyVO> getReplyList(@RequestParam("n") int fBoard_Num) throws Exception {
@@ -180,10 +179,10 @@ public class FBoardController {
 	}
 	
 	
-	//��� ����
+	//댓글 삭제
 	@ResponseBody
 	@RequestMapping(value = "/free_contentView/deleteReply", method = RequestMethod.POST)
-	public String getReplyList(FReplyVO reply, UserVO user, HttpSession session) throws Exception {
+	public String getReplyList(FReplyVO reply) throws Exception {
 	 log.info("post delete reply");
 
 	 int result = 0;
@@ -191,22 +190,17 @@ public class FBoardController {
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	 
 	 String username = ((UserDetails)principal).getUsername();
+	 log.info("username id " + username);
 	 String userId = service.replyUserIdCheck(reply.getRepNum());
-	 log.info(userId);
+	 log.info("userId id " + userId);
 	 
 	 if(username.equals(userId)) {
-	  
-		 log.info("����");
 			 
 		 reply.setId(username); 
 		 service.deleteReply(reply);
 		  
 		 result = 1;
-		  
-		 log.info("if �ȿ� ��: " + result);
 	 }
-	 
-	 log.info("if �ۿ� ��: " + result);
 	 
 	 return String.valueOf(result);
 	 

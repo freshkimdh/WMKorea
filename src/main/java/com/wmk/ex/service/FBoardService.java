@@ -11,39 +11,43 @@ import com.wmk.ex.vo.FReplyVO;
 
 public interface FBoardService {
 	
-	//�Խ��� ���
+	//占쌉쏙옙占쏙옙 占쏙옙占�
 	public List<FBoardVO> getList();
 	
-	//�Խ��� get num
+	//占쌉쏙옙占쏙옙 get num
 	public FBoardVO getNum(int fBoard_Num);
 	
 	//FBoardVO fid = UserVO id >> get id
 	public FBoardVO getfId(String fId);
 	
-	//�Խ��� �ۼ�
+	//게시판 작성
 	public void writeBoard(FBoardVO fboardVO);
 	
-	//�Խ��� ����
+	//게시판 수정
 	public void updateModify(FBoardVO fboardVO);
 	
-	//�Խ��� ����
-	public void deleteBoard(int fBoard_Num);
+	//게시판 삭제 
+	public void deleteBoard(FBoardVO fboardVO);
 	
-	//����¡ ó��
+	
+	//占쏙옙占쏙옙징 처占쏙옙
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 	
 	
-	//��� �ۼ�
+	//占쏙옙占� 占쌜쇽옙
 	public void registReply(FReplyVO reply) throws Exception;
 	
-	//��� ����Ʈ
+	//占쏙옙占� 占쏙옙占쏙옙트
 	public List<FReplyVO> replyList(int fBoard_Num) throws Exception;
 	
-	//��� ����
+	//占쏙옙占� 占쏙옙占쏙옙
 	public void deleteReply(FReplyVO reply) throws Exception;
 	
-	//���̵� üũ
+	//댓글  id 체크
 	public String replyUserIdCheck(int repNum) throws Exception;
+	
+	//게시판 id 체크
+	public String boardUserIdCheck(int fBoard_Num) throws Exception;
 
 }
