@@ -317,7 +317,7 @@
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
 	      <h class="text-warning">★★★★★</h> (5) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
+	      <span class="badge  badge-pill badge-danger ">좋아요</span>${userList.like_Cnt}
 	      <span class="badge  badge-pill badge-success">분류</span> 관광지
 	    </div>
 	  </div>

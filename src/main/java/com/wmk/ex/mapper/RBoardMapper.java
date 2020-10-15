@@ -3,8 +3,15 @@ package com.wmk.ex.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.wmk.ex.page.Criteria;
+import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.FReplyVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
@@ -15,43 +22,60 @@ public interface RBoardMapper {
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
 
-	//°Ô½ÃÆÇ ¹øÈ£ get
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ get
 	public RBoardVO getrBoardNum(int rBoardNum);
 	
 	//RBoardVO rid = UserVO id >> get id
 	public RBoardVO getrId(String rId);
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void rWriteBoard(RBoardVO rboardVO);
 //	public void rWriteBoard(RBoardVO rboardVO , MultipartHttpServletRequest mpRequest);
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updaterModify(RBoardVO rboardVO);
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleterBoard(int rBoardNum);
 	
-	//Á¶È¸¼ö
+	//ï¿½ï¿½È¸ï¿½ï¿½
 	public void addUprHit(int rBoardNum);
 	
 	/*
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 	*/
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void registReply(RReplyVO reply) throws Exception;
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteReply(RReplyVO reply) throws Exception;
 	
-	//¾ÆÀÌµð Ã¼Å©
+	//ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å©
 	public String replyUserIdCheck(int repNum) throws Exception;
+	public List<FBoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
+	
+	@Update("update REVIEW_BOARD set LIKE_CNT = LIKE_CNT + 1 where RBOARDNUM = #{RBOARDNUM}")
+	public int updateLike(int rBoardNum);
+	@Insert("insert into likeTo(likeNo, RBOARDNUM, id) values(like_to_seq.nextval, #{RBOARDNUM},#{id})")
+	public int insertLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
+	
+	@Select("select count(*) from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
+	public int getCountLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
 	
 	
+	@Update("update REVIEW_BOARD set LIKE_CNT = LIKE_CNt -1 where RBOARDNUM = #{RBOARDNUM}")
+	public int updateUnLike (int rBoardNum);
+	@Delete("Delete from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
+	public int deleteLike(@Param("RBOARDNUM") int rBoardNum, @Param("id") String id);
+	
+	@Select("select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}")
+	public void cntLike(int rBoardNum);
 	
 }

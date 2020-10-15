@@ -292,6 +292,7 @@ function replyList() {
         <td>
         <p><span class="badge badge-pill badge-secondary">No</span> ${rContentView.rBoardNum}
         <span class="badge badge-pill badge-secondary">조회수</span> ${rContentView.rHit}
+        <span class="badge badge-pill badge-secondary">좋아요</span> ${rContentView.like_Cnt}
                 <span class="badge badge-pill badge-secondary">등록일 </span><%-- ${rContentView.rDate} --%> <fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
         </p>
         
@@ -362,9 +363,21 @@ function replyList() {
 <div class="container">
 <div align="center">
 <!-- <img src="img/travel_board_img/like_1.png" class="img-rounded img-fluid" id="like"> -->
+<sec:authorize access="isAuthenticated()">
+	        <div class="col-sm-2">
+	            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
+	                <button type="button" id="likeBtn" class="btn btn-info">&nbsp;
+	                    <span id="like"> &nbsp;</span>
+	                    <c:out value="${rContentView.like_Cnt}"/>
+	                </button>
+	            </div>
+	        </div>
+        </sec:authorize>
+<%-- 
 <img src="img/travel_board_img/like_1.png" width="70" onmouseover="this.src='img/travel_board_img/like_2.png'" 
 onmouseout="this.src='img/travel_board_img/like_2.png'">
-<h4 align="center"><strong>15</strong></h4>
+<h4 align="center"><strong>15</strong></h4> 
+--%>
 </div>
 
 <hr> <br>
@@ -561,6 +574,52 @@ $(document).on("click", ".delete", function(){
 </script>
 
 
+<script type="text/javascript">
+// 서버로 부터 초기값 세팅
+var boardNo = '${rContentView.rBoardNum}';
+console.log('${isSelectLike}');
+console.log("boardNo"+boardNo);
+// 처음에 유저가 좋아요 눌렀는지 판단 유무
+var isSelectLike = '${isSelectLike}';
+isSelectLike = isSelectLike === 'true';
+console.log("aaa"+isSelectLike);
+    $(document).ready(function () {
+    	var likeMessage = isSelectLike ? 'UnLike' : 'Like';
+    	$("#like").text(likeMessage);
+		
+        $("#likeBtn").on("click", function () {
+			// 좋아요 유무에 따른 좋아요, 좋아요 해제 호출 변경 처리
+        	var apiUrl = isSelectLike ? '/ex/commons/board/unlike/' : '/ex/commons/board/like/';
+           	console.log("api:"+apiUrl);
+        	$.ajax({
+                url : apiUrl + boardNo,
+                async: true,
+                type : "POST",
+                dataType : "text",
+                contentType: "application/json",
+                success: function(isSuccess) {
+                	$("#like").text();isSelectLike? "Like" : "UnLike" 
+                	isSelectLike = !isSelectLike;
+
+                	if(isSuccess){
+                        alert("성공");
+                    }else{
+                        alert("실패");
+                    }
+                },
+                error: function(err) {
+                	console.log(JSON.stringify(err));
+                     console.log("제발ㅡㅡ"+err); 
+                    alert("알수 없는 에러 발생 아 제발 ");
+                }
+            })
+        });
+    }) 
+                	
+                	
+                	
+                	
+</script>
 
 
 </div>

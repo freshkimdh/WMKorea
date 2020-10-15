@@ -4,10 +4,12 @@ package com.wmk.ex.service;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.mapper.RBoardMapper;
 import com.wmk.ex.page.Criteria;
+import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
 
@@ -21,20 +23,20 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	private RBoardMapper rmapper; 
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
 		return rmapper.getReviewList(rboardVO);
 	}
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
 		return rmapper.getReviewListAjax(rboardVO);
 	}
 	
-	//°Ô½ÃÆÇ ¹øÈ£ get
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ get
 	@Override
 	public RBoardVO getrBoardNum(int rBoardNum) {
 		RBoardVO rboardVO = rmapper.getrBoardNum(rBoardNum);
@@ -53,7 +55,7 @@ public class RBoardServiceImpl implements RBoardService {
 		return rboardVO;
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@Override
 	public void rWriteBoard(RBoardVO rboardVO) {
 //		public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) {
@@ -66,14 +68,14 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void updaterModify(RBoardVO rboardVO) {
 		
 		rmapper.updaterModify(rboardVO);	
 	}
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void deleterBoard(int rBoardNum) {
 		
@@ -81,7 +83,7 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 	
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<RReplyVO> replyList(int rBoardNum) throws Exception {
 		
@@ -90,7 +92,7 @@ public class RBoardServiceImpl implements RBoardService {
 		return rmapper.replyList(rBoardNum);
 	}
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@Override
 	public void registReply(RReplyVO reply) throws Exception {
 		
@@ -98,7 +100,7 @@ public class RBoardServiceImpl implements RBoardService {
 		
 	}
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void deleteReply(RReplyVO reply) throws Exception {
 		log.info("deleteReply...");
@@ -107,34 +109,82 @@ public class RBoardServiceImpl implements RBoardService {
 		
 	}
 	
-	//´ñ±Û ¾ÆÀÌµð È®ÀÎ
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ È®ï¿½ï¿½
 	@Override
 	public String replyUserIdCheck(int repNum) throws Exception {
 		log.info("idCheck...");
 		
 		return rmapper.replyUserIdCheck(repNum);
 	}
-	/*
-	//ÆäÀÌÂ¡ Ã³¸®
-	@Override
-	public int getTotalCount(Criteria cri) {
+	
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
+		@Override
+		public int getTotalCount(Criteria cri) {
+			
+			log.info("get total count...");
+			return rmapper.getTotalCount(cri);
+		}
+
 		
-		log.info("get total count...");
-		return mapper.getTotalCount(cri);
-	}
+		@Override
+		public List<FBoardVO> getListWithPaging(Criteria criteria) {
+			
+			log.info("get List with criteria"  + criteria);
+			return rmapper.getListWithPaging(criteria);
+		}
+
+		@Override
+		public int updateLike(int rBoardNum) {
+			// TODO Auto-generated method stub
+			return rmapper.updateLike(rBoardNum);
+		}
+
+		@Override
+		public int insertLike(int rBoardNum, String id) {
+			// TODO Auto-generated method stub
+			return rmapper.insertLike(rBoardNum, id);
+		}
+
+		@Transactional
+		public void updateInsertLike(int rBoardNum,String id) {
+			rmapper.updateLike(rBoardNum);
+			rmapper.insertLike(rBoardNum, id);
+		}
+
+		@Override
+		public int updateUnLike(int rBoardNum) {
+			// TODO Auto-generated method stub
+			return rmapper.updateUnLike(rBoardNum);
+		}
+		@Override
+		public int deleteLike(int rBoardNum, String id) {
+			// TODO Auto-generated method stub
+			return rmapper.deleteLike(rBoardNum, id);
+		}
+		
+		@Transactional
+		public void deleteUnlike(int rBoardNum,String id) {
+			rmapper.updateUnLike(rBoardNum);
+			rmapper.deleteLike(rBoardNum, id);
+		}
+
+		@Override
+		public int getLikeCount(int rBoardNum, String id) {
+			return rmapper.getCountLike(rBoardNum, id);
+		}
+
+		@Override
+		public void cntLike(int rBoardNum) {
+			// TODO Auto-generated method stub
+			rmapper.cntLike(rBoardNum);
+			
+		}
+		
+
+
 
 	
-	@Override
-	public List<FBoardVO> getListWithPaging(Criteria criteria) {
-		
-		log.info("get List with criteria"  + criteria);
-		return mapper.getListWithPaging(criteria);
-	}
-
-
-
 	
-	*/
 
 }
 

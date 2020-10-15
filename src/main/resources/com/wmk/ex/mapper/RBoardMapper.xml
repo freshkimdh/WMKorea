@@ -8,23 +8,21 @@
 	<select id="getReviewList" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
 	<![CDATA[ 
 		select 
-     		rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory
+			*
 	    from Review_BOARD
-	    	where rArea = #{rArea}
+	    	where rArea = #{rArea, jdbcType=VARCHAR}
 	    	order by rBoardNum desc
 	]]>
  	</select>
  	
  	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
 	<![CDATA[ 
-		select 
-     		rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory
-	    from Review_BOARD
-	    	where rCategory = #{rCategory}
-	    	and rArea =  #{rArea}
-	    	order by rBoardNum desc
+		select * from Review_BOARD
+		where rCategory = #{rCategory}
+	    and rArea =  #{rArea}
 	]]>
  	</select>
+<!-- 	    	order by rBoardNum desc -->
  	
  	
  	<!--게시판 번호-->
@@ -44,7 +42,7 @@
 	<!--게시판 작성-->
 	<insert id="rWriteBoard">
 		insert into Review_BOARD (rBoardNum, rId, rTitle, rInShort, rOpenTime, rArea, rAdress, rContent, rHit, rStep, rIndent, rCategory) 
-			values (review_board_seq.nextval, #{rId}, #{rTitle}, #{rInShort}, #{rOpenTime}, #{rArea}, #{rAdress}, #{rContent}, 0, 0, 0, #{rCategory})
+			values (review_board_seq.nextval, #{rId}, #{rTitle}, #{rInShort}, #{rOpenTime, jdbcType=VARCHAR}, #{rArea}, #{rAdress, jdbcType=VARCHAR}, #{rContent}, 0, 0, 0, #{rCategory})
 	</insert> 
 	
 	<!--게시판 수정  -->
@@ -97,6 +95,13 @@
 	  from review_reply
 	      where repNum = #{repNum}
 	</select>
+	
+		<select id="getTotalCount" resultType="int">
+		select count(*)	from Review_BOARD where rBoardNum > 0
+	</select>
+	
+	
+	
 	
 
 </mapper>

@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.wmk.ex.page.Criteria;
+import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
 
@@ -13,42 +15,58 @@ import com.wmk.ex.vo.RReplyVO;
 
 public interface RBoardService {
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
 	
-	//°Ô½ÃÆÇ get rBoardNum
+	//ï¿½Ô½ï¿½ï¿½ï¿½ get rBoardNum
 	public RBoardVO getrBoardNum(int rBoardNum);
 	
 	//RBoardVO rid = UserVO id >> get id
 	public RBoardVO getrId(String rId);
 	
-	//°Ô½ÃÆÇ ÀÛ¼º
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void rWriteBoard(RBoardVO rboardVO);
 	//public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest);
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updaterModify(RBoardVO rboardVO);
 	
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleterBoard(int rBoardNum);
 	/*
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 */
 	
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	public void registReply(RReplyVO reply) throws Exception;
 		
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteReply(RReplyVO reply) throws Exception;
 	
-	//¾ÆÀÌµð Ã¼Å©
+	//ï¿½ï¿½ï¿½Ìµï¿½ Ã¼Å©
 	public String replyUserIdCheck(int repNum) throws Exception;
+	
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
+	public List<FBoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
+		
+		
+	public int updateLike(int rBoardNum);
+	public int insertLike(int rBoardNum,String id);
+	public void updateInsertLike(int rBoardNum,String id);
+	public int updateUnLike(int rBoardNum);
+	public int deleteLike(int rBoardNum,String id);
+	public void deleteUnlike(int rBoardNum,String id);
+	public int getLikeCount(int rBoardNum,String id);
+	public void cntLike(int rBoardNum);
+		
 	
 
 }

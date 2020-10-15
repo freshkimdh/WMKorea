@@ -5,18 +5,18 @@ import java.util.Date;
 public class RBoardVO {
 	
 	/*
-	rBoard_Num NUMBER(20) not null PRIMARY KEY,  --°Ô½ÃÆÇ¹øÈ£
-   rId VARCHAR2(20) not null,                   --ÀÛ¼ºÀÚ
-   rTitle VARCHAR2(100) not null,              --±ÛÁ¦¸ñ
-   rInShort VARCHAR2(100),            --¿ä¾à
-   rContent VARCHAR2(255),           --±Û³»¿ë
-   rDate DATE DEFAULT SYSDATE,       --ÀÛ¼ºÀÏ
-   rOpenTime VARCHAR2(20),            --°³Àå½Ã°£
-   rArea VARCHAR2(20),                --Áö¿ª
-   rAdress VARCHAR2(50),              --ÁÖ¼Ò
-   rViews NUMBER(10) DEFAULT 0,       --Á¶È¸¼ö
-   rStep NUMBER(10),                  --´ñ±Û
-   rIndent NUMBER(10),                 --´ñ±Û
+	rBoard_Num NUMBER(20) not null PRIMARY KEY,  --ï¿½Ô½ï¿½ï¿½Ç¹ï¿½È£
+   rId VARCHAR2(20) not null,                   --ï¿½Û¼ï¿½ï¿½ï¿½
+   rTitle VARCHAR2(100) not null,              --ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   rInShort VARCHAR2(100),            --ï¿½ï¿½ï¿½
+   rContent VARCHAR2(255),           --ï¿½Û³ï¿½ï¿½ï¿½
+   rDate DATE DEFAULT SYSDATE,       --ï¿½Û¼ï¿½ï¿½ï¿½
+   rOpenTime VARCHAR2(20),            --ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
+   rArea VARCHAR2(20),                --ï¿½ï¿½ï¿½ï¿½
+   rAdress VARCHAR2(50),              --ï¿½Ö¼ï¿½
+   rViews NUMBER(10) DEFAULT 0,       --ï¿½ï¿½È¸ï¿½ï¿½
+   rStep NUMBER(10),                  --ï¿½ï¿½ï¿½
+   rIndent NUMBER(10),                 --ï¿½ï¿½ï¿½
    FOREIGN KEY (rId) REFERENCES wmk_users (id)
 );
 		*/
@@ -34,10 +34,11 @@ public class RBoardVO {
 	private int rStep;
 	private int rIndent;
 	private int rCategory;
+	private int Like_Cnt;
 	
-	public RBoardVO() {
-			
-		}
+
+	public RBoardVO(){}
+	
 
 	public int getrBoardNum() {
 		return rBoardNum;
@@ -143,6 +144,13 @@ public class RBoardVO {
 		this.rCategory = rCategory;
 	}
 
+	public int getLike_Cnt() {
+		return Like_Cnt;
+	}
+	
+	public void setLike_Cnt(int like_Cnt) {
+		Like_Cnt = like_Cnt;
+	}
 	
 	
 	@Override
@@ -150,7 +158,7 @@ public class RBoardVO {
 		return "RBoardVO [rBoardNum=" + rBoardNum + ", rId=" + rId + ", rTitle=" + rTitle + ", rInShort=" + rInShort
 				+ ", rContent=" + rContent + ", rDate=" + rDate + ", rOpenTime=" + rOpenTime + ", rArea=" + rArea
 				+ ", rAdress=" + rAdress + ", rHit=" + rHit + ", rStep=" + rStep + ", rIndent=" + rIndent
-				+ ", rCategory=" + rCategory + "]";
+				+ ", rCategory=" + rCategory + ", Like_Cnt=" + Like_Cnt +"]";
 	}
 	
 	

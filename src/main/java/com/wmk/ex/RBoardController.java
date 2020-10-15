@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,10 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.service.RBoardService;
-import com.wmk.ex.vo.FReplyVO;
+import com.wmk.ex.vo.CustomUser;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
 import com.wmk.ex.vo.ReplyVO;
@@ -48,7 +46,7 @@ public class RBoardController {
 	
 	private RBoardService rservice;
 	
-	//ÀüÁö¿ª ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/areaIndex")
 	public String areaList(RBoardVO rboardVO, Model model) {
 		
@@ -58,10 +56,10 @@ public class RBoardController {
 		return "/review_board/areaIndex";
 	}
 	
-	//°Ô½ÃÆÇ ¸ñ·Ï
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/review_boardList")
 	public String reviewList(RBoardVO rboardVO, Model model, String rArea) {
-		System.out.println("rArea´ä´ä´ä" + rArea);
+		System.out.println("rAreaï¿½ï¿½ï¿½ï¿½" + rArea);
 		log.info("review_boardList...");
 		model.addAttribute("rList", rservice.getReviewList(rboardVO));
 		model.addAttribute("rArea", rboardVO.getrArea());
@@ -70,7 +68,7 @@ public class RBoardController {
 		return "/review_board/userReviewList";
 	}
 	
-	  //°Ô½ÃÆÇ ¸ñ·Ï ajax
+	  //ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ajax
 	  @RequestMapping("/review_boardList_ajax") 
 	  @ResponseBody
 	  public List<RBoardVO> reviewListAjax(@RequestBody RBoardVO rboardVO, Model model) {
@@ -90,25 +88,38 @@ public class RBoardController {
 		return list ;
 	  }
 
-	//°Ô½ÃÆÇ ³»¿ë
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/review_contentView") 
-	public String reviewContentView(RBoardVO rboardVO, Model model, String area, int rBoardNum) throws Exception {
+	public String reviewContentView(RBoardVO rboardVO, Model model, String area, int rBoardNum,  Authentication authentication) throws Exception {
+		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
 		
-	   log.info("review_contentView...");
-	   System.out.println("rboardVO= " + rboardVO);
-	   System.out.println("¿ÀÀ×" + rservice.getrBoardNum(rboardVO.getrBoardNum()));
-	   model.addAttribute("rContentView", rservice.getrBoardNum(rboardVO.getrBoardNum()));
-	   if(area != "") {
-		   model.addAttribute("area", area);
-	   }
+		if(area != "") {
+			model.addAttribute("area", area);
+			log.info("Area!!!!!!!!!!!!!!!!!!!!");
+		}
+		model.addAttribute("list", rservice.getReviewList(rboardVO));
+		if(loginInfo == null) {
+			// ë¡œê·¸ì¸ ì•ˆëœì‚¬ëžŒì€ ì¢‹ì•„ìš” ëˆŒë¥´ì§€ ëª»í•˜ë‹ˆ falseë¦¬í„´
+			model.addAttribute("isSelectLike", false);
+		} else {
+			// ë¡œê·¸ì¸ ìœ ì €ê°€ í•´ë‹¹ ê²Œì‹œê¸€ ì¢‹ì•„ìš” ë²„íŠ¼ ëˆŒë €ëŠ”ì§€ ì•Œê¸° ìœ„í•´ í•´ë‹¹ í…Œì´ë¸” ì¡°íšŒ
+			int likeCount = rservice.getLikeCount(rboardVO.getrBoardNum(), loginInfo.getUser().getId());
+			log.info(likeCount);
+			model.addAttribute("isSelectLike", likeCount > 0);
+			
+		}
+		log.info("content_view...");
+		model.addAttribute("rContentView", rservice.getrBoardNum(rboardVO.getrBoardNum()));
+		log.info("CONTENTVIEW	:rservice.getrBoardNum(rboardVO.getrBoardNum())..??????");
+		
+		log.info("LIST		:rservice.getReviewList(rboardVO)))..??????");
+		
 	   
-//	   List<RReplyVO> reply = rservice.replyList(rBoardNum);
-//	   model.addAttribute("reply", reply);
 	   
-	   return "/review_board/reviewContentView";
+		return "/review_board/reviewContentView";
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º view
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ view
 	@RequestMapping("/review_writeView")
 	public String reviewWriteView(RBoardVO rboardVO ,Model model) {
 		
@@ -119,13 +130,13 @@ public class RBoardController {
 		return "/review_board/writeView";
 	}
 	
-	//°Ô½ÃÆÇ ÀÛ¼º 
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ 
 	@RequestMapping("/review_write")
 	public String write(RBoardVO rboardVO, String area) throws Exception {
 //		public String write(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception {
 		log.info("review_write...");
 		System.out.println("area="+ area);
-		System.out.println("´äÀº="+ rboardVO.toString());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½="+ rboardVO.toString());
 		//rservice.rWriteBoard(rboardVO, mpRequest);
 		rservice.rWriteBoard(rboardVO);
 		
@@ -133,7 +144,7 @@ public class RBoardController {
 		return "review_boardList?rArea="+ area;
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤ È­¸é
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
 	@GetMapping("/review_modifyView") 
 	public String reviewModifyView(RBoardVO rboardVO, Model model) {
 	
@@ -144,7 +155,7 @@ public class RBoardController {
 		return "/review_board/modifyView";
 	}
 	
-	//°Ô½ÃÆÇ ¼öÁ¤
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/review_modify")
 	public String reviewModify(RBoardVO rboardVO) {
 		
@@ -154,7 +165,7 @@ public class RBoardController {
 		return "redirect:review_boardList";
 	}
 
-	//°Ô½ÃÆÇ »èÁ¦
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/review_delete") 
 	public String reviewDelete(RBoardVO rboardVO) {
 		
@@ -163,18 +174,18 @@ public class RBoardController {
 	    RBoardVO getDetail = rservice.getrBoardNum(rboardVO.getrBoardNum());
 	    log.info("getDetail=" + rservice.getrBoardNum(rboardVO.getrBoardNum()));
 	    
-	    //rContent¸¦ °¡Á®¿Í¼­ ckeditor¿¡ ³Ö¾ú´ø °ªµéÀÇ ÀÌ¸§À» ºÐ¸®ÇÏ¿© ¹è¿­¿¡ ´ã´Â´Ù.
+	    //rContentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ckeditorï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½ï¿½Ï¿ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 	    String rContent = getDetail.getrContent();
 	    
 	    String[] rContArr = rContent.split("uid=|#");
 	    
 	    log.info("rContentArrLeng=" + + rContArr.length);
 	    
-	    //ÀÌ¹ÌÁö°¡ ¾øÀ» ¶§ ¹è¿­ÀÇ ±æÀÌ°¡ 1ÀÌ¾úÀ¸¹Ç·Î, 1º¸´Ù Å¬ °æ¿ì·Î if¹® ÀÛ¼ºÇÑ´Ù.
+	    //ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ 1ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, 1ï¿½ï¿½ï¿½ï¿½ Å¬ ï¿½ï¿½ï¿½ï¿½ ifï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ñ´ï¿½.
 	    if(rContArr.length > 1) {
 	    	for(int i=0; i<=rContArr.length-1; i++) {
 	    		if(i%2 != 0) {
-	    			//¿øÇÏ´Â ¹®ÀÚ »èÁ¦ ¹× º¯°æÀ» À§ÇÔ
+	    			//ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    			String realName= rContArr[i];
 	    			String realName2;
 	    			String realName3;
@@ -182,7 +193,7 @@ public class RBoardController {
 					realName3= realName2.replace("fileName=", "_");
 					log.info("realName3=" + realName3);
 					
-					//ÀÌ¹ÌÁö »èÁ¦ °¡´ÉÇÑ ¹æ¹ý
+					//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 					File existFile = new File( "C:\\Review\\" + "ckImage/" + realName3); 
 					if(existFile.exists()){
 						existFile.delete(); 
@@ -197,29 +208,29 @@ public class RBoardController {
 	    return "redirect:review_boardList";
 	}
 
-	//ckeditor ÀÌ¹ÌÁö ¾÷·Îµå
+	//ckeditor ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 	@RequestMapping("/img/imageUpload.do")
     public void imageUpload(HttpServletRequest request,
             HttpServletResponse response, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
         
-		// ·£´ý ¹®ÀÚ »ý¼º
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         UUID uid = UUID.randomUUID();
         OutputStream out = null;
         PrintWriter printWriter = null;
         
-        //ÀÎÄÚµù
+        //ï¿½ï¿½ï¿½Úµï¿½
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         
         try{
             
-            //ÆÄÀÏ ÀÌ¸§ °¡Á®¿À±â
-            String fileName = upload.getOriginalFilename(); //¾÷·ÎµåÇÑ ¿À¸®Áö³Î ÆÄÀÏ ³×ÀÓÀ» ±¸ÇÑ´Ù.
-            byte[] bytes = upload.getBytes(); //¾÷·ÎµåÇÑ ÆÄÀÏ µ¥ÀÌÅÍ¸¦ ±¸ÇÑ´Ù.
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            String fileName = upload.getOriginalFilename(); //ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
+            byte[] bytes = upload.getBytes(); //ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
             
         	
-            //ÀÌ¹ÌÁö °æ·Î »ý¼º
+            //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             String path = "C:\\Review\\" + "ckImage/";
 
             String ckUploadPath = path + uid + "_" + fileName;
@@ -227,10 +238,10 @@ public class RBoardController {
            
             
             
-            //ÇØ´ç µð·ºÅä¸® È®ÀÎ(µð·ºÅä¸®°¡ ¾øÀ» °æ¿ì »ý¼ºÇØÁØ´Ù.)
+            //ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ä¸® È®ï¿½ï¿½(ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.)
             if(!folder.exists()){
                 try{
-                    folder.mkdirs(); // µð·ºÅä¸® »ý¼º
+                    folder.mkdirs(); // ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½
                 }catch(Exception e){
                     e.getStackTrace();
                 }
@@ -238,15 +249,15 @@ public class RBoardController {
             
             out = new FileOutputStream(new File(ckUploadPath));
             out.write(bytes);
-            out.flush(); // outputStram¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ°í ÃÊ±âÈ­
+            out.flush(); // outputStramï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ê±ï¿½È­
             
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
-            String fileUrl = "/ex/img/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName+ "&#";  // ÀÛ¼ºÈ­¸é
+            String fileUrl = "/ex/img/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName+ "&#";  // ï¿½Û¼ï¿½È­ï¿½ï¿½
         
-            // ¾÷·Îµå½Ã ¸Þ½ÃÁö Ãâ·Â
+            // ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-            printWriter.flush(); //ÇöÀç ¹öÆÛ¿¡ ÀúÀåµÇ¾î ÀÖ´Â ³»¿ëÀ» Å¬¶óÀÌ¾ðÆ®·Î Àü¼ÛÇÏ°í ¹öÆÛ¸¦ ºñ¿î´Ù. (JSP)
+            printWriter.flush(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½. (JSP)
 
         }catch(IOException e){
             e.printStackTrace();
@@ -266,14 +277,14 @@ public class RBoardController {
                             , HttpServletRequest request, HttpServletResponse response)
                             		throws ServletException, IOException{
         
-	//¼­¹ö¿¡ ÀúÀåµÈ ÀÌ¹ÌÁö °æ·Î
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	String path = "C:\\Review\\" + "ckImage/";
    
     String sDirPath = path + uid + "_" + fileName;
 	
     File imgFile = new File(sDirPath);
     
-    //»çÁø ÀÌ¹ÌÁö Ã£Áö ¸øÇÏ´Â °æ¿ì ¿¹¿ÜÃ³¸®·Î ºó ÀÌ¹ÌÁö ÆÄÀÏÀ» ¼³Á¤ÇÑ´Ù.
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
     if(imgFile.isFile()){
         byte[] buf = new byte[1024];
         int readByte = 0;
@@ -309,7 +320,7 @@ public class RBoardController {
 }
 	
 	
-	//´ñ±Û ÀÛ¼º
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@ResponseBody
 	@RequestMapping(value = "/review_contentView/registReply", method = RequestMethod.POST)
 	public void registReply(RReplyVO reply) throws Exception {
@@ -332,13 +343,13 @@ public class RBoardController {
 	 
 	 rservice.registReply(reply);
 	 
-	 log.info("¼º°ø");
+	 log.info("ï¿½ï¿½ï¿½ï¿½");
 	 
 	 //return "redirect:/review_contentView?rBoardNum=" + reply.getrBoardNum() + "&area=";
 	}
 	
 	
-	// »óÇ° ¼Ò°¨(´ñ±Û) ¸ñ·Ï
+	// ï¿½ï¿½Ç° ï¿½Ò°ï¿½(ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½
 	@ResponseBody
 	@RequestMapping("/review_contentView/replyList")
 	public List<RReplyVO> getReplyList(@RequestParam("n") int rBoardNum) throws Exception {
@@ -364,17 +375,17 @@ public class RBoardController {
 	 
 	 if(username.equals(userId)) {
 	  
-		 log.info("¼º°ø");
+		 log.info("ï¿½ï¿½ï¿½ï¿½");
 			 
 		 reply.setId(username); 
 		 rservice.deleteReply(reply);
 		  
 		 result = 1;
 		  
-		 log.info("if ¹® ¾È¿¡: " + result);
+		 log.info("if ï¿½ï¿½ ï¿½È¿ï¿½: " + result);
 	 }
 	 
-	 log.info("if ¹® ¹Û¿¡: " + result);
+	 log.info("if ï¿½ï¿½ ï¿½Û¿ï¿½: " + result);
 	 
 	 return String.valueOf(result);
 	 
