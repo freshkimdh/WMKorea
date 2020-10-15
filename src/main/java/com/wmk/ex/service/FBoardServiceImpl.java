@@ -18,7 +18,7 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	private FBoardMapper mapper; 
 	
-	//�Խ��� ���
+	//占쌉쏙옙占쏙옙 占쏙옙占�
 	@Override
 	public List<FBoardVO> getList() {
 		log.info("getList..."); 
@@ -26,7 +26,7 @@ public class FBoardServiceImpl implements FBoardService {
 		return mapper.getList();
 	}
 	
-	//�Խ��� ��ȣ get
+	//게시판 번호 get
 	@Override
 	public FBoardVO getNum(int fBoard_Num) {
 		FBoardVO fboardVO = mapper.getNum(fBoard_Num);
@@ -46,7 +46,7 @@ public class FBoardServiceImpl implements FBoardService {
 	}	
 	
 	
-	//�Խ��� �ۼ�
+	//占쌉쏙옙占쏙옙 占쌜쇽옙
 	@Override
 	public void writeBoard(FBoardVO fboardVO) {
 		
@@ -55,21 +55,23 @@ public class FBoardServiceImpl implements FBoardService {
 		mapper.writeBoard(fboardVO);		
 	}
 	
-	//�Խ��� ����
+	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
 	@Override
 	public void updateModify(FBoardVO fboardVO) {
 		
 		mapper.updateModify(fboardVO);	
 	}
 	
-	//�Խ��� ����
+	
+	//게시판 삭제 
 	@Override
-	public void deleteBoard(int fBoard_Num) {
+	public void deleteBoard(FBoardVO fboardVO) {
 		
-		mapper.deleteBoard(fBoard_Num);		
+		mapper.deleteBoard(fboardVO);	
+		
 	}
 	
-	//����¡ ó��
+	//占쏙옙占쏙옙징 처占쏙옙
 	@Override
 	public int getTotalCount(Criteria cri) {
 		
@@ -86,14 +88,14 @@ public class FBoardServiceImpl implements FBoardService {
 	}
 	
 	
-	//��� �ۼ�
+	//占쏙옙占� 占쌜쇽옙
 	@Override
 	public void registReply(FReplyVO reply) throws Exception {
 		mapper.registReply(reply);
 		
 	}
 	
-	//��� ���
+	//占쏙옙占� 占쏙옙占�
 	@Override
 	public List<FReplyVO> replyList(int fBoard_Num) throws Exception {
 		
@@ -115,8 +117,23 @@ public class FBoardServiceImpl implements FBoardService {
 	public String replyUserIdCheck(int repNum) throws Exception {
 		
 		log.info("idCheck...");
+		log.info("replyUserIdCheck " + repNum);
+		log.info("replyUserIdCheck: " + mapper.replyUserIdCheck(repNum));
 		
 		return mapper.replyUserIdCheck(repNum);
+	}
+	
+	//게시판 id 체크
+	@Override
+	public String boardUserIdCheck(int fBoard_Num) throws Exception {
+		
+		log.info("board idCheck...");
+		log.info(mapper.boardUserIdCheck(fBoard_Num));
+		log.info(fBoard_Num);
+		
+		//log.info(mapper.getNum(fId));
+		
+		return mapper.boardUserIdCheck(fBoard_Num);
 	}
 	
 
