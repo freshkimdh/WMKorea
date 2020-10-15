@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -33,39 +33,44 @@
 
 	<div class="container">
 		<img class="mx-auto d-block" src="goods/profile.png" width="150"><br>
-		<h3 align="center"> 김대환 님의 주문이 완료되었습니니다.</h3>
+		<h3 align="center"> <sec:authentication property="principal.user.nickname"/> 님의 주문이 완료되었습니니다.</h3>
 		<p align="center">자세한 주문내역은 마이페이지에서 조회하실 수 있습니다.</p>
 		
 		<br>
 		
 <%-- 		<h5><strong>주문 정보</strong></h5> --%>
 		
-		<form action="">
+
 		
 		  <table class="table">
-
-		    <tbody>
-		    
-		      <tr align="center">
+		  
+		  <tr align="center">
+		      
 		        <td><strong>주문 번호</strong></td>
 		        <td><strong>총 결제 금액</strong></td>
 
-		      </tr>		    
+		  </tr>	
+
+		    <tbody>	    
 		    
-		    
+<c:forEach items="${orderList}" var="orderList" varStatus="last">		    
 		      <tr align="center">
-		        <td>2020-10-08</td>
-		        <td>15000원</td>
+
+ 		        <td>${orderList.orderId}</td>
+		        <td>${orderList.amount} 원</td>
+
 		      </tr>
-		    
+</c:forEach>		    
 		    </tbody>
 		    
 		  </table>
 		  
 		  
+		  
+		  
 			<br>
 			
-					  <table class="table">
+			<table class="table">
 
 		    <tbody>
 		    
@@ -110,7 +115,7 @@
 	<br>
 	<p align="center">
 	<a href="" class="btn btn-dark btn-lg" role="button">쇼핑 계속하기</a>
-	<a href="goodsIndex2" class="btn btn-dark btn-lg" role="button">주문내역 보기</a>
+	<a href="orderList" class="btn btn-dark btn-lg" role="button">주문내역 보기</a>
 	</p>
 	  
 	</form>

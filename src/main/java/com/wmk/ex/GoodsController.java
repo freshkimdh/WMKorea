@@ -221,21 +221,21 @@ public class GoodsController {
 
 	}
 	
-	@GetMapping("/goodsOrder") 
+/*	@GetMapping("/goodsOrder") 
 	public String goodsOrder(Model model) {
 		
 		log.info("goodsOrder");
 		return "/wmk_goods/goodsOrder";
 
-	}
+	} */
 	
-	@GetMapping("/goodsOrderComplete") 
+/*	@GetMapping("/goodsOrderComplete") 
 	public String goodsOrderComplete(Model model) {
 		
 		log.info("/goodsOrderComplete");
 		return "/wmk_goods/goodsOrderComplete";
 
-	}
+	} */
 	
 	
 	

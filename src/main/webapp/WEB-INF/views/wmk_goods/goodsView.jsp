@@ -356,7 +356,7 @@
 			
 			
 			
-			<p>배송: 주문시 결제 (2,500원)</p>
+			<p>배송비: 회원 무료</p>
 			
 		<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->	
 		
@@ -368,8 +368,45 @@
 
 		<sec:authorize access="isAuthenticated()">			
 			
-			<a href="goodsOrder" class="btn btn-dark" role="button">구매하기</a>
+			<a href="goodsOrder" class="btn btn-dark addCart_btn2" role="button">구매하기</a>
+				<script>
+				  $(".addCart_btn2").click(function(){
+				   var gdsNum = $("#gdsNum").val();
+				   var gdsColor = $("#gdsColor").val();
+				   var gdsSize = $("#gdsSize").val();
+				   var gdsText = $("#gdsText").val(); 
+				   var cartStock = $(".numBox").val();
+				   
+				      
+				   var data = {
+				     gdsNum : gdsNum,
+				     gdsColor : gdsColor,
+				     gdsSize : gdsSize,
+				     gdsText : gdsText,
+				     cartStock : cartStock
+				     };
+				   			   
+				   
+				   $.ajax({
+				    url : "${pageContext.request.contextPath}/addCart",
+				    type : "post",
+				    data : data,
+				    success : function(result){
 
+							
+						$(".numBox").val("1");
+						location.href = "${pageContext.request.contextPath}/goodsOrder";
+					    
+						},
+						
+				    error : function(){
+				     alert("카트 담기 실패");
+				    }
+				   }); /* ajax end */
+				   		   
+				   
+				  }); /* click function end */
+				 </script>
 			
 
 				 <button type="button" class="btn btn-dark addCart_btn">카트에 담기</button>
