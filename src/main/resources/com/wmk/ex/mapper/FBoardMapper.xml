@@ -37,11 +37,11 @@
 	
 	
 	<!--게시판 수정  -->
-	<insert id="updateModify" >
+	<update id="updateModify" >
 	<![CDATA[
 		update FREE_BOARD set fTitle = #{fTitle}, fContent = #{fContent} where fId = #{fId} and fBoard_Num = #{fBoard_Num}
 	]]>
-	</insert>
+	</update>
 	
 	
 	<!--게시판 삭제  -->

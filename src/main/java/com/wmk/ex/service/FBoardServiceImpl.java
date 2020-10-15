@@ -55,7 +55,7 @@ public class FBoardServiceImpl implements FBoardService {
 		mapper.writeBoard(fboardVO);		
 	}
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
+	//게시판 수정
 	@Override
 	public void updateModify(FBoardVO fboardVO) {
 		

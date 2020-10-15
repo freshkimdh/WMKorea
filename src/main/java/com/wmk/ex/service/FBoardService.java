@@ -23,10 +23,10 @@ public interface FBoardService {
 	//게시판 작성
 	public void writeBoard(FBoardVO fboardVO);
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
+	//게시판 수정
 	public void updateModify(FBoardVO fboardVO);
 	
-	//게시판 삭제 2
+	//게시판 삭제 
 	public void deleteBoard(FBoardVO fboardVO);
 	
 	

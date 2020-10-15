@@ -157,7 +157,7 @@
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-			<img src="img/main_logo2.png">
+			<a href="index"><img src="img/main_logo2.png"></a>
 		</div> <!-- tr -->
 		
 		<div class="col-sm-6" id="s2">
@@ -214,7 +214,7 @@
 			커뮤니티
 			</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="free_boardList">자유 게시판</a>
         	<a class="dropdown-item" href="areaIndex">여행후기 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
@@ -330,7 +330,7 @@
 
 
  <section class="replyForm">
-  <form role="form" method="post" autocomplete="off">
+  <form:form role="form" method="post">
   	<input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
   	
    <div class="input_area">
@@ -376,7 +376,7 @@
     
    </div>
    
-  </form>
+  </form:form>
  </section>
 
 <section class="replyList">

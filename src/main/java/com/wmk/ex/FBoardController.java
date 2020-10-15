@@ -86,7 +86,7 @@ public class FBoardController {
 		return "redirect:free_boardList";
 	}
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
+	//게시판 수정 작성
 	@GetMapping("/free_modifyView") 
 	public String modifyView(FBoardVO fboardVO, Model model) {
 	
@@ -96,12 +96,14 @@ public class FBoardController {
 		return "/free_board/modifyView";
 	}
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占쏙옙
+	//게시판 수정 완료
 	@RequestMapping("/free_modify")
-	public String modify(FBoardVO fboardVO) {
+	public String modify(FBoardVO fboardVO, Model model) {
 		
-		log.info("free_modify...");
+		log.info("게시판 수정 완료...");
 		service.updateModify(fboardVO);
+		
+		//model.addAttribute("modifyView", service.getNum(fboardVO.getfBoard_Num()));
 		
 		return "redirect:free_boardList";
 	}
