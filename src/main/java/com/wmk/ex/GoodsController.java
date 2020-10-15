@@ -229,13 +229,13 @@ public class GoodsController {
 
 	} */
 	
-	@GetMapping("/goodsOrderComplete") 
+/*	@GetMapping("/goodsOrderComplete") 
 	public String goodsOrderComplete(Model model) {
 		
 		log.info("/goodsOrderComplete");
 		return "/wmk_goods/goodsOrderComplete";
 
-	}
+	} */
 	
 	
 	

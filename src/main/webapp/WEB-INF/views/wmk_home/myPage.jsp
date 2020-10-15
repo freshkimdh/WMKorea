@@ -134,8 +134,73 @@
 <p>
 <p align="center" class="display-3" id="login_f">My Page</p> 
 
+	<div class="container">
+	
+<div class="container" id="menu">
+
+  <div class="row">
+  
+   	<div class="col-sm-1">
+  	</div>
+  
+  	
+  	<div class="col-sm-10" align="center">
+		<!-- Group button details-->
+		<div class="btn-group btn-group btn-block">
+			<a href="userModify" class="btn btn-secondary" role="button">회원정보 수정</a>
+			<!-- <a href="#" class="btn btn-secondary" role="button">프로필 사진 등록</a> -->
+			<a href="userPwModify" class="btn btn-secondary" role="button">비밀번호 수정</a>
+			<a href="cartList" class="btn btn-secondary" role="button">장바구니 보기</a>
+		    <a href="orderList" class="btn btn-secondary" role="button">주문내역 보기</a>
+		    <a href="userDeleteView" class="btn btn-secondary" role="button">회원 탈퇴</a>
+		</div>  	
+  	</div>
+  	
+   	<div class="col-sm-1">
+  	</div>
+  
+  </div>
+  
+<br>  
+</div> 
+
+		<!-- <img class="mx-auto d-block" src="goods/profile.png" width="150"><br> -->
+		<img class="mx-auto d-block" src="img/avatar2.jpg" width="150"> <br>
+<p align="center"><button type="button" class="btn btn-danger btn-sm">프로필 사진 등록</button></p>
+		<h3 align="center"> <sec:authentication property="principal.user.nickname"/> 님의 마이페이지 입니다.</h3>
+		<p align="center">원하시는 정보를 조회 및 수정해주세요.</p>
+	</div>
 
 <div class="container">
+     
+  <table class="table">
+    <thead align="center">
+      <tr>
+        <th>ID</th>
+        <th>Membership</th>
+        <th>Email</th>
+        <th>Nationallity</th>
+      </tr>
+    </thead>
+    <tbody align="center">
+      <tr>
+        <td><sec:authentication property="principal.user.id"/></td>
+        <td>일반 회원</td>
+        <td><sec:authentication property="principal.user.email"/></td>
+        <td><sec:authentication property="principal.user.nationality"/></td>
+      </tr>
+      <tr>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<%-- <div class="container">
 	<div class="row">
 	
 	<div class="col-sm-2"></div>
@@ -145,7 +210,7 @@
 <h1>마이페이지입니다.</h1>
 
 <p>principal: <sec:authentication property="principal"/></p>
-<p>UserVO: <sec:authentication property="principal.user"/></p> <!-- principal 에 emp 다는게 목적이었다. -->
+<p>UserVO: <sec:authentication property="principal.user"/></p> 
 <p>유저 아이디: <sec:authentication property="principal.user.id"/></p>
 <p>유저 비밀번호: <sec:authentication property="principal.user.pw"/></p>
 <p>유저 이메일: <sec:authentication property="principal.user.email"/></p>
@@ -156,6 +221,9 @@
 <h3>[<a href="<c:url value="/userModify" />">회원정보 수정</a>]</h3>
 <h3>[<a href="<c:url value="/userDeleteView" />">회원탈퇴</a>]</h3>
 
+<h3>[<a href="<c:url value="/cartList" />">장바구니 보기</a>]</h3>
+<h3>[<a href="<c:url value="/orderList" />">주문내역보기</a>]</h3>
+
 
   
   	</div>
@@ -163,7 +231,7 @@
   	<div class="col-sm-2"></div>
 	</div>
 </div>
-
+ --%>
 
 
 <br><br>

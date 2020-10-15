@@ -128,7 +128,7 @@
 		  
 			<br>
 			
-			<h5><strong>결제방법 선택</strong></h5>
+		<h5><strong>결제방법 선택</strong></h5>
 		  <table class="table">
 
 		    <tbody>
