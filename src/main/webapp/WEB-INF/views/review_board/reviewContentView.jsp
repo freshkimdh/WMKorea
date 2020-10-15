@@ -577,6 +577,7 @@ $(document).on("click", ".delete", function(){
 <script type="text/javascript">
 // 서버로 부터 초기값 세팅
 var boardNo = '${rContentView.rBoardNum}';
+
 console.log('${isSelectLike}');
 console.log("boardNo"+boardNo);
 // 처음에 유저가 좋아요 눌렀는지 판단 유무
@@ -602,9 +603,11 @@ console.log("aaa"+isSelectLike);
                 	isSelectLike = !isSelectLike;
 
                 	if(isSuccess){
-                        alert("성공");
+                     /*   alert("성공"); */
+                       location.reload(true);
                     }else{
-                        alert("실패");
+                      /*  alert("실패"); */
+                       location.reload(true);
                     }
                 },
                 error: function(err) {
