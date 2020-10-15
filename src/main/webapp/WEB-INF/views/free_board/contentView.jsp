@@ -97,7 +97,7 @@
 
 
   <script> 
-  
+  //댓글 삭제
   function replyList() {
 	 var fBoard_Num = ${contentView.fBoard_Num};
 	 $.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
@@ -133,7 +133,6 @@
   }
 	</script>
 	
-
 
 
 </head>
@@ -317,6 +316,8 @@
 <hr> <br>
 
 
+<button type="button" class="boardDelete" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
+
 
 
 <!-- 댓글 작성 -->
@@ -347,7 +348,7 @@
 	</sec:authorize>
    
    
-   
+   		
     	<script>
 		 $("#reply_btn").click(function(){
 		  
@@ -391,11 +392,11 @@
 	
 	<script>
 	//댓글 삭제
-		 $(document).on("click", ".delete", function(){
+		  $(document).on("click", ".delete", function(){
 		  
 		  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
 			 
- 		  if(deleteConfirm){
+		  if(deleteConfirm){
 		  
 		  var data = {repNum : $(this).attr("data-repNum")};
 		  
@@ -422,7 +423,46 @@
 		}
 	});
 	</script>
-
+	
+	
+	<script>
+		//게시판 삭제
+		
+		$(document).on("click", ".boardDelete", function(){
+		  
+		  var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+		
+		  if(deleteConfirm){
+			  
+			  var data = {fBoard_Num : $(this).attr("data-fBoard_Num")};
+			  
+			  
+			  $.ajax({
+				  url : "${pageContext.request.contextPath}/free_delete",
+				  type : "get",
+				  data : data,
+				  success : function(result){
+				   
+				   console.log("result: " + result);
+					
+				   console.log("data: " + data);
+				   
+				   if(result == 1) {
+					  window.location.href = "${pageContext.request.contextPath}/free_boardList";
+				   }
+				   
+				   if(result == 0) {
+				    alert("작성자 본인만 삭제 할 수 있습니다.");    
+				   }
+				  },
+				  error : function(){
+				   alert("로그인하셔야합니다.")
+				  }
+				});
+		 	 }
+		});
+		
+		</script>
 	
 	
 

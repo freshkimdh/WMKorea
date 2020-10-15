@@ -107,7 +107,7 @@ public class FBoardController {
 	}
 	
 	//게시판 삭제
-	//@ResponseBody
+	@ResponseBody
 	@GetMapping("/free_delete") 
 	public String delete(FBoardVO fboardVO) throws Exception {
 		log.info("free_delete...");
@@ -129,11 +129,13 @@ public class FBoardController {
 			 result = 1;
 			 
 			 log.info("삭제 성공");
-			 
+			 log.info(result);
 		 }
 		
+		log.info(result);
 	   
-		return "redirect:free_boardList";
+		//return "redirect:free_boardList";
+		return String.valueOf(result);
 
 	}
 	
