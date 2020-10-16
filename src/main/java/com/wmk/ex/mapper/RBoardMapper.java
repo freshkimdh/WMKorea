@@ -60,20 +60,20 @@ public interface RBoardMapper {
 	public String replyUserIdCheck(int repNum) throws Exception;
 	public List<FBoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
-	
+	// 좋아요 버튼
 	@Update("update REVIEW_BOARD set LIKE_CNT = LIKE_CNT + 1 where RBOARDNUM = #{RBOARDNUM}")
 	public int updateLike(int rBoardNum);
 	@Insert("insert into likeTo(likeNo, RBOARDNUM, id) values(like_to_seq.nextval, #{RBOARDNUM},#{id})")
 	public int insertLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
-	
-	@Select("select count(*) from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
-	public int getCountLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
-	
-	
+	// 좋아요 버튼 해제
 	@Update("update REVIEW_BOARD set LIKE_CNT = LIKE_CNt -1 where RBOARDNUM = #{RBOARDNUM}")
 	public int updateUnLike (int rBoardNum);
 	@Delete("Delete from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
 	public int deleteLike(@Param("RBOARDNUM") int rBoardNum, @Param("id") String id);
+	
+	
+	@Select("select count(*) from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
+	public int getCountLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
 	
 	@Select("select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}")
 	public void cntLike(int rBoardNum);
