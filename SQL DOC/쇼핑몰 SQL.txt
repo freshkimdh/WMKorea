@@ -1,7 +1,7 @@
-<<<<<<<<<<<<<<<<<Àå¹Ù±¸´Ï ±â´É ±¸Çö DB>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (2020.10.14, Á¤°æÃ¤)
+<<<<<<<<<<<<<<<<<ì¥ë°”êµ¬ë‹ˆ ê¸°ëŠ¥ êµ¬í˜„ DB>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (2020.10.14, ì •ê²½ì±„)
 
 
--- Á¦Ç° Å×ÀÌºí »ı¼º
+-- ì œí’ˆ í…Œì´ë¸” ìƒì„±
 create table wmk_goods (
     gdsNum       number          not null,
     gdsName      varchar2(50)    not null,
@@ -17,18 +17,18 @@ create table wmk_goods (
 create sequence wmk_goods_seq;
 
 
---Á¦Ç° µî·Ï
+--ì œí’ˆ ë“±ë¡
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'Picture frame', 101, 30000, 50, '³ª¸¸ÀÇ È¨ÀÎÅ×¸®¾î¸¦ ²Ù¸çÁÙ ÀÛÀº µ¥ÄÚ·¹ÀÌ¼Ç', 'goods/picture_frame.png');
+values (wmk_goods_seq.nextval, 'Picture frame', 101, 30000, 50, 'ë‚˜ë§Œì˜ í™ˆì¸í…Œë¦¬ì–´ë¥¼ ê¾¸ë©°ì¤„ ì‘ì€ ë°ì½”ë ˆì´ì…˜', 'goods/picture_frame.png');
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'T-shirts', 201, 15000, 50, '½ºÅ¸ÀÏ°ú Æí¾ÈÇÔÀ» ¸ğµÎ °®Ãá ÇÁ¸®¹Ì¾ö ¿ø´Ü 100% Æ¼¼ÅÃ÷', 'goods/t-shirts.png');
+values (wmk_goods_seq.nextval, 'T-shirts', 201, 15000, 50, 'ìŠ¤íƒ€ì¼ê³¼ í¸ì•ˆí•¨ì„ ëª¨ë‘ ê°–ì¶˜ í”„ë¦¬ë¯¸ì—„ ì›ë‹¨ 100% í‹°ì…”ì¸ ', 'goods/t-shirts.png');
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'Mug-cup', 301, 8000, 50, '¸ğ´øÇÏ°í ¼¼·ÃµÈ ½ºÅ¸ÀÏÀÇ ³ª¸¸À» À§ÇÑ ½Ã±×´ÏÃ³ ¾ÆÀÌÅÛ', 'goods/mug_cup.png');
+values (wmk_goods_seq.nextval, 'Mug-cup', 301, 8000, 50, 'ëª¨ë˜í•˜ê³  ì„¸ë ¨ëœ ìŠ¤íƒ€ì¼ì˜ ë‚˜ë§Œì„ ìœ„í•œ ì‹œê·¸ë‹ˆì²˜ ì•„ì´í…œ', 'goods/mug_cup.png');
 
---Á¦Ç° Ä«Å×°í¸® »ı¼º
+--ì œí’ˆ ì¹´í…Œê³ ë¦¬ ìƒì„±
 create table goods_category (
     cateName varchar2(20) not null,
     cateCode varchar2(30) not null,
@@ -38,24 +38,24 @@ create table goods_category (
 );
 
 
---Á¦Ç° Ä«Å×°í¸® µî·Ï
+--ì œí’ˆ ì¹´í…Œê³ ë¦¬ ë“±ë¡
 
-insert into goods_category (cateName, cateCode) values ('¾×ÀÚ', '100');
-insert into goods_category (cateName, cateCode, cateCodeRef) values ('¾×ÀÚ1-1', '101', '100');
+insert into goods_category (cateName, cateCode) values ('ì•¡ì', '100');
+insert into goods_category (cateName, cateCode, cateCodeRef) values ('ì•¡ì1-1', '101', '100');
 
-insert into goods_category (cateName, cateCode) values ('Æ¼¼ÅÃ÷', '200');
-insert into goods_category (cateName, cateCode, cateCodeRef) values ('Æ¼¼ÅÃ÷1-1', '201', '200');
-insert into goods_category (cateName, cateCode, cateCodeRef) values ('Æ¼¼ÅÃ÷1-2', '202', '200');
+insert into goods_category (cateName, cateCode) values ('í‹°ì…”ì¸ ', '200');
+insert into goods_category (cateName, cateCode, cateCodeRef) values ('í‹°ì…”ì¸ 1-1', '201', '200');
+insert into goods_category (cateName, cateCode, cateCodeRef) values ('í‹°ì…”ì¸ 1-2', '202', '200');
 
-insert into goods_category (cateName, cateCode) values ('¸Ó±×ÄÅ', '300');
-insert into goods_category (cateName, cateCode, cateCodeRef) values ('¸Ó±×ÄÅ1-1', '301', '300');
+insert into goods_category (cateName, cateCode) values ('ë¨¸ê·¸ì»µ', '300');
+insert into goods_category (cateName, cateCode, cateCodeRef) values ('ë¨¸ê·¸ì»µ1-1', '301', '300');
 
---Á¦Ç° Ä«Å×°í¸® Á¶È¸
+--ì œí’ˆ ì¹´í…Œê³ ë¦¬ ì¡°íšŒ
 select level, cateName, cateCode, cateCodeRef from goods_category
     start with cateCodeRef is null connect by prior cateCode = cateCodeRef;
     
 
---Àå¹Ù±¸´Ï »ı¼º
+--ì¥ë°”êµ¬ë‹ˆ ìƒì„±
 create table wmk_cart (
     cartNum     number          not null,
     userId      varchar2(50)    not null,
@@ -70,17 +70,17 @@ create table wmk_cart (
 
 create sequence wmk_cart_seq;
 
---¿ì¸® °èÁ¤ ¾ÆÀÌµğ¸¦ Àå¹Ù±¸´Ï ¿¡¼­ ¿Ü·¡Å°·Î ¹Ş±â
+--ìš°ë¦¬ ê³„ì • ì•„ì´ë””ë¥¼ ì¥ë°”êµ¬ë‹ˆ ì—ì„œ ì™¸ë˜í‚¤ë¡œ ë°›ê¸°
 alter table wmk_cart
     add constraint wmk_cart_userId foreign key(userId)
     references wmk_users(ID);
 
---»óÇ° ¹øÈ£¸¦ Àå¹Ù±¸´Ï¿¡¼­ ¿Ü·¡Å°·Î ¹Ş±â
+--ìƒí’ˆ ë²ˆí˜¸ë¥¼ ì¥ë°”êµ¬ë‹ˆì—ì„œ ì™¸ë˜í‚¤ë¡œ ë°›ê¸°
 alter table wmk_cart
     add constraint wmk_cart_gdsNum foreign key(gdsNum)
     references wmk_goods(gdsNum);
 
---Æ¯Á¤ È¸¿øÀÇ Àå¹Ù±¸´Ï Á¶È¸ÇÏ±â
+--íŠ¹ì • íšŒì›ì˜ ì¥ë°”êµ¬ë‹ˆ ì¡°íšŒí•˜ê¸°
 select
     row_number() over(order by c.cartNum desc) as num,
     c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate, c.gdsColor, c.gdsSize, c.gdsText,
@@ -95,9 +95,9 @@ commit;
 
 
 
-<<<<<<<<<<<<<<<<<ÁÖ¹®ÇÏ±â ¹× ÁÖ¹®³»¿ª È®ÀÎÇÏ±â DB>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (2020.10.14. Á¤°æÃ¤)
+<<<<<<<<<<<<<<<<<ì£¼ë¬¸í•˜ê¸° ë° ì£¼ë¬¸ë‚´ì—­ í™•ì¸í•˜ê¸° DB>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> (2020.10.14. ì •ê²½ì±„)
 
---ÁÖ¹® Å×ÀÌºí
+--ì£¼ë¬¸ í…Œì´ë¸”
 create table wmk_order (
     orderId     varchar2(50) not null,
     userId      varchar2(50) not null,
@@ -112,13 +112,13 @@ create table wmk_order (
 );
 
 
---ÁÖ¹®Å×ÀÌºí°ú È¸¿ø idÀÇ ¿Ü·¡Å° ¼³Á¤
+--ì£¼ë¬¸í…Œì´ë¸”ê³¼ íšŒì› idì˜ ì™¸ë˜í‚¤ ì„¤ì •
 alter table wmk_order
     add constraint wmk_order_userId foreign key(userId)
     references wmk_users(Id);
     
     
---ÁÖ¹® »ó¼¼Å×ÀÌºí  
+--ì£¼ë¬¸ ìƒì„¸í…Œì´ë¸”  
 create table wmk_order_details (
     orderDetailsNum number       not null,
     orderId         varchar2(50) not null,
@@ -127,15 +127,15 @@ create table wmk_order_details (
     primary key(orderDetailsNum)
 );
 
---ÁÖ¹® »ó¼¼ ¹øÈ£(orderDetailsNum)·Î ÀÌ¿ëµÉ ½ÃÄö½º
+--ì£¼ë¬¸ ìƒì„¸ ë²ˆí˜¸(orderDetailsNum)ë¡œ ì´ìš©ë  ì‹œí€€ìŠ¤
 create sequence wmk_order_details_seq;
 
---ÁÖ¹® »ó¼¼ Å×ÀÌºí°ú ÁÖ¹®Å×ÀÌºíÀÇ ÂüÁ¶ ¼³Á¤
+--ì£¼ë¬¸ ìƒì„¸ í…Œì´ë¸”ê³¼ ì£¼ë¬¸í…Œì´ë¸”ì˜ ì°¸ì¡° ì„¤ì •
 alter table wmk_order_details
     add constraint wmk_order_details_orderId foreign key(orderId)
     references wmk_order(orderId);
     
---ÁÖ¹® Á¤º¸ È®ÀÎ
+--ì£¼ë¬¸ ì •ë³´ í™•ì¸
 select
 o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount,
 d.orderDetailsNum, d.gdsNum, d.cartStock
@@ -143,11 +143,4 @@ from wmk_order o
     inner join wmk_order_details d
         on o.orderId = d.orderId
     where userId = 'abcde';
-
-
-
-
-
-
-
 
