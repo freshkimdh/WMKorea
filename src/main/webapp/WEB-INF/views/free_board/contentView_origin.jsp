@@ -91,7 +91,7 @@
     section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
     section.replyList div.replyContent { padding:10px; margin:20px 0; }
     
-    section.replyList div#replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
+    section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
    </style>
 
 
@@ -110,45 +110,22 @@
       var repDate = new Date(this.repDate);
       repDate = repDate.toLocaleDateString("ko-US")
       
-      
-      str += "<div class='container' id='comment_view'>"
-      	+ "<div class='row'>"
-      	+ "<div class='col-md-1' align='right'>"
-      	+ "<img src='img/avatar2.jpg' width='50'/>"
-      	+ "</div>"
-      	+ "<div class='col-md-11'>"
-        + "<div class='userInfo' id='replyFooter'>"
-        + "<span class='id'>" + "<strong>" + this.id + "</strong>" + "</span>"
+      str += "<div>"
+        + "<div class='userInfo'>"
+        + "<span class='id'>" + this.id + "</span>"
         + "<span class='date'>" + repDate + "</span>"
-        +  "&nbsp;" + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-        + "</div>" <!--userInfro End -->
-        + this.repCon
         + "</div>"
-      	+ "</div>"
-      	
-      	+ "</div>" <!-- row end -->
-      	+ "<hr>"
-      	
-      	
-      	<!-- 김대환 작업 댓글 디자인 코드 -->
-/*         str += "<div>"
-            + "<div class='userInfo'>"
-            + "<span class='id'>" + this.id + "</span>"
-            + "<span class='date'>" + repDate + "</span>"
-            + "</div>"
-            + "<div class='replyContent'>" + this.repCon + "</div>"
-            + "</div>"
-            
-            
-            + "<div class='replyFooter'>"
-            + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-            + "</div>"
-            
-            + "<hr>"
-            
-            ; */
-
+        + "<div class='replyContent'>" + this.repCon + "</div>"
+        + "</div>"
         
+        
+        + "<div class='replyFooter'>"
+        + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+        + "</div>"
+        
+        + "<hr>"
+        
+        ;           
      });
      
      $("section.replyList ol").html(str);
@@ -285,81 +262,79 @@
 
 <p>
 <div class="container">
-
-	<p align="center" class="display-3" id="disf">Community</p>
-	
+<p align="center" class="display-3" id="disf">Community</p>
 </div>
 
 <div class="container" id="free_board">
+  <h2>자유게시판</h2> <br>
+  
+    
+ <!-- 게시글 내용 부분 -->
+<table class="table">
+    <thead>
+   <tr>
+      <th>글 제목: ${contentView.fTitle}</th>
+   </tr>
+    </thead>
 
-	  <h2>자유게시판</h2> <br>
-	  
-</div>  
+    <tbody>
+      <tr>
+        <td>
+        <p><span class="badge badge-pill badge-secondary">No</span> ${contentView.fBoard_Num}
+        <span class="badge badge-pill badge-secondary">조회수</span> ${contentView.fHit}
+        </p>
+        
+      <div class="card">
+         <div class="card-body">
+              <div class="row">
+                 <div class="col-md-2">
+                        <img src="img/avatar2.jpg" class="img img-rounded img-fluid"/>
+                  </div>
+               
+                   <div class="col-md-10">
+                      <strong>작성자: ${contentView.fId}</strong> <br>
+                  <p>글 내용: ${contentView.fContent}</p>
+                  <br><p align="right">
+                  <p class="text-dark" align="right"><fmt:formatDate value="${contentView.fDate}" pattern="yyyy-MM-dd"/></p>   
+               </div>
+                 </div>   
+         </div>   
+      </div>
+        
+        </td>
+      </tr>
+    </tbody>
+</table>
+  
+  <!-- <hr> -->
+ 
+<p align="right">
+<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
+<a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
+</p>
+ 
+<hr> <br>
 
 
-<div class="container" >    
-	 <!-- 게시글 내용 부분 -->
-	<table class="table">
-	    <thead>
-	   <tr>
-	      <th>제목: ${contentView.fTitle}</th>
-	   </tr>
-	    </thead>
-	
-	    <tbody>
-	      <tr>
-	        <td>
-	        <p><span class="badge badge-pill badge-secondary">No</span> ${contentView.fBoard_Num}
-	        <span class="badge badge-pill badge-secondary">조회수</span> ${contentView.fHit}
-	        </p>
-	        
-	      <div class="card">
-	         <div class="card-body">
-	              <div class="row">
-	                 <div class="col-md-2">
-	                        <img src="img/avatar2.jpg" class="img img-rounded img-fluid"/>
-	                  </div>
-	               
-	                   <div class="col-md-10">
-	                      <span class="badge badge-pill badge-secondary">작성자</span> ${contentView.fId} <br>
-	                  <span class="badge badge-pill badge-secondary">내용</span><br>
-	                  <p>${contentView.fContent}</p>
-	                  <br><p align="right">
-	                  <p class="text-dark" align="right"><fmt:formatDate value="${contentView.fDate}" pattern="yyyy-MM-dd"/></p>   
-	               </div>
-	                 </div>   
-	         </div>   
-	      </div>
-	        
-	        </td>
-	      </tr>
-	    </tbody>
-	</table>
-	  
-	  <!-- <hr> -->
-	 
-	<p align="right">
-	<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
-	<%-- <a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a> --%>
-	<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
-	</p>
-	
-	<hr> 
-</div>
+<button type="button" class="boardDelete" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
 
 
 
 <!-- 댓글 작성 -->
 
-<div class="container" id="reply">
+<div id="reply">
 
 
-<%--  <section class="replyForm"> --%>
+
+
+
+
+ <section class="replyForm">
   <form:form role="form" method="post">
      <input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
      
    <div class="input_area">
-   <label for="Content">댓글:</label>
+   <label for="Content">댓글 내용:</label>
       <textarea class="form-control" rows="5" id="repCon" name="repCon"></textarea>
    </div>
    
@@ -368,9 +343,8 @@
          <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">댓글 작성</button></p>
    </sec:authorize>
    
-   <sec:authorize access="isAuthenticated()">
-   		<br>   
-      <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">등록</button></p>
+   <sec:authorize access="isAuthenticated()">   
+      <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">댓글 작성</button></p>
    </sec:authorize>
    
    
@@ -403,7 +377,7 @@
    </div>
    
   </form:form>
-<%--  </section> --%>
+ </section>
 
 <section class="replyList">
  <ol>
@@ -491,8 +465,34 @@
       </script>
    
    
+
+
+
+
+
 </section>
 </div>
+
+
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%--<br> 
 
