@@ -129,7 +129,7 @@
 		</li>
 				
 		<li class="nav-item">
-			<a class="nav-link" href="#">핫플레이스</a>
+			<a class="nav-link" href="hotReviewList">핫플레이스</a>
 		</li>
 				
 		<li class="nav-item dropdown">
