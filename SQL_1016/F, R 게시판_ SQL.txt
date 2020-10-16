@@ -10,7 +10,7 @@ create table FREE_BOARD(
 	fGroup NUMBER(4),
 	fStep NUMBER(4),
 	fIndent NUMBER(4),
-	FOREIGN KEY (fId) REFERENCES wmk_users (id) -- 
+	FOREIGN KEY (fId) REFERENCES wmk_users (id) 
 );
 
 --free 게시판 번호 순서
