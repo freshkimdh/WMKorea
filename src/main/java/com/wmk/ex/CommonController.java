@@ -34,7 +34,7 @@ public class CommonController {
 		ResponseEntity<String> entity = null;
 	
 		try {
-			rBoardService.updateInsertLike(board_no,loginInfo.getUser().getId());
+			//rBoardService.updateInsertLike(board_no,loginInfo.getUser().getId());
 			
 			log.info("aa");
 			entity = new ResponseEntity<>("success",HttpStatus.OK);
@@ -57,7 +57,7 @@ public class CommonController {
         
 		try {
 			// 스프링 유저정보 받아와서  unLike실행
-			rBoardService.deleteUnlike(board_no,loginInfo.getUser().getId());
+			//rBoardService.deleteUnlike(board_no,loginInfo.getUser().getId());
 			entity = new ResponseEntity<String>("success",HttpStatus.OK);
 			
 		} catch (Exception e) {

@@ -3,6 +3,7 @@ package com.wmk.ex.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -15,49 +16,42 @@ import com.wmk.ex.vo.RReplyVO;
 
 public interface RBoardService {
 	
-	//�Խ��� ���
-	
+
+	//list, list ajax
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
 	
-	//�Խ��� get rBoardNum
+	
 	public RBoardVO getrBoardNum(int rBoardNum);
 	
 	//RBoardVO rid = UserVO id >> get id
 	public RBoardVO getrId(String rId);
 	
-	//�Խ��� �ۼ�
-	public void rWriteBoard(RBoardVO rboardVO);
-	//public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest);
+	//글작성
+	public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
 	
-	//�Խ��� ����
-	public void updaterModify(RBoardVO rboardVO);
-	
-	//�Խ��� ����
+	//수정
+	public void updaterModify(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
+
+	//삭제
 	public void deleterBoard(int rBoardNum);
-	/*
-	//����¡ ó��
-	public List<FBoardVO> getListWithPaging(Criteria cri);
-	public int getTotalCount(Criteria cri);
-*/
 	
-	//��� ���
+	//업로드 파일 list로 뿌려주기
+	public List<Map<String, Object>> selectFileList(int rBoardNum) throws Exception;
+	
+	//업로드된 파일 삭제
+	public void removerBoard(int fileSize);
+	
 	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
 	
-	//��� �ۼ�
 	public void registReply(RReplyVO reply) throws Exception;
 		
-	//��� ����
 	public void deleteReply(RReplyVO reply) throws Exception;
 	
-	//���̵� üũ
 	public String replyUserIdCheck(int repNum) throws Exception;
 	
-	//����¡ ó��
-	public List<FBoardVO> getListWithPaging(Criteria cri);
-	public int getTotalCount(Criteria cri);
-		
-		
+
+	//좋아요 기능		
 	public int updateLike(int rBoardNum);
 	public int insertLike(int rBoardNum,String id);
 	public void updateInsertLike(int rBoardNum,String id);

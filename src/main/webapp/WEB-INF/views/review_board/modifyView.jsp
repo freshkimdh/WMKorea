@@ -88,46 +88,20 @@
 
 
  	<script type="text/javascript">
- 	/*
-	function validateForm() {
-		
-		var name = document.forms["boardForm"]["rId"].value;
-		if (name == "" || name == null){
-	    alert("이름을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
- 	function validateForm2() {
-		
-		var pw = document.forms["boardForm"]["bPw"].value;
-		if (pw == "" || pw == null){
-	    alert("비밀번호를 입력해주세요.");
-		return false;
-		}
-	  
-	} */
-	
-	function validateForm3() {
-		
-		var title = document.forms["boardForm"]["rTitle"].value;
-		if (title == "" || title == null){
-	    alert("제목을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
-	function validateForm4() {
-		
-		var con = document.forms["boardForm"]["rContent"].value;
-		if (con == "" || con == null){
-	    alert("내용을 입력해주세요.");
-		return false;
-		}
-	  
-	}
+ 	
+ 	$(document).ready(function(){
+		 $("#regBtn").on("click", function(){  
+			var title = document.forms["boardForm"]["rTitle"].value;
+			if (title == "" || title == null){
+		    alert("글제목을 입력해주세요.");
+				return false;
+			}
+			var inshort = document.forms["boardForm"]["rInShort"].value;
+			if (inshort == "" || inshort == null){
+		    alert("회원님의 피셜을 들려주세요.");
+			return false;
+			}
+	    });   
 	
 	function removeCheck() {
 		
@@ -140,12 +114,26 @@
 		}
 
 	}
-
+ 	});
  	</script> 
+ 	
+ 	<!-- 업로드 이미지 미리보기 -->
+ 	<script> 
+	  function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		reader.onload = function(event) {
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			document.querySelector("div#image_container").appendChild(img);
+		};
+			
+			reader.readAsDataURL(event.target.files[0]); 
+	  }
+	</script>
 		
 
 
-</head>
+
 </head>
 <body>
 
@@ -249,7 +237,7 @@
  
 
 
-<form name="boardForm" action="review_modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
+<form name="boardForm" action="review_modify" method="post" required enctype="multipart/form-data">
 
 	<input type="hidden" name="rId" value="${rModifyView.rId}">
 	<input type="hidden" name="rBoardNum" value="${rModifyView.rBoardNum}">
@@ -268,10 +256,15 @@
 	<label for="rArea">지역 :</label>
      <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
      <select name="rArea">
-    	<option value="서울">서울</option>
-    	<option value="인천">인천</option>
-    	<option value="경기">경기</option>
-    	<option value="대구">대구</option>
+    	<option value="서울·경기·인천">서울·경기·인천</option>
+    	<option value="강원도">강원도</option>
+    	<option value="충청북도">충청북도</option>
+    	<option value="충청남도">충청남도</option>
+    	<option value="경상북도">경상북도</option>
+    	<option value="경상남도">경상남도</option>
+    	<option value="전라북도">전라북도</option>
+    	<option value="전라남도">전라남도</option>
+    	<option value="제주도">제주도</option>
 	</select>
 	
 	</div>
@@ -294,6 +287,16 @@
 		<div class="form-group">
     		<label for="rInShort">피셜:</label>
       		<input type="text" class="form-control" id="rInShort" name="rInShort" value="${rModifyView.rInShort}"> <p>
+		</div>
+		
+		<div class="form-group" >
+    		<label for="Thumbnail">썸네일용 이미지:</label>
+      		<input type="file" class="form-control" id="uploadImg" name ="uploadImg" accept="image/*" onchange="setThumbnail(event);"> <p>
+		</div>
+		
+		<div class="form-group">
+    		<label for="fileImage">썸네일용 이미지 미리보기:</label><br>
+    		<div id="image_container"> </div>
 		</div>
 	
 	    <div class="form-group">

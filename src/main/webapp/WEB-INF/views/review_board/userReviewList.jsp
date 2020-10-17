@@ -46,18 +46,32 @@
                //console.log( data );
 
                var sTxt = '';
-              
+               var _storedFileName = "null.jpg";
                $(objList).each(function (index, order){
             	   sTxt += '<div class="col-md-4">';
             	   sTxt += 		'<div class="card shadow-sm">';
             	   sTxt += 			'<div class="list_picture">';
-            	   sTxt += 				'<a href="review_contentView?rBoardNum=33&amp;area=서울"><img src="others/s1.jpg" class="img-fluid mx-auto d-block rounded"></a>';
+            	   if(order.storedFileName == null || order.storedFileName == ''){
+            	   	sTxt += 				'<a href="review_contentView?rBoardNum='+ order.rBoardNum + '&area='+ order.rArea + '"><img src="/filePath/null.jpg" class="img-fluid mx-auto d-block rounded"></a>';
+            	   }else{
+            	   	sTxt += 				'<a href="review_contentView?rBoardNum='+ order.rBoardNum + '&area='+ order.rArea + '"><img src="/filePath/' + order.storedFileName + '" class="img-fluid mx-auto d-block rounded"></a>';
+            	   }
             	   sTxt += 			'</div>';
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
             	   sTxt += 				'<h class="text-warning">★★★★★</h> (4) <br>';
-            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span> 18 ';
-            	   sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>' + order.rCategory ;
+            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt;
+            	   if(order.rCategory == 0){
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
+            	   }else if(order.rCategory == 1){
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 관광지';
+            	   }else if(order.rCategory == 2){
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 행사';
+            	   }else if(order.rCategory == 3){
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 맛집';
+            	   }else if(order.rCategory == 4){
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 기타';
+            	   }
             	   sTxt += 			'</div>';
             	   sTxt += 		'</div>';
             	   sTxt += 		'<br>';
@@ -271,16 +285,6 @@
   	</div>
   	
   	
-  	<!--  <div class="col-sm-8" align="center">
-		Group button details
-		<div class="btn-group btn-group btn-block">
-			<button type="button" class="btn btn-secondary">전체</button>
-			<button type="button" class="btn btn-secondary">관광지</button>
-		    <button type="button" class="btn btn-secondary">행사</button>
-		    <button type="button" class="btn btn-secondary">맛집</button>
-		    <button type="button" class="btn btn-secondary">기타</button>
-		</div>  	
-  	</div> -->
   	<div class="col-sm-8" align="center">
 		<!-- Group button details-->
 		<div class="btn-group btn-group btn-block">
@@ -308,104 +312,28 @@
     <div class="container" id="review_contentView">
 		<div class="row">
 		<c:forEach items="${rList}" var="userList">
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
+		<div class="col-md-4"> 
 	  <div class="card shadow-sm">
 	  	<div class="list_picture">
-		<a href="review_contentView?rBoardNum=${userList.rBoardNum}&area=${area}"><img src="others/s1.jpg" class="img-fluid mx-auto d-block rounded"></a>
+	  	<c:if test="${area eq null || area eq '' }">
+			<a href="review_contentView?rBoardNum=${userList.rBoardNum}&area=${userList.rArea}"><img src="/filePath/${userList.storedFileName ne ' '? userList.storedFileName : 'null.jpg'}" class="img-fluid mx-auto d-block rounded"></a>
+	  	</c:if>
+	  	<c:if test="${area ne null && area ne '' }"> <!-- 빈값이 아니면서 null이 아니면  -->
+			<a href="review_contentView?rBoardNum=${userList.rBoardNum}&area=${area}"><img src="/filePath/${userList.storedFileName ne ' '? userList.storedFileName : 'null.jpg'}" class="img-fluid mx-auto d-block rounded"></a>
+	  	</c:if>
 	    </div>
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
 	      <h class="text-warning">★★★★★</h> (5) <br>
-	      <span class="badge  badge-pill badge-danger ">좋아요</span>${userList.like_Cnt}
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
+	      <span class="badge  badge-pill badge-danger ">Like</span> ${userList.like_Cnt}
+	      <span class="badge  badge-pill badge-success">${userList.rCategory}</span>
 	    </div>
 	  </div>
 	  <br>
         </div>
      	</c:forEach>
-	<%-- <div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/n_tower.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>N서울타워</strong><br>도시의 전경을 조망할 수 있는 타워 & 레스토랑</p>
-
-	      <h class="text-warning">★★★★☆</h> (4) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/myungdong.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>명동</strong><br>다양한 쇼핑 및 캐주얼한 세계 각국의 요리를 선보이는 식당</p>
-	      <h class="text-warning">★★★☆☆</h> (3) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 22 
-	      <span class="badge  badge-pill badge-success">분류</span> 맛집
-	    </div>
-	  </div>
-	  <br>
-        </div>        
-        
-
-        
-       <!-- second line -->
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="seoulCotentView"><img src="img/travel_board_img/kyungbok.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>경복궁</strong><br>투어 & 박물관이 있는 역사적인 궁전</p>
-
-	      <h class="text-warning">★★★★★</h> (5) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-	<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/n_tower.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>N서울타워</strong><br>도시의 전경을 조망할 수 있는 타워 & 레스토랑</p>
-
-	      <h class="text-warning">★★★★☆</h> (4) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/myungdong.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>명동</strong><br>다양한 쇼핑 및 캐주얼한 세계 각국의 요리를 선보이는 식당</p>
-	      <h class="text-warning">★★★☆☆</h> (3) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 22 
-	      <span class="badge  badge-pill badge-success">분류</span> 맛집
-	    </div>
-	  </div>
-	  <br>
-
-        </div>  --%>           
- 
+	
       </div> 
 
   </div>

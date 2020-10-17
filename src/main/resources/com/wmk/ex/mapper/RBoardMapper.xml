@@ -7,19 +7,27 @@
 	<!--게시판 목록  -->
 	<select id="getReviewList" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
 	<![CDATA[ 
-		select 
-			*
-	    from Review_BOARD
-	    	where rArea = #{rArea, jdbcType=VARCHAR}
+		select
+     		a.rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory, Like_Cnt as likeCnt, b.stored_file_name as storedFileName
+	    from Review_BOARD a
+	    	left join Review_img_file b
+	    	on(a.rBoardNum = b.rBoardNum)
+	    	where rArea =  #{rArea}
 	    	order by rBoardNum desc
 	]]>
  	</select>
  	
  	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
 	<![CDATA[ 
-		select * from Review_BOARD
-		where rCategory = #{rCategory}
-	    and rArea =  #{rArea}
+		select 
+     		a.rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory, Like_Cnt as likeCnt, b.stored_file_name as storedFileName
+	    from Review_BOARD a
+	    	left join Review_img_file b
+	    	on(a.rBoardNum = b.rBoardNum)
+	    	where rCategory = #{rCategory}
+	    	and rArea =  #{rArea}
+	    	order by rBoardNum desc
+	
 	]]>
  	</select>
 <!-- 	    	order by rBoardNum desc -->
@@ -51,7 +59,6 @@
 		update Review_BOARD set rTitle = #{rTitle}, rContent = #{rContent}, rOpenTime = #{rOpenTime}, rInShort= #{rInShort}, rAdress= #{rAdress}, rCategory= #{rCategory} where rId = #{rId} and rBoardNum = #{rBoardNum}
 	]]>
 	</insert>
-	<!-- update Review_BOARD set rId= #{rId}, rTitle = #{rTitle}, rContent = #{rContent}, rOpenTime = #{rOpenTime}, rInShort= #{rInShort}, rAdress= #{rAdress}, rCategory= #{rCategory} where rBoardNum = #{rBoardNum} -->
 	
 	<!--게시판 삭제  -->
 	<insert id="deleterBoard" >
@@ -66,6 +73,62 @@
 		update Review_BOARD set rHit = rHit + 1 where rBoardNum = #{rBoardNum}
 	]]>
 	</insert>
+	
+	<!-- 첨부파일 업로드    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
+	<insert id="insertFile" parameterType="hashMap" >
+		<![CDATA[
+		insert into Review_Img_File (
+	        file_no
+	        , rBoardNum
+	        , ORIGINAL_FILE_NAME
+	        , STORED_FILE_NAME
+	        , FILE_SIZE
+	        , regdate
+	    ) values (
+	        Review_Img_File_no_seq.nextval
+	        , review_board_seq.currval   
+	        , #{ORIGINAL_FILE_NAME ,jdbcType=VARCHAR}
+	        , #{STORED_FILE_NAME ,jdbcType=VARCHAR}
+	        , #{FILE_SIZE, jdbcType=VARCHAR}
+	        , sysdate
+	    )
+		]]>
+	</insert>
+	
+	
+	<!-- 첨부파일 업데이트    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
+	<update id="updateFile" parameterType="hashMap" >
+		<![CDATA[
+		UPDATE Review_Img_File 
+			SET
+		        ORIGINAL_FILE_NAME = #{ORIGINAL_FILE_NAME ,jdbcType=VARCHAR}
+		        , STORED_FILE_NAME = #{STORED_FILE_NAME ,jdbcType=VARCHAR}
+		        , FILE_SIZE = #{FILE_SIZE, jdbcType=VARCHAR}
+		        , regdate = sysdate
+		WHERE rBoardNum  = #{rBoardNum}
+	]]>
+	</update>
+	
+	<!-- 첨부파일 삭제    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
+	<update id="deleteFile" parameterType="hashMap" >
+		<![CDATA[
+		DELETE From Review_Img_File 
+			WHERE FILE_NO  = #{rBoardNum}
+	]]>
+	</update>
+	
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORIGINAL_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE,
+			   STORED_FILE_NAME
+		  FROM Review_Img_File
+		 WHERE rBoardNum = #{rBoardNum} and FILE_NO=#{FILE_NO}
+	</select>
+	
+	
 	
 	
 	<!--아래는 댓글 부분 -->
@@ -82,7 +145,7 @@
  		values (#{rBoardNum}, #{id}, review_reply_seq.nextval, #{repCon})
 	</insert>
 	
-		<!-- 댓글 삭제 -->
+	<!-- 댓글 삭제 -->
 	<delete id="deleteReply">
 	 delete review_reply
 	     where repNum = #{repNum}

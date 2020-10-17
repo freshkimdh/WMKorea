@@ -116,14 +116,14 @@ public class Basics_BoardController {
 	}
 	
 	
-	//°Ë»ö±â´É 
+	//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ 
 	@RequestMapping("/boardByTitle")
-	public String boardByTitle(BoardVO boardVO, Model model) {  //¹«¾ùÀÌµç(Á¦¸ñÀÌµç, ÀÌ¸§ÀÌ´ø...µîµî) Ãâ·ÂÇÏ°íÀÚ ºÀÅõ¸¦ ÀÎÀÚ·Î ³ÖÀ½.
+	public String boardByTitle(BoardVO boardVO, Model model) {  //ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½, ï¿½Ì¸ï¿½ï¿½Ì´ï¿½...ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		
-		System.out.println(boardVO.toString());  //BoardVO.java ¿¡ ÀÖ´Â toString()À» Ãâ·ÂÇÏ±â À§ÇØ.(test¿ë)
+		System.out.println(boardVO.toString());  //BoardVO.java ï¿½ï¿½ ï¿½Ö´ï¿½ toString()ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½.(testï¿½ï¿½)
 		log.info("boardByTitle");
 		
-		service.boardByTitle(boardVO);  //À¯Àú°¡ ÀÔ·ÂÇÑ °ÍÀ» ¼­ºñ½º¿¡¼­ ¹Þ¾ÆÁÖ±âÀ§ÇÔ.( À¯Àú°¡ ÀÔ·ÂÇÑ Á¦¸ñÀ» ¼­ºñ½º·Î ³Ñ±â±â À§ÇÔ)
+		service.boardByTitle(boardVO);  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ñ½º¿ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½.( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ñ½º·ï¿½ ï¿½Ñ±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		System.out.println(service.boardByTitle(boardVO));
 		
 		model.addAttribute("boardByTitle", service.boardByTitle(boardVO));
@@ -134,7 +134,7 @@ public class Basics_BoardController {
 	
 	
 	
-//	//´ñ±Û »èÁ¦
+//	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	@RequestMapping("/replyDelete")
 //	public String replyDelete(ReplyVO vo)  {
 //		

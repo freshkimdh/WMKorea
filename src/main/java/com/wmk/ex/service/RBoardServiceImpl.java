@@ -3,12 +3,17 @@ package com.wmk.ex.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.mapper.RBoardMapper;
 import com.wmk.ex.page.Criteria;
+import com.wmk.ex.util.FileUtils;
 import com.wmk.ex.vo.FBoardVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
@@ -23,20 +28,22 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	private RBoardMapper rmapper; 
 	
-	//�Խ��� ���
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
+	
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
+		log.info("imple"+rmapper.getReviewList(rboardVO));
+		
 		return rmapper.getReviewList(rboardVO);
 	}
-	//�Խ��� ���
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
 		return rmapper.getReviewListAjax(rboardVO);
 	}
 	
-	//�Խ��� ��ȣ get
 	@Override
 	public RBoardVO getrBoardNum(int rBoardNum) {
 		RBoardVO rboardVO = rmapper.getrBoardNum(rBoardNum);
@@ -55,35 +62,76 @@ public class RBoardServiceImpl implements RBoardService {
 		return rboardVO;
 	}
 	
-	//�Խ��� �ۼ�
+	@SuppressWarnings("null")
 	@Override
-	public void rWriteBoard(RBoardVO rboardVO) {
-//		public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) {
+	public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
 		log.info("rWriteBoard........");
 		
 		rmapper.rWriteBoard(rboardVO);
-		//rmapper.rWriteBoard(rboardVO, mpRequest);
+		
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(rboardVO, mpRequest); 
+		
+		System.out.println("abcd" + list);
+		System.out.println("abcd" + list.size());
+		
+		
+		int size = list.size();
+		Map<String, Object> map = new HashMap<>();
+
+		
+		System.out.println("abcdmap" + map);
+		if(size == 0) {
+			System.out.println("�־�Ÿ��");
+			map.put("ORIGINAL_FILE_NAME", " ");
+			map.put("STORED_FILE_NAME", " ");
+			map.put("FILE_SIZE", 0);
+			rmapper.insertFile(map);
+		}else {
+			for(int i=0; i<size; i++){ 
+				rmapper.insertFile(list.get(i));
+				System.out.println("list.get(i)" + list.get(i));
+			}
+		}
 	}	
 	
 	
 	
-	//�Խ��� ����
 	@Override
-	public void updaterModify(RBoardVO rboardVO) {
+	public void updaterModify(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
-		rmapper.updaterModify(rboardVO);	
+		log.info("아아아아아=" + rboardVO);
+		rmapper.updaterModify(rboardVO);
+		
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(rboardVO, mpRequest);
+		log.info("list=" + list);
+		int size = list.size();
+		for(int i=0; i<size; i++){ 
+			rmapper.updateFile(list.get(i)); 
+			System.out.println("list.get(i)" + list.get(i));
+		}
 	}
 	
-	//�Խ��� ����
 	@Override
 	public void deleterBoard(int rBoardNum) {
 		
 		rmapper.deleterBoard(rBoardNum);		
 	}
 	
+	@Override
+	public List<Map<String, Object>> selectFileList(int rBoardNum) throws Exception {
+
+		return rmapper.selectFileList(rBoardNum);
+	}
 	
-	//��� ���
+	
+	@Override
+	public void removerBoard(int rBoardNum) {
+		
+		rmapper.deleteFile(rBoardNum);
+	}
+	
+	
 	@Override
 	public List<RReplyVO> replyList(int rBoardNum) throws Exception {
 		
@@ -92,7 +140,6 @@ public class RBoardServiceImpl implements RBoardService {
 		return rmapper.replyList(rBoardNum);
 	}
 	
-	//��� �ۼ�
 	@Override
 	public void registReply(RReplyVO reply) throws Exception {
 		
@@ -100,7 +147,6 @@ public class RBoardServiceImpl implements RBoardService {
 		
 	}
 	
-	//��� ����
 	@Override
 	public void deleteReply(RReplyVO reply) throws Exception {
 		log.info("deleteReply...");
@@ -109,29 +155,12 @@ public class RBoardServiceImpl implements RBoardService {
 		
 	}
 	
-	//��� ���̵� Ȯ��
 	@Override
 	public String replyUserIdCheck(int repNum) throws Exception {
 		log.info("idCheck...");
 		
 		return rmapper.replyUserIdCheck(repNum);
 	}
-	
-	//����¡ ó��
-		@Override
-		public int getTotalCount(Criteria cri) {
-			
-			log.info("get total count...");
-			return rmapper.getTotalCount(cri);
-		}
-
-		
-		@Override
-		public List<FBoardVO> getListWithPaging(Criteria criteria) {
-			
-			log.info("get List with criteria"  + criteria);
-			return rmapper.getListWithPaging(criteria);
-		}
 
 		@Override
 		public int updateLike(int rBoardNum) {
@@ -179,6 +208,8 @@ public class RBoardServiceImpl implements RBoardService {
 			rmapper.cntLike(rBoardNum);
 			
 		}
+		
+		
 		
 
 
