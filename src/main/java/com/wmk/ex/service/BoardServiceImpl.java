@@ -62,7 +62,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		mapper.insertBoard(boardVO);
 		
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(boardVO, mpRequest); 
+		/*List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(boardVO, mpRequest); 
 		
 		System.out.println("listlist" + list);
 		
@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
 			mapper.insertFile(list.get(i)); 
 			
 			System.out.println("list.get(i)" + list.get(i));
-		}
+		}*/
 	}
 
 	
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	//°Ë»ö±â´É
+	//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public List<BoardVO> boardByTitle(BoardVO boardVO) {
 		
@@ -103,7 +103,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	//ÆäÀÌÂ¡ Ã³¸®
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½
 	@Override
 	public int getTotal(Criteria cri) {
 		
@@ -120,7 +120,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	//´ñ±Û ¸ñ·Ï ±â´É
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<ReplyVO> readReply(int bId) {
 		
@@ -129,7 +129,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	//´ñ±Û ÀÛ¼º 
+	//ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ 
 	@Override
 	public void writeReply(ReplyVO vo) {
 		
@@ -137,7 +137,7 @@ public class BoardServiceImpl implements BoardService {
 		mapper.writeReply(vo);
 	}
 	
-	//Ajax ´ñ±Û ÀÛ¼º
+	//Ajax ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@Override
 	public void writeReply(HashMap<String, String> comment) {
 		log.info("writeReply2...");
@@ -145,21 +145,22 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-	//Ajax ´ñ±Û ¸ñ·Ï
+	//Ajax ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<ReplyVO> readReply(ReplyVO replyVO) {
 		
 		return mapper.readReply(replyVO);
 	}
 	
-	// Ã·ºÎÆÄÀÏ Á¶È¸
+	// Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	@Override
 	public List<Map<String, Object>> selectFileList(int bId) {
 		return mapper.selectFileList(bId);
 	}
 
+
 	
-//	//´ñ±Û »èÁ¦
+//	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	@Override
 //	public void deleteReply(ReplyVO vo) {
 //		

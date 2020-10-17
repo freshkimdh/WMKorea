@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wmk.ex.service.RBoardService;
 import com.wmk.ex.vo.CustomUser;
@@ -46,7 +48,7 @@ public class RBoardController {
 	
 	private RBoardService rservice;
 	
-	//������ ���
+	
 	@RequestMapping("/areaIndex")
 	public String areaList(RBoardVO rboardVO, Model model) {
 		
@@ -56,48 +58,71 @@ public class RBoardController {
 		return "/review_board/areaIndex";
 	}
 	
-	//�Խ��� ���
+	
 	@RequestMapping("/review_boardList")
-	public String reviewList(RBoardVO rboardVO, Model model, String rArea) {
-		System.out.println("rArea����" + rArea);
+	//작성 후(write 메서드) 보낸 파라메터 값(지역명)을 받기 위해 @RequestParam 을 사용한다.
+	public String reviewList(RBoardVO rboardVO, Model model, @RequestParam("rArea") String rArea) {
+		
+		log.info("rArea지역은=" + rArea);
 		log.info("review_boardList...");
+		log.info("rboardVO 왜 안나오까?" + rboardVO.toString());
+		
+		//만약 rArea가 ""이 아니거나 null값이 아니면, rArea의 값을 vo에 넣어준다.
+		if(!"".equals(rArea) || rArea != null  ) {
+			rboardVO.setrArea(rArea);
+		}
+		
 		model.addAttribute("rList", rservice.getReviewList(rboardVO));
 		model.addAttribute("rArea", rboardVO.getrArea());
-		System.out.println("rArea"+ rboardVO.getrArea());
+		
+		log.info("rList" + rservice.getReviewList(rboardVO));
+		log.info("rArea" + rboardVO.getrArea());
 		
 		return "/review_board/userReviewList";
 	}
 	
-	  //�Խ��� ��� ajax
+	 //list ajax page
 	  @RequestMapping("/review_boardList_ajax") 
 	  @ResponseBody
 	  public List<RBoardVO> reviewListAjax(@RequestBody RBoardVO rboardVO, Model model) {
 	  
 	     log.info("review_boardList_ajax..."); 
-	    // System.out.println("cate" + rboardVO.getrCategory());
-	     System.out.println("rArea"+ rboardVO.getrArea());
-		// model.addAttribute("area", area);
+	     log.info("rArea"+ rboardVO.getrArea());
 	     
 	     List<RBoardVO> list = null;
+	     //if category가 0이면 모든 리스트를 출력하고, 아니라면 ajax리스트를 가져와라.
 	     if(rboardVO.getrCategory() == 0) {
 	    	 list = rservice.getReviewList(rboardVO);
 	     }else {
 	    	 list = rservice.getReviewListAjax(rboardVO);
 	     }
-			 
-		return list ;
+	     model.addAttribute("rList", rservice.getReviewList(rboardVO));	   //??
+		
+	    return list ;
 	  }
 
-	//�Խ��� ����
+	
 	@GetMapping("/review_contentView") 
-	public String reviewContentView(RBoardVO rboardVO, Model model, String area, int rBoardNum,  Authentication authentication) throws Exception {
-		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
+	public String reviewContentView(RBoardVO rboardVO, Model model,  @RequestParam("area") String area, 
+									int rBoardNum, Authentication authentication) throws Exception {
 		
+		//if area가 ""아니면, area를 jsp에 area라는 이름으로 뿌려준다.
 		if(area != "") {
 			model.addAttribute("area", area);
 			log.info("Area!!!!!!!!!!!!!!!!!!!!");
 		}
-		model.addAttribute("list", rservice.getReviewList(rboardVO));
+		
+		log.info("rContent_view...");
+		
+		model.addAttribute("rContentView", rservice.getrBoardNum(rboardVO.getrBoardNum()));
+		log.info("rContentView=" + rservice.getrBoardNum(rboardVO.getrBoardNum()));
+		
+		List<Map<String, Object>> fileList = rservice.selectFileList(rboardVO.getrBoardNum());
+		model.addAttribute("file", fileList);
+		
+		/*
+		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
+
 		if(loginInfo == null) {
 			// 로그인 안된사람은 좋아요 눌르지 못하니 false리턴
 			model.addAttribute("isSelectLike", false);
@@ -106,142 +131,155 @@ public class RBoardController {
 			int likeCount = rservice.getLikeCount(rboardVO.getrBoardNum(), loginInfo.getUser().getId());
 			log.info(likeCount);
 			model.addAttribute("isSelectLike", likeCount > 0);
-			
 		}
-		log.info("content_view...");
-		model.addAttribute("rContentView", rservice.getrBoardNum(rboardVO.getrBoardNum()));
-		log.info("CONTENTVIEW	:rservice.getrBoardNum(rboardVO.getrBoardNum())..??????");
-		
-		log.info("LIST		:rservice.getReviewList(rboardVO)))..??????");
-		
-	   
+		*/
 	   
 		return "/review_board/reviewContentView";
 	}
 	
-	//�Խ��� �ۼ� view
+	
 	@RequestMapping("/review_writeView")
 	public String reviewWriteView(RBoardVO rboardVO ,Model model) {
 		
 		log.info("review_writeView...");
-		System.out.println("area2="+ rboardVO.getrArea());
+		log.info("area2="+ rboardVO.getrArea());
 		model.addAttribute("rArea", rboardVO.getrArea());
 		
 		return "/review_board/writeView";
 	}
 	
-	//�Խ��� �ۼ� 
-	@RequestMapping("/review_write")
-	public String write(RBoardVO rboardVO, String area) throws Exception {
-//		public String write(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception {
-		log.info("review_write...");
-		System.out.println("area="+ area);
-		System.out.println("����="+ rboardVO.toString());
-		//rservice.rWriteBoard(rboardVO, mpRequest);
-		rservice.rWriteBoard(rboardVO);
-		
 
-		return "review_boardList?rArea="+ area;
+	@RequestMapping("/review_write")
+	public String write(RBoardVO rboardVO, String area, RedirectAttributes redirect, MultipartHttpServletRequest mpRequest) throws Exception {
+		
+		log.info("review_write...");
+		log.info("area="+ area);
+		rservice.rWriteBoard(rboardVO, mpRequest);
+		
+		//redirect로 parameter값 전달(get방식으로 area값을 보내주기 위해 redirect를 한다.) **받는 곳에서 반드시 @RequestParam으로 매핑해주어야함!!!
+		redirect.addAttribute("rArea", area);  
+		
+		return "redirect:review_boardList";
 	}
 	
-	//�Խ��� ���� ȭ��
+	//수정화면
 	@GetMapping("/review_modifyView") 
-	public String reviewModifyView(RBoardVO rboardVO, Model model) {
+	public String reviewModifyView(RBoardVO rboardVO, Model model, String area) throws Exception {
 	
 		log.info("review_modifyView...");	
-
+		log.info("rboardVO.getrArea()=" + rboardVO.getrArea());
 		model.addAttribute("rModifyView", rservice.getrBoardNum(rboardVO.getrBoardNum()));
+		model.addAttribute("area", area);
+		
+		List<Map<String, Object>> fileList = rservice.selectFileList(rboardVO.getrBoardNum());
+		model.addAttribute("file", fileList);
 		
 		return "/review_board/modifyView";
 	}
 	
-	//�Խ��� ����
+	//수정
 	@RequestMapping("/review_modify")
-	public String reviewModify(RBoardVO rboardVO) {
+	public String reviewModify(RBoardVO rboardVO, RedirectAttributes redirect, MultipartHttpServletRequest mpRequest) throws Exception {
 		
 		log.info("review_modify...");
-		rservice.updaterModify(rboardVO);
+		log.info("rboardVO!!!=" + rboardVO);
 		
-		return "redirect:review_boardList";
+		rservice.updaterModify(rboardVO, mpRequest);
+		
+		log.info("수정내용 보여줘"+ rboardVO.toString());
+		
+		
+		redirect.addAttribute("area", rboardVO.getrArea());
+		redirect.addAttribute("rBoardNum", rboardVO.getrBoardNum());
+		
+		return "redirect:review_contentView";
 	}
 
-	//�Խ��� ����
+
 	@GetMapping("/review_delete") 
-	public String reviewDelete(RBoardVO rboardVO) {
+	public String reviewDelete(RBoardVO rboardVO, RedirectAttributes redirect) {
 		
 	    log.info("review_delete...");
-	    
+	    log.info("rboardVO="+ rboardVO);
+	    //글번호를 넣어서 db에 해당 글번호에 해당하는 한줄을 가져온다.
 	    RBoardVO getDetail = rservice.getrBoardNum(rboardVO.getrBoardNum());
 	    log.info("getDetail=" + rservice.getrBoardNum(rboardVO.getrBoardNum()));
 	    
-	    //rContent�� �����ͼ� ckeditor�� �־��� ������ �̸��� �и��Ͽ� �迭�� ��´�.
+	    //rContent를 가져와서 ckeditor에 넣었던 값들의 이름을 분리하여 배열에 담는다.
+	    //위의 getDetail 한줄 안에 있는 글내용을 선언하여 저장한다. 
 	    String rContent = getDetail.getrContent();
-	    
-	    String[] rContArr = rContent.split("uid=|#");
-	    
-	    log.info("rContentArrLeng=" + + rContArr.length);
-	    
-	    //�̹����� ���� �� �迭�� ���̰� 1�̾����Ƿ�, 1���� Ŭ ���� if�� �ۼ��Ѵ�.
-	    if(rContArr.length > 1) {
-	    	for(int i=0; i<=rContArr.length-1; i++) {
-	    		if(i%2 != 0) {
-	    			//���ϴ� ���� ���� �� ������ ����
-	    			String realName= rContArr[i];
-	    			String realName2;
-	    			String realName3;
-	    			realName2 = realName.replace("&amp;", "");
-					realName3= realName2.replace("fileName=", "_");
-					log.info("realName3=" + realName3);
-					
-					//�̹��� ���� ������ ���
-					File existFile = new File( "C:\\Review\\" + "ckImage/" + realName3); 
-					if(existFile.exists()){
-						existFile.delete(); 
-					}
-	    		}
-	    		
+	   //rContent의 값이 없거나 빈값이라면
+	    if(rContent == null || "".equals(rContent)) {
+	    	rservice.deleterBoard(rboardVO.getrBoardNum());
+			rservice.removerBoard(rboardVO.getrBoardNum());
+	    //rContent의 값이 존재하면	
+	    }else{
+	    	int imgFindIndex = rContent.indexOf("uid=");
+	    	//rContent 내용중 이미지가 존재하는경우
+	    	if(imgFindIndex == -1) {
+	    		String[] rContArr = rContent.split("uid=|#");
+		    	//이미지가 없을 때 배열의 길이가 1로 출력됨. 1보다 클 경우로 if문 작성한다.
+	    	    if(rContArr.length > 1) {
+	    	    	for(int i=0; i<=rContArr.length-1; i++) {
+	    	    		if(i%2 != 0) {
+	    	    			
+	    	    			String realName= rContArr[i];
+	    	    			String realName2;
+	    	    			String realName3;
+	    	    			realName2 = realName.replace("&amp;", "");
+	    					realName3= realName2.replace("fileName=", "_");
+	    					log.info("realName3=" + realName3);
+	    					
+	    					File existFile = new File( "C:\\Review\\" + "ckImage/" + realName3); 
+	    					if(existFile.exists()){
+	    						existFile.delete(); 
+	    					}
+	    	    		}
+	    	    		
+	    	    	}
+	    	    	
+	    	    }
 	    	}
-	    	
-	    }
-	    rservice.deleterBoard(rboardVO.getrBoardNum());
+	    	rservice.deleterBoard(rboardVO.getrBoardNum());
+			rservice.removerBoard(rboardVO.getrBoardNum());
+	    }; 
+		
+		redirect.addAttribute("rArea", rboardVO.getrArea());
 	    
-	    return "redirect:review_boardList";
+		return "redirect:review_boardList";
 	}
 
-	//ckeditor �̹��� ���ε�
+	//ckeditor 이미지 저장
 	@RequestMapping("/img/imageUpload.do")
     public void imageUpload(HttpServletRequest request,
             HttpServletResponse response, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
         
-		// ���� ���� ����
+		//파일명 변경
         UUID uid = UUID.randomUUID();
         OutputStream out = null;
         PrintWriter printWriter = null;
         
-        //���ڵ�
+        
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         
         try{
             
-            //���� �̸� ��������
-            String fileName = upload.getOriginalFilename(); //���ε��� �������� ���� ������ ���Ѵ�.
-            byte[] bytes = upload.getBytes(); //���ε��� ���� �����͸� ���Ѵ�.
+            String fileName = upload.getOriginalFilename();
+            byte[] bytes = upload.getBytes();
             
         	
-            //�̹��� ��� ����
+            //저장되는 이미지 경로
             String path = "C:\\Review\\" + "ckImage/";
 
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
            
-            
-            
-            //�ش� ���丮 Ȯ��(���丮�� ���� ��� �������ش�.)
+            //저장파일이 존재하지 않는다면
             if(!folder.exists()){
                 try{
-                    folder.mkdirs(); // ���丮 ����
+                    folder.mkdirs(); // 만들어준다. (디렉토리)
                 }catch(Exception e){
                     e.getStackTrace();
                 }
@@ -249,15 +287,15 @@ public class RBoardController {
             
             out = new FileOutputStream(new File(ckUploadPath));
             out.write(bytes);
-            out.flush(); // outputStram�� ����� �����͸� �����ϰ� �ʱ�ȭ
+            out.flush();
             
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
-            String fileUrl = "/ex/img/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName+ "&#";  // �ۼ�ȭ��
+            String fileUrl = "/ex/img/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName+ "&#"; 
         
-            // ���ε�� �޽��� ���
+            
             printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-            printWriter.flush(); //���� ���ۿ� ����Ǿ� �ִ� ������ Ŭ���̾�Ʈ�� �����ϰ� ���۸� ����. (JSP)
+            printWriter.flush(); 
 
         }catch(IOException e){
             e.printStackTrace();
@@ -277,14 +315,12 @@ public class RBoardController {
                             , HttpServletRequest request, HttpServletResponse response)
                             		throws ServletException, IOException{
         
-	//������ ����� �̹��� ���
 	String path = "C:\\Review\\" + "ckImage/";
    
     String sDirPath = path + uid + "_" + fileName;
 	
     File imgFile = new File(sDirPath);
     
-    //���� �̹��� ã�� ���ϴ� ��� ����ó���� �� �̹��� ������ �����Ѵ�.
     if(imgFile.isFile()){
         byte[] buf = new byte[1024];
         int readByte = 0;
@@ -320,7 +356,7 @@ public class RBoardController {
 }
 	
 	
-	//��� �ۼ�
+	//댓글
 	@ResponseBody
 	@RequestMapping(value = "/review_contentView/registReply", method = RequestMethod.POST)
 	public void registReply(RReplyVO reply) throws Exception {
@@ -340,16 +376,11 @@ public class RBoardController {
 	   
 	 }
 	 
-	 
 	 rservice.registReply(reply);
 	 
-	 log.info("����");
-	 
-	 //return "redirect:/review_contentView?rBoardNum=" + reply.getrBoardNum() + "&area=";
 	}
 	
 	
-	// ��ǰ �Ұ�(���) ���
 	@ResponseBody
 	@RequestMapping("/review_contentView/replyList")
 	public List<RReplyVO> getReplyList(@RequestParam("n") int rBoardNum) throws Exception {

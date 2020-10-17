@@ -19,16 +19,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="resources/ckeditor/ckeditor.js"></script>
-
-<!-- 	<style> /* Font responsive  */
-	body {font-size: 16px;}
-	#district {font-size: 1rem;}
-	#disf {
-	/* font-size: 4rem; */
-	font-size: 4vw;}
-	</style> -->
 	
-	<style>
+  <style>
 	
   /* Make the image fully responsive */
   .carousel-inner img {
@@ -90,94 +82,49 @@
 
  	$(document).ready(function(){
  		 $("#regBtn").on("click", function(){  
- 	        alert("테스트입니다요.");
- 	       var rArea = "${rArea}";
- 	        /* alert(rArea);
-            document.getElementById("boardForm")[0].setAttribute("area", rArea).submit();
- 	 	    console.log(form); */
- 	 	    
- 	 	    
- 	 	  	/* var abc = document.getElementById("boardForm")[0].setAttribute("area", rArea);
- 	 	  	
- 	 	  	abc.submit();    */            // action으로 url을 지정
- 	 		//document.boardForm.submit();    
-		
- 	 	  	
- 	 	  /* var 	abc = document.getElementById("boardForm");
- 	 	  var input_id = document.createElement("input");
+ 			var title = document.forms["boardForm"]["rTitle"].value;
+ 			if (title == "" || title == null){
+ 		    alert("글제목을 입력해주세요.");
+ 				return false;
+ 			}
+ 			var inshort = document.forms["boardForm"]["rInShort"].value;
+ 			if (inshort == "" || inshort == null){
+ 		    alert("회원님의 피셜을 들려주세요.");
+ 			return false;
+ 			}
+ 	    });   
+ 		
+ 		function removeCheck() {
+ 			
+ 			if (confirm("목록으로 돌아가겠습니까?") == true){
 
- 	 	  input_id.setAttribute("type", "hidden");
+ 			document.form.submit();
 
- 	 	  input_id.setAttribute("name", "area");      //name 속성 지정
- 	 	  input_id.setAttribute("value", rArea);        //value 값 설정
+ 			 }else {
+ 				 return false;
+ 			}
 
- 	 	  var aaa = abc.appendChild(input_id);
- 	 	  
- 	 	  
- 	 	  aaa.submit();                 //from 태그에 추가 */
- 	 	  
-		 	 	document.boardForm.action="review_write?rArea="+ "${rArea}";         // 만약 다른 주소로 전송 할 경우
-		 	 	
-		 	 	document.boardForm.submit();
-
- 	 	  
- 	    });    
+ 		}
  		
  	});
 
-	function validateForm() {
-		
-		var name = document.forms["boardForm"]["bName"].value;
-		if (name == "" || name == null){
-	    alert("이름을 입력해주세요.");
-		return false;
-		}
-	  
-	}
 	
-/* 	function validateForm2() {
-		
-		var pw = document.forms["boardForm"]["bPw"].value;
-		if (pw == "" || pw == null){
-	    alert("비밀번호를 입력해주세요.");
-		return false;
-		}
-	  
-	} */
-	
-	function validateForm3() {
-		
-		var title = document.forms["boardForm"]["bTitle"].value;
-		if (title == "" || title == null){
-	    alert("제목을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
-	function validateForm4() {
-		
-		var con = document.forms["boardForm"]["bContent"].value;
-		if (con == "" || con == null){
-	    alert("내용을 입력해주세요.");
-		return false;
-		}
-	  
-	}
-	
-	function removeCheck() {
-		
-		if (confirm("목록으로 돌아가겠습니까?") == true){
-
-		document.form.submit();
-
-		 }else {
-			 return false;
-		}
-
-	}
 
  	</script> 
+ 	
+ 	<!-- 이미지 미리보기 -->
+ 	<script> 
+	  function setThumbnail(event) { 
+		var reader = new FileReader(); 
+		reader.onload = function(event) {
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			document.querySelector("div#image_container").appendChild(img);
+		};
+			
+			reader.readAsDataURL(event.target.files[0]); 
+	  }
+	</script>
 		
 
 
@@ -298,8 +245,6 @@
   <h2>여행후기게시판</h2> <br>
  
 
-
-
 <%-- <sec:authorize access="isAnonymous()">
 	<div class="row">
     	<div class="col">
@@ -311,24 +256,18 @@
     	
 	</div>
 </sec:authorize> --%>
-<%-- 	<input type="hidden" name="rArea" value='<c:if test=""></c:if>'> --%>
-<form id ="boardForm" name="boardForm" action="review_write" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="post" <%-- required --%> enctype="multipart/form-data">
+<form id ="boardForm" name="boardForm" action="review_write" method="post" required enctype="multipart/form-data">
 	<input type="hidden" name="area" value='<c:out value="${rArea}"></c:out>'>
 <sec:authorize access="isAuthenticated()">
     
-<!--<label for="bName"></label> -->
 	<input type="hidden" class="form-control" id="rId" placeholder="" name="rId" value="<sec:authentication property="principal.user.id"/>">
 
 </sec:authorize> 
-	
- 	<!-- <div class="form-group">
-    <label for="bTitle">작성자:</label>
-      <input type="text" class="form-control" id="rId" placeholder="" name="rId"> <p>
-	</div>  -->
+
 
 	<div class="form-group">
     <label for="rCategory">분류:</label>
-     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
+    
      <select id="rCategory" name="rCategory">
     	<option value="1">관광지</option>
     	<option value="2">행사</option>
@@ -340,10 +279,15 @@
 	<label for="rArea">지역 :</label>
      <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
      <select id="rArea" name="rArea">
-    	<option value="서울">서울</option>
-    	<option value="인천">인천</option>
-    	<option value="경기">경기</option>
-    	<option value="대구">대구</option>
+    	<option value="서울·경기·인천">서울·경기·인천</option>
+    	<option value="강원도">강원도</option>
+    	<option value="충청북도">충청북도</option>
+    	<option value="충청남도">충청남도</option>
+    	<option value="경상북도">경상북도</option>
+    	<option value="경상남도">경상남도</option>
+    	<option value="전라북도">전라북도</option>
+    	<option value="전라남도">전라남도</option>
+    	<option value="제주도">제주도</option>
 	</select>
 	
 	</div>
@@ -368,7 +312,16 @@
     <label for="rTitle">피셜:</label>
       <input type="text" class="form-control" id="rInShort" placeholder="" name="rInShort"> <p>
 	</div>
-
+	
+	<div class="form-group">
+    <label for="Thumbnail">썸네일용 이미지:</label>
+      <input type="file" class="form-control" name="uploadImg" accept="image/*" onchange="setThumbnail(event);"> <p>
+	</div>
+	
+	<div class="form-group" id="image_container">
+    <label for="fileImage">썸네일용 이미지 미리보기:</label><br>
+	</div>
+	
     <div class="form-group" >
       <label for="rContent">내용:</label>
       <textarea class="form-control" rows="10" id="rContent" name="rContent"></textarea>
@@ -377,7 +330,7 @@
 		</script> 
     </div>
   
-	<p align="center"><button type="button" id="regBtn" class="btn btn-dark">등록</button> 
+	<p align="center"><button type="submit" id="regBtn" class="btn btn-dark">등록</button> 
 <!-- 	<a href="boardList" class="btn btn-dark" role="button" onclick="removeCheck()">취소</a></p> -->
 	<a href="review_boardList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
 

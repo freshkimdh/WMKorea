@@ -15,9 +15,7 @@ create table FREE_BOARD
 	FGROUP NUMBER(4),
 	FSTEP NUMBER(4),
 	FINDENT NUMBER(4),
-	LIKE_CNT NUMBER default 0,
-	HATE_CNT NUMBER,
-	VIEW_CNT NUMBER
+	LIKE_CNT NUMBER default 0
 )
 
  좋아요 테이블 생성
@@ -26,7 +24,7 @@ create table LIKETO
 (
 	LIKENO NUMBER(5) not null
 		primary key,
-	FBOARD_NUM NUMBER(4)
+	RboardNum NUMBER(4)
 		references FREE_BOARD,
 	ID VARCHAR2(50) not null
 		references WMK_USERS,

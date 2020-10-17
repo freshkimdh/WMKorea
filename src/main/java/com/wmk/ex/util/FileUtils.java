@@ -1,5 +1,6 @@
 package com.wmk.ex.util;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,30 +8,34 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.wmk.ex.vo.BoardVO;
+
+import com.wmk.ex.vo.RBoardVO;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@Component("fileUtils")   // »ç¿ëµÈ Å¬·¡½º¸¦ ÀÚµ¿À¸·Î ºó¿¡ µî·ÏÇØÁÖ´Â ¿¡³ëÅ×ÀÌ¼Ç
+@Component("fileUtils")   
 public class FileUtils {
 	
-	//ÆÄÀÏ ÀúÀå
-	private static final String filePath = "C:\\Users\\Administrator\\git\\WMKorea\\src\\main\\webapp\\resources\\img\\"; // ÆÄÀÏÀÌ ÀúÀåµÉ À§Ä¡
+	
+	private static final String filePath = "C:\\WMKOREA\\ThumbnailImg\\"; //ì´ë¯¸ì§€ ì €ì¥ê²½ë¡œ
 	
 	
-	public List<Map<String, Object>> parseInsertFileInfo(BoardVO boardVO, 
+	public List<Map<String, Object>> parseInsertFileInfo(RBoardVO rboardVO, 
 			MultipartHttpServletRequest mpRequest) throws Exception{
 		
+		log.info("rboardVO=" + rboardVO.toString());
 		
 		/*
-			IteratorÀº µ¥ÀÌÅÍµéÀÇ ÁıÇÕÃ¼ ¿¡¼­ ÄÃ·º¼ÇÀ¸·ÎºÎÅÍ Á¤º¸¸¦ ¾ò¾î¿Ã ¼ö ÀÖ´Â ÀÎÅÍÆäÀÌ½ºÀÔ´Ï´Ù.
-			List³ª ¹è¿­Àº ¼øÂ÷ÀûÀ¸·Î µ¥ÀÌÅÍÀÇ Á¢±ÙÀÌ °¡´ÉÇÏÁö¸¸, MapµîÀÇ Å¬·¡½ºµéÀº ¼øÂ÷ÀûÀ¸·Î Á¢±ÙÇÒ ¼ö°¡ ¾ø½À´Ï´Ù.
-			IteratorÀ» ÀÌ¿ëÇÏ¿© Map¿¡ ÀÖ´Â µ¥ÀÌÅÍµéÀ» while¹®À» ÀÌ¿ëÇÏ¿© ¼øÂ÷ÀûÀ¸·Î Á¢±ÙÇÕ´Ï´Ù.
-		*/
+		Iteratorì€ ë°ì´í„°ë“¤ì˜ ì§‘í•©ì²´? ì—ì„œ ì»¬ë ‰ì…˜ìœ¼ë¡œë¶€í„° ì •ë³´ë¥¼ ì–»ì–´ì˜¬ ìˆ˜ ìˆëŠ” ì¸í„°í˜ì´ìŠ¤ì…ë‹ˆë‹¤.
+		Listë‚˜ ë°°ì—´ì€ ìˆœì°¨ì ìœ¼ë¡œ ë°ì´í„°ì˜ ì ‘ê·¼ì´ ê°€ëŠ¥í•˜ì§€ë§Œ, Mapë“±ì˜ í´ë˜ìŠ¤ë“¤ì€ ìˆœì°¨ì ìœ¼ë¡œ ì ‘ê·¼í•  ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.
+		Iteratorì„ ì´ìš©í•˜ì—¬ Mapì— ìˆëŠ” ë°ì´í„°ë“¤ì„ whileë¬¸ì„ ì´ìš©í•˜ì—¬ ìˆœì°¨ì ìœ¼ë¡œ ì ‘ê·¼í•©ë‹ˆë‹¤.
+		 */
 		
 		Iterator<String> iterator = mpRequest.getFileNames();
 		
@@ -42,7 +47,7 @@ public class FileUtils {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		Map<String, Object> listMap = null;
 		
-		int bId = boardVO.getbId();
+		int rBoardNum = rboardVO.getrBoardNum();
 		
 		File file = new File(filePath);
 		if(file.exists() == false) {
@@ -59,7 +64,7 @@ public class FileUtils {
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);
 				listMap = new HashMap<String, Object>();
-				listMap.put("bId", bId);
+				listMap.put("rBoardNum", rBoardNum);
 				listMap.put("ORIGINAL_FILE_NAME", originalFileName);
 				
 				log.info("originalFileName=" + originalFileName);

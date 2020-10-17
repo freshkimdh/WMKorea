@@ -283,7 +283,7 @@ function replyList() {
 <table class="table">
     <thead>
 	<tr>
-		<th align="center"><h3 align="center">${rContentView.rTitle} ${rContentView.rInShort}</h3></th>
+		<th align="center"><h3 align="center">${rContentView.rTitle}</h3></th>
 	</tr>
     </thead>
 
@@ -293,7 +293,7 @@ function replyList() {
         <p><span class="badge badge-pill badge-secondary">No</span> ${rContentView.rBoardNum}
         <span class="badge badge-pill badge-secondary">조회수</span> ${rContentView.rHit}
         <span class="badge badge-pill badge-secondary">좋아요</span> ${rContentView.like_Cnt}
-                <span class="badge badge-pill badge-secondary">등록일 </span><%-- ${rContentView.rDate} --%> <fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
+                <span class="badge badge-pill badge-secondary">등록일 </span><fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
         </p>
         
 		<div class="card">
@@ -301,7 +301,14 @@ function replyList() {
 	        	<div class="row">
         			<div class="col-md-5">
         				<div class="content_picture">
-        	       		<img src="img/travel_board_img/kyungbok.jpg" class="rounded img-fluid"/>
+        	       		<c:forEach var="files" items="${file}" >
+        	       			<c:if test="${files.STORED_FILE_NAME eq null || files.STORED_FILE_NAME eq ' '}" >
+        	       				<img src="/filePath/null.jpg" class="rounded img-fluid"/>
+        	       			</c:if>	
+        	       			<c:if test="${files.STORED_FILE_NAME ne null && files.STORED_FILE_NAME ne ' ' }" >
+        	       				<img src="/filePath/${files.STORED_FILE_NAME}" class="rounded img-fluid"/>
+        	       			</c:if>
+        	       		</c:forEach>
         	       		</div><br>
         	    	</div>
         	    
@@ -460,9 +467,8 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 <!--  board buttons --> 
 <div class="container">
 <p align="right">
-<a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}" class="btn btn-dark" role="button">수정</a>
-<a href="review_delete?rBoardNum=${rContentView.rBoardNum}" class="btn btn-dark" role="button">삭제</a>
-<a href="review_boardList" class="btn btn-dark" role="button">목록</a>
+<a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a>
+ <a href="review_delete?rBoardNum=${rContentView.rBoardNum}&rArea=${rContentView.rArea}" class="btn btn-dark" role="button">삭제</a>
 </p>
 <br>
 </div>

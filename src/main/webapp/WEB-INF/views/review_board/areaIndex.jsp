@@ -180,43 +180,10 @@
 	</div>
 
  	</ul>
-</div>
+	</div>
 
 </nav>
 
-<%-- 
-<div id="demo" class="carousel slide" data-ride="carousel">
-
-  <!-- Indicators -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-     <li data-target="#demo" data-slide-to="1"></li>
-     <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  
-  <!-- The slideshow -->
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/main_carousel_1_text.jpg" alt="main_carousel_1" width="800" height="250">
-    </div>
-    <div class="carousel-item">
-      <img src="img/main_carousel_2.jpg" alt="Chicago" width="800" height="250">
-    </div>
-    <div class="carousel-item">
-      <img src="img/main_carousel_3.jpg" alt="New York" width="800" height="250">
-    </div> 
-  </div>
-  
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-
- --%>
 
 <p>
 <div class="container">
@@ -233,196 +200,140 @@
 	
 	<div class="col-sm-4">
 	
-	<div class="img-container" onclick="location.href='review_boardList?rArea=서울'">
-	<p align="center"><a href="review_boardList?rArea='서울 '"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<div class="img-container" onclick="location.href='review_boardList?rArea=서울·경기·인천'">
+	<p align="center"><a href="review_boardList?rArea='서울·경기·인천'"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
 		<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>
 	</div>
 	
-      <h4 align="center">서울 (Seoul)</h4>
-      <p align="center">Hi Seoul SOUL OF ASIA<br>대한민국의 수도이자 광역자치단체</p>
-      <p align="center"><a href="review_boardList?rArea='서울 '" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-   		
-   	<br>
+      <h4 align="center"><a href="review_boardList?rArea='서울 ·경기·인천'" style="color: black">서울·경기·인천 </a></h4>
+      <p align="center">(Seoul·Gyeonggi·Incheon)
+   	  <br>
 	</div>
+	
 	
 	<div class="col-sm-4">
-	
-	<div class="img-container" onclick="location.href='review_boardList?rArea=경기'">
-	<p align="center"><a href="review_boardList?rArea='경기 '"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
-		<div class="overlay">
-    	<span><h5>자세히 보기</h5></span>
-    	</div>
-	</div>
-	
-      <h4 align="center">경기 (Gyeonggi)</h4>
-      <p align="center">정치·경제·문화의 미래를 만드는 곳<br>대한민국을 넘어 글로벌 스탠다드를 만드는 경기</p>
-      <p align="center"><a href="review_boardList?rArea='경기 '" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-   		
-   	<br>
-	</div>
-  	
-  	
-  	<div class="col-sm-4">
-  	<div class="img-container" onclick="location.href='review_boardList?rArea=인천'">
-    <p align="center"><a href="review_boardList?rArea='인천'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
-      			<div class="overlay">
-    		<span><h5>자세히 보기</h5></span>
-    		</div>
-    </div>
-     
-     
-      <h4 align="center">인천 (Incheon)</h4>
-      <p align="center">All ways INCHEON<br>살고 싶은 도시, 함께 만드는 인천</p>
-      <p align="center"><a href="review_boardList?rArea='인천'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-    </div>
-    
-<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Second Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->    
-
-    	<div class="col-sm-4">
-    <div class="img-container" onclick="location.href='review_boardList?rArea=충청 (Chungcheong)'">
-	<p align="center"><a href="review_boardList?rArea='충청 '"><img src="img/chung_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
-       	<div class="overlay">
-    	<span><h5>자세히 보기</h5></span>
-    	</div>     
-      
-    </div>  
-      
-      <h4 align="center">충청 (Chungcheong)</h4>
-      <p align="center"><br> 한반도의 지방으로, 서해를 끼고 있는 중남부 지역</p>
-      <p align="center"><a href="review_boardList?rArea='충청'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-   	<br>
-	</div>
-    
-    
-   	<div class="col-sm-4">
-   	<div class="img-container" onclick="location.href='review_boardList?rArea=강원'">
-	<p align="center"><a href="review_boardList?rArea='강원'"><img src="img/gangwon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+   	<div class="img-container" onclick="location.href='review_boardList?rArea=강원도'">
+	<p align="center"><a href="review_boardList?rArea='강원도'"><img src="img/gangwon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
        	<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>      
     </div>  
       
       
-      <h4 align="center">강원 (Gangwon)</h4>
-      <p align="center">새밝의 예나라 정든 내 고장<br>아침 해 먼저 받은 우리 강원도</p>
-      <p align="center"><a href="review_boardList?rArea='강원'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
+      <h4 align="center"><a href="review_boardList?rArea='강원도'" style="color: black">강원도</a></h4>
+      <p align="center">(Gangwon)</p>
       <br>
     </div>  
+	
+	
+	<div class="col-sm-4">
+	
+	<div class="img-container" onclick="location.href='review_boardList?rArea=충청북도'">
+	<p align="center"><a href="review_boardList?rArea='충청북도 '"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+		<div class="overlay">
+    	<span><h5>자세히 보기</h5></span>
+    	</div>
+	</div>
+	
+      <h4 align="center"><a href="review_boardList?rArea='충청북도'" style="color: black">충청북도</a></h4>
+      <p align="center">(Chung-cheong bukdo)</p>
+   	<br>
+	</div>
   	
   	
   	<div class="col-sm-4">
-   	<div class="img-container" onclick="location.href='review_boardList?rArea=대전'"> 	
-    <p align="center"><a href="review_boardList?rArea='대전 '"><img src="img/daejeon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+  	<div class="img-container" onclick="location.href='review_boardList?rArea=충청남도'">
+    <p align="center"><a href="review_boardList?rArea='충청남도'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+      			<div class="overlay">
+    		<span><h5>자세히 보기</h5></span>
+    		</div>
+    </div>
+     
+     
+      <h4 align="center"><a href="review_boardList?rArea='충청남도'" style="color: black">충청남도</a></h4>
+      <p align="center">(Chungcheongnam-do)</p>
+      <br>
+    </div>
+    
+<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Second Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->    
+
+    	<div class="col-sm-4">
+    <div class="img-container" onclick="location.href='review_boardList?rArea=경상북도'">
+	<p align="center"><a href="review_boardList?rArea='경상북도 '"><img src="img/chung_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+       	<div class="overlay">
+    	<span><h5>자세히 보기</h5></span>
+    	</div>     
+      
+    </div>  
+      
+      <h4 align="center"><a href="review_boardList?rArea='경상북도'" style="color: black">경상북도</a></h4>
+      <p align="center">(Gyeongsangbuk-do)</p>
+   	<br>
+	</div>
+    
+    
+   	
+  	
+  	
+  	<div class="col-sm-4">
+   	<div class="img-container" onclick="location.href='review_boardList?rArea=경상남도'"> 	
+    <p align="center"><a href="review_boardList?rArea='경상남도 '"><img src="img/daejeon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
        	<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
+    	
      </div> 
-      <h4 align="center">대전 (Daejeon)</h4>
-      <p align="center">대덕연구단지, 국제과학비즈니스벨트가 조성된 한국 최대의 과학·연구도시</p>
-      <p align="center"><a href="review_boardList?rArea='대전'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
+      <h4 align="center"><a href="review_boardList?rArea='서울 ·경기·인천'" style="color: black">경상남도</a></h4>
+      <p align="center">(Gyeongsangnam-do)</p>
       <br>
     </div>
     
 <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Third Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->    
 
 	<div class="col-sm-4">
-	<div class="img-container" onclick="location.href='review_boardList?rArea=전라'"> 	
-	<p align="center"><a href="review_boardList?rArea='전라'"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="300px" height="300px"></a></p><p>
+	<div class="img-container" onclick="location.href='review_boardList?rArea=전라북도'"> 	
+	<p align="center"><a href="review_boardList?rArea='전라북도'"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
         <div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
       </div> 
-      <h4 align="center">전라 (Jeolla)</h4>
-      <p align="center">전라도전라도<br>전라북도 전라남도</p>
-      <p align="center"><a href="review_boardList?rArea='전라'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
+      <h4 align="center"><a href="review_boardList?rArea='전라북도'" style="color: black">전라북도</a></h4>
+      <p align="center">(Jeollabuk do)</p>
    	<br>
 	</div>
     
     
    	<div class="col-sm-4">
-   	<div class="img-container" onclick="location.href='review_boardList?rArea=경상'">
-	<p align="center"><a href="review_boardList?rArea='경상'"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="300px" height="300px"></a></p><p>
+   	<div class="img-container" onclick="location.href='review_boardList?rArea=전라남도'">
+	<p align="center"><a href="review_boardList?rArea='전라남도'"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
       <div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
       </div> 
-      <h4 align="center">경상 (Gyeongsang)</h4>
-      <p align="center">경상도경상도<br>경상북도 경상남도</p>
-      <p align="center"><a href="review_boardList?rArea='경상'" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-    </div>  
-  	
-  	
-  	<div class="col-sm-4">
-  	<div class="img-container" onclick="location.href='review_boardList?rArea=부산'">
-    <p align="center"><a href="review_boardList?rArea='부산'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="300px" height="300px"></a></p><p> <!-- img-fluid -->
-      <div class="overlay">
-    	<span><h5>자세히 보기</h5></span>
-    	</div> 
-      </div> 
-      <h4 align="center">부산 (Busan)</h4>
-      <p align="center">부산부산<br>부산해운대</p>
-      <p align="center"><a href="review_boardList?rArea='부산 '" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-    </div>
-    
-    
-<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Fourth Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->    
-
-    	<div class="col-sm-4">
-	<img src="img/chung_icon.jpg" class="img-fluid mx-auto d-block rounded-circle" width="300px" height="300px"><p>
-      <h4 align="center">충청 (Chungcheong)</h4>
-      <p align="center">한반도의 지방으로, 서해를 끼고 있는 중남부 지역</p>
-      <p align="center"><a href="https://www.seoul.go.kr/main/index.jsp" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
-   	<br>
-	</div>
-    
-    
-   	<div class="col-sm-4">
-	<img src="img/gangwon_icon.jpg" class="img-fluid mx-auto d-block rounded-circle" width="300px" height="300px"><p>
-      <h4 align="center">강원 (Gangwon)</h4>
-      <p align="center">새밝의 예나라 정든 내 고장<br>아침 해 먼저 받은 우리 강원도</p>
-      <p align="center"><a href="http://www.provin.gangwon.kr/gw/portal" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
+      <h4 align="center"><a href="review_boardList?rArea='전라남도'" style="color: black">전라남도</a></h4>
+      <p align="center">(Jeollanam do)</p>
       <br>
     </div>  
   	
   	
   	<div class="col-sm-4">
-    <img src="img/daejeon_icon.jpg" class="img-fluid mx-auto d-block rounded-circle" width="300px" height="300px"><p> <!-- img-fluid -->
-      <h4 align="center">대전 (Daejeon)</h4>
-      <p align="center">대덕연구단지, 국제과학비즈니스벨트가 조성된 한국 최대의 과학·연구도시</p>
-      <p align="center"><a href="https://www.daejeon.go.kr/intro_main.jsp" class="btn btn-success btn-sm" role="button" align="center">공식 사이트 &raquo;</a></p>
+  	<div class="img-container" onclick="location.href='review_boardList?rArea=제주도'">
+    <p align="center"><a href="review_boardList?rArea='제주도'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+      <div class="overlay">
+    	<span><h5>자세히 보기</h5></span>
+    	</div> 
+      </div> 
+      <h4 align="center"><a href="review_boardList?rArea='제주도'" style="color: black">제주도</a></h4>
+      <p align="center">(Jeju do)</p>
       <br>
     </div>
-    
-  	
   	
   
-  
-
-       
   </div>
 </div>
-<!-- <p>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>인천</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>서울</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>대전</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
-</div> -->
+
 <br><br>
 <br><br><br>
 
