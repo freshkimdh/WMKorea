@@ -110,7 +110,7 @@
 	<div class="row"> 
 	
 		<div class="col-sm-6" id="s1">
-			<a href="index"><img src="img/main_logo2.png"></a>
+			<a href="${pageContext.request.contextPath}/index"><img src="img/main_logo2.png"></a>
 		</div> 
 		
 		<div class="col-sm-6" id="s2">
@@ -140,7 +140,7 @@
 	<ul class="navbar-nav">
 
 		<li class="nav-item">
-			<a class="nav-link" href="index">메인</a>
+			<a class="nav-link" href="${pageContext.request.contextPath}/index">메인</a>
 		</li>
 				
 		<li class="nav-item">
@@ -148,12 +148,10 @@
 		</li>
 				
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			내 캐릭터 만들기
-			</a>
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">내 캐릭터 만들기</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
-        	<a class="dropdown-item" href="goodsList">굿즈</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/characterMaking">내 캐릭터 만들기</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/goodsList">굿즈</a>
       		</div>
 		</li>
 		
@@ -163,8 +161,8 @@
 			커뮤니티
 			</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="free_boardList">자유 게시판</a>
-        	<a class="dropdown-item" href="areaIndex">여행지 게시판</a>
+        	<a class="dropdown-item" href="boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/areaIndex">여행지 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
 		</li>
