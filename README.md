@@ -7,7 +7,7 @@
   * sns소셜 카카오톡으로 로그인을 할 수 있도록 구현 
   * 나만의 캐릭터를 만들어 프로필로 지정 굿즈를 통해 티셔츠나 머그잔에 씌울수 있도록 구현
   > Skill Set
-  * Olacle
+  * Oracle
   * java 1.8
   * Apache Tomcat v9.0
   * Mybatis Olacle연동 
@@ -19,3 +19,8 @@
   >설치방법
   
   >구동방법
+  * jsp(ajax)
+  * Controller
+  * Service/ServiceImpl
+  * mapper
+  * DB(Oracle)
