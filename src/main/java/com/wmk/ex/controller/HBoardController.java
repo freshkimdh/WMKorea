@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

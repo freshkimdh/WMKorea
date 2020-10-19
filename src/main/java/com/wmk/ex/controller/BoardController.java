@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import java.util.List;
 
@@ -23,14 +23,14 @@ public class BoardController {
 	
 	private BoardService service;
 	
-	@RequestMapping("/boardList")
-	public String boardList(BoardVO boardVO,Model model) {
-		
-		log.info("/wmk_board/boardList");
-		model.addAttribute("list", service.getList());
-		
-		return "/wmk_board/boardList";
-	}
+//	@RequestMapping("/boardList")
+//	public String boardList(BoardVO boardVO,Model model) {
+//		
+//		log.info("/wmk_board/boardList");
+//		model.addAttribute("list", service.getList());
+//		
+//		return "/wmk_board/boardList";
+//	}
 	
 	
 	@RequestMapping("/writeView")

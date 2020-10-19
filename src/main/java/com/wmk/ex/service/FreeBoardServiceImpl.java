@@ -3,10 +3,10 @@ package com.wmk.ex.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.wmk.ex.mapper.FBoardMapper;
+import com.wmk.ex.mapper.FreeBoardMapper;
 import com.wmk.ex.page.Criteria;
-import com.wmk.ex.vo.FBoardVO;
-import com.wmk.ex.vo.FReplyVO;
+import com.wmk.ex.vo.FreeBoardVO;
+import com.wmk.ex.vo.FreeReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -14,13 +14,13 @@ import lombok.extern.log4j.Log4j;
 @Log4j 
 @Service
 @AllArgsConstructor
-public class FBoardServiceImpl implements FBoardService {
+public class FreeBoardServiceImpl implements FreeBoardService {
 	
-	private FBoardMapper mapper; 
+	private FreeBoardMapper mapper; 
 	
 	//占쌉쏙옙占쏙옙 占쏙옙占�
 	@Override
-	public List<FBoardVO> getList() {
+	public List<FreeBoardVO> getList() {
 		log.info("getList..."); 
 		
 		return mapper.getList();
@@ -28,8 +28,8 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//게시판 번호 get
 	@Override
-	public FBoardVO getNum(int fBoard_Num) {
-		FBoardVO fboardVO = mapper.getNum(fBoard_Num);
+	public FreeBoardVO getNum(int fBoard_Num) {
+		FreeBoardVO fboardVO = mapper.getNum(fBoard_Num);
 							mapper.addUphit(fBoard_Num);
 		
 		log.info("getNum..."); 
@@ -39,8 +39,8 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//FBoardVO fid = UserVO id >> get id
 	@Override
-	public FBoardVO getfId(String fId) {
-		FBoardVO fboardVO = mapper.getfId(fId);
+	public FreeBoardVO getfId(String fId) {
+		FreeBoardVO fboardVO = mapper.getfId(fId);
 							
 		return fboardVO;
 	}	
@@ -48,7 +48,7 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//占쌉쏙옙占쏙옙 占쌜쇽옙
 	@Override
-	public void writeBoard(FBoardVO fboardVO) {
+	public void writeBoard(FreeBoardVO fboardVO) {
 		
 		log.info("writeBoard........");
 		
@@ -57,7 +57,7 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//게시판 수정
 	@Override
-	public void updateModify(FBoardVO fboardVO) {
+	public void updateModify(FreeBoardVO fboardVO) {
 		
 		mapper.updateModify(fboardVO);	
 	}
@@ -65,7 +65,7 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//게시판 삭제 
 	@Override
-	public void deleteBoard(FBoardVO fboardVO) {
+	public void deleteBoard(FreeBoardVO fboardVO) {
 		
 		mapper.deleteBoard(fboardVO);	
 		
@@ -81,7 +81,7 @@ public class FBoardServiceImpl implements FBoardService {
 
 	
 	@Override
-	public List<FBoardVO> getListWithPaging(Criteria criteria) {
+	public List<FreeBoardVO> getListWithPaging(Criteria criteria) {
 		
 		log.info("get List with criteria"  + criteria);
 		return mapper.getListWithPaging(criteria);
@@ -90,14 +90,14 @@ public class FBoardServiceImpl implements FBoardService {
 	
 	//占쏙옙占� 占쌜쇽옙
 	@Override
-	public void registReply(FReplyVO reply) throws Exception {
+	public void registReply(FreeReplyVO reply) throws Exception {
 		mapper.registReply(reply);
 		
 	}
 	
 	//占쏙옙占� 占쏙옙占�
 	@Override
-	public List<FReplyVO> replyList(int fBoard_Num) throws Exception {
+	public List<FreeReplyVO> replyList(int fBoard_Num) throws Exception {
 		
 		log.info("get replyList...");
 		
@@ -105,7 +105,7 @@ public class FBoardServiceImpl implements FBoardService {
 	}
 
 	@Override
-	public void deleteReply(FReplyVO reply) throws Exception {
+	public void deleteReply(FreeReplyVO reply) throws Exception {
 		
 		log.info("deleteReply...");
 		

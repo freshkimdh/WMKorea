@@ -10,25 +10,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Wemade Korea</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
+<title>Wemade Korea</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
       
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
 	
-<!-- 	<style> /* Font responsive  */
-	body {font-size: 16px;}
-	#district {font-size: 1rem;}
-	#disf {
-	/* font-size: 4rem; */
-	font-size: 4vw;}
-	</style> -->
-	
-	<style>
+<style>
 	
   /* Make the image fully responsive */
   .carousel-inner img {
@@ -49,63 +41,90 @@
 	
 	</style>
 	
-	<!-- Banner style tag -->
-	<style>
-	body, html {
-  height: 100%;
-  margin: 0;
-/*    font-family: Arial, Helvetica, sans-serif; */
-}
-
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
-  height: 20%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-	</style>
-
 	
+	<style>
+	
+	.img-container{
+	position:relative;
 
+	/*  display:table; */
+	}
+	.img-container img{
+	/* display:block; */
+	isplay: table-cell;
+	text-align: center;
+ 	}
+	.img-container .overlay{
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  width:100%;
+	  height:100%;
+	  background:rgb(0,0,0);
+	  opacity:0;
+	  transition:opacity 500ms ease-in-out;
+	}
+	.img-container:hover .overlay{
+	  opacity:60%;
+	}
+	.overlay span{
+	  position:absolute;
+	  top:50%;
+	  left:50%;
+	  transform:translate(-50%,-50%);
+	  color:#fff;
+	}
+		
+	</style>	
+	
+	<style>
+		body, html {
+			height: 100%;
+			margin: 0;
+		}
+		
+		.hero-image {
+			background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
+			height: 20%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			position: relative;
+		}
+		
+		.hero-text {
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+		}
+	</style>
 
 </head>
 
 <body>
-
-<div class="container"> <!-- table -->
-	<div class="row"> <!-- td -->
+<!-- table -->
+<div class="container">
+	<div class="row"> 
 	
 		<div class="col-sm-6" id="s1">
 			<a href="index"><img src="img/main_logo2.png"></a>
-		</div> <!-- tr -->
+		</div> 
 		
 		<div class="col-sm-6" id="s2">
-			<!-- Search Bar -->
-<!-- 			<p>Search Bar</p> -->
-		<p>
- 		<div class="input-group mb-3">
-  			<input type="text" class="form-control" placeholder="Search">
-  			<div class="input-group-append">
-    			<button class="btn btn-danger" type="submit">Go</button>
-  			</div>
-		</div>
-			<!-- Search Bar End -->
+	 		<div class="input-group mb-3">
+	  			<input type="text" class="form-control" placeholder="Search">
+	  			<div class="input-group-append">
+	    			<button class="btn btn-danger" type="submit">Go</button>
+	  			</div>
+			</div>
 		</div>
 	</div>
 </div>
 
-<!-- <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top"> -->
+
 <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
 	
 	<!-- Brand Logo -->
@@ -202,7 +221,6 @@
     <thead class="thead-light" align="center">
       <tr>
         <th>No</th>
-       <!--  <th>구분</th> -->
         <th>작성자</th>
         <th>제목</th>
         <th>조회수</th>
@@ -213,10 +231,8 @@
 <c:forEach items="${list}" var="list">
       <tr>
         <td align="center">${list.fBoard_Num}</td>
-        <%-- <td align="center">잡담</td>
-        <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach> --%>
         <td align="center">${list.fId}</td>
-        <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
+        <td align="center"><a class="text-dark" href="contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
         <td align="center">${list.fHit}</td>
         <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
       </tr>
@@ -231,25 +247,8 @@
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">	
-	<p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
+	<p align="right"><a href="writeView" class="btn btn-dark" role="button">글 작성</a></p>
 </sec:authorize>
-
-
-
-<%--       <c:if test="${pageMaker.prev}">
-         <a href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a>
-      </c:if>
-
-      <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-         <c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-         <a href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a>
-      </c:forEach>
-      
-      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-         <a href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }"> Next </a>
-      </c:if> <br> --%>
-
-
 
 </div>
 
@@ -270,11 +269,10 @@
     	
     	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
     		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
-    	</c:if>
- 
-	</ul>
-  
+    	</c:if> 
+	</ul> 
 </div>
+
 
 <div class="container" id="board_search_bar">
 

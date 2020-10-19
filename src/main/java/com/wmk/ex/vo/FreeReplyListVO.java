@@ -2,7 +2,7 @@ package com.wmk.ex.vo;
 
 import java.util.Date;
 
-public class FReplyVO {
+public class FreeReplyListVO {
 	
 	private int fBoard_Num;
 	private String id;
@@ -10,7 +10,7 @@ public class FReplyVO {
 	private String repCon;
 	private Date repDate;
 	
-	public FReplyVO() {
+	public FreeReplyListVO() {
 		
 	}
 

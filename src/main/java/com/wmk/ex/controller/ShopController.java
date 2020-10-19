@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -42,7 +42,7 @@ public class ShopController {
 	 @Inject
 	 ShopService service;
     
-	 // Ä«Å×°í¸®º° »óÇ° ¸®½ºÆ®
+	 // Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®
 	 @RequestMapping(value = "/shop/list", method = RequestMethod.GET)
 	 public String getList(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model) throws Exception {
 		  log.info("get llist");
@@ -71,7 +71,7 @@ public class ShopController {
 	 
 	 
 	 
-//	// »óÇ° Á¶È¸ - ¼Ò°¨(´ñ±Û) ÀÛ¼º
+//	// ï¿½ï¿½Ç° ï¿½ï¿½È¸ - ï¿½Ò°ï¿½(ï¿½ï¿½ï¿½) ï¿½Û¼ï¿½
 //	 @RequestMapping(value = "/shop/view", method = RequestMethod.POST)
 //	 public String registReply(CommentVO comment, HttpSession session) throws Exception {
 //		 log.info("regist reply");
@@ -85,7 +85,7 @@ public class ShopController {
 //	  return "redirect:/shop/view?n=" + comment.getGdsNum();
 //	 }
 	 
-	// »óÇ° ¼Ò°¨(´ñ±Û) ÀÛ¼º
+	// ï¿½ï¿½Ç° ï¿½Ò°ï¿½(ï¿½ï¿½ï¿½) ï¿½Û¼ï¿½
 	 @ResponseBody
 	 @RequestMapping(value = "/shop/view/registReply", method = RequestMethod.POST)
 	 public void registReply(CommentVO comment, HttpSession session) throws Exception {
@@ -100,7 +100,7 @@ public class ShopController {
 	 } 
 	 
 	 
-	 // »óÇ° ¼Ò°¨(´ñ±Û) ¸ñ·Ï
+	 // ï¿½ï¿½Ç° ï¿½Ò°ï¿½(ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½
 	 @ResponseBody
 	 @RequestMapping(value = "/shop/view/replyList", method = RequestMethod.GET)
 	 public List<CommentListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception {
@@ -113,7 +113,7 @@ public class ShopController {
 	 
 	 
 	 
-	// »óÇ° ¼Ò°¨(´ñ±Û) »èÁ¦
+	// ï¿½ï¿½Ç° ï¿½Ò°ï¿½(ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½
 	 @ResponseBody
 	 @RequestMapping(value = "/shop/view/deleteReply", method = RequestMethod.POST)
 	 public int getReplyList(CommentVO comment, HttpSession session) throws Exception {
@@ -145,8 +145,8 @@ public class ShopController {
 //		}
 	 
 	 
-	 //Àå¹Ù±¸´Ï ´ã±â (½ºÇÁ¸µ ½ÃÅ¥¸®Æ¼ ¼¼¼Ç°ª ºÒ·¯¿À±â): chaddy
-	//±¸¸ÅÇÏ±â ¹öÆ°À» ´©¸£¸é ÇØ´ç ¸Þ¼­µå ½ÇÇàÇÏ Àå¹Ù±¸´Ï¿¡ ´ã°í ÁÖ¹®ÇÏ±â ÆäÀÌÁö·Î ÀÌµ¿ (½ºÇÁ¸µ ½ÃÅ¥¸®Æ¼ ¼¼¼Ç°ª ºÒ·¯¿À±â): chaddy
+	 //ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¥ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½): chaddy
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¥ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½): chaddy
 	 @ResponseBody
 	 @RequestMapping(value = "/addCart", method = RequestMethod.POST)
 	 public void addCart(CartVO cart, HttpSession session) throws Exception {
@@ -162,7 +162,7 @@ public class ShopController {
 	 }
 	 
 		/*
-		 * //±¸¸ÅÇÏ±â ¹öÆ° ´©¸£°í¸é Àå¹Ù±¸´Ï¿¡ ´ã°í ÁÖ¹®ÇÏ±â ÆäÀÌÁö·Î ÀÌµ¿ (½ºÇÁ¸µ ½ÃÅ¥¸®Æ¼ ¼¼¼Ç°ª ºÒ·¯¿À±â): chaddy
+		 * //ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¥ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½): chaddy
 		 * 
 		 * @ResponseBody
 		 * 
@@ -181,7 +181,7 @@ public class ShopController {
 		 */
 	 
 	 
-	 //Àå¹Ù±¸´Ï º¸±â
+	 //ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 @RequestMapping(value = "/cartList", method = RequestMethod.GET)
 	 public String getCartList(HttpSession session, Model model) throws Exception {
 		 log.info("get cart list");
@@ -203,7 +203,7 @@ public class ShopController {
 	 
 	 
 	 
-	// Àå¹Ù±¸´Ï »èÁ¦
+	// ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 @ResponseBody
 	 @RequestMapping(value = "/shop/cartList/deleteCart", method = RequestMethod.POST)
 	 public int deleteCart(HttpSession session,
@@ -251,7 +251,7 @@ public class ShopController {
 		}
 		
 		
-		// goodsOrder¿¡ ÀÖ´Â Á¦Ç° ÁÖ¹®ÇÏ±â
+		// goodsOrderï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½Ï±ï¿½
 		 @RequestMapping(value = "/goodsOrder", method = RequestMethod.POST)
 		 public String goodsOrder(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 			 
@@ -295,7 +295,7 @@ public class ShopController {
 		 	 
 	 	 
 	 
-	// Àå¹Ù±¸´Ï¿¡ ÀÖ´Â Á¦Ç° ÁÖ¹®ÇÏ±â
+	// ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½Ï±ï¿½
 	 @RequestMapping(value = "/cartList", method = RequestMethod.POST)
 	 public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 		 
@@ -362,7 +362,7 @@ public class ShopController {
 	
 	
 	 
-	// Æ¯Á¤ À¯ÀúÀÇ ÁÖ¹® ¸ñ·Ïº¸±â
+	// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½Ïºï¿½ï¿½ï¿½
 	 @RequestMapping(value = "/orderList", method = RequestMethod.GET)
 	 public String getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
 		
@@ -382,7 +382,7 @@ public class ShopController {
 	  
 	 }
 	 
-	// Å« ÁÖ¹®ÀÇ »ó¼¼ ¸ñ·Ï º¸±â
+	// Å« ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 @RequestMapping(value = "/orderView", method = RequestMethod.GET)
 	 public String getOrderList(HttpSession session, @RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
 		 log.info("get order view");

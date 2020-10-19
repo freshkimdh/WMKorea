@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.page.Criteria;
-import com.wmk.ex.vo.FBoardVO;
+import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.RBoardVO;
 import com.wmk.ex.vo.RReplyVO;
 

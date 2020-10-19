@@ -2,7 +2,7 @@ package com.wmk.ex.vo;
 
 import java.util.Date;
 
-public class FBoardVO {
+public class FreeBoardVO {
 	
 
 //fBoard_Num NUMBER(20) not null PRIMARY KEY,
@@ -14,7 +14,7 @@ public class FBoardVO {
 //fGroup NUMBER(4),
 //fStep NUMBER(4),
 //fIndent NUMBER(4),
-//FOREIGN KEY (fId) REFERENCES wmk_users (id) -- ÀÛ¼ºÀÚ¸¦ id·Î ³ªÅ¸³½´Ù.
+//FOREIGN KEY (fId) REFERENCES wmk_users (id) -- ï¿½Û¼ï¿½ï¿½Ú¸ï¿½ idï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½.
 	
 	private int fBoard_Num;
 	private String fId;
@@ -26,7 +26,7 @@ public class FBoardVO {
 	private int fStep;
 	private int fIndent;
 	
-	public FBoardVO() {
+	public FreeBoardVO() {
 		
 	}
 

@@ -98,15 +98,6 @@
 	  
 	}
 	
-/* 	function validateForm2() {
-		
-		var pw = document.forms["boardForm"]["bPw"].value;
-		if (pw == "" || pw == null){
-	    alert("비밀번호를 입력해주세요.");
-		return false;
-		}
-	  
-	} */
 	
 	function validateForm3() {
 		
@@ -262,19 +253,8 @@
  
 
 
-<form name="boardForm" action="free_write" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
+<form name="boardForm" action="free_write" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="post" required>
 
-<%-- <sec:authorize access="isAnonymous()">
-	<div class="row">
-    	<div class="col">
-    
-		<label for="fId">이름:</label>
-      	<input type="text" class="form-control" id="fId" placeholder="" name="fId">
-    
-    	</div>
-    	
-	</div>
-</sec:authorize> --%>
 
 <sec:authorize access="isAuthenticated()">
     
@@ -282,11 +262,6 @@
 	<input type="hidden" class="form-control" id="fId" placeholder="" name="fId" value="<sec:authentication property="principal.user.id"/>">
 
 </sec:authorize> 
-
-<!-- 	<div class="form-group">
-    <label for="bTitle">이름:</label>
-      <input type="text" class="form-control" id="fId" placeholder="" name="fId"> <p>
-	</div> -->
 
 
 	
@@ -302,7 +277,6 @@
     </div>
   
 	<p align="center"><button type="submit" class="btn btn-dark">등록</button> 
-<!-- 	<a href="boardList" class="btn btn-dark" role="button" onclick="removeCheck()">취소</a></p> -->
 	<a href="free_boardList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
 
 

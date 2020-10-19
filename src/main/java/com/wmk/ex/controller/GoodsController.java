@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -38,7 +38,7 @@ public class GoodsController {
 	 @Inject
 	 ShopService shopService;
 	
-	//»óÇ° ¸ÞÀÎ ÆäÀÌÁö
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/goodsIndex", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		log.info("Welcome home! The client locale is {}.");
@@ -55,7 +55,7 @@ public class GoodsController {
 	
 	
 	
-	// °ü¸®ÀÚ ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/index", method = RequestMethod.GET)
 	public void getIndex() throws Exception {
 	 log.info("get signup");
@@ -63,7 +63,7 @@ public class GoodsController {
 
 	}
 	
-	//»óÇ° µî·Ï
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/register", method = RequestMethod.GET)
 	public void getGoodsRegister(Model model) throws Exception {
 	 log.info("get goods register");
@@ -74,7 +74,7 @@ public class GoodsController {
 	}
 	
 	
-	//»óÇ° µî·Ï
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/register", method = RequestMethod.POST)
 	public String postGoodsRegister(GoodsVO vo) throws Exception {
 		
@@ -84,7 +84,7 @@ public class GoodsController {
 	
 	}
 	
-	//»óÇ° ¸ñ·Ï
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/list", method = RequestMethod.GET)
 	public void getGoodList(Model model) throws Exception {
 		log.info("get goods list");
@@ -96,7 +96,7 @@ public class GoodsController {
 	}
 	
 	
-	// »óÇ° Á¶È¸
+	// ï¿½ï¿½Ç° ï¿½ï¿½È¸
 	@RequestMapping(value = "/admin_goods/goods/view", method = RequestMethod.GET)
 	public void getGoodsview(@RequestParam("n") int gdsNum, Model model) throws Exception {
 		log.info("get goods view");
@@ -106,7 +106,7 @@ public class GoodsController {
 		model.addAttribute("goods", goods);
 	}
 		
-	//»óÇ° ¼öÁ¤
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/modify", method = RequestMethod.GET)
 	public void getGoodsRegister(@RequestParam("n") int gdsNum, Model model) throws Exception {
 			
@@ -122,7 +122,7 @@ public class GoodsController {
 		
 	}
 		
-	// »óÇ° ¼öÁ¤
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/modify", method = RequestMethod.POST)
 	public String postGoodsModify(GoodsVO vo) throws Exception {
 		log.info("post goods modify");
@@ -132,7 +132,7 @@ public class GoodsController {
 		return "redirect:/admin_goods/index";
 	}
 		
-	// »óÇ° »èÁ¦
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/admin_goods/goods/delete", method = RequestMethod.POST)
 	public String postGoodsDelete(@RequestParam("n") int gdsNum) throws Exception {
 		log.info("post goods delete");
@@ -143,10 +143,10 @@ public class GoodsController {
 	}
 	
 	
-	//±ÂÁî ÆäÀÌÁö ½ÃÀÛ (Á¤°æÃ¤)
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½Ã¤)
 	
 	
-	// »óÇ° µî·Ï
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/goods_register", method = RequestMethod.GET)
 	public String getGoodsRegister2(Model model) throws Exception {
 		log.info("get goods register");
@@ -159,7 +159,7 @@ public class GoodsController {
 
 	}
 	
-	// »óÇ° µî·Ï(post)
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½(post)
 	@RequestMapping(value = "/goods_register", method = RequestMethod.POST)
 	public String postGoodsRegister2(GoodsVO vo) throws Exception {
 		
@@ -170,7 +170,7 @@ public class GoodsController {
 	}
 	
 	 
-	// »óÇ° ¸®½ºÆ®  
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®  
 	@GetMapping("/goodsList") 
 	public String goodsList(Model model) throws Exception {
 		
@@ -186,7 +186,7 @@ public class GoodsController {
 
 	}
 	
-	//»óÇ° »ó¼¼º¸±â
+	//ï¿½ï¿½Ç° ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	 @RequestMapping(value = "/goodsView", method = RequestMethod.GET)
 	 public String goodsView(@RequestParam("n") int gdsNum, Model model) throws Exception{
 		 log.info("get view");
