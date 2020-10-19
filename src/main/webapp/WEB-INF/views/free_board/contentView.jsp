@@ -342,6 +342,7 @@
 	<a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
 	<%-- <a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a> --%>
 	<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
+	<a href="" class="btn btn-outline-dark btn-sm" role="button">답변<br></a>
 	</p>
 	
 	<hr> 
@@ -365,7 +366,8 @@
    
    <div class="input_area">
    <sec:authorize access="isAnonymous()">
-         <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">댓글 작성</button></p>
+   		<br>
+         <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">등록</button></p>
    </sec:authorize>
    
    <sec:authorize access="isAuthenticated()">
@@ -492,110 +494,15 @@
    
    
 </section>
-</div>
-
-<%--<br> 
 
 <p align="right">
-<sec:authorize access="isAnonymous()">
-<a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a>
-</sec:authorize>
-
-
-<sec:authorize access="isAuthenticated()">
 <a href="free_writeView" class="btn btn-dark" role="button">글 작성</a>
-</sec:authorize>
-
 <a href="free_boardList" class="btn btn-dark" role="button">목록</a>
 </p>
 <br>
-
-  
-          
-    <table class="table table-hover">
-       <thead class="thead-light" align="center">
-         <tr>
-           <th>No</th>
-           <th>작성자</th>
-           <th>제목</th>
-           <th>조회수</th>
-           <th>등록일</th>
-         </tr>
-       </thead>
-    <tbody>
-      <c:forEach items="${list}" var="list">
-            <tr>
-              <td align="center">${list.fBoard_Num}</td>
-              <td align="center">잡담</td>
-              <td ><c:forEach begin="1" end="${list.fIndent}">Re:</c:forEach>
-              <td align="center">${list.fId}</td>
-              <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
-              <td align="center">${list.fHit}</td>
-              <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
-            </tr>
-      </c:forEach>
-    </tbody>
-  </table>
-
-<sec:authorize access="isAnonymous()">
-   <p align="right"><a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a></p>
-</sec:authorize>
-
-<sec:authorize access="isAuthenticated()">   
-   <p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
-</sec:authorize>
-
 </div>
 
 
-
-<div class="container" id="board_pagination">
-
-   <ul class="pagination justify-content-center">
-       
-       <c:if test="${pageMaker.prev}">
-          <li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
-       </c:if>
-       
-       <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-          <c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-          <li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
-       </c:forEach>
-       
-       <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-          <li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
-       </c:if>
- 
-   </ul>
-  
-</div>
-
-<div class="container" id="board_search_bar">
-
-   <div class="row">
-      
-      <div class="col-sm-4">
-      </div>
-
-      <div class="col-sm-4">
-<!-- Board Search Bar -->
-          <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="">
-              <div class="input-group-append">
-                <button class="btn btn-danger btn-dark" type="submit">검색</button>
-              </div>
-         </div>
-<!-- Board Search Bar End -->
-      </div>
-   
-      <div class="col-sm-4">
-      </div>
-      
-   </div>
-
-</div>
-
-<br> --%>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
 <p>Copyright © 2020 Wemade Korea All rights reserved</p>
