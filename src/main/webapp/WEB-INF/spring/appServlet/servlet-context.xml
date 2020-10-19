@@ -19,6 +19,7 @@
 	<resources mapping="/wmk_home/img/**" location="/resources/img/" />
 	<resources mapping="/img/travel_board_img/**" location="/resources/img/travel_board" />
 	<resources mapping="/wmk_home/img/character/**" location="/resources/img/character" />
+	<resources mapping="/free_board/img/**" location="/resources/img/" />
 	
 	<resources mapping="/goods/**" location="/resources/goods/" />
 	<resources mapping="/others/**" location="/resources/others/" />

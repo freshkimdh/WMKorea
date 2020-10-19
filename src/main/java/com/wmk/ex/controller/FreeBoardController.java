@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
@@ -23,6 +25,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequestMapping("/free_board")
 @AllArgsConstructor
 @Log4j
 public class FreeBoardController {
@@ -30,8 +33,8 @@ public class FreeBoardController {
 	private FreeBoardService freeService;
 	
 	//게시판 목록 read
-	@GetMapping("/free_boardList")
-	public String BoardList(Model model, Criteria cri) throws Exception {
+	@GetMapping("/boardList")
+	public void BoardList(Model model, Criteria cri) throws Exception {
 		
 		int total = freeService.getTotalCount(cri);
 		
@@ -42,29 +45,24 @@ public class FreeBoardController {
 		model.addAttribute("list", freeService.getListWithPaging(cri));	
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
-		return "/free_board/boardList";
 	}
 	
 	
 	//게시판 내용 read
-	@GetMapping("/free_contentView")
-	public String ContentView(FreeBoardVO freeBoardVO, Model model) throws Exception {
+	@GetMapping("/contentView")
+	public void ContentView(FreeBoardVO freeBoardVO, Model model) throws Exception {
 		
-	   log.info("content_view...");
+	   log.info("contentView...");
 	   model.addAttribute("contentView", freeService.getNum(freeBoardVO.getfBoard_Num()));
-	   model.addAttribute("list", freeService.getList());
-	   
-	   return "/free_board/contentView";	   	  
+	   model.addAttribute("list", freeService.getList());	   	  
 	}
 	
 	
 	//게시판 작성 뷰 read
-	@GetMapping("/free_writeView")
-	public String WriteView() throws Exception {
+	@GetMapping("/writeView")
+	public void WriteView() throws Exception {
 		
-		log.info("free_writeView...");
-		
-		return "/free_board/writeView";
+		log.info("writeView...");		
 	}
 	
 	
@@ -75,42 +73,40 @@ public class FreeBoardController {
 		log.info("free_write...");
 		freeService.writeBoard(freeBoardVO);
 
-		return "redirect:free_boardList";
+		return "redirect:boardList";
 	}
 	
 	
 	//게시판 수정 뷰 read
-	@GetMapping("/free_modifyView") 
-	public String ModifyView(FreeBoardVO freeBoardVO, Model model) throws Exception {
+	@GetMapping("/modifyView") 
+	public void ModifyView(FreeBoardVO freeBoardVO, Model model) throws Exception {
 	
 		log.info("modifyView...");	
 		model.addAttribute("modifyView", freeService.getNum(freeBoardVO.getfBoard_Num()));
-		
-		return "/free_board/modifyView";
 	}
 	
 	
 	//게시판 수정 작성 완료 update
-	@PutMapping("/free_modify")
-	public String Modify(FreeBoardVO freeboardVO, Model model) throws Exception {
+	@PutMapping("/modify")
+	public String Modify(FreeBoardVO freeboardVO) throws Exception {
 		
 		log.info("Modify...");
 		freeService.updateModify(freeboardVO);
 				
-		return "redirect:free_boardList";
+		return "redirect:boardList";
 	}
 	
 	
 	//게시판 삭제 delete
 	@ResponseBody
-	@DeleteMapping("/free_delete") 
+	@DeleteMapping("/delete") 
 	public String Delete(FreeBoardVO freeBoardVO) throws Exception {
 		
 		
 		int result = 0;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		log.info("free_delete...");	
+		log.info("delete...");	
 		 
 		String username = ((UserDetails)principal).getUsername();
 		String userId = freeService.boardUserIdCheck(freeBoardVO.getfBoard_Num());
@@ -137,7 +133,7 @@ public class FreeBoardController {
 	
 	//댓글 등록 create
 	@ResponseBody
-	@PostMapping("/free_contentView/registReply")
+	@PostMapping("/registReply")
 	public void RegistReply(FreeReplyVO freeReplyVO) throws Exception {
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -158,7 +154,7 @@ public class FreeBoardController {
 	
 	//댓글 목록 read
 	@ResponseBody
-	@GetMapping("/free_contentView/replyList")
+	@GetMapping("/replyList")
 	public List<FreeReplyVO> GetReplyList(@RequestParam("n") int fBoard_Num) throws Exception {
 		log.info("get reply list");
 		    
@@ -170,7 +166,7 @@ public class FreeBoardController {
 	
 	//댓글 삭제 delete
 	@ResponseBody
-	@DeleteMapping("/free_contentView/deleteReply")
+	@DeleteMapping("/deleteReply")
 	public String DeleteReply(FreeReplyVO freeReplyVO) throws Exception {
 	 
 		int result = 0;

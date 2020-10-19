@@ -24,7 +24,7 @@ public interface FreeBoardMapper {
 	//�Խ��� ����
 	public void updateModify(FreeBoardVO fboardVO);
 	
-	//�Խ��� ����
+	//게시판 삭제
 	public void deleteBoard(FreeBoardVO fboardVO);
 	
 	//��ȸ��
@@ -41,13 +41,13 @@ public interface FreeBoardMapper {
 	//��� ����Ʈ
 	public List<FreeReplyVO> replyList(int fBoard_Num) throws Exception;
 	
-	//��� ����
+	//
 	public void deleteReply(FreeReplyVO reply) throws Exception;
 	
 	//��� ���̵� üũ
 	public String replyUserIdCheck(int repNum) throws Exception;
 	
-	//�Խ��� ���̵� üũ
+	//게시판 id 확인
 	public String boardUserIdCheck(int fBoard_Num) throws Exception;
 	
 	

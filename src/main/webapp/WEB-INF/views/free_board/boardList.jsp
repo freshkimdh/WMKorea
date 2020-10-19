@@ -20,21 +20,61 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
 	
-	<style>
-		.carousel-inner img {
-			width: 100%;
-			height: 100%;
-		}
-	</style>
-	  
-	<style>
-		#s1 {	
-			line-height:55px;
-		}
+<style>
 	
-		#s1 img {
-			vertical-align:middle;
-		}	
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+  
+	<style>
+ 	#s1 {
+	/* background: blue; */
+	line-height:55px;
+	}
+
+ 	#s1 img {
+ 	vertical-align:middle;
+	}
+	
+	</style>
+	
+	
+	<style>
+	
+	.img-container{
+	position:relative;
+
+	/*  display:table; */
+	}
+	.img-container img{
+	/* display:block; */
+	isplay: table-cell;
+	text-align: center;
+ 	}
+	.img-container .overlay{
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  width:100%;
+	  height:100%;
+	  background:rgb(0,0,0);
+	  opacity:0;
+	  transition:opacity 500ms ease-in-out;
+	}
+	.img-container:hover .overlay{
+	  opacity:60%;
+	}
+	.overlay span{
+	  position:absolute;
+	  top:50%;
+	  left:50%;
+	  transform:translate(-50%,-50%);
+	  color:#fff;
+	}
+		
 	</style>	
 	
 	<style>
@@ -181,7 +221,6 @@
     <thead class="thead-light" align="center">
       <tr>
         <th>No</th>
-       <!--  <th>구분</th> -->
         <th>작성자</th>
         <th>제목</th>
         <th>조회수</th>
@@ -193,7 +232,7 @@
       <tr>
         <td align="center">${list.fBoard_Num}</td>
         <td align="center">${list.fId}</td>
-        <td align="center"><a class="text-dark" href="free_contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
+        <td align="center"><a class="text-dark" href="contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
         <td align="center">${list.fHit}</td>
         <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
       </tr>
@@ -208,7 +247,7 @@
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">	
-	<p align="right"><a href="free_writeView" class="btn btn-dark" role="button">글 작성</a></p>
+	<p align="right"><a href="writeView" class="btn btn-dark" role="button">글 작성</a></p>
 </sec:authorize>
 
 </div>

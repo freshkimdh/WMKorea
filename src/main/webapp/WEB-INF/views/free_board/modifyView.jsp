@@ -240,9 +240,9 @@
  
 
 
-<form name="boardForm" action="free_modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="post">
+<form name="boardForm" action="modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="post">
 	
-	<input type="hidden" name="_method" value="put" />
+	<input type="hidden" name="_method" value="put"/>
 	<input type="hidden" name="fId" value="${modifyView.fId}">
 	<input type="hidden" name="fBoard_Num" value="${modifyView.fBoard_Num}">
 	

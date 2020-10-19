@@ -100,7 +100,7 @@
   //댓글 삭제
   function replyList() {
     var fBoard_Num = ${contentView.fBoard_Num};
-    $.getJSON("${pageContext.request.contextPath}/free_contentView/replyList" + "?n=" + fBoard_Num, function(data){
+    $.getJSON("${pageContext.request.contextPath}/free_board/replyList" + "?n=" + fBoard_Num, function(data){
      var str = "";
      
      $(data).each(function(){
@@ -121,12 +121,12 @@
         + "<span class='id'>" + "<strong>" + this.id + "</strong>" + "</span>"
         + "<span class='date'>" + repDate + "</span>"
         +  "&nbsp;" + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-        + "</div>" <!--userInfro End -->
+        + "</div>" //userInfro End
         + this.repCon
         + "</div>"
          + "</div>"
          
-         + "</div>" <!-- row end -->
+         + "</div>" //row end 
          + "<hr>"
          
          
@@ -180,7 +180,7 @@
    <div class="row"> <!-- td -->
    
       <div class="col-sm-6" id="s1">
-         <a href="index"><img src="img/main_logo2.png"></a>
+         <a href="${pageContext.request.contextPath}/index"><img src="img/main_logo2.png"></a>
       </div> <!-- tr -->
       
       <div class="col-sm-6" id="s2">
@@ -327,8 +327,8 @@
      <!-- <hr> -->
     
    <p align="right">
-   <a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
-   <button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
+   <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
+   		<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
    <a href="" class="btn btn-outline-dark btn-sm" role="button">답변<br></a>
    </p>
    
@@ -377,7 +377,7 @@
           };
         
         $.ajax({
-         url : "${pageContext.request.contextPath}/free_contentView/registReply",
+         url : "${pageContext.request.contextPath}/free_board/registReply",
          type : "post",
          data : data,
          success : function(){
@@ -416,7 +416,7 @@
         var data = {repNum : $(this).attr("data-repNum")};
         
         $.ajax({
-           url : "${pageContext.request.contextPath}/free_contentView/deleteReply",
+           url : "${pageContext.request.contextPath}/free_board/deleteReply",
            type : "delete",
            data : data,
            success : function(result){
@@ -453,7 +453,7 @@
            
            
            $.ajax({
-              url : "${pageContext.request.contextPath}/free_delete",
+              url : "${pageContext.request.contextPath}/free_board/delete",
               type : "delete",
               data : data,
               success : function(result){
@@ -463,7 +463,7 @@
                console.log("data: " + data);
                
                if(result == 1) {
-                 window.location.href = "${pageContext.request.contextPath}/free_boardList";
+                 window.location.href = "${pageContext.request.contextPath}/free_board/boardList";
                }
                
                if(result == 0) {
@@ -483,8 +483,8 @@
 </section>
 
 <p align="right">
-<a href="free_writeView" class="btn btn-dark" role="button">글 작성</a>
-<a href="free_boardList" class="btn btn-dark" role="button">목록</a>
+<a href="writeView" class="btn btn-dark" role="button">글 작성</a>
+<a href="boardList" class="btn btn-dark" role="button">목록</a>
 </p>
 <br>
 </div>

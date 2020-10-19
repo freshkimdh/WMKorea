@@ -149,7 +149,7 @@
 			커뮤니티
 			</a>
 			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="free_boardList">자유 게시판</a>
+        	<a class="dropdown-item" href="${pageContext.request.contextPath}/free_board/boardList">자유 게시판</a>
         	<a class="dropdown-item" href="areaIndex">여행지 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
       		</div>
