@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -211,9 +211,11 @@
 		
 		
 		<h1 align="center">${list.gdsName}</h1>
-		<h1 align="center">(&#8361;${list.gdsPrice}~)</h1>
+<%-- 		<h1 align="center">(&#8361;${list.gdsPrice}~)</h1> --%>
+		<h1 align="center">&#8361;<fmt:formatNumber pattern="###,###,###" value="${list.gdsPrice}" />~</h1>
 		<p align="center" style="font-size:20px">${list.gdsDes}</p>
 		
+
 		
 		
 		

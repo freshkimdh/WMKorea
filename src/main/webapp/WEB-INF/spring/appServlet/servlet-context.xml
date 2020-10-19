@@ -23,6 +23,8 @@
 	<resources mapping="/goods/**" location="/resources/goods/" />
 	<resources mapping="/others/**" location="/resources/others/" />
 	
+	<resources mapping="/img/character/**" location="/resources/img/character" />
+	
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
