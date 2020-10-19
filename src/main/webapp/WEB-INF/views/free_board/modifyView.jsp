@@ -98,15 +98,7 @@
 	  
 	}
 	
-/* 	function validateForm2() {
-		
-		var pw = document.forms["boardForm"]["bPw"].value;
-		if (pw == "" || pw == null){
-	    alert("비밀번호를 입력해주세요.");
-		return false;
-		}
-	  
-	} */
+
 	
 	function validateForm3() {
 		
@@ -248,24 +240,11 @@
  
 
 
-<form name="boardForm" action="free_modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="get" required>
+<form name="boardForm" action="free_modify" onsubmit="return validateForm(), validateForm3(), validateForm4()" method="post">
 	
+	<input type="hidden" name="_method" value="put" />
 	<input type="hidden" name="fId" value="${modifyView.fId}">
 	<input type="hidden" name="fBoard_Num" value="${modifyView.fBoard_Num}">
-<%-- 	<input type="hidden" name="fGroup" value="${modifyView.fGroup}">
-	<input type="hidden" name="fStep" value="${modifyView.fStep}">
-	<input type="hidden" name="fIndent" value="${modifyView.fIndent}"> --%>
-	
-<%-- 	<div class="row">
-    	<div class="col">
-    
-		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="bName" value="${modifyView.fId}">
-    
-    	</div>
-    	
-
-	</div> --%>
 	
 		<div class="form-group">
     	<label for="bTitle">제목:</label>

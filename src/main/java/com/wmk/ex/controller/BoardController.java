@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import java.util.List;
 

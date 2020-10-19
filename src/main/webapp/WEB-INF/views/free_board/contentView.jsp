@@ -222,21 +222,17 @@
       </li>
             
       <li class="nav-item dropdown">
-         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-         내 캐릭터 만들기
-         </a>
+         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">내 캐릭터 만들기</a>
          <div class="dropdown-menu">
            <a class="dropdown-item" href="boardList">내 캐릭터 만들기</a>
            <a class="dropdown-item" href="goodsIndex">굿즈(테스트)</a>
            <a class="dropdown-item" href="goodsList">굿즈</a>
-            </div>
+         </div>
       </li>
       
       <!-- Dropdown -->            
       <li class="nav-item dropdown">
-         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-         커뮤니티
-         </a>
+         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">커뮤니티</a>
          <div class="dropdown-menu">
            <a class="dropdown-item" href="free_boardList">자유 게시판</a>
            <a class="dropdown-item" href="areaIndex">여행후기 게시판</a>
@@ -273,14 +269,6 @@
 
 </nav>
 
-<!-- This is banner -->
-<!-- <div class="hero-image">
-  <div class="hero-text">
-<p style="font-size:60px" class="display-3">Community</p>
-   <p>We Make Our World</p>
-  </div>
-</div>
-<p><br> -->
 
 
 <p>
@@ -340,7 +328,6 @@
     
    <p align="right">
    <a href="free_modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
-   <%-- <a href="free_delete?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button">삭제</a> --%>
    <button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
    <a href="" class="btn btn-outline-dark btn-sm" role="button">답변<br></a>
    </p>
@@ -355,7 +342,7 @@
 <div class="container" id="reply">
 
 
-<%--  <section class="replyForm"> --%>
+
   <form:form role="form" method="post">
      <input type="hidden" name="fBoard_Num" id="fBoard_Num" value="${contentView.fBoard_Num}">
      
@@ -405,7 +392,7 @@
    </div>
    
   </form:form>
-<%--  </section> --%>
+
 
 <section class="replyList">
  <ol>
@@ -430,7 +417,7 @@
         
         $.ajax({
            url : "${pageContext.request.contextPath}/free_contentView/deleteReply",
-           type : "post",
+           type : "delete",
            data : data,
            success : function(result){
             
@@ -467,7 +454,7 @@
            
            $.ajax({
               url : "${pageContext.request.contextPath}/free_delete",
-              type : "get",
+              type : "delete",
               data : data,
               success : function(result){
                

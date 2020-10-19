@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

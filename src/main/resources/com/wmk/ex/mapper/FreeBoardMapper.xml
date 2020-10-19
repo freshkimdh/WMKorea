@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wmk.ex.mapper.FBoardMapper">
+<mapper namespace="com.wmk.ex.mapper.FreeBoardMapper">
 	
 	<!--게시판 목록  -->
-	<select id="getList" resultType="com.wmk.ex.vo.FBoardVO">
+	<select id="getList" resultType="com.wmk.ex.vo.FreeBoardVO">
 	<![CDATA[ 
 		select 
      		fBoard_Num, fId, fTitle, fContent, fDate, fHit, fGroup, fStep, fIndent
@@ -16,14 +16,14 @@
  	
  	
  	<!--게시판 번호-->
- 	<select id="getNum" resultType="com.wmk.ex.vo.FBoardVO">
+ 	<select id="getNum" resultType="com.wmk.ex.vo.FreeBoardVO">
 	<![CDATA[ 
 		select * from FREE_BOARD where fBoard_Num = #{fBoard_Num} 
 	]]>
 	</select>	
 	
 	<!--게시판 VO의 회원 get id  -->
-	<select id="getfId" resultType="com.wmk.ex.vo.FBoardVO">
+	<select id="getfId" resultType="com.wmk.ex.vo.FreeBoardVO">
 	<![CDATA[ 
 		select * from FREE_BOARD where fId = #{fId} 
 	]]>
@@ -68,7 +68,7 @@
 	</insert>
 	
 	<!--페이징 처리  -->
-	<select id="getListWithPaging" resultType="com.wmk.ex.vo.FBoardVO">
+	<select id="getListWithPaging" resultType="com.wmk.ex.vo.FreeBoardVO">
 		<![CDATA[
 			SELECT * FROM (
 			     SELECT ROWNUM AS RNUM, A.* FROM (
@@ -88,7 +88,7 @@
 	
 	
 	<!--댓글 목록-->
-	<select id="replyList" resultType="com.wmk.ex.vo.FReplyVO">	
+	<select id="replyList" resultType="com.wmk.ex.vo.FreeReplyVO">	
 	select fBoard_Num, id, repNum, repCon, repDate
 	from free_reply 
 	where fBoard_Num = #{fBoard_Num}

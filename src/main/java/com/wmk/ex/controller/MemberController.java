@@ -1,4 +1,4 @@
-package com.wmk.ex;
+package com.wmk.ex.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +28,13 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder passEncoder;
 	  
-	// È¸¿ø °¡ÀÔ get
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ get
 	@RequestMapping(value = "/member/signup", method = RequestMethod.GET)
 	public void getSignup() throws Exception {
 	 log.info("get signup");
 	}
 
-	// È¸¿ø °¡ÀÔ post
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ post
 	@RequestMapping(value = "/member/signup", method = RequestMethod.POST)
 	public String postSignup(MemberVO vo) throws Exception {
 	 log.info("post signup");
@@ -49,13 +49,13 @@ public class MemberController {
 	}
 	
 	
-	// ·Î±×ÀÎ  get
+	// ï¿½Î±ï¿½ï¿½ï¿½  get
 	@RequestMapping(value = "/member/signin", method = RequestMethod.GET)
 	public void getSignin() throws Exception {
 	 log.info("get signin");
 	}
 
-	// ·Î±×ÀÎ post
+	// ï¿½Î±ï¿½ï¿½ï¿½ post
 	@RequestMapping(value = "/member/signin", method = RequestMethod.POST)
 	public String postSignin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 	 log.info("post signin");
@@ -76,7 +76,7 @@ public class MemberController {
 	 return "redirect:/index";
 	}
 	  
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@RequestMapping(value = "/member/signout", method = RequestMethod.GET)
 	public String signout(HttpSession session) throws Exception {
 	 log.info("get logout");
