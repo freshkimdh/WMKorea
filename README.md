@@ -17,6 +17,12 @@
   * Rest API 적용 
 	
   >설치방법
+  * sts-3.9.13.RELEASE
+  * Apache Tomcat v9.0
+  * JavaSE-1.8
+  * spring-security-core-5.0.6.RELEASE.jar
+  * lombok.jar
+  
   
   >구동방법
   * jsp(ajax)
