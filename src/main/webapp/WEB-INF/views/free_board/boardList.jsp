@@ -226,19 +226,32 @@
       </tr>
     </thead>
     <tbody>
-<c:forEach items="${list}" var="list">
-      <tr>
-        <td align="center">${list.fBoard_Num}</td>
-        <td align="center">${list.fId}</td>
-        <td align="center"><a class="text-dark" href="contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
-        <td align="center">${list.fHit}</td>
-        <td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
-      </tr>
-</c:forEach>
+    	<!-- 검색어의 값이 null일 경우  -->
+   		<c:if test="${boardByTitle eq null}">
+   			<c:forEach items="${list}" var="list">
+      		<tr>
+        		<td align="center">${list.fBoard_Num}</td>
+        		<td align="center">${list.fId}</td>
+        		<td align="center"><a class="text-dark" href="contentView?fBoard_Num=${list.fBoard_Num}">${list.fTitle}</a></td>
+        		<td align="center">${list.fHit}</td>
+        		<td align="center"><fmt:formatDate value="${list.fDate}" pattern="yyyy-MM-dd"/></td>
+      		</tr>
+			</c:forEach>
+		</c:if>
+		 <!-- 검색어가 null값이 아닐 경우 -->
+      	<c:if test="${boardByTitle ne null}">
+	      <c:forEach items="${boardByTitle}" var="boardByTitle">
+      		<tr>
+        		<td align="center">${boardByTitle.fBoard_Num}</td>
+        		<td align="center">${boardByTitle.fId}</td>
+        		<td align="center"><a class="text-dark" href="contentView?fBoard_Num=${boardByTitle.fBoard_Num}">${boardByTitle.fTitle}</a></td>
+        		<td align="center">${boardByTitle.fHit}</td>
+        		<td align="center"><fmt:formatDate value="${boardByTitle.fDate}" pattern="yyyy-MM-dd"/></td>
+      		</tr>
+			</c:forEach>
+      	</c:if>
     </tbody>
   </table>
-
-
 
 <sec:authorize access="isAnonymous()">
 	<p align="right"><a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a></p>
@@ -272,7 +285,7 @@
 </div>
 
 
-<div class="container" id="board_search_bar">
+<div class="container" id="boardByTitle">
 
 	<div class="row">
 		
@@ -281,12 +294,14 @@
 
 		<div class="col-sm-4">
 <!-- Board Search Bar -->
+		<form action="boardByTitle" method="get">
  			<div class="input-group mb-3">
-  				<input type="text" class="form-control" placeholder="">
+  				<input type="text" name="fTitle" id="fTitle" class="form-control" placeholder="">
   				<div class="input-group-append">
     				<button class="btn btn-danger btn-dark" type="submit">검색</button>
   				</div>
 			</div>
+		</form>	
 <!-- Board Search Bar End -->
 		</div>
 	

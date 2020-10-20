@@ -47,5 +47,8 @@ public interface FreeBoardService {
 	
 	//게시판 id 체크
 	public String boardUserIdCheck(int fBoard_Num) throws Exception;
+	
+	//게시판 서치
+	public List<FreeBoardVO> boardByTitle(FreeBoardVO fboardVO);
 
 }

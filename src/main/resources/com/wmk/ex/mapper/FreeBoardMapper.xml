@@ -115,5 +115,13 @@
 				where repNum = #{repNum}
 	]]>
 	</select>
-
+	
+	<!-- 게시판 서치 -->
+	<select id="findBoardByTitle" parameterType="String" resultType="com.wmk.ex.vo.FreeBoardVO">
+	<![CDATA[	
+		select * 
+			from FREE_BOARD 
+				where fTitle like '%'||#{fTitle}||'%' 
+	]]>
+	</select>
 </mapper>

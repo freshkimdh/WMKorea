@@ -135,6 +135,15 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return mapper.boardUserIdCheck(fBoard_Num);
 	}
 	
+	//게시판 서치
+	@Override
+	public List<FreeBoardVO> boardByTitle(FreeBoardVO fboardVO) {
+		
+		log.info("boardByTitle...");
+
+		return mapper.findBoardByTitle(fboardVO);
+	}
+	
 
 
 
