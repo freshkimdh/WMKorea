@@ -20,13 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.ShopService;
-import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
 import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.GoodsViewVO;
-import com.wmk.ex.vo.MemberVO;
 import com.wmk.ex.vo.OrderDetailVO;
 import com.wmk.ex.vo.OrderListVO;
 import com.wmk.ex.vo.OrderVO;
@@ -85,19 +83,7 @@ public class ShopController {
 //	  return "redirect:/shop/view?n=" + comment.getGdsNum();
 //	 }
 	 
-	// ��ǰ �Ұ�(���) �ۼ�
-	 @ResponseBody
-	 @RequestMapping(value = "/shop/view/registReply", method = RequestMethod.POST)
-	 public void registReply(CommentVO comment, HttpSession session) throws Exception {
-	  log.info("regist reply");
-	  
-	  MemberVO member = (MemberVO)session.getAttribute("member");
-	  comment.setUserId(member.getUserId());
-	  
-	  service.registReply(comment);
-	  
 
-	 } 
 	 
 	 
 	 // ��ǰ �Ұ�(���) ���
@@ -113,27 +99,7 @@ public class ShopController {
 	 
 	 
 	 
-	// ��ǰ �Ұ�(���) ����
-	 @ResponseBody
-	 @RequestMapping(value = "/shop/view/deleteReply", method = RequestMethod.POST)
-	 public int getReplyList(CommentVO comment, HttpSession session) throws Exception {
-	  log.info("post delete reply");
 
-	  int result = 0;
-	  
-	  MemberVO member = (MemberVO)session.getAttribute("member");
-	  String userId = service.idCheck(comment.getRepNum());
-	    
-	  if(member.getUserId().equals(userId)) {
-	   
-	   comment.setUserId(member.getUserId());
-	   service.deleteReply(comment);
-	   
-	   result = 1;
-	  }
-	  
-	  return result; 
-	 }
 	 
 //		@GetMapping("/reply_view") 
 //		public String reply_view(BoardVO boardVO, Model model) {
