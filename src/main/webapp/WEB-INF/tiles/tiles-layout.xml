@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+  
+<tiles-definitions>
+
+    <definition name="layout" template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+	</definition>
+	
+	
+	<definition name="baseForm" template="/WEB-INF/views/layout/baseForm.jsp">
+	
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp"/>
+		
+		<put-attribute name="body" value=""/>
+		
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
+		
+		
+	</definition>
+	
+	
+	<definition name="/wmk_home/index" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/index.jsp" />
+	
+	</definition>
+	
+
+	<definition name="/wmk_home/joinForm" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/joinForm.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_home/loginForm" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/loginForm.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_home/myPage" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/myPage.jsp" />
+	
+	</definition>
+	
+	<definition name="/wmk_home/characterMaking" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/characterMaking.jsp" />
+	
+	</definition>
+	
+	
+
+	
+</tiles-definitions>
+
+
+
+
+
+
