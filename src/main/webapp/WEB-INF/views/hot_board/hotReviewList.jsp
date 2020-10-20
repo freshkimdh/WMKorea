@@ -19,64 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
-  <script type="text/javascript">
-  
-	$(document).ready(function(){
-   	 $("#cate").on('click', 'li', function() {
-   		 
- 		var formData= {                 
- 			rCategory: $(this).val(),
- 			rArea : "${rArea}"
-        };
-   		  
-   		$.ajax({
-            type: "POST"
-            , dataType: "json"
-            , async : false
-            , contentType : "application/json; charset=UTF-8"
-            , url : "<c:url value="review_boardList_ajax" />"
-            , data : JSON.stringify(formData)
-            , success : function(objList) {
-               //값을 제이슨형태로 변환
-               //var responseData = JSON.stringify(objList);
-               //제이슨타입을 맵형식으로 변환
-               //var data = JSON.parse(responseData);
-               
-               //console.log( responseData );
-               //console.log( data );
 
-               var sTxt = '';
-              
-               $(objList).each(function (index, order){
-            	   sTxt += '<div class="col-md-4">';
-            	   sTxt += 		'<div class="card shadow-sm">';
-            	   sTxt += 			'<div class="list_picture">';
-            	   sTxt += 				'<a href="review_contentView?rBoardNum=33&amp;area=서울"><img src="others/s1.jpg" class="img-fluid mx-auto d-block rounded"></a>';
-            	   sTxt += 			'</div>';
-            	   sTxt += 			'<div class="card-body">';
-            	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
-            	   sTxt += 				'<h class="text-warning">★★★★★</h> (4) <br>';
-            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span> 18 ';
-            	   sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>' + order.rCategory ;
-            	   sTxt += 			'</div>';
-            	   sTxt += 		'</div>';
-            	   sTxt += 		'<br>';
-            	   sTxt +=  '</div>';
-               });
-               
-               $('#review_contentView .row').html(sTxt); //success 종료
-               
-               //console.log( sTxt );
-            }, error : function(response){
-               alert("상품 정보를 조회할 수 없습니다.\n잠시 후 다시 시도하거나 고객센터로 문의바랍니다.");
-               //alert("[" + response.status + "] 처리 중 오류가 발생하였습니다. 다시 시도하거나 관리자에게 문의바랍니다.");
-            }
-         });
-   		 
-   	 
-   	 });
-	})
-  </script>
 
 <!-- 	<style> /* Font responsive  */
 	body {font-size: 16px;}
@@ -256,8 +199,8 @@
 <!-- This is banner -->
 <div class="hero-image">
   <div class="hero-text">
-	<p style="font-size:60px" class="display-3">${rArea}</p>
-	<p>We Make Our World</p>
+	<p style="font-size:80px" class="display-3">Hot place</p>
+	<p> We made Korea </p>
   </div>
 </div>
 
@@ -281,8 +224,8 @@
 		    <button type="button" class="btn btn-secondary">기타</button>
 		</div>  	
   	</div> -->
-  	<div class="col-sm-8" align="center">
-		<!-- Group button details-->
+ <!--  	<div class="col-sm-8" align="center">
+		Group button details
 		<div class="btn-group btn-group btn-block">
 			<ul id="cate">
 				<li id="cate2" class="btn btn-secondary cate2" value="0">전체</li> 
@@ -292,7 +235,7 @@
 				<li id="cate2" class="btn btn-secondary cate2" value="4">기타</li> 
 		    </ul>
 		</div>  	
-  	</div>
+  	</div> -->
   	
   	
   	<div class="col-sm-2">
@@ -411,12 +354,12 @@
   </div>
   
 	<!--  board buttons --> 
- 	<div class="container">
+ 	<%-- <div class="container">
 	<p align="right">
 	<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
 	</p>
 	<br>
-	</div>
+	</div> --%>
 
 <!-- <img src="others/s1.PNG"> -->
 

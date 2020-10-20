@@ -31,6 +31,11 @@ public class RBoardServiceImpl implements RBoardService {
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;
 	
+	public List<RBoardVO> getrList(RBoardVO rboardVO){
+		log.info("Get rlist");
+		return rmapper.getrList(rboardVO);
+	}
+	
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
