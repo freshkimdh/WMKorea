@@ -49,6 +49,7 @@ public class HomeController {
 		return "/wmk_home/myPage";
 	}
 	
+	//아래 코드 삭제 예정
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 

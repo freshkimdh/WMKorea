@@ -7,19 +7,17 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Criteria { //Ç¥ÁØ, ±âÁØ
-	//ÆäÀÌÂ¡Ã³¸®¸¦ À§ÇØ¼­ ÆäÀÌÁö ¹øÈ£¿Í ÇÑÆäÀÌÁö´ç ¸î°³ÀÇ µ¥ÀÌÅÍ¸¦ º¸¿©ÁÙ °ÍÀÎ°¡¸¦ °áÁ¤ÇØ¾ßÇÑ´Ù.
-	private int pageNum; //ÆäÀÌÁö ¹øÈ£
-	private int amount; //ÇÑÆäÀÌÁö´ç ¸î°³ÀÇ µ¥ÀÌÅÍ¸¦ º¸¿©ÁÙ °ÍÀÎ°¡?
+public class Criteria { //í˜ì´ì§€ ê´€ë¦¬
 	
+	private int pageNum; 
+	private int amount; 
 	
 	public Criteria() {
-		this(1, 10); //±âº»°ª 1ÆäÀÌÁö 10°³·Î ÁöÁ¤
-		
+		this(1, 10); 		
 	}
 	
+	
 	public Criteria(int pageNum, int amount) {
-		
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}

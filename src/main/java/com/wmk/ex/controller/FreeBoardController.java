@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
@@ -144,7 +143,7 @@ public class FreeBoardController {
 			log.info("유저 id " + username);
 			freeReplyVO.setId(username);
 		} else { //user id 가져오기 실패
-			String username = principal.toString();
+			
 			log.info("유저 id 가져오기 실패");
 		}
 	 

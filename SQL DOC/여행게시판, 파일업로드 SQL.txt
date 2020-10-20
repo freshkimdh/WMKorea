@@ -9,7 +9,7 @@ create table Review_Board(
    rContent VARCHAR2(4000),           --글내용
    rDate DATE DEFAULT SYSDATE,       --작성일
    rOpenTime VARCHAR2(20),            --개장시간
-   rArea VARCHAR2(20),                --지역
+   rArea VARCHAR2(50),                --지역
    rAdress VARCHAR2(50),              --주소
    rHit NUMBER(10) DEFAULT 0,       --조회수
    rStep NUMBER(10),                  --댓글
