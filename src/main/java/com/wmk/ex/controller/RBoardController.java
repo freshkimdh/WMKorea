@@ -41,7 +41,7 @@ import com.wmk.ex.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Controller
+@Controller()
 @AllArgsConstructor
 @Log4j
 public class RBoardController {
@@ -120,7 +120,7 @@ public class RBoardController {
 		List<Map<String, Object>> fileList = rservice.selectFileList(rboardVO.getrBoardNum());
 		model.addAttribute("file", fileList);
 		
-		/*
+		
 		CustomUser loginInfo =  authentication != null ? (CustomUser) authentication.getPrincipal() : null;
 
 		if(loginInfo == null) {
@@ -129,10 +129,10 @@ public class RBoardController {
 		} else {
 			// 로그인 유저가 해당 게시글 좋아요 버튼 눌렀는지 알기 위해 해당 테이블 조회
 			int likeCount = rservice.getLikeCount(rboardVO.getrBoardNum(), loginInfo.getUser().getId());
-			log.info(likeCount);
+			log.info("like Count	:"+likeCount);
 			model.addAttribute("isSelectLike", likeCount > 0);
 		}
-		*/
+		
 	   
 		return "/review_board/reviewContentView";
 	}
