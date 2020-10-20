@@ -188,7 +188,19 @@ public class FreeBoardController {
 		return String.valueOf(result);		 
 	}
 	
+	//게시판 서치
+	@GetMapping("/boardByTitle")
+	public String boardByTitle(FreeBoardVO freeBoardVO, Model model) {  
 	
+		log.info("boardByTitle");
+		
+		freeService.boardByTitle(freeBoardVO);
+		log.info(freeBoardVO.toString()); 
+		
+		model.addAttribute("boardByTitle", freeService.boardByTitle(freeBoardVO));
+		
+		return "/free_board/boardList";
+	}
 	
 	
 }

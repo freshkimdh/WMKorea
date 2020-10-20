@@ -47,5 +47,8 @@ public interface FreeBoardMapper {
 	
 	//게시판 id
 	public String boardUserIdCheck(int fBoard_Num) throws Exception;
+
+	//게시판 서치
+	public List<FreeBoardVO> findBoardByTitle(FreeBoardVO fboardVO);
 	
 }
