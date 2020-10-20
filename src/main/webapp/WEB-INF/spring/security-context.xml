@@ -8,7 +8,6 @@
     <!-- 검사 URL -->
     <http auto-config="true" use-expressions="true">
         
-        <intercept-url pattern="/write_view" access="hasAnyRole('USER, ADMIN')" />
         <intercept-url pattern="/" access="permitAll" />
         
  		<form-login login-page="/loginForm"
@@ -30,48 +29,16 @@
     </beans:bean>
     
    
-  		<beans:bean id="customNoOpPasswordEncoder" class="com.wmk.ex.security.CustomNoOpPasswordEncoder" /> <!-- 커스텀 인코더 객체생성	 -->
-		
-		<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> <!-- 스프링에서 제공하는 인코더 객체생성 -->
-     
- 		<beans:bean id="customUserDetailService" class="com.wmk.ex.security.CustomUserDetailService" /> <!-- 객체생성  -->
-		
-<!--      <jdbc-user-service 
-            data-source-ref="dataSource"
-            role-prefix=""
-            users-by-username-query="select username, password, enabled from users where username = ?"
-            authorities-by-username-query="select username, authority from authorities where username = ?"
-            group-authorities-by-username-query="select g.id, g.group_name, ga.authority from groups g, group_members gm, group_authorities ga where gm.username = ? and g.id = ga.group_id and g.id = gm.group_id"
-    /> -->
-    
-    
-	<!-- provider --> 
-	<authentication-manager>
-		<authentication-provider> 
-			<user-service> 
-				<user name="member" password="{noop}member" authorities="ROLE_MEMBER" />
-				<user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN" />
-				<user name="user" password="{noop}user" authorities="ROLE_USER" />
-				<user name="Ejshd" password="{noop}1234" authorities="ROLE_USER" />  			
-			</user-service> 
-		</authentication-provider>
-	</authentication-manager>
-	
-		<!--  provider  --> <!-- 내가 만든 password-encoder 객체로 기존에 있는 EMP table DB에 접근 (08/10) -->
-       	<authentication-manager>
+	<beans:bean id="customNoOpPasswordEncoder" class="com.wmk.ex.security.CustomNoOpPasswordEncoder" />					<!-- 커스텀 인코더 객체생성	 -->		
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />	<!-- 스프링에서 제공하는 인코더 객체생성 -->     
+ 	<beans:bean id="customUserDetailService" class="com.wmk.ex.security.CustomUserDetailService" />						<!-- 객체생성  -->
+		   
+   	
+	<!--  provider  --> <!-- 내가 만든 password-encoder 객체로 기존에 있는 EMP table DB에 접근 (08/10) -->
+    <authentication-manager>
         <authentication-provider user-service-ref="customUserDetailService">
         <password-encoder ref="bcryptPasswordEncoder"/>
         </authentication-provider>
-    </authentication-manager>
-		
-	
-   
-<!--    <authentication-manager>
-        <authentication-provider>
-        <jdbc-user-service 
-            data-source-ref="dataSource"
-         />
-        </authentication-provider>
-    </authentication-manager> -->
+    </authentication-manager>		
    
 </beans:beans>

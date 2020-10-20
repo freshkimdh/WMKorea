@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.wmk.ex.dao.ShopDAO;
 import com.wmk.ex.mapper.ShopMapper;
-import com.wmk.ex.vo.BoardVO;
 import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CommentListVO;
@@ -18,7 +17,6 @@ import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.OrderDetailVO;
 import com.wmk.ex.vo.OrderListVO;
 import com.wmk.ex.vo.OrderVO;
-import com.wmk.ex.vo.UserVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -36,15 +34,15 @@ public class ShopServiceImpl implements ShopService {
 
 	@Override
 	public List<GoodsViewVO> list(int cateCode, int level) throws Exception {
-		 int cateCodeRef = 0;  // Ä«Å×°í¸® ÂüÁ¶ ÄÚµå. ¾ø¾îµµ ¹«°ü
+		 int cateCodeRef = 0;  // Ä«ï¿½×°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½. ï¿½ï¿½ï¿½îµµ ï¿½ï¿½ï¿½ï¿½
 		 
-		 if(level == 1) {  // lavel 1 = 1Â÷ ºÐ·ù.
+		 if(level == 1) {  // lavel 1 = 1ï¿½ï¿½ ï¿½Ð·ï¿½.
 		  
 		  cateCodeRef = cateCode;
 		  return dao.list(cateCode, cateCodeRef);
-		  // µÎ°¡Áö ¸ðµÎ cateCode·Î ÇØµµ ¹«°ü
+		  // ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ cateCodeï¿½ï¿½ ï¿½Øµï¿½ ï¿½ï¿½ï¿½ï¿½
 		  
-		 } else {  // lavel 2 = 2Â÷ ºÐ·ù
+		 } else {  // lavel 2 = 2ï¿½ï¿½ ï¿½Ð·ï¿½
 		  
 		  return dao.list(cateCode);
 		  
@@ -82,7 +80,7 @@ public class ShopServiceImpl implements ShopService {
 		return dao.idCheck(repNum);
 	}
 
-	//Ä«Æ®´ã±â
+	//Ä«Æ®ï¿½ï¿½ï¿½
 	@Override
 	public void addCart(CartVO cart) throws Exception {
 		
@@ -90,7 +88,7 @@ public class ShopServiceImpl implements ShopService {
 		
 	}
 	
-	//Àå¹Ù±¸´Ï º¸±â
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public List<CartListVO> cartList(String username) throws Exception {
 		
@@ -104,7 +102,7 @@ public class ShopServiceImpl implements ShopService {
 		
 	}
 
-	//ÁÖ¹®Á¤º¸
+	//ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void orderInfo(OrderVO order) throws Exception {
 		
@@ -112,7 +110,7 @@ public class ShopServiceImpl implements ShopService {
 		
 	}
 
-	//ÁÖ¹® »ó¼¼Á¤º¸
+	//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception {
 
