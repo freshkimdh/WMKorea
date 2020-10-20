@@ -176,8 +176,8 @@
 	<div class="btn-group btn-group-sm">
 	
 <sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
-   		<a href="${pageContext.request.contextPath}/loginForm" class="btn btn-secondary" type="button">Login</a>
-		<a href="${pageContext.request.contextPath}/joinForm" class="btn btn-secondary" type="button">Join</a> 
+   		<a href="${pageContext.request.contextPath}/wmk_home/loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="${pageContext.request.contextPath}/wmk_home/joinForm" class="btn btn-secondary" type="button">Join</a> 
 		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
 </sec:authorize>
 

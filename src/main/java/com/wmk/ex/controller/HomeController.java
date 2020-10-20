@@ -1,67 +1,41 @@
 package com.wmk.ex.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Logger;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
 
 
 @Log4j
 @Controller
+@RequestMapping("/wmk_home")
 public class HomeController {
 	
 	@GetMapping("/index")
-	public String index(Model model) {
+	public void Index(Model model) {
 		log.info("index...");
-		return "/wmk_home/index";
 	}
 	
 	@GetMapping("/characterMaking")
-	public String character(Model model) {
+	public void Character(Model model) {
 		log.info("character...");
-		return "/wmk_home/characterMaking";
 	}
 	
-	
 	@GetMapping("/loginForm") 
-	public String login(Model model) {
+	public void Login(Model model) {
 		log.info("loginForm...");
-		return "/wmk_home/loginForm";
 	}
 		
 	@GetMapping("/joinForm") 
-	public String join(Model model) {		
+	public void Join(Model model) {		
 		log.info("joinForm...");
-		return "/wmk_home/joinForm";
 	}
 	
 	@GetMapping("/mypage") 
-	public String myPage(Model model) {
+	public void MyPage(Model model) {
 		log.info("mypage...");
-		return "/wmk_home/myPage";
-	}
-	
-	//아래 코드 삭제 예정
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
 	}
 	
 }
