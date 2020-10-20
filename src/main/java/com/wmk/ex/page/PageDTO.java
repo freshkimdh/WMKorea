@@ -4,49 +4,45 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
 public class PageDTO { 
 	
-	//ÆäÀÌÂ¡ Ã³¸®¸¦ ÇÒ¶§ ÇÊ¿äÇÑ Á¤º¸µé
-	private int startPage; //È­¸é¿¡ º¸¿©Áö´Â ÆäÀÌÁö ½ÃÀÛ¹øÈ£
-	private int endPage; //È­¸é¿¡ º¸¿©Áö´Â ÆäÀÌÁö ³¡ ¹øÈ£
-	private boolean prev, next; //ÀÌÀü°ú ´ÙÀ½À¸·Î ÀÌµ¿°¡´ÉÇÑ ¸µÅ©Ç¥½Ã
-	private int total; //ÀüÃ¼ °Ô½Ã±Û ¼ö
+	//í˜ì´ì§• ì²˜ë¦¬ë¥¼ í• ë•Œ í•„ìš”í•œ ì •ë³´ë“¤
+	private int startPage; 			//í™”ë©´ì— ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ ì‹œì‘ë²ˆí˜¸
+	private int endPage; 			//í™”ë©´ì— ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ ë ë²ˆí˜¸
+	private boolean prev, next; 	//ì´ì „ê³¼ ë‹¤ìŒìœ¼ë¡œ ì´ë™ê°€ëŠ¥í•œ ë§í¬í‘œì‹œ
+	private int total;				//ì „ì²´ ê²Œì‹œê¸€ ìˆ˜
 	private Criteria cri;
 	
 	public PageDTO(Criteria cri, int total) {
 		
 		this.cri = cri;
-		this.total = total; //ÀüÃ¼ µ¥ÀÌÅÍ¼ö
-		
-		this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10; //ceilÀº ¿Ã¸²ÀÌ´Ù. 0.3 ÀÌ¶ó¸é 1·Î ¹Ù²ãÁÜ.
-		
+		this.total = total;
+		this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10; //ceilì€ ì˜¬ë¦¼ì´ë‹¤. 0.3 ì´ë¼ë©´ 1ë¡œ ë°”ê¿”ì¤Œ.
 		this.startPage = this.endPage - 9;
 		
-		//TotalÀ» ÅëÇÑ endPageÀÇ Àç°è»ê
-		//10¾¿ º¸¿©ÁÖ´Â °æ¿ì ÀüÃ¼ Å×ÀÌÅÍ ¼ö°¡ 80°³¶ó°í °¡Á¤ÇÏ¸é ³¡¹øÈ£´Â 10ÀÌ ¾Æ´Ñ 8ÀÌ µÊ.
+		//Totalì„ í†µí•œ endPageì˜ ì¬ê³„ì‚°
+		//10ì”© ë³´ì—¬ì£¼ëŠ” ê²½ìš° ì „ì²´ í…Œì´í„° ìˆ˜ê°€ 80ê°œë¼ê³  ê°€ì •í•˜ë©´ ëë²ˆí˜¸ëŠ” 10ì´ ì•„ë‹Œ 8ì´ ë¨.
 		int realEnd = (int) (Math.ceil((total * 1.0) / cri.getAmount()));
 		
 		if (realEnd <= this.endPage) {
 			this.endPage = realEnd;
 		}
 
-		//½ÃÀÛ ¹øÈ£°¡ 1º¸´Ù Å«°æ¿ì Á¸Àç
-		this.prev = this.startPage > 1;
-		//realEnd °¡ ³¡¹øÈ£(endpage)º¸´Ù Å« °æ¿ì¿¡¸¸ Á¸Àç
-		this.next = this.endPage < realEnd;
+		this.prev = this.startPage > 1; //ì‹œì‘ ë²ˆí˜¸ê°€ 1ë³´ë‹¤ í°ê²½ìš° ì¡´ì¬		
+		this.next = this.endPage < realEnd; //realEnd ê°€ ëë²ˆí˜¸(endpage)ë³´ë‹¤ í° ê²½ìš°ì—ë§Œ ì¡´ì¬
 		
 	}
 	
-	public String makeQuery(int page) { //get¹æ½Ä¿¡ ¹®±¸¸¦ ´Ş¾ÆÁÖ±â À§ÇÑ ÇÔ¼ö
+	public String makeQuery(int page) { //getë°©ì‹ì— ë¬¸êµ¬ë¥¼ ë‹¬ì•„ì£¼ê¸° ìœ„í•œ í•¨ìˆ˜
 		UriComponents uriComponentsBuilder = UriComponentsBuilder.newInstance().queryParam("pageNum", page) // pageNum = 3
-				.queryParam("amount", cri.getAmount()) // pageNum=3&amount=10
-				.build(); // ?pageNum=3&amount=10
-		return uriComponentsBuilder.toUriString(); // ?pageNum=3&amount=10 ¸®ÅÏ 
+				.queryParam("amount", cri.getAmount())
+				.build();
+		
+		return uriComponentsBuilder.toUriString();		// ?pageNum=3&amount=10 ë¦¬í„´ 
 	}
 	
 }

@@ -3,54 +3,49 @@ package com.wmk.ex.mapper;
 import java.util.List;
 
 import com.wmk.ex.page.Criteria;
-import com.wmk.ex.service.FreeBoardServiceImpl;
-import com.wmk.ex.vo.CommentVO;
 import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.FreeReplyVO;
 
 public interface FreeBoardMapper {
 	
-	public List<FreeBoardVO> getList();
+	//게시판 목록
+	public List<FreeBoardVO> getList() throws Exception;
 
-	//�Խ��� ��ȣ get
-	public FreeBoardVO getNum(int fBoard_Num);
+	//게시판 번호
+	public FreeBoardVO getNum(int fBoard_Num) throws Exception;
 	
 	//FBoardVO fid = UserVO id >> get id
-	public FreeBoardVO getfId(String fId);
+	public FreeBoardVO getfId(String fId) throws Exception;
 	
-	//�Խ��� �ۼ�
-	public void writeBoard(FreeBoardVO fboardVO);
+	//게사판 작성
+	public void writeBoard(FreeBoardVO fboardVO) throws Exception;
 	
-	//�Խ��� ����
-	public void updateModify(FreeBoardVO fboardVO);
+	//게시판 수정
+	public void updateModify(FreeBoardVO fboardVO) throws Exception;
 	
 	//게시판 삭제
-	public void deleteBoard(FreeBoardVO fboardVO);
+	public void deleteBoard(FreeBoardVO fboardVO) throws Exception;
 	
-	//��ȸ��
-	public void addUphit(int fBoard_Num);
+	//게시판 조회수
+	public void addUphit(int fBoard_Num) throws Exception;
 	
-	//����¡ ó��
-	public List<FreeBoardVO> getListWithPaging(Criteria cri);
-	public int getTotalCount(Criteria cri);
+	//게시판 페이징
+	public List<FreeBoardVO> getListWithPaging(Criteria cri) throws Exception;
+	public int getTotalCount(Criteria cri) throws Exception;
 	
-
-	//��ǰ ��� �ۼ�
+	//게시판 댓글
 	public void registReply(FreeReplyVO reply) throws Exception;
 	
-	//��� ����Ʈ
+	//게시판 댓글 목록
 	public List<FreeReplyVO> replyList(int fBoard_Num) throws Exception;
 	
-	//
+	//게시판 댓글 삭제
 	public void deleteReply(FreeReplyVO reply) throws Exception;
 	
-	//��� ���̵� üũ
+	//게시판 댓글 id
 	public String replyUserIdCheck(int repNum) throws Exception;
 	
-	//게시판 id 확인
+	//게시판 id
 	public String boardUserIdCheck(int fBoard_Num) throws Exception;
-	
-	
-	
 	
 }

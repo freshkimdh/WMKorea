@@ -11,37 +11,35 @@ import com.wmk.ex.vo.FreeReplyVO;
 
 public interface FreeBoardService {
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占�
-	public List<FreeBoardVO> getList();
+	//게시판 목록 
+	public List<FreeBoardVO> getList() throws Exception;
 	
-	//占쌉쏙옙占쏙옙 get num
-	public FreeBoardVO getNum(int fBoard_Num);
+	//게시판 번호
+	public FreeBoardVO getNum(int fBoard_Num) throws Exception;
 	
 	//FBoardVO fid = UserVO id >> get id
-	public FreeBoardVO getfId(String fId);
+	public FreeBoardVO getfId(String fId) throws Exception;
 	
 	//게시판 작성
-	public void writeBoard(FreeBoardVO fboardVO);
+	public void writeBoard(FreeBoardVO fboardVO) throws Exception;
 	
 	//게시판 수정
-	public void updateModify(FreeBoardVO fboardVO);
+	public void updateModify(FreeBoardVO fboardVO) throws Exception;
 	
 	//게시판 삭제 
-	public void deleteBoard(FreeBoardVO fboardVO);
+	public void deleteBoard(FreeBoardVO fboardVO) throws Exception;
+		
+	//게시판 페이징
+	public List<FreeBoardVO> getListWithPaging(Criteria cri) throws Exception;
+	public int getTotalCount(Criteria cri) throws Exception;
 	
-	
-	//占쏙옙占쏙옙징 처占쏙옙
-	public List<FreeBoardVO> getListWithPaging(Criteria cri);
-	public int getTotalCount(Criteria cri);
-	
-	
-	//占쏙옙占� 占쌜쇽옙
+	//게시판 댓글 작성
 	public void registReply(FreeReplyVO reply) throws Exception;
 	
-	//占쏙옙占� 占쏙옙占쏙옙트
+	//게시판 댓글 목록
 	public List<FreeReplyVO> replyList(int fBoard_Num) throws Exception;
 	
-	//占쏙옙占� 占쏙옙占쏙옙
+	//게시판 댓글 삭제
 	public void deleteReply(FreeReplyVO reply) throws Exception;
 	
 	//댓글  id 체크

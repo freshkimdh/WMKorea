@@ -18,9 +18,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	private FreeBoardMapper mapper; 
 	
-	//占쌉쏙옙占쏙옙 占쏙옙占�
+	//게시판 목록 
 	@Override
-	public List<FreeBoardVO> getList() {
+	public List<FreeBoardVO> getList() throws Exception {
 		log.info("getList..."); 
 		
 		return mapper.getList();
@@ -28,7 +28,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	//게시판 번호 get
 	@Override
-	public FreeBoardVO getNum(int fBoard_Num) {
+	public FreeBoardVO getNum(int fBoard_Num) throws Exception {
 		FreeBoardVO fboardVO = mapper.getNum(fBoard_Num);
 							mapper.addUphit(fBoard_Num);
 		
@@ -39,16 +39,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	//FBoardVO fid = UserVO id >> get id
 	@Override
-	public FreeBoardVO getfId(String fId) {
+	public FreeBoardVO getfId(String fId) throws Exception {
 		FreeBoardVO fboardVO = mapper.getfId(fId);
 							
 		return fboardVO;
 	}	
 	
 	
-	//占쌉쏙옙占쏙옙 占쌜쇽옙
+	//게시판 작성
 	@Override
-	public void writeBoard(FreeBoardVO fboardVO) {
+	public void writeBoard(FreeBoardVO fboardVO) throws Exception {
 		
 		log.info("writeBoard........");
 		
@@ -57,7 +57,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	//게시판 수정
 	@Override
-	public void updateModify(FreeBoardVO fboardVO) {
+	public void updateModify(FreeBoardVO fboardVO) throws Exception {
 		
 		mapper.updateModify(fboardVO);	
 	}
@@ -65,37 +65,37 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	//게시판 삭제 
 	@Override
-	public void deleteBoard(FreeBoardVO fboardVO) {
+	public void deleteBoard(FreeBoardVO fboardVO) throws Exception {
 		
 		mapper.deleteBoard(fboardVO);	
 		
 	}
 	
-	//占쏙옙占쏙옙징 처占쏙옙
+	//게시판 페이징
 	@Override
-	public int getTotalCount(Criteria cri) {
+	public int getTotalCount(Criteria cri) throws Exception {
 		
 		log.info("get total count...");
 		return mapper.getTotalCount(cri);
 	}
 
-	
+	//게시판 페이징
 	@Override
-	public List<FreeBoardVO> getListWithPaging(Criteria criteria) {
+	public List<FreeBoardVO> getListWithPaging(Criteria criteria) throws Exception {
 		
 		log.info("get List with criteria"  + criteria);
 		return mapper.getListWithPaging(criteria);
 	}
 	
 	
-	//占쏙옙占� 占쌜쇽옙
+	//게시판 댓글 작성
 	@Override
 	public void registReply(FreeReplyVO reply) throws Exception {
 		mapper.registReply(reply);
 		
 	}
 	
-	//占쏙옙占� 占쏙옙占�
+	//게시판 댓글 목록
 	@Override
 	public List<FreeReplyVO> replyList(int fBoard_Num) throws Exception {
 		
@@ -103,7 +103,8 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		
 		return mapper.replyList(fBoard_Num);
 	}
-
+	
+	//게시판 댓글 삭제
 	@Override
 	public void deleteReply(FreeReplyVO reply) throws Exception {
 		
@@ -130,8 +131,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		log.info("board idCheck...");
 		log.info(mapper.boardUserIdCheck(fBoard_Num));
 		log.info(fBoard_Num);
-		
-		//log.info(mapper.getNum(fId));
 		
 		return mapper.boardUserIdCheck(fBoard_Num);
 	}
