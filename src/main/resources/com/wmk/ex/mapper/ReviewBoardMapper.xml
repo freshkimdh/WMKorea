@@ -20,12 +20,8 @@
 	
 	<select id="getrList" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
-		select
-     		*
-	    from Review_BOARD 
-	 
-	    order by like_cnt desc
-	    
+		select * from Review_BOARD 
+	    	order by like_cnt desc 
 	]]>
  	</select>
  	

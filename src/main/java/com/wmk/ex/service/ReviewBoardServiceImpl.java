@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.mapper.ReviewBoardMapper;
-import com.wmk.ex.page.Criteria;
 import com.wmk.ex.util.FileUtils;
-import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.ReviewBoardVO;
 import com.wmk.ex.vo.ReviewReplyVO;
 
@@ -26,56 +24,47 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ReviewBoardServiceImpl implements ReviewBoardService {
 	
-	private ReviewBoardMapper rmapper; 
+	private ReviewBoardMapper reviewBoardMapper; 
 	
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;
 	
-	public List<ReviewBoardVO> getrList(ReviewBoardVO rboardVO){
+	
+	//여행 게시판 목록
+	public List<ReviewBoardVO> getrList(ReviewBoardVO reviweBoardVO){
 		log.info("Get rlist");
-		return rmapper.getrList(rboardVO);
+		return reviewBoardMapper.getrList(reviweBoardVO);
 	}
 	
-	public List<ReviewBoardVO> getReviewList(ReviewBoardVO rboardVO) {
-		log.info("getrList..."); 
-		
-		log.info("imple"+rmapper.getReviewList(rboardVO));
-		
-		return rmapper.getReviewList(rboardVO);
+	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviweBoardVO) {
+		log.info("getrList..."); 		
+		return reviewBoardMapper.getReviewList(reviweBoardVO);
 	}
-	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO rboardVO) {
-		log.info("getrList..."); 
-		
-		return rmapper.getReviewListAjax(rboardVO);
+	
+	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviweBoardVO) {
+		log.info("getrList..."); 		
+		return reviewBoardMapper.getReviewListAjax(reviweBoardVO);
 	}
 	
 	@Override
-	public ReviewBoardVO getrBoardNum(int rBoardNum) {
-		ReviewBoardVO rboardVO = rmapper.getrBoardNum(rBoardNum);
-							rmapper.addUprHit(rBoardNum);
+	public ReviewBoardVO getrBoardNum(int reviewBoardNum) {
+		ReviewBoardVO rboardVO = reviewBoardMapper.getrBoardNum(reviewBoardNum);
+			reviewBoardMapper.addUprHit(reviewBoardNum);
 		
 		log.info("getrBoardNum..."); 
 		
 		return rboardVO;
 	}
 	
-	//RBoardVO rid = UserVO id >> get id
-	@Override
-	public ReviewBoardVO getrId(String rId) {
-		ReviewBoardVO rboardVO = rmapper.getrId(rId);
-							
-		return rboardVO;
-	}
-	
 	@SuppressWarnings("null")
 	@Override
-	public void rWriteBoard(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public void rWriteBoard(ReviewBoardVO reviweBoardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
 		log.info("rWriteBoard........");
 		
-		rmapper.rWriteBoard(rboardVO);
+		reviewBoardMapper.rWriteBoard(reviweBoardVO);
 		
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(rboardVO, mpRequest); 
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(reviweBoardVO, mpRequest); 
 		
 		System.out.println("abcd" + list);
 		System.out.println("abcd" + list.size());
@@ -91,138 +80,125 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 			map.put("ORIGINAL_FILE_NAME", " ");
 			map.put("STORED_FILE_NAME", " ");
 			map.put("FILE_SIZE", 0);
-			rmapper.insertFile(map);
+			reviewBoardMapper.insertFile(map);
 		}else {
 			for(int i=0; i<size; i++){ 
-				rmapper.insertFile(list.get(i));
+				reviewBoardMapper.insertFile(list.get(i));
 				System.out.println("list.get(i)" + list.get(i));
 			}
 		}
 	}	
 	
-	
-	
 	@Override
-	public void updaterModify(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public void updaterModify(ReviewBoardVO reviweBoardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
-		log.info("아아아아아=" + rboardVO);
-		rmapper.updaterModify(rboardVO);
+		reviewBoardMapper.updaterModify(reviweBoardVO);
 		
-		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(rboardVO, mpRequest);
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(reviweBoardVO, mpRequest);
 		log.info("list=" + list);
 		int size = list.size();
 		for(int i=0; i<size; i++){ 
-			rmapper.updateFile(list.get(i)); 
+			reviewBoardMapper.updateFile(list.get(i)); 
 			System.out.println("list.get(i)" + list.get(i));
 		}
 	}
 	
 	@Override
-	public void deleterBoard(int rBoardNum) {
+	public void deleterBoard(int reviewBoardNum) {
 		
-		rmapper.deleterBoard(rBoardNum);		
+		reviewBoardMapper.deleterBoard(reviewBoardNum);		
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectFileList(int rBoardNum) throws Exception {
+	public List<Map<String, Object>> selectFileList(int reviewBoardNum) throws Exception {
 
-		return rmapper.selectFileList(rBoardNum);
+		return reviewBoardMapper.selectFileList(reviewBoardNum);
 	}
 	
 	
 	@Override
-	public void removerBoard(int rBoardNum) {
+	public void removerBoard(int reviewBoardNum) {
 		
-		rmapper.deleteFile(rBoardNum);
+		reviewBoardMapper.deleteFile(reviewBoardNum);
 	}
 	
 	
 	@Override
-	public List<ReviewReplyVO> replyList(int rBoardNum) throws Exception {
+	public List<ReviewReplyVO> replyList(int reviewBoardNum) throws Exception {
 		
 		log.info("get replyList...");
 		
-		return rmapper.replyList(rBoardNum);
+		return reviewBoardMapper.replyList(reviewBoardNum);
 	}
 	
 	@Override
-	public void registReply(ReviewReplyVO reply) throws Exception {
+	public void registReply(ReviewReplyVO reviewReply) throws Exception {
 		
-		rmapper.registReply(reply);
+		reviewBoardMapper.registReply(reviewReply);
 		
 	}
 	
 	@Override
-	public void deleteReply(ReviewReplyVO reply) throws Exception {
+	public void deleteReply(ReviewReplyVO reviewReply) throws Exception {
 		log.info("deleteReply...");
 		
-		rmapper.deleteReply(reply);
+		reviewBoardMapper.deleteReply(reviewReply);
 		
 	}
 	
+	//댓글 id 확인
 	@Override
 	public String replyUserIdCheck(int repNum) throws Exception {
 		log.info("idCheck...");
 		
-		return rmapper.replyUserIdCheck(repNum);
+		return reviewBoardMapper.replyUserIdCheck(repNum);
+	}
+	
+	
+	//좋아요
+	@Override
+	public int updateLike(int reviewBoardNum) {
+		return reviewBoardMapper.updateLike(reviewBoardNum);
+	}
+	@Override
+	public int insertLike(int reviewBoardNum, String id) {
+		return reviewBoardMapper.insertLike(reviewBoardNum, id);
+	}
+	@Transactional
+	public void updateInsertLike(int reviewBoardNum,String id) {
+		reviewBoardMapper.updateLike(reviewBoardNum);
+		reviewBoardMapper.insertLike(reviewBoardNum, id);
+	}
+		
+		
+	//좋아요 취소
+	@Override
+	public int updateUnLike(int reviewBoardNum) {
+		return reviewBoardMapper.updateUnLike(reviewBoardNum);
+	}
+	@Override
+	public int deleteLike(int reviewBoardNum, String id) {
+		return reviewBoardMapper.deleteLike(reviewBoardNum, id);
+	}		
+	@Transactional
+	public void deleteUnlike(int reviewBoardNum,String id) {
+		reviewBoardMapper.updateUnLike(reviewBoardNum);
+		reviewBoardMapper.deleteLike(reviewBoardNum, id);
 	}
 
-		@Override
-		public int updateLike(int rBoardNum) {
-			// TODO Auto-generated method stub
-			return rmapper.updateLike(rBoardNum);
-		}
-
-		@Override
-		public int insertLike(int rBoardNum, String id) {
-			// TODO Auto-generated method stub
-			return rmapper.insertLike(rBoardNum, id);
-		}
-
-		@Transactional
-		public void updateInsertLike(int rBoardNum,String id) {
-			rmapper.updateLike(rBoardNum);
-			rmapper.insertLike(rBoardNum, id);
-		}
-
-		@Override
-		public int updateUnLike(int rBoardNum) {
-			// TODO Auto-generated method stub
-			return rmapper.updateUnLike(rBoardNum);
-		}
-		@Override
-		public int deleteLike(int rBoardNum, String id) {
-			// TODO Auto-generated method stub
-			return rmapper.deleteLike(rBoardNum, id);
-		}
 		
-		@Transactional
-		public void deleteUnlike(int rBoardNum,String id) {
-			rmapper.updateUnLike(rBoardNum);
-			rmapper.deleteLike(rBoardNum, id);
-		}
-
-		@Override
-		public int getLikeCount(int rBoardNum, String id) {
-			return rmapper.getCountLike(rBoardNum, id);
-		}
-
-		@Override
-		public void cntLike(int rBoardNum) {
-			// TODO Auto-generated method stub
-			rmapper.cntLike(rBoardNum);
+	//좋아요 갯수
+	@Override
+	public int getLikeCount(int reviewBoardNum, String id) {
+		return reviewBoardMapper.getCountLike(reviewBoardNum, id);
+	}
+	@Override
+	public void cntLike(int reviewBoardNum) {
+		reviewBoardMapper.cntLike(reviewBoardNum);
 			
-		}
+	}
 		
-		
-		
-
-
-
-	
-	
 
 }
-
 
 

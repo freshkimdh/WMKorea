@@ -14,9 +14,6 @@ public interface FreeBoardMapper {
 	//게시판 번호
 	public FreeBoardVO getNum(int fBoard_Num) throws Exception;
 	
-	//FBoardVO fid = UserVO id >> get id
-	public FreeBoardVO getfId(String fId) throws Exception;
-	
 	//게사판 작성
 	public void writeBoard(FreeBoardVO fboardVO) throws Exception;
 	

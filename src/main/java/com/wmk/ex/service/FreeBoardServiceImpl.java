@@ -35,16 +35,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		log.info("getNum..."); 
 		
 		return fboardVO;
-	}
-	
-	//FBoardVO fid = UserVO id >> get id
-	@Override
-	public FreeBoardVO getfId(String fId) throws Exception {
-		FreeBoardVO fboardVO = mapper.getfId(fId);
-							
-		return fboardVO;
-	}	
-	
+	}		
 	
 	//게시판 작성
 	@Override

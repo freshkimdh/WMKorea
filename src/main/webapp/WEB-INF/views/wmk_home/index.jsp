@@ -7,8 +7,8 @@
 header {
   position: relative;
   background-color: black;
-  height: 65vh;
-  min-height: 25rem;
+  height: 20vh;
+  min-height: 20rem;
   width: 100%;
   overflow: hidden;
 }
