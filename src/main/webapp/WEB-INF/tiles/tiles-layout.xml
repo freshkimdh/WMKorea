@@ -58,6 +58,19 @@
 	</definition>
 	
 	
+		<definition name="accessDenied" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/accessDenied.jsp" />
+	
+	</definition>
+	
+		<definition name="loginFail" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/loginFail.jsp" />
+	
+	</definition>
+	
+	
 
 	
 </tiles-definitions>

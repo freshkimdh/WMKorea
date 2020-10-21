@@ -271,7 +271,7 @@
     	</div>
     	
     	<p align="center"><button type="submit" id="register_Btn" class="btn btn-dark">등록</button> 
-		<a href="goodsList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
+		<a href="${pageContext.request.contextPath}/goodsList" class="btn btn-dark" role="button" onclick="return confirm('목록으로 돌아가겠습니까?');">취소</a></p>
 	
     	</div>
     	

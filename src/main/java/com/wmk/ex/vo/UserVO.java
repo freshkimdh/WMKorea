@@ -28,6 +28,10 @@ public class UserVO {
 		
 		String authorities = "ROLE_USER";
 		
+		
+		 if(getId().trim().equals("admin")) authorities = "ROLE_ADMIN";
+		 
+		
 		return authorities;
 	}
 

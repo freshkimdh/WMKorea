@@ -264,9 +264,9 @@
 		
 		</div> <!-- row end  -->
 		
-	<sec:authorize access="isAuthenticated()">
-	<p align="right"><a href="goods_register" class="btn btn-dark" role="button">제품 등록</a></p>
-	</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+	<p align="right"><a href="admin/goods_register" class="btn btn-dark" role="button">제품 등록</a></p>
+</sec:authorize>
 	
 	</div> <!--  container end -->
 	

@@ -40,7 +40,9 @@ public class UserService {
 	   
 	   userMapper.insertAuthorities(userVO);
 	   
-	   }  
+	   }
+	   
+	   
 	   @Transactional
 	   public void userDelete(UserVO userVO) throws Exception {
 	      log.info("delete Start");
