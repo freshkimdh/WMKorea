@@ -327,8 +327,13 @@
 
 	      <h class="text-warning">★★★★★</h> (5) <br>
 	      <span class="badge  badge-pill badge-danger ">Like</span> ${userList.like_Cnt}
-	      <span class="badge  badge-pill badge-success">${userList.rCategory}</span>
-	    </div>
+	     <span class="badge  badge-pill badge-success "  style="font-size:15px">분류</span>
+	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
+        	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
+        	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
+        	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
+        	     		<br>
+       </div>
 	  </div>
 	  <br>
         </div>

@@ -259,7 +259,13 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
-	      <span class="badge  badge-pill badge-danger ">좋아요</span>${userList.like_Cnt}
+	      <span class="badge  badge-pill badge-danger "  style="font-size:15px">좋아요</span>${userList.like_Cnt}
+	      <span class="badge  badge-pill badge-success "  style="font-size:15px">분류</span>
+	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
+        	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
+        	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
+        	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
+        	     		<br>
 	    </div>
 	  </div>
 	  <br>

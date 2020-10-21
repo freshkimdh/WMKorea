@@ -56,9 +56,11 @@ public interface RBoardService {
 	public int updateLike(int rBoardNum);
 	public int insertLike(int rBoardNum,String id);
 	public void updateInsertLike(int rBoardNum,String id);
+	
 	public int updateUnLike(int rBoardNum);
 	public int deleteLike(int rBoardNum,String id);
 	public void deleteUnlike(int rBoardNum,String id);
+	
 	public int getLikeCount(int rBoardNum,String id);
 	public void cntLike(int rBoardNum);
 		

@@ -175,8 +175,37 @@
 		select count(*)	from Review_BOARD where rBoardNum > 0
 	</select>
 	
+	<!-- 좋아요   -->
+	<update id="updateLike">
+	<![CDATA[
+		update REVIEW_BOARD set LIKE_CNT = LIKE_CNT + 1 where RBOARDNUM = #{RBOARDNUM}
+	]]>
+	</update>
+	
+	<insert id="insertLike">
+		insert into likeTo(likeNo, RBOARDNUM, id) values(like_to_seq.nextval, #{RBOARDNUM},#{id})
+	</insert>
 	
 	
+	<!-- 좋아요 해제 -->
+	<update id="updateUnLike">
+		update REVIEW_BOARD set LIKE_CNT = LIKE_CNt -1 where RBOARDNUM = #{RBOARDNUM}
+	</update>
 	
+	<delete id="deleteLike">
+		Delete from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}
+	</delete>
+	
+	<select id="getCountLike" resultType="int">
+		select count(*) from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}
+	</select>
+	
+	<select id="getLikeCnt" resultType="int">
+		select count(*) from likeTo where RBOARDNUM = #{RBOARDNUM}
+	</select>
+	
+	<select id="cntLike">
+	select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}
+	</select>
 
 </mapper>
