@@ -2,7 +2,7 @@ package com.wmk.ex.vo;
 
 import java.util.Date;
 
-public class RReplyVO {
+public class ReviewReplyVO {
 	
 	private int rBoardNum;
 	private String id;
@@ -10,7 +10,7 @@ public class RReplyVO {
 	private String repCon;
 	private Date repDate;
 	
-	public RReplyVO() {
+	public ReviewReplyVO() {
 		
 	}
 

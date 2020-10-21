@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wmk.ex.mapper.RBoardMapper">
+<mapper namespace="com.wmk.ex.mapper.ReviewBoardMapper">
 	
 	<!--게시판 목록  -->
 	
-	<select id="getReviewList" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
+	<select id="getReviewList" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select
      		a.rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory, Like_Cnt, b.stored_file_name as storedFileName
@@ -18,7 +18,7 @@
 	]]>
  	</select>
 	
-	<select id="getrList" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
+	<select id="getrList" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select
      		*
@@ -29,7 +29,7 @@
 	]]>
  	</select>
  	
- 	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.RBoardVO" parameterType="com.wmk.ex.vo.RBoardVO">
+ 	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select 
      		a.rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory, Like_Cnt, b.stored_file_name as storedFileName
@@ -46,14 +46,14 @@
  	
  	
  	<!--게시판 번호-->
- 	<select id="getrBoardNum" resultType="com.wmk.ex.vo.RBoardVO">
+ 	<select id="getrBoardNum" resultType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select * from Review_BOARD where rBoardNum = #{rBoardNum} 
 	]]>
 	</select>	
 	
 	<!--게시판 VO의 회원 get id  -->
-	<select id="getrId" resultType="com.wmk.ex.vo.RBoardVO">
+	<select id="getrId" resultType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select * from Review_BOARD where rId = #{rId} 
 	]]>
@@ -145,7 +145,7 @@
 	
 	<!--아래는 댓글 부분 -->
 	<!--댓글 목록  -->
-	<select id="replyList" resultType="com.wmk.ex.vo.RReplyVO">	
+	<select id="replyList" resultType="com.wmk.ex.vo.ReviewReplyVO">	
 	select rBoardNum, id, repNum, repCon, repDate
 	from review_reply 
 	where rBoardNum = #{rBoardNum}

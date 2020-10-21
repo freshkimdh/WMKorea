@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.wmk.ex.vo.RBoardVO;
+import com.wmk.ex.vo.ReviewBoardVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,7 +26,7 @@ public class FileUtils {
 	private static final String filePath = "C:\\WMKOREA\\ThumbnailImg\\"; //이미지 저장경로
 	
 	
-	public List<Map<String, Object>> parseInsertFileInfo(RBoardVO rboardVO, 
+	public List<Map<String, Object>> parseInsertFileInfo(ReviewBoardVO rboardVO, 
 			MultipartHttpServletRequest mpRequest) throws Exception{
 		
 		log.info("rboardVO=" + rboardVO.toString());

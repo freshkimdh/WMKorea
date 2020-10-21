@@ -11,28 +11,28 @@ import org.apache.ibatis.annotations.Update;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FreeBoardVO;
-import com.wmk.ex.vo.RBoardVO;
-import com.wmk.ex.vo.RReplyVO;
+import com.wmk.ex.vo.ReviewBoardVO;
+import com.wmk.ex.vo.ReviewReplyVO;
 
 
-public interface RBoardMapper {
+public interface ReviewBoardMapper {
 	
-	public List<RBoardVO> getrList(RBoardVO rboardVO);
-	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
-	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
+	public List<ReviewBoardVO> getrList(ReviewBoardVO rboardVO);
+	public List<ReviewBoardVO> getReviewList(ReviewBoardVO rboardVO);
+	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO rboardVO);
 
 	
-	public RBoardVO getrBoardNum(int rBoardNum);
+	public ReviewBoardVO getrBoardNum(int rBoardNum);
 	
 	
 	//RBoardVO rid = UserVO id >> get id
-	public RBoardVO getrId(String rId);
+	public ReviewBoardVO getrId(String rId);
 	
 	
-	public void rWriteBoard(RBoardVO rboardVO);
+	public void rWriteBoard(ReviewBoardVO rboardVO);
 	
 	
-	public void updaterModify(RBoardVO rboardVO);
+	public void updaterModify(ReviewBoardVO rboardVO);
 	
 	
 	public void deleterBoard(int rBoardNum);
@@ -53,13 +53,13 @@ public interface RBoardMapper {
 	public List<Map<String, Object>> selectFileList(int rBoardNum);
 	
 	
-	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
+	public List<ReviewReplyVO> replyList(int rBoardNum) throws Exception;
 	
 	
-	public void registReply(RReplyVO reply) throws Exception;
+	public void registReply(ReviewReplyVO reply) throws Exception;
 	
 	
-	public void deleteReply(RReplyVO reply) throws Exception;
+	public void deleteReply(ReviewReplyVO reply) throws Exception;
 	
 	
 	public String replyUserIdCheck(int repNum) throws Exception;

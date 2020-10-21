@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.wmk.ex.service.RBoardService;
+import com.wmk.ex.service.ReviewBoardService;
 import com.wmk.ex.vo.CustomUser;
 
 import lombok.extern.log4j.Log4j;
@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CommonController {
 	@Autowired
-	RBoardService rBoardService;
+	ReviewBoardService rBoardService;
 	
 	
 

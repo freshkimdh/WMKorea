@@ -9,30 +9,30 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.vo.FreeBoardVO;
-import com.wmk.ex.vo.RBoardVO;
-import com.wmk.ex.vo.RReplyVO;
+import com.wmk.ex.vo.ReviewBoardVO;
+import com.wmk.ex.vo.ReviewReplyVO;
 
 
 
-public interface RBoardService {
+public interface ReviewBoardService {
 	
 
 	//list, list ajax
-	public List<RBoardVO> getrList(RBoardVO rboardVO);
-	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
-	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
+	public List<ReviewBoardVO> getrList(ReviewBoardVO rboardVO);
+	public List<ReviewBoardVO> getReviewList(ReviewBoardVO rboardVO);
+	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO rboardVO);
 	
 	
-	public RBoardVO getrBoardNum(int rBoardNum);
+	public ReviewBoardVO getrBoardNum(int rBoardNum);
 	
 	//RBoardVO rid = UserVO id >> get id
-	public RBoardVO getrId(String rId);
+	public ReviewBoardVO getrId(String rId);
 	
 	//글작성
-	public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void rWriteBoard(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	//수정
-	public void updaterModify(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
+	public void updaterModify(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception;
 
 	//삭제
 	public void deleterBoard(int rBoardNum);
@@ -43,11 +43,11 @@ public interface RBoardService {
 	//업로드된 파일 삭제
 	public void removerBoard(int fileSize);
 	
-	public List<RReplyVO> replyList(int rBoardNum) throws Exception;
+	public List<ReviewReplyVO> replyList(int rBoardNum) throws Exception;
 	
-	public void registReply(RReplyVO reply) throws Exception;
+	public void registReply(ReviewReplyVO reply) throws Exception;
 		
-	public void deleteReply(RReplyVO reply) throws Exception;
+	public void deleteReply(ReviewReplyVO reply) throws Exception;
 	
 	public String replyUserIdCheck(int repNum) throws Exception;
 	
