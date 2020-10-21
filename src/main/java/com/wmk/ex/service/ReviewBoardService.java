@@ -11,8 +11,10 @@ import com.wmk.ex.vo.ReviewReplyVO;
 
 public interface ReviewBoardService {
 	
+	//핫플레이스 게시판 목록
+	public List<ReviewBoardVO> getHotList(ReviewBoardVO reviweBoardVO);
+	
 	//여행 게시판 목록
-	public List<ReviewBoardVO> getrList(ReviewBoardVO reviweBoardVO);
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviweBoardVO);
 	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviweBoardVO);
 	

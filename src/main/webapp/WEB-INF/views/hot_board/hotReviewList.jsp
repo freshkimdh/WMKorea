@@ -250,7 +250,7 @@
   <div class="album py-5">
     <div class="container" id="review_contentView">
 		<div class="row">
-		<c:forEach items="${rList}" var="userList">
+		<c:forEach items="${hotList}" var="userList">
 		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
 	  <div class="card shadow-sm">
 	  	<div class="list_picture">

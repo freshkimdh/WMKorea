@@ -10,18 +10,26 @@ import com.wmk.ex.vo.ReviewReplyVO;
 
 public interface ReviewBoardMapper {
 	
-	public List<ReviewBoardVO> getrList(ReviewBoardVO reviewBoardVO);
+	//핫플레이스 게시판 목록
+	public List<ReviewBoardVO> getHotList(ReviewBoardVO reviewBoardVO);
+	
+	//여행 게시판 목록
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviewBoardVO);
 	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviewBoardVO);
-
+	
+	//여행 게시판 번호
 	public ReviewBoardVO getrBoardNum(int reviewBoardNum);
 	
+	//여행 게시판 글작성
 	public void rWriteBoard(ReviewBoardVO reviewBoardVO);
 	
+	//여행 게시판 수정
 	public void updaterModify(ReviewBoardVO reviewBoardVO);
 	
+	//여행 게시판 삭제
 	public void deleterBoard(int reviewBoardNum);
 	
+	//여행 게시판 조회수
 	public void addUprHit(int reviewBoardNum);
 	
 	//업로드 파일
