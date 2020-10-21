@@ -4,61 +4,37 @@ import java.util.List;
 
 import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
-import com.wmk.ex.vo.CategoryVO;
-import com.wmk.ex.vo.CommentListVO;
-import com.wmk.ex.vo.CommentVO;
-import com.wmk.ex.vo.GoodsVO;
-import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.OrderDetailVO;
 import com.wmk.ex.vo.OrderListVO;
 import com.wmk.ex.vo.OrderVO;
-import com.wmk.ex.vo.UserVO;
 
 
 
 public interface ShopService {
 	
-	//Ä«Å×°í¸®º° »óÇ° ¸®½ºÆ®
-	public List<GoodsViewVO> list(int cateCode, int level) throws Exception;
-	
-	//»óÇ° Á¶È¸
-	public GoodsViewVO goodsView(int gdsNum) throws Exception;
-	
-	//»óÇ° ´ñ±Û ÀÛ¼º
-	public void registReply(CommentVO comment) throws Exception;
-	
-	//»óÇ° ¼Ò°¨(´ñ±Û) ¸®½ºÆ®
-	public List<CommentListVO> commentList(int gdsNum) throws Exception;
-	
-	//»óÇ° ¼Ò°¨(´ñ±Û) »èÁ¦
-	public void deleteReply(CommentVO comment) throws Exception;
-	
-	//¾ÆÀÌµð Ã¼Å©
-	public String idCheck(int repNum) throws Exception;
-	
-	//Àå¹Ù±¸´Ï ´ã±â
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void addCart(CartVO cart) throws Exception;
 	
-	//Àå¹Ù±¸´Ï º¸±â
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<CartListVO> cartList(String username) throws Exception;
 	
-	//Àå¹Ù±¸´Ï »èÁ¦
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteCart (CartVO cart) throws Exception;
 	
 	
-	// ÁÖ¹®Á¤º¸
+	// ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void orderInfo(OrderVO order) throws Exception;
 
-	//ÁÖ¹® »ó¼¼ Á¤º¸
+	//ï¿½Ö¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception;
 	
-	//Ä«Æ®ºñ¿ì±â 
+	//Ä«Æ®ï¿½ï¿½ï¿½ï¿½ 
 	public void cartAllDelete(String userId) throws Exception;
 	
-	//Æ¯Á¤ À¯ÀúÀÇ ÁÖ¹® ¸ñ·Ïº¸±â
+	//Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½Ïºï¿½ï¿½ï¿½
 	public List<OrderVO> orderList(OrderVO order) throws Exception;
 	
-	//Æ¯Á¤ Å« ÁÖ¹®ÀÇ »ó¼¼³»¿ë º¸±â
+	//Æ¯ï¿½ï¿½ Å« ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ó¼¼³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 	
 

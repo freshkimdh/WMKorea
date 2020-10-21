@@ -40,76 +40,8 @@ public class ShopController {
 	 @Inject
 	 ShopService service;
     
-	 // ī�װ��� ��ǰ ����Ʈ
-	 @RequestMapping(value = "/shop/list", method = RequestMethod.GET)
-	 public String getList(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model) throws Exception {
-		  log.info("get llist");
-		  
-		  List<GoodsViewVO> list = null;
-		  list = service.list(cateCode, level);
-		 
-		  model.addAttribute("list", list);
-		  
-		  return "/admin_goods/shop/list";
-	  
-	 }
-	 
-	 @RequestMapping(value = "/shop/view", method = RequestMethod.GET)
-	 public String getView(@RequestParam("n") int gdsNum, Model model) throws Exception{
-		 log.info("get view");
-		 
-		 GoodsViewVO view = service.goodsView(gdsNum);
-		 model.addAttribute("view", view);
-		 
-//		 List<CommentListVO> reply = service.commentList(gdsNum);
-//		 model.addAttribute("reply", reply);
-		 
-		 return "/admin_goods/shop/view";
-	 }
-	 
-	 
-	 
-//	// ��ǰ ��ȸ - �Ұ�(���) �ۼ�
-//	 @RequestMapping(value = "/shop/view", method = RequestMethod.POST)
-//	 public String registReply(CommentVO comment, HttpSession session) throws Exception {
-//		 log.info("regist reply");
-//		 
-//		 MemberVO member = (MemberVO)session.getAttribute("member");
-//		 comment.setUserId(member.getUserId());
-//		 
-//		 service.registReply(comment);
-//	  
-//	  
-//	  return "redirect:/shop/view?n=" + comment.getGdsNum();
-//	 }
 	 
 
-	 
-	 
-	 // ��ǰ �Ұ�(���) ���
-	 @ResponseBody
-	 @RequestMapping(value = "/shop/view/replyList", method = RequestMethod.GET)
-	 public List<CommentListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception {
-	  log.info("get reply list");
-	    
-	  List<CommentListVO> reply = service.commentList(gdsNum);
-	  
-	  return reply;
-	 } 
-	 
-	 
-	 
-
-	 
-//		@GetMapping("/reply_view") 
-//		public String reply_view(BoardVO boardVO, Model model) {
-//		
-//			log.info("reply_view");
-//			model.addAttribute("reply_view", service.get(boardVO.getbId()));
-//			
-//			return "reply_view";
-//		}
-	 
 	 
 	 //��ٱ��� ��� (������ ��ť��Ƽ ���ǰ� �ҷ�����): chaddy
 	//�����ϱ� ��ư�� ������ �ش� �޼��� ������ ��ٱ��Ͽ� ��� �ֹ��ϱ� �������� �̵� (������ ��ť��Ƽ ���ǰ� �ҷ�����): chaddy
