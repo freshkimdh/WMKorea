@@ -80,11 +80,11 @@ public class ShopServiceImpl implements ShopService {
 		return dao.idCheck(repNum);
 	}
 
-	//īƮ���
+	//장바구니 담기
 	@Override
 	public void addCart(CartVO cart) throws Exception {
 		
-		dao.addCart(cart);
+		shopmapper.addCart(cart);
 		
 	}
 	

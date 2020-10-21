@@ -14,34 +14,39 @@ import com.wmk.ex.vo.UserVO;
 
 public interface ShopMapper {
 	
-//	//Ä«Å×°í¸®º° »óÇ° ¸®½ºÆ®
+//	//Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®
 //	public List<GoodsViewVO> list(int cateCode) throws Exception;
 //	
-//	//»óÇ°Á¶È¸
+//	//ï¿½ï¿½Ç°ï¿½ï¿½È¸
 //	public GoodsViewVO goodslist(int gdsNum) throws Exception;
 	
 
 	public UserVO userIdread(String id) throws Exception;
 	
-	//Àå¹Ù±¸´Ï º¸±â
+	
+	//ìž¥ë°”êµ¬ë‹ˆ ë‹´ê¸°
+	public void addCart(CartVO cart) throws Exception;
+	
+	
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<CartListVO> cartList(String username);
 	
-	//Àå¹Ù±¸´Ï »èÁ¦
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteCart(CartVO cart) throws Exception;
 	
-	//ÁÖ¹®Á¤º¸
+	//ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void orderInfo(OrderVO order) throws Exception;
 		
-	//ÁÖ¹® »ó¼¼Á¤º¸
+	//ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception;
 	
-	//ÁÖ¹®½Ã Ä«Æ® ºñ¿ì±â
+	//ï¿½Ö¹ï¿½ï¿½ï¿½ Ä«Æ® ï¿½ï¿½ï¿½ï¿½
 	public void cartAllDelete(String userId) throws Exception;
 	
-	//Æ¯Á¤ À¯ÀúÀÇ ÁÖ¹®¸ñ·Ï º¸±â
+	//Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<OrderVO> orderList(OrderVO order) throws Exception;
 	
-	//Æ¯Á¤ Å« ÁÖ¹®ÀÇ »ó¼¼³»¿ë º¸±â
+	//Æ¯ï¿½ï¿½ Å« ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ó¼¼³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 	
 
