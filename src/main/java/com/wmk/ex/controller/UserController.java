@@ -52,6 +52,7 @@ import lombok.extern.log4j.Log4j;
 public class UserController {
 	
 	private UserService userService;
+	
 	@Inject
     private BCryptPasswordEncoder passEncoder;
 	

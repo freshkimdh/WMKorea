@@ -48,18 +48,11 @@
                var sTxt = '';
                var _storedFileName = "null.jpg";
                $(objList).each(function (index, order){
-            	   
-               var likeCount = order.LIKE_CNT;
-               
-               console.log("likeCount	:"+likeCount);
-               console.log(order);
             	   sTxt += '<div class="col-md-4">';
             	   sTxt += 		'<div class="card shadow-sm">';
             	   sTxt += 			'<div class="list_picture">';
             	   if(order.storedFileName == null || order.storedFileName == ''){
             	   	sTxt += 				'<a href="review_contentView?rBoardNum='+ order.rBoardNum + '&area='+ order.rArea + '"><img src="/filePath/null.jpg" class="img-fluid mx-auto d-block rounded"></a>';
-            	    sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt; 
-            	    console.log("dddddddddddLikeCount	:");
             	   }else{
             	   	sTxt += 				'<a href="review_contentView?rBoardNum='+ order.rBoardNum + '&area='+ order.rArea + '"><img src="/filePath/' + order.storedFileName + '" class="img-fluid mx-auto d-block rounded"></a>';
             	   }
@@ -67,8 +60,7 @@
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
             	   sTxt += 				'<h class="text-warning">★★★★★</h> (4) <br>';
-            	   console.log("ddddddddddd");
-            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.Like_Cnt; 
+            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt;
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
             	   }else if(order.rCategory == 1){
