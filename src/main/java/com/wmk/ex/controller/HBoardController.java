@@ -24,12 +24,10 @@ public class HBoardController {
 	 
 	//�Խ��� ���
 		@RequestMapping("/hotReviewList")
-		public String hotReviewList2(RBoardVO rboardVO, Model model, String rArea) {
-			log.info("rArea??	;" + rArea);
+		public String hotReviewList2(RBoardVO rboardVO, Model model) {
 			log.info("review_boardList...");
-			model.addAttribute("rList", rservice.getReviewList(rboardVO));
-			model.addAttribute("rArea", rboardVO.getrArea());
-			log.info("rArea, rboardVO.getrArea()");
+			model.addAttribute("rList", rservice.getrList(rboardVO));
+			log.info(rboardVO);
 			
 			
 			return "/hot_board/hotReviewList";

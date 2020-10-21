@@ -26,7 +26,8 @@
    		 
  		var formData= {                 
  			rCategory: $(this).val(),
- 			rArea : "${rArea}"
+ 			rArea : "${rArea}",
+ 			rBoardNum: "${rBoardNum}"
         };
    		  
    		$.ajax({
@@ -49,7 +50,7 @@
                var _storedFileName = "null.jpg";
                $(objList).each(function (index, order){
             	   
-               var likeCount = order.LIKE_CNT;
+               var likeCount = order.like_Cnt;
                
                console.log("likeCount	:"+likeCount);
                console.log(order);
@@ -68,7 +69,7 @@
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
             	   sTxt += 				'<h class="text-warning">★★★★★</h> (4) <br>';
             	   console.log("ddddddddddd");
-            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.Like_Cnt; 
+            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt; 
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
             	   }else if(order.rCategory == 1){
