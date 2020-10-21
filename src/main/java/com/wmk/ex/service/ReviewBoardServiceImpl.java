@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.wmk.ex.mapper.RBoardMapper;
+import com.wmk.ex.mapper.ReviewBoardMapper;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.util.FileUtils;
 import com.wmk.ex.vo.FreeBoardVO;
-import com.wmk.ex.vo.RBoardVO;
-import com.wmk.ex.vo.RReplyVO;
+import com.wmk.ex.vo.ReviewBoardVO;
+import com.wmk.ex.vo.ReviewReplyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,34 +24,34 @@ import lombok.extern.log4j.Log4j;
 @Log4j 
 @Service
 @AllArgsConstructor
-public class RBoardServiceImpl implements RBoardService {
+public class ReviewBoardServiceImpl implements ReviewBoardService {
 	
-	private RBoardMapper rmapper; 
+	private ReviewBoardMapper rmapper; 
 	
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;
 	
-	public List<RBoardVO> getrList(RBoardVO rboardVO){
+	public List<ReviewBoardVO> getrList(ReviewBoardVO rboardVO){
 		log.info("Get rlist");
 		return rmapper.getrList(rboardVO);
 	}
 	
-	public List<RBoardVO> getReviewList(RBoardVO rboardVO) {
+	public List<ReviewBoardVO> getReviewList(ReviewBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
 		log.info("imple"+rmapper.getReviewList(rboardVO));
 		
 		return rmapper.getReviewList(rboardVO);
 	}
-	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO) {
+	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO rboardVO) {
 		log.info("getrList..."); 
 		
 		return rmapper.getReviewListAjax(rboardVO);
 	}
 	
 	@Override
-	public RBoardVO getrBoardNum(int rBoardNum) {
-		RBoardVO rboardVO = rmapper.getrBoardNum(rBoardNum);
+	public ReviewBoardVO getrBoardNum(int rBoardNum) {
+		ReviewBoardVO rboardVO = rmapper.getrBoardNum(rBoardNum);
 							rmapper.addUprHit(rBoardNum);
 		
 		log.info("getrBoardNum..."); 
@@ -61,15 +61,15 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	//RBoardVO rid = UserVO id >> get id
 	@Override
-	public RBoardVO getrId(String rId) {
-		RBoardVO rboardVO = rmapper.getrId(rId);
+	public ReviewBoardVO getrId(String rId) {
+		ReviewBoardVO rboardVO = rmapper.getrId(rId);
 							
 		return rboardVO;
 	}
 	
 	@SuppressWarnings("null")
 	@Override
-	public void rWriteBoard(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public void rWriteBoard(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
 		log.info("rWriteBoard........");
 		
@@ -103,7 +103,7 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	
 	@Override
-	public void updaterModify(RBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
+	public void updaterModify(ReviewBoardVO rboardVO, MultipartHttpServletRequest mpRequest) throws Exception{
 		
 		log.info("아아아아아=" + rboardVO);
 		rmapper.updaterModify(rboardVO);
@@ -138,7 +138,7 @@ public class RBoardServiceImpl implements RBoardService {
 	
 	
 	@Override
-	public List<RReplyVO> replyList(int rBoardNum) throws Exception {
+	public List<ReviewReplyVO> replyList(int rBoardNum) throws Exception {
 		
 		log.info("get replyList...");
 		
@@ -146,14 +146,14 @@ public class RBoardServiceImpl implements RBoardService {
 	}
 	
 	@Override
-	public void registReply(RReplyVO reply) throws Exception {
+	public void registReply(ReviewReplyVO reply) throws Exception {
 		
 		rmapper.registReply(reply);
 		
 	}
 	
 	@Override
-	public void deleteReply(RReplyVO reply) throws Exception {
+	public void deleteReply(ReviewReplyVO reply) throws Exception {
 		log.info("deleteReply...");
 		
 		rmapper.deleteReply(reply);

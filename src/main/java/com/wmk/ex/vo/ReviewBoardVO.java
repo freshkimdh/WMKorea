@@ -2,7 +2,7 @@ package com.wmk.ex.vo;
 
 import java.util.Date;
 
-public class RBoardVO {
+public class ReviewBoardVO {
 	
 	/*
 	rBoard_Num NUMBER(20) not null PRIMARY KEY,  --�Խ��ǹ�ȣ
@@ -39,7 +39,7 @@ public class RBoardVO {
 	private String storedFileName;
 	
 
-	public RBoardVO(){}
+	public ReviewBoardVO(){}
 
 
 	public int getrBoardNum() {
