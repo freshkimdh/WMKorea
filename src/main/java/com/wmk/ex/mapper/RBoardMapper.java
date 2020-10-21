@@ -17,6 +17,7 @@ import com.wmk.ex.vo.RReplyVO;
 
 public interface RBoardMapper {
 	
+	public List<RBoardVO> getrList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
 
@@ -81,6 +82,9 @@ public interface RBoardMapper {
 	
 	@Select("select count(*) from likeTo where id = #{id} and RBOARDNUM = #{RBOARDNUM}")
 	public int getCountLike(@Param("RBOARDNUM")int rBoardNum,@Param("id")String id);
+	
+	@Select("select count(*) from likeTo where RBOARDNUM = #{RBOARDNUM}")
+	public int getLikeCnt(int rBoardNum);
 	
 	@Select("select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}")
 	public void cntLike(int rBoardNum);

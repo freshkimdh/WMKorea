@@ -95,6 +95,7 @@ public class RBoardController {
 	    	 list = rservice.getReviewList(rboardVO);
 	     }else {
 	    	 list = rservice.getReviewListAjax(rboardVO);
+	    	
 	     }
 	     model.addAttribute("rList", rservice.getReviewList(rboardVO));	   //??
 		

@@ -18,6 +18,7 @@ public interface RBoardService {
 	
 
 	//list, list ajax
+	public List<RBoardVO> getrList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewList(RBoardVO rboardVO);
 	public List<RBoardVO> getReviewListAjax(RBoardVO rboardVO);
 	
