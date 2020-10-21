@@ -18,11 +18,23 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class HomeController {
 	
-	@GetMapping("/index")
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	  public String hello(Locale locale, Model model) {
+
+	  
+	  return "tiles";
+	  }
+
+	
+	@RequestMapping(value="index", method = RequestMethod.GET)
 	public String index(Model model) {
 		log.info("index...");
+		
 		return "/wmk_home/index";
 	}
+	
+	
 	
 	@GetMapping("/characterMaking")
 	public String character(Model model) {
@@ -62,6 +74,11 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping(value="tiles", method = RequestMethod.GET)
+	public String layout(Model model) {
+		return "layout";
 	}
 	
 }

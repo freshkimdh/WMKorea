@@ -5,6 +5,118 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Wemade Korea</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
+      
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  	
+	<style>
+	
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+  
+	<style>
+ 	#s1 {
+	/* background: blue; */
+	line-height:55px;
+
+ 	}
+
+ 	#s1 img {
+ 	vertical-align:middle;
+	}
+	
+
+	</style>
+
+
+
+
+</head>
+<body>
+
+<div class="container"> <!-- table -->
+	<div class="row"> <!-- td -->
+	
+		<div class="col-sm-6" id="s1">
+			<a href="index"><img src="img/main_logo2.png"></a>
+		</div> <!-- tr -->
+		
+		<div class="col-sm-6" id="s2">
+			<!-- Search Bar -->
+<!-- 			<p>Search Bar</p> -->
+		<p>
+ 		<div class="input-group mb-3">
+  			<input type="text" class="form-control" placeholder="Search">
+  			<div class="input-group-append">
+    			<button class="btn btn-danger" type="submit">Go</button>
+  			</div>
+		</div>
+			<!-- Search Bar End -->
+		</div>
+	</div>
+</div>
+
+<!-- <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top"> -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+	
+	<!-- Brand Logo -->
+	<a class="navbar-brand" href="#">MENU</a>
+	
+	<!-- Toggler -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<!-- Content -->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+	<ul class="navbar-nav">
+
+		<li class="nav-item">
+			<a class="nav-link" href="index">메인</a>
+		</li>
+				
+		<li class="nav-item">
+			<a class="nav-link" href="#">핫플레이스</a>
+		</li>
+				
+		<li class="nav-item">
+			<a class="nav-link" href="#">내 캐릭터 만들기</a>
+		</li>
+						
+		<li class="nav-item">
+			<a class="nav-link" href="list">커뮤니티</a>
+		</li>
+		
+	</ul>
+	
+	</div>
+
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+ 	<ul class="navbar-nav"> 
+	<div class="btn-group btn-group-sm">
+<!-- 	<a class="btn btn-dark">반갑습니다, 김대환 님!</a> -->
+  		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="joinForm" class="btn btn-secondary" type="button">Join</a>
+		<a href="loginForm" class="btn btn-secondary" type="button">My Page</a>
+	</div>
+
+ 	</ul>
+</div>
+
+</nav>
+
 
 
 <p>
@@ -93,6 +205,12 @@
 <br><br>
 
 
+<div class="jumbotron text-center" style="margin-bottom:0">
+<p>Copyright © 2020 Wemade Korea All rights reserved</p>
+</div>  
+
+
+</body>
 <script>
 //중복 체크 검사 유무 검사하는 값 12
 var isCheckIdCheck = false;
