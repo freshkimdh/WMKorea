@@ -58,4 +58,7 @@ public interface ReviewBoardMapper {
 	public int getLikeCnt(int reviewBoardNum);
 	
 	public void cntLike(int reviewBoardNum);
+	
+	//여행지 게시판 검색
+	public List<ReviewBoardVO> findReviewBoardByTitle(ReviewBoardVO reviewBoardVO);
 }

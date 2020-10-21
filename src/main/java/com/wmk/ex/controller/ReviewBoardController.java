@@ -55,7 +55,7 @@ public class ReviewBoardController {
 	}
 	
 	
-	//여행지 목록 rea
+	//여행지 목록 read
 	@RequestMapping("/review_boardList")
 	//작성 후(write 메서드) 보낸 파라메터 값(지역명)을 받기 위해 @RequestParam 을 사용한다.
 	public String ReviewList(ReviewBoardVO reviewBoardVO, Model model, @RequestParam("rArea") String reviewArea) throws Exception {
@@ -401,6 +401,21 @@ public class ReviewBoardController {
 		 
 		return String.valueOf(result);
 	 
+	}
+	
+	//여행지 게시판 검색
+	@GetMapping("/review_boardByTitle")
+	public String reviewBoardByTitle(ReviewBoardVO reviewBoardVO, Model model) {  
+	
+		log.info("reviewBoardByTitle");
+		
+		reviewService.reviewBoardByTitle(reviewBoardVO);
+		log.info("freeBoardVO=" + reviewBoardVO);
+		
+		model.addAttribute("reviewBoardByTitle", reviewService.reviewBoardByTitle(reviewBoardVO));
+		model.addAttribute("title", reviewBoardVO.getrTitle());
+		
+		return "/wmk_home/allAreaContentView";
 	}
 	
 }

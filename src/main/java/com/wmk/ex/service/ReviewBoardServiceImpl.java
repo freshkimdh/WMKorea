@@ -197,6 +197,14 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		reviewBoardMapper.cntLike(reviewBoardNum);
 			
 	}
+	
+	//여행지 게시판 검색
+	@Override
+	public List<ReviewBoardVO> reviewBoardByTitle(ReviewBoardVO reviweBoardVO) {
+		log.info("reviewBoardByTitle...");
+
+		return reviewBoardMapper.findReviewBoardByTitle(reviweBoardVO);
+	}
 		
 
 }

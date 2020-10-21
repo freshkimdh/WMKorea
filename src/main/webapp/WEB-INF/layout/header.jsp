@@ -17,12 +17,14 @@
 			<!-- Search Bar -->
 <!-- 			<p>Search Bar</p> -->
 		<p>
- 		<div class="input-group mb-3">
-  			<input type="text" class="form-control" placeholder="Search">
-  			<div class="input-group-append">
-    			<button class="btn btn-danger" type="submit">Go</button>
-  			</div>
-		</div>
+		<form action="review_boardByTitle" method="get">
+	 		<div class="input-group mb-3">
+	  			<input type="text" name="rTitle" id="rTitle" class="form-control" placeholder="Search">
+	  			<div class="input-group-append">
+	    			<button class="btn btn-danger" type="submit">Go</button>
+	  			</div>
+			</div>
+		</form>
 			<!-- Search Bar End -->
 		</div>
 	</div>

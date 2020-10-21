@@ -59,6 +59,9 @@ public interface ReviewBoardService {
 	//좋아요 갯수
 	public int getLikeCount(int reviewBoardNum,String id);
 	public void cntLike(int reviewBoardNum);
+	
+	//여행지 게시판 검색
+	public List<ReviewBoardVO> reviewBoardByTitle(ReviewBoardVO reviweBoardVO);
 		
 	
 

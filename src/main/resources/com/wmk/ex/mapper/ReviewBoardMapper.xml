@@ -201,7 +201,20 @@
 	</select>
 	
 	<select id="cntLike">
-	select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}
+		select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}
 	</select>
-
+	
+	<!-- 여행지 게시판 검색 -->
+	<select id="findReviewBoardByTitle" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
+	<![CDATA[ 
+		select
+     		a.rBoardNum, rId, rTitle, rInShort, rContent, rDate, rOpenTime, rArea, rAdress, rHit, rStep, rIndent, rCategory, Like_Cnt, b.stored_file_name as storedFileName
+	    from Review_BOARD a
+	    	left join Review_img_file b
+	    	on(a.rBoardNum = b.rBoardNum)
+	    	where rTitle like '%'||#{rTitle}||'%' 
+	    	order by rBoardNum desc
+	]]>
+ 	</select>
+	
 </mapper>

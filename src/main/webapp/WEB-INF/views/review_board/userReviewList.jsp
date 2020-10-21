@@ -59,7 +59,6 @@
             	   sTxt += 			'</div>';
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
-            	   sTxt += 				'<h class="text-warning">★★★★★</h> (4) <br>';
             	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt;
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
@@ -80,10 +79,8 @@
                
                $('#review_contentView .row').html(sTxt); //success 종료
                
-               //console.log( sTxt );
             }, error : function(response){
-               alert("상품 정보를 조회할 수 없습니다.\n잠시 후 다시 시도하거나 고객센터로 문의바랍니다.");
-               //alert("[" + response.status + "] 처리 중 오류가 발생하였습니다. 다시 시도하거나 관리자에게 문의바랍니다.");
+               alert("카테고리를 다시 눌러주십시오.");
             }
          });
    		 
@@ -325,9 +322,8 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
-	      <h class="text-warning">★★★★★</h> (5) <br>
 	      <span class="badge  badge-pill badge-danger ">Like</span> ${userList.like_Cnt}
-	     <span class="badge  badge-pill badge-success "  style="font-size:15px">분류</span>
+	     <span class="badge  badge-pill badge-success "  style="font-size:13px">분류</span>
 	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
         	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>

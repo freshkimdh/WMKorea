@@ -57,6 +57,12 @@
 	
 	</definition>
 	
+	<definition name="/wmk_home/allAreaContentView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_home/allAreaContentView.jsp" />
+	
+	</definition>
+	
 	
 		<definition name="accessDenied" extends="baseForm">
 	
