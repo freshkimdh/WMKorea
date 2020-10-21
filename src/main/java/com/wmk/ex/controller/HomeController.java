@@ -81,4 +81,15 @@ public class HomeController {
 		return "layout";
 	}
 	
+	@RequestMapping(value="/accessDenied", method = RequestMethod.GET)
+	public String accessDenied(Model model) {
+		return "accessDenied";
+	}
+	
+	@RequestMapping(value="/loginFail", method = RequestMethod.GET)
+	public String loginFail(Model model) {
+		return "loginFail";
+	}
+	
+	
 }

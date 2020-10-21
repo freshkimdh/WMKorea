@@ -147,7 +147,7 @@ public class GoodsController {
 	
 	
 	// ��ǰ ���
-	@RequestMapping(value = "/goods_register", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/goods_register", method = RequestMethod.GET)
 	public String getGoodsRegister2(Model model) throws Exception {
 		log.info("get goods register");
 
@@ -160,7 +160,7 @@ public class GoodsController {
 	}
 	
 	// ��ǰ ���(post)
-	@RequestMapping(value = "/goods_register", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/goods_register", method = RequestMethod.POST)
 	public String postGoodsRegister2(GoodsVO vo) throws Exception {
 		
 		adminService.register(vo);
