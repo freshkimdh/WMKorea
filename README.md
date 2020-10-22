@@ -13,6 +13,7 @@
   * Apache Tomcat v9.0
   * Mybatis Olacle연동 
   * JUnit Test
+  * Jmeter Test
   * Spring Security
   * jQuery , Ajax 사용 
   * Rest API 적용
