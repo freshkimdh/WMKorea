@@ -23,7 +23,9 @@
 		
 	</definition>
 	
-	
+
+
+<!--  wmk_home folder start -->	
 	<definition name="/wmk_home/index" extends="baseForm">
 	
 		<put-attribute name="body" value="/WEB-INF/views/wmk_home/index.jsp" />
@@ -62,25 +64,126 @@
 		<put-attribute name="body" value="/WEB-INF/views/wmk_home/allAreaContentView.jsp" />
 	
 	</definition>
+<!--  wmk_home folder end -->	
 	
 	
-		<definition name="accessDenied" extends="baseForm">
+	
+<!--  wmk_goods folder start -->
+
+	<definition name="/wmk_goods/goodsList" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goodsList.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_goods/goodsView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goodsView.jsp" />
+	
+	</definition>
+	
+
+	<definition name="/wmk_goods/goodsView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goodsView.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_goods/cartList" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/cartList.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_goods/goodsOrder" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goodsOrder.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/wmk_goods/goodsOrderComplete" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goodsOrderComplete.jsp" />
+	
+	</definition>
+
+	<definition name="/wmk_goods/orderList" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/orderList.jsp" />
+	
+	</definition>
+
+	<definition name="/wmk_goods/orderView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/orderView.jsp" />
+	
+	</definition>			
+	
+	<definition name="/wmk_goods/goods_register" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/wmk_goods/goods_register.jsp" />
+	
+	</definition>
+
+
+<!--  wmk_goods folder end -->		
+	
+	
+<!-- free board  -->
+
+	<definition name="/free_board/boardList" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/free_board/boardList.jsp" />
+	
+	</definition>
+	
+	
+	<definition name="/free_board/contentView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/free_board/contentView.jsp" />
+	
+	</definition>
+
+
+	<definition name="/free_board/writeView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/free_board/writeView.jsp" />
+	
+	</definition>
+	
+	<definition name="/free_board/modifyView" extends="baseForm">
+	
+		<put-attribute name="body" value="/WEB-INF/views/free_board/modifyView.jsp" />
+	
+	</definition>
+	
+	
+<!-- free board end-->
+	
+	
+	
+	
+<!-- error page  -->
+	<definition name="accessDenied" extends="baseForm">
 	
 		<put-attribute name="body" value="/WEB-INF/views/accessDenied.jsp" />
 	
 	</definition>
 	
-		<definition name="loginFail" extends="baseForm">
+	<definition name="loginFail" extends="baseForm">
 	
 		<put-attribute name="body" value="/WEB-INF/views/loginFail.jsp" />
 	
 	</definition>
 	
-	
 
 	
 </tiles-definitions>
-
+<!-- error page end-->
 
 
 

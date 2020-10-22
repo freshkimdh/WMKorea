@@ -59,24 +59,6 @@ public class ShopController {
 		 
 	 }
 	 
-		/*
-		 * //�����ϱ� ��ư ������� ��ٱ��Ͽ� ��� �ֹ��ϱ� �������� �̵� (������ ��ť��Ƽ ���ǰ� �ҷ�����): chaddy
-		 * 
-		 * @ResponseBody
-		 * 
-		 * @RequestMapping(value = "/addCart2", method = RequestMethod.POST) public void
-		 * addCart2(CartVO cart, HttpSession session) throws Exception {
-		 * 
-		 * 
-		 * Object principal =
-		 * SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 * 
-		 * String username = ((UserDetails)principal).getUsername();
-		 * cart.setUserId(username); service.addCart(cart);
-		 * 
-		 * 
-		 * }
-		 */
 	 
 	 
 	 //��ٱ��� ����

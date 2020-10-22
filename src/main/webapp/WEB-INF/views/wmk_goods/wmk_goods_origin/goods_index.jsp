@@ -9,7 +9,7 @@
 	<title>Home</title>
 	
 	
-		<style>
+<!-- 		<style>
 	
 		body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
@@ -57,8 +57,8 @@
 		footer#footer { margin-top:100px; border-radius:50px 50px 0 0; }
 		footer#footer div#footer_box { padding:0 20px; }
 		
-	</style>
-</head>
+	</style> -->
+<%-- </head>
 
 <body>
 <div id="root">
@@ -90,4 +90,4 @@
 
 </div>
 </body>
-</html>
+</html> --%>

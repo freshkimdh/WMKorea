@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -9,7 +9,7 @@
 	<title>Home</title>
 	
 	
-<!-- 		<style>
+		<style>
 	
 		body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
@@ -57,7 +57,7 @@
 		footer#footer { margin-top:100px; border-radius:50px 50px 0 0; }
 		footer#footer div#footer_box { padding:0 20px; }
 		
-	</style> -->
+	</style>
 </head>
 
 <body>
@@ -91,3 +91,4 @@
 </div>
 </body>
 </html>
+ --%>

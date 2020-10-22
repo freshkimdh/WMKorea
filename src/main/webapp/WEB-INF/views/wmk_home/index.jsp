@@ -7,7 +7,7 @@
 header {
   position: relative;
   background-color: black;
-  height: 20vh;
+  height: 35vh;
   min-height: 20rem;
   width: 100%;
   overflow: hidden;
