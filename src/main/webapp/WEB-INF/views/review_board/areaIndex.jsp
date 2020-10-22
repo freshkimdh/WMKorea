@@ -201,7 +201,7 @@
 	<div class="col-sm-4">
 	
 	<div class="img-container" onclick="location.href='review_boardList?rArea=서울·경기·인천'">
-	<p align="center"><a href="review_boardList?rArea='서울·경기·인천'"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='서울·경기·인천'"><img src="img/seoul1.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
 		<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>
@@ -215,7 +215,7 @@
 	
 	<div class="col-sm-4">
    	<div class="img-container" onclick="location.href='review_boardList?rArea=강원도'">
-	<p align="center"><a href="review_boardList?rArea='강원도'"><img src="img/gangwon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='강원도'"><img src="img/gang1.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
        	<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>      
@@ -231,7 +231,7 @@
 	<div class="col-sm-4">
 	
 	<div class="img-container" onclick="location.href='review_boardList?rArea=충청북도'">
-	<p align="center"><a href="review_boardList?rArea='충청북도 '"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='충청북도 '"><img src="img/cb.png" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
 		<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>
@@ -245,7 +245,7 @@
   	
   	<div class="col-sm-4">
   	<div class="img-container" onclick="location.href='review_boardList?rArea=충청남도'">
-    <p align="center"><a href="review_boardList?rArea='충청남도'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+    <p align="center"><a href="review_boardList?rArea='충청남도'"><img src="img/ss1.png" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
       			<div class="overlay">
     		<span><h5>자세히 보기</h5></span>
     		</div>
@@ -261,7 +261,7 @@
 
     	<div class="col-sm-4">
     <div class="img-container" onclick="location.href='review_boardList?rArea=경상북도'">
-	<p align="center"><a href="review_boardList?rArea='경상북도 '"><img src="img/chung_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='경상북도 '"><img src="img/GJ.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
        	<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div>     
@@ -279,7 +279,7 @@
   	
   	<div class="col-sm-4">
    	<div class="img-container" onclick="location.href='review_boardList?rArea=경상남도'"> 	
-    <p align="center"><a href="review_boardList?rArea='경상남도 '"><img src="img/daejeon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+    <p align="center"><a href="review_boardList?rArea='경상남도 '"><img src="img/tongyoun.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
        	<div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
@@ -294,7 +294,7 @@
 
 	<div class="col-sm-4">
 	<div class="img-container" onclick="location.href='review_boardList?rArea=전라북도'"> 	
-	<p align="center"><a href="review_boardList?rArea='전라북도'"><img src="img/seoul_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='전라북도'"><img src="img/gunsan.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
         <div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
@@ -307,7 +307,7 @@
     
    	<div class="col-sm-4">
    	<div class="img-container" onclick="location.href='review_boardList?rArea=전라남도'">
-	<p align="center"><a href="review_boardList?rArea='전라남도'"><img src="img/gyeonggi_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
+	<p align="center"><a href="review_boardList?rArea='전라남도'"><img src="img/JN.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p>
       <div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
@@ -320,7 +320,7 @@
   	
   	<div class="col-sm-4">
   	<div class="img-container" onclick="location.href='review_boardList?rArea=제주도'">
-    <p align="center"><a href="review_boardList?rArea='제주도'"><img src="img/incheon_icon.jpg" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
+    <p align="center"><a href="review_boardList?rArea='제주도'"><img src="img/jeju.png" class="img-fluid mx-auto d-block img-thumbnail" width="400px" height="300px"></a></p><p> <!-- img-fluid -->
       <div class="overlay">
     	<span><h5>자세히 보기</h5></span>
     	</div> 
