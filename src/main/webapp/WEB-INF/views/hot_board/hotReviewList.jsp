@@ -18,17 +18,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
-
-
-<!-- 	<style> /* Font responsive  */
-	body {font-size: 16px;}
-	#district {font-size: 1rem;}
-	#disf {
-	/* font-size: 4rem; */
-	font-size: 4vw;}
-	</style> -->
-	
+   	
   
 	<style>
  	#s1 {
@@ -212,31 +202,7 @@
   
   	<div class="col-sm-2">
   	</div>
-  	
-  	
-  	<!--  <div class="col-sm-8" align="center">
-		Group button details
-		<div class="btn-group btn-group btn-block">
-			<button type="button" class="btn btn-secondary">전체</button>
-			<button type="button" class="btn btn-secondary">관광지</button>
-		    <button type="button" class="btn btn-secondary">행사</button>
-		    <button type="button" class="btn btn-secondary">맛집</button>
-		    <button type="button" class="btn btn-secondary">기타</button>
-		</div>  	
-  	</div> -->
- <!--  	<div class="col-sm-8" align="center">
-		Group button details
-		<div class="btn-group btn-group btn-block">
-			<ul id="cate">
-				<li id="cate2" class="btn btn-secondary cate2" value="0">전체</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="1">관광지</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="2">행사</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="3">맛집</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="4">기타</li> 
-		    </ul>
-		</div>  	
-  	</div> -->
-  	
+  	 	  	
   	
   	<div class="col-sm-2">
   	</div>
@@ -271,101 +237,10 @@
 	  </div>
 	  <br>
         </div>
-     	</c:forEach>
-	<%-- <div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/n_tower.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>N서울타워</strong><br>도시의 전경을 조망할 수 있는 타워 & 레스토랑</p>
-
-	      <h class="text-warning">★★★★☆</h> (4) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/myungdong.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>명동</strong><br>다양한 쇼핑 및 캐주얼한 세계 각국의 요리를 선보이는 식당</p>
-	      <h class="text-warning">★★★☆☆</h> (3) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 22 
-	      <span class="badge  badge-pill badge-success">분류</span> 맛집
-	    </div>
-	  </div>
-	  <br>
-        </div>        
-        
-
-        
-       <!-- second line -->
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="seoulCotentView"><img src="img/travel_board_img/kyungbok.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>경복궁</strong><br>투어 & 박물관이 있는 역사적인 궁전</p>
-
-	      <h class="text-warning">★★★★★</h> (5) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-	<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/n_tower.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>N서울타워</strong><br>도시의 전경을 조망할 수 있는 타워 & 레스토랑</p>
-
-	      <h class="text-warning">★★★★☆</h> (4) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 18 
-	      <span class="badge  badge-pill badge-success">분류</span> 관광지
-	    </div>
-	  </div>
-	  <br>
-        </div>
-        
-		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
-	  <div class="card shadow-sm">
-	  	<div class="list_picture">
-		<a href="http://google.com"><img src="img/travel_board_img/myungdong.jpg" class="img-fluid mx-auto d-block rounded"></a>
-	    </div>
-	    <div class="card-body">
-	      <p class="card-text"><strong>명동</strong><br>다양한 쇼핑 및 캐주얼한 세계 각국의 요리를 선보이는 식당</p>
-	      <h class="text-warning">★★★☆☆</h> (3) <br>
-	      <span class="badge  badge-pill badge-danger ">Like</span> 22 
-	      <span class="badge  badge-pill badge-success">분류</span> 맛집
-	    </div>
-	  </div>
-	  <br>
-
-        </div>  --%>           
- 
+     	</c:forEach>        
       </div> 
-
   </div>
   
-	<!--  board buttons --> 
- 	<%-- <div class="container">
-	<p align="right">
-	<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
-	</p>
-	<br>
-	</div> --%>
-
 <!-- <img src="others/s1.PNG"> -->
 
 <div id="jumbotron" class="jumbotron text-center" style="margin-bottom:0">

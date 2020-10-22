@@ -21,16 +21,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
   
-	
-<!-- 	<style> /* Font responsive  */
-	body {font-size: 16px;}
-	#district {font-size: 1rem;}
-	#disf {
-	/* font-size: 4rem; */
-	font-size: 4vw;}
-	</style> -->
-	
-  
 	<style>
  	#s1 {
 	/* background: blue; */
@@ -70,17 +60,8 @@
 
 </style>
 	
-	
-<%-- 	<style>
-	
-  /* Make the image fully responsive */
-  #imginfo {
-    width: 200;
-    height: 100;
-  }
-  </style> --%>
   
-  	<style>
+<style>
 	
   
   .content_picture img {
@@ -89,7 +70,7 @@
   
   }
   
-  </style>	
+</style>	
   
   
 
@@ -161,10 +142,6 @@ function replyList() {
 }
 
 </script>
-
-
-
-
 
 
 
@@ -323,17 +300,7 @@ function replyList() {
 						<strong>개장 시간</strong> ${rContentView.rOpenTime} <!-- 09:00~21:00(연중 무휴) --></br>
 						<strong>위치 정보</strong> ${rContentView.rAdress} <!-- 서울특별시 종로구 세종로 사직로 161 -->
 						<hr class="new3">
-						<strong>피셜</strong><br>${rContentView.rInShort}
-<!-- 						 <div class="bg-light"> -->
-						<!-- 경복궁은 대한민국 서울 세종로에 있는 조선 왕조의 법궁이다. 
-						근정전을 중심으로 하고 있다. 1395년에 창건하였다.
-						 ‘경복’은 시경에 나오는 말로 왕과 그 자손, 온 백성들이 태평성대의 큰 복을 누리기를 축원한다는 의미다.
-						 풍수지리적으로도 백악산을 뒤로 하고 좌우에는 낙산과 인왕산으로 둘러싸여 있어 길지의 요건를 갖추고 있다. 
-						1592년, 임진왜란으로 인해 불탄 이후 그 임무를 창덕궁에 넘겨주었다가 1865년에 흥선대원군의 명으로 중건되었다. 
-						일제 강점기에는 조선총독부 건물을 짓는 등 많은 전각들이 훼손되었으나, 
-						1990년대부터 총독부 건물을 철거하는 등 복원사업을 벌인 덕분에 복원 작업은 현재 부분 완료된 상태다. -->
-<!-- 						</div>	 -->					
-						
+						<strong>피셜</strong><br>${rContentView.rInShort}									
 			
 					</div>
 	       	 	</div>	
@@ -344,11 +311,6 @@ function replyList() {
       </tr>
     </tbody>
 </table>
-
-<%-- <p align="right">
-<a href="delete2?bId=${contentView.bId}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
-<a href="modifyView?bId=${contentView.bId}" class="btn btn-outline-dark btn-sm" role="button">수정</a>
-</p> --%>
 
 </div>
 
@@ -362,7 +324,6 @@ function replyList() {
 <!-- Like -->
 <div class="container">
 <div align="center">
-<!-- <img src="img/travel_board_img/like_1.png" class="img-rounded img-fluid" id="like"> -->
 <sec:authorize access="isAuthenticated()">
 	        <div class="col-sm-2">
 	            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
@@ -373,89 +334,11 @@ function replyList() {
 	            </div>
 	        </div>
         </sec:authorize>
-<%-- 
-<img src="img/travel_board_img/like_1.png" width="70" onmouseover="this.src='img/travel_board_img/like_2.png'" 
-onmouseout="this.src='img/travel_board_img/like_2.png'">
-<h4 align="center"><strong>15</strong></h4> 
---%>
 </div>
 
 <hr> <br>
 </div>
 
-
-<!--  Comment view -->
-<%-- <div class="container" id="comment_view">
-
- 	<table>     
-		<tr>
-		<div class="row">
-		<div class="col-md-1" align="right">
-			<img src="img/avatar2.jpg" width="50"/>
-		</div>
-		<div class="col-md-11">
-			<strong>김대환</strong> 
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-<span class="fa fa-star"></span> <a>(3)</a>
-<span class="badge badge-secondary"><a href="http://google.com" class="text-white"> 삭제</a></span><br>
-			<p>경복궁 가봤는데 아주 좋아요.<br>제 엉덩이만큼 끝내주는 관광지입니다..</p>
-			<p class="text-dark" align="right">${contentView.bDate}</p>					
-		</div>
-					
-
-		</div>
-		</tr>
-	</table>
-	
-</div> --%>
-
-
-
-<!-- Comment write -->
-<%-- <div class="container" id="comment_write">
-
-<form action="">
-<br>
-	<div class="row">
-    	<div class="col">
-    
-		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="rName">
-    
-    	</div>
-    	
-    	<div class="col">
-    	<label for="bPw">비밀번호:</label>
-      	<input type="password" class="form-control" id="pw" placeholder="" name="bPw"> <p>
-    	</div>
-    	
-    	<div class="col">
-		<label for="sel1">평가:</label>
-		<select class="form-control" id="sel1" name="sellist1">
-			<option>★☆☆☆☆(1)</option>
-			<option>★★☆☆☆(2)</option>
-			<option>★★★☆☆(3)</option>
-			<option>★★★★☆(4)</option>
-			<option>★★★★★(5)</option>
-		</select>
-    	</div>
-    	
-	</div>
-
-    <div class="form-group">
-      <label for="comment">댓글:</label>
-      <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
-    </div>
-    
-    <!-- <button type="submit" class="btn btn-outline-dark btn-sm">등록</button> -->
-    <a href="review_contentView" class="btn btn-outline-dark btn-sm" role="button">등록</a>
-</form>
-<hr>
-<br>
-</div> --%>
  
 <!--  board buttons --> 
 <div class="container">
@@ -505,12 +388,7 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 		  });
 		 });
 	</script>
-    
-    
-    
-    
-    
-    
+ 
     
    </div>
    

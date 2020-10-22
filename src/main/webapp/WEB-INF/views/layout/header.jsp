@@ -11,7 +11,7 @@
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-			<a href="index"><img src="${pageContext.request.contextPath}/img/main_logo2.png"></a>
+			<a href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/img/main_logo2.png"></a>
 		</div> <!-- tr -->
 		
 		<div class="col-sm-6" id="s2">
@@ -60,7 +60,6 @@
 			</a>
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/characterMaking">내 캐릭터 만들기</a>
-<!--         	<a class="dropdown-item" href="goodsIndex">굿즈(테스트)</a> -->
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/goodsList">굿즈</a>
       		</div>
 		</li>
@@ -73,7 +72,6 @@
 			<div class="dropdown-menu">
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/free_board/boardList">자유 게시판</a>
         	<a class="dropdown-item" href="${pageContext.request.contextPath}/areaIndex">여행지 게시판</a>
-<%--         	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a> --%>
       		</div>
 		</li>
 		
@@ -86,13 +84,13 @@
 	<div class="btn-group btn-group-sm">
 	
 <sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
-   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
-		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-		<a href="loginForm" class="btn btn-secondary" type="button">My Page</a>
+   		<a href="${pageContext.request.contextPath}/loginForm" class="btn btn-secondary" type="button">Login</a>
+		<a href="${pageContext.request.contextPath}/joinForm" class="btn btn-secondary" type="button">Join</a> 
+		<a href="${pageContext.request.contextPath}/loginForm" class="btn btn-secondary" type="button">My Page</a>
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
-		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!!</a>
+		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님</a>
    		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
    			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
    		</form:form> 

@@ -44,8 +44,7 @@ public class UserService {
 	@Transactional
 	public void userDelete(UserVO userVO) throws Exception {
 		log.info("delete Start");
-		String userId = userVO.getId();// hdhd
-		String userPw = userVO.getPw();// 1234 암호
+		String userId = userVO.getId();
 		log.info("login ID   :   " + userVO.getId());
 		log.info("login PW   :   " + userVO.getPw());
 		userMapper.authori(userId);

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>   
+	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 
 
@@ -13,84 +14,63 @@
 
 <div class="container">
 	<div class="row">
-<div class="col-sm-2">
-
-</div>
-
-	
-<div class="col-sm-8">
+		<div class="col-sm-2"></div>
 
 
-<form:form name="join_member" action="addUser" method="POST"  onsubmit="return checkJoinform();">
-  
-  	<div class="form-group">
-  		<label for="id">아이디 (ID):</label>
-  		<input type="text" class="form-control" id="id" name="id" >
-  		<button class="btn btn-danger" id="duplicate_check" type="button"  onclick="check();">중복체크</button>
+		<div class="col-sm-8">
+
+
+			<form:form name="join_member" action="addUser" method="POST"
+				onsubmit="return checkJoinform();">
+
+				<div class="form-group">
+					<label for="id">아이디 (ID):</label> <input type="text"
+						class="form-control" id="id" name="id">
+					<button class="btn btn-danger" id="duplicate_check" type="button"
+						onclick="check();">중복체크</button>
+				</div>
+				<div class="form-group">
+					<label for="pw">비밀번호 (Password):</label> <input type="password"
+						class="form-control" id="pw" name="pw"> <label for="pw">비밀번호
+						확인 (CheckPassword):</label> <input type="password" class="form-control"
+						id="pw2" name="pw2">
+				</div>
+
+				<div class="form-group">
+					<label for="nickname">닉네임 (Signature Name):</label> <input
+						type="text" class="form-control" id="nickname" name="nickname">
+				</div>
+
+
+				<div class="form-group">
+					<label for="email">이메일 (Email):</label> <input type="email"
+						class="form-control" id="email" placeholder="" name="email">
+				</div>
+
+				<div class="form-group">
+					<label for="nationality">국적 (Nationality):</label> <select
+						class="form-control" id="nationality" name="nationality">
+						<option>한국 (Republic of Korea)</option>
+						<option>일본 (Japan)</option>
+						<option>중국 (China)</option>
+						<option>미국 (United States)</option>
+						<option>기타 (Others)</option>
+					</select>
+
+
+				</div>
+				<button type="submit" class="btn btn-danger">Submit</button>
+
+			</form:form>
+
+		</div>
 	</div>
-	<div class="form-group">
-  		<label for="pw">비밀번호 (Password):</label>
-  		<input type="password" class="form-control" id="pw" name="pw">
-  		<label for="pw">비밀번호 확인 (CheckPassword):</label>
-  		<input type="password" class="form-control" id="pw2" name="pw2">
-	</div>
-	
-	 <div class="form-group">
-  		<label for="nickname">닉네임 (Signature Name):</label>
-  		<input type="text" class="form-control" id="nickname" name="nickname">
-	</div>
-	
-	
-     <div class="form-group">
-      <label for="email">이메일 (Email):</label>
-      <input type="email" class="form-control" id="email" placeholder="" name="email">
-    </div>
-    
-<!--     <tr>
-          <th>이메일</th>
-          <td>
-            <input type='text' name="email">@
-            <input type='text' name="email_dns">
-              <select name="emailaddr">
-                 <option value="">직접입력</option>
-                 <option value="daum.net">daum.net</option>
-                 <option value="empal.com">empal.com</option>
-                 <option value="gmail.com">gmail.com</option>
-                 <option value="hanmail.net">hanmail.net</option>
-                 <option value="msn.com">msn.com</option>
-                 <option value="naver.com">naver.com</option>
-                 <option value="nate.com">nate.com</option>
-              </select>
-            </td>
-         </tr>
-<br><br> -->
-    
-  
-    <div class="form-group">
-      <label for="nationality">국적 (Nationality):</label>
-      <select class="form-control" id="nationality" name="nationality">
-        <option>한국 (Republic of Korea)</option>
-        <option>일본 (Japan)</option>
-        <option>중국 (China)</option>
-        <option>미국 (United States)</option>
-        <option>기타 (Others)</option>
-      </select>
-      
-
-    </div>
-    <button type="submit" class="btn btn-danger">Submit</button>
-    
- </form:form>
- 
-</div>
-</div>
 </div>
 
-<div class="col-sm-2">
+<div class="col-sm-2"></div>
 
-</div>
-
-<br><br>
+<br>
+<br>
 
 
 <script>

@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
-import com.wmk.ex.vo.CategoryVO;
-import com.wmk.ex.vo.GoodsVO;
-import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.OrderDetailVO;
 import com.wmk.ex.vo.OrderListVO;
 import com.wmk.ex.vo.OrderVO;
