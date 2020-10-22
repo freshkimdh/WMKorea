@@ -31,9 +31,9 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	
 	
 	//여행 게시판 목록
-	public List<ReviewBoardVO> getrList(ReviewBoardVO reviweBoardVO){
-		log.info("Get rlist");
-		return reviewBoardMapper.getrList(reviweBoardVO);
+	public List<ReviewBoardVO> getHotReviewList(ReviewBoardVO reviweBoardVO){
+		log.info("getHotReviewList...");
+		return reviewBoardMapper.getHotReviewList(reviweBoardVO);
 	}
 	
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviweBoardVO) {

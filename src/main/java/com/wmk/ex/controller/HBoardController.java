@@ -15,15 +15,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class HBoardController {
 	
-	 private ReviewBoardService rservice;
+	 private ReviewBoardService reviewService;
 	 
 	//핫플레이스 게시판
-	@RequestMapping("/hotReviewList")
-	public String hotReviewList2(ReviewBoardVO reviewBoardVO, Model model) {
-		log.info("review_boardList...");
-		model.addAttribute("rList", rservice.getrList(reviewBoardVO));
-		log.info(reviewBoardVO);
-			
+	@RequestMapping("/hot_reviewList")
+	public String hotReviewList(ReviewBoardVO reviewBoardVO, Model model) {
+		log.info("hot_reviewList...");
+		
+		model.addAttribute("hotReivewList", reviewService.getHotReviewList(reviewBoardVO));
 			
 		return "/hot_board/hotReviewList";
 	}

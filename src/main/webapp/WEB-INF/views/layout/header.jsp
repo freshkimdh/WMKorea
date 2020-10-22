@@ -51,7 +51,7 @@
 		</li>
 				
 		<li class="nav-item">
-			<a class="nav-link" href="${pageContext.request.contextPath}/hotReviewList">핫플레이스</a>
+			<a class="nav-link" href="${pageContext.request.contextPath}/hot_reviewList">핫플레이스</a>
 		</li>
 				
 		<li class="nav-item dropdown">
@@ -92,7 +92,7 @@
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
-		<a class="btn btn-dark">똥마려워요, <sec:authentication property="principal.user.nickname"/> 님!!</a>
+		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!!</a>
    		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
    			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
    		</form:form> 

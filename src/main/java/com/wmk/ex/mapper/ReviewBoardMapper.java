@@ -10,7 +10,7 @@ import com.wmk.ex.vo.ReviewReplyVO;
 
 public interface ReviewBoardMapper {
 	
-	public List<ReviewBoardVO> getrList(ReviewBoardVO reviewBoardVO);
+	public List<ReviewBoardVO> getHotReviewList(ReviewBoardVO reviewBoardVO);
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviewBoardVO);
 	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviewBoardVO);
 

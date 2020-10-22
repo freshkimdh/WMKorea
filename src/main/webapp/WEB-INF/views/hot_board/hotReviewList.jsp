@@ -248,23 +248,23 @@
 
 
   <div class="album py-5">
-    <div class="container" id="review_contentView">
+    <div class="container" id="hot_reviewList">
 		<div class="row">
-		<c:forEach items="${rList}" var="userList">
+		<c:forEach items="${hotReivewList}" var="hotList">
 		<div class="col-md-4"> <!-- <div class="card mb-4 shadow-sm"> -->
 	  <div class="card shadow-sm">
 	  	<div class="list_picture">
-		<a href="review_contentView?rBoardNum=${userList.rBoardNum}&area=${area}"><img src="others/s1.jpg" class="img-fluid mx-auto d-block rounded"></a>
+		<a href="review_contentView?rBoardNum=${hotList.rBoardNum}&area=${area}"><img src="/filePath/${hotList.storedFileName ne ' '? hotList.storedFileName : 'null.jpg'}" class="img-fluid mx-auto d-block rounded"></a>
 	    </div>
 	    <div class="card-body">
-	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
+	      <p class="card-text"><strong>${hotList.rTitle}</strong><br>${hotList.rInShort}</p>
 
-	      <span class="badge  badge-pill badge-danger "  style="font-size:15px">좋아요</span>${userList.like_Cnt}
+	      <span class="badge  badge-pill badge-danger "  style="font-size:15px">좋아요</span>${hotList.like_Cnt}
 	      <span class="badge  badge-pill badge-success "  style="font-size:15px">분류</span>
-	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
-        	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
-        	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
-        	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
+	      				<c:if test="${hotList.rCategory eq '1'}">관광지</c:if>
+        	     		<c:if test="${hotList.rCategory eq '2'}">행사</c:if>
+        	     		<c:if test="${hotList.rCategory eq '3'}">맛집</c:if>
+        	     		<c:if test="${hotList.rCategory eq '4'}">기타</c:if>
         	     		<br>
 	    </div>
 	  </div>
