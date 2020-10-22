@@ -3,15 +3,15 @@ package com.wmk.ex.vo;
 import java.util.Date;
 
 public class ReviewReplyVO {
-	
+
 	private int rBoardNum;
 	private String id;
 	private int repNum;
 	private String repCon;
 	private Date repDate;
-	
+
 	public ReviewReplyVO() {
-		
+
 	}
 
 	public int getrBoardNum() {
@@ -53,13 +53,5 @@ public class ReviewReplyVO {
 	public void setRepDate(Date repDate) {
 		this.repDate = repDate;
 	}
-	
-	
 
-
-	
-	
-	
-
-	
 }

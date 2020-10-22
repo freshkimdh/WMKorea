@@ -18,11 +18,11 @@ public class ReviewBoardVO {
 	private int rIndent;
 	private int rCategory;
 	private int Like_Cnt;
-	
+
 	private String storedFileName;
 
-	public ReviewBoardVO(){
-		
+	public ReviewBoardVO() {
+
 	}
 
 	public int getrBoardNum() {
@@ -152,6 +152,5 @@ public class ReviewBoardVO {
 				+ ", rAdress=" + rAdress + ", rHit=" + rHit + ", rStep=" + rStep + ", rIndent=" + rIndent
 				+ ", rCategory=" + rCategory + ", Like_Cnt=" + Like_Cnt + ", storedFileName=" + storedFileName + "]";
 	}
-	
-	
+
 }

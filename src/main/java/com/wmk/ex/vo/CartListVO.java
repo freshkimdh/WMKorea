@@ -8,22 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class CartListVO {
 
-//    cartNum     number          not null,
-//    userId      varchar2(50)    not null,
-//    gdsNum      number          not null,
-//    gdsColor    varchar2(50)    null,
-//    gdsSize     varchar2(50)    null,
-//    gdsText     varchar2(50)    null,
-//    cartStock   number          not null,
-//    addDate     date            default sysdate,
-//    primary key(cartNum, userId) 
-	
 	private int cartNum;
 	private String userId;
 	private int gdsNum;
@@ -33,20 +23,9 @@ public class CartListVO {
 	private String gdsName;
 	private int gdsPrice;
 	private String gdsImg;
-	
 
 	private String gdsColor;
 	private String gdsSize;
 	private String gdsText;
 
-	
-
-
-	
-	
-
-	
-	
-	
-	
 }

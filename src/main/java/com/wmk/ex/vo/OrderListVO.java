@@ -12,28 +12,26 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderListVO {
-	
-	//OrderVO의 모든값
-	private String orderId;				//    orderId     varchar2(50) not null,
-	private String userId;				//    userId      varchar2(50) not null,
-	private String OrderRec;			//    orderRec    varchar2(50) not null,
-	private String userAddr1;			//    userAddr1   varchar2(20) not null,
-	private String userAddr2;			//    userAddr2   varchar2(50) not null,
-	private String userAddr3;			//    userAddr3   varchar2(50) not null,
-	private String orderPhon;			//    orderPhon   varchar2(30) not null,
-	private int amount;					//    amount      number       not null,
-	private Date oderDate;				//    orderDate   Date         default sysdate,   
-										//    primary key(orderId)	
-	
-	//OrderDetilsVO의 모든값
+
+	// OrderVO
+	private String orderId;
+	private String userId;
+	private String OrderRec;
+	private String userAddr1;
+	private String userAddr2;
+	private String userAddr3;
+	private String orderPhon;
+	private int amount;
+	private Date oderDate;
+
+	// OrderDetilsVO
 	private int orderDetailsNum;
 	private int gdsNum;
 	private int cartStock;
-	
-	//GoodsVO의 정보
+
+	// GoodsVO
 	private String gdsName;
 	private String gdsImg;
 	private int gdsPrice;
-	
 
 }

@@ -3,17 +3,17 @@ package com.wmk.ex.vo;
 import java.util.Date;
 
 public class CommentListVO {
-	
-	private int gdsNum;		//    gdsNum      number          not null,
-	private String userId;		//    userId      varchar2(50)    not null,
-	private int repNum;		//    repNum      number          not null,
-	private String repCon;		//    repCon      varchar2(2000)  not null,
-	private Date repDate;		//    repDate     date            default sysdate,
-	
+
+	private int gdsNum;
+	private String userId;
+	private int repNum;
+	private String repCon;
+	private Date repDate;
+
 	private String userName;
-	
+
 	public CommentListVO() {
-		
+
 	}
 
 	public int getGdsNum() {
@@ -63,10 +63,5 @@ public class CommentListVO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	
 
-	
-	
-	
 }

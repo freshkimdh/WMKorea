@@ -3,15 +3,15 @@ package com.wmk.ex.vo;
 import java.util.Date;
 
 public class FreeReplyListVO {
-	
+
 	private int fBoard_Num;
 	private String id;
 	private int repNum;
 	private String repCon;
 	private Date repDate;
-	
+
 	public FreeReplyListVO() {
-		
+
 	}
 
 	public int getfBoard_Num() {
@@ -53,9 +53,5 @@ public class FreeReplyListVO {
 	public void setRepDate(Date repDate) {
 		this.repDate = repDate;
 	}
-	
-	
-	
 
-	
 }

@@ -37,204 +37,184 @@ import lombok.extern.log4j.Log4j;
 //@RequestMapping("/shop/*")
 public class ShopController {
  
-	 @Inject
-	 ShopService service;
+	@Inject
+	ShopService service;
     
 	 
+	@ResponseBody
+	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
+	public void addCart(CartVO cart, HttpSession session) throws Exception {
+		 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		String username = ((UserDetails)principal).getUsername();
+		cart.setUserId(username);
+		service.addCart(cart);	 
+	}	 	 
+	 
+	 
+	//��ٱ��� ����
+	@RequestMapping(value = "/cartList", method = RequestMethod.GET)
+	public String getCartList(HttpSession session, Model model) throws Exception {
+		log.info("get cart list");
+		 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal).getUsername();
+	  
+		List<CartListVO> cartList = service.cartList(username);
+	  
+		model.addAttribute("cartList", cartList);
+		 
+		return "/wmk_goods/cartList";
+	  
+	}
 
-	 
-	 //��ٱ��� ��� (������ ��ť��Ƽ ���ǰ� �ҷ�����): chaddy
-	//�����ϱ� ��ư�� ������ �ش� �޼��� ������ ��ٱ��Ͽ� ��� �ֹ��ϱ� �������� �̵� (������ ��ť��Ƽ ���ǰ� �ҷ�����): chaddy
-	 @ResponseBody
-	 @RequestMapping(value = "/addCart", method = RequestMethod.POST)
-	 public void addCart(CartVO cart, HttpSession session) throws Exception {
-		 
- 
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 
-		 String username = ((UserDetails)principal).getUsername();
-		 cart.setUserId(username);
-		 service.addCart(cart);
-		 
-		 
-	 }
-	 
-	 
-	 
-	 //��ٱ��� ����
-	 @RequestMapping(value = "/cartList", method = RequestMethod.GET)
-	 public String getCartList(HttpSession session, Model model) throws Exception {
-		 log.info("get cart list");
-		 
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 String username = ((UserDetails)principal).getUsername();
-
-	  
-		 List<CartListVO> cartList = service.cartList(username);
-	  
-		 model.addAttribute("cartList", cartList);
-		 
-		 return "/wmk_goods/cartList";
-	  
-	 }
-	 
-	 
-	 
-	 
-	 
-	 
+	
 	// ��ٱ��� ����
-	 @ResponseBody
-	 @RequestMapping(value = "/shop/cartList/deleteCart", method = RequestMethod.POST)
-	 public int deleteCart(HttpSession session,
-	      @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
-		 log.info("delete cart");
-	  	  
-	  
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	@ResponseBody
+	@RequestMapping(value = "/shop/cartList/deleteCart", method = RequestMethod.POST)
+	public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
+		
+		log.info("delete cart");	  	  
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
-		 String username = ((UserDetails)principal).getUsername();
+		String username = ((UserDetails)principal).getUsername();
 	   
-		  int result = 0;
-		  int cartNum = 0;
+		int result = 0;
+		int cartNum = 0;
 		  	  
-		  if(username != null) {
-		   cart.setUserId(username);
+		if(username != null) {
+			cart.setUserId(username);
 		   
-		   for(String i : chArr) {   
-		    cartNum = Integer.parseInt(i);
-		    cart.setCartNum(cartNum);
-		    service.deleteCart(cart);
-		   }   
-		   result = 1;	
-		  }  
-		  return result;  
+			for(String i : chArr) {   
+				cartNum = Integer.parseInt(i);
+				cart.setCartNum(cartNum);
+				service.deleteCart(cart);
+			}
+			
+			result = 1;	
+		}  
+		return result;  
 	 }
 	 
 	 
-		@GetMapping("/goodsOrder") 
-		public String goodsOrder(Model model) throws Exception {
+	@GetMapping("/goodsOrder") 
+	public String goodsOrder(Model model) throws Exception {
 			
 			
-			 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			 String username = ((UserDetails)principal).getUsername();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal).getUsername();
 
 		  
-			 List<CartListVO> cartList = service.cartList(username);
+		List<CartListVO> cartList = service.cartList(username);
 		  
-			 model.addAttribute("cartList", cartList);
+		model.addAttribute("cartList", cartList);
 			
-			log.info("goodsOrder");
+		log.info("goodsOrder");
 			
-			return "/wmk_goods/goodsOrder";
+		return "/wmk_goods/goodsOrder";
 
-		}
+	}
 		
 		
-		// goodsOrder�� �ִ� ��ǰ �ֹ��ϱ�
-		 @RequestMapping(value = "/goodsOrder", method = RequestMethod.POST)
-		 public String goodsOrder(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
+	// goodsOrder�� �ִ� ��ǰ �ֹ��ϱ�
+	@RequestMapping(value = "/goodsOrder", method = RequestMethod.POST)
+	public String goodsOrder(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 			 
-			 log.info("order");
+		log.info("order");
 			 
-			 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			 
-			 String username = ((UserDetails)principal).getUsername();
+		String username = ((UserDetails)principal).getUsername();
 			 		  
 			  
-			  Calendar cal = Calendar.getInstance();
-			  int year = cal.get(Calendar.YEAR);
-			  String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-			  String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
-			  String subNum = "";
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		String subNum = "";
 			  
 			  
-			  for(int i = 1; i <= 6; i ++) {
-			   subNum += (int)(Math.random() * 10);
-			  }
+		for(int i = 1; i <= 6; i ++) {
+			subNum += (int)(Math.random() * 10);
+		}
 			  
 			  
-			  String orderId = ymd + "_" + subNum;
+		String orderId = ymd + "_" + subNum;
 			  
-			  order.setOrderId(orderId);
-			  order.setUserId(username);
+		order.setOrderId(orderId);
+		order.setUserId(username);
 			  
-			  service.orderInfo(order);
+		service.orderInfo(order);
 			  
-			  orderDetail.setOrderId(orderId);   
-			  service.orderInfo_Details(orderDetail);
+		orderDetail.setOrderId(orderId);   
+		service.orderInfo_Details(orderDetail);
 			  
-			  service.cartAllDelete(username);
+		service.cartAllDelete(username);
 			  
-			  return "redirect:/goodsOrderComplete";
-			  
-		  
-				/* return "/wmk_goods/goodsOrder"; */
-		  
-		 }
+		return "redirect:/goodsOrderComplete";
+			  		  
+	}
 		 	 
 	 	 
 	 
 	// ��ٱ��Ͽ� �ִ� ��ǰ �ֹ��ϱ�
-	 @RequestMapping(value = "/cartList", method = RequestMethod.POST)
-	 public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
+	@RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 		 
-		 log.info("order");
+		log.info("order");
 		 
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
-		 String username = ((UserDetails)principal).getUsername();
+		String username = ((UserDetails)principal).getUsername();
 		 		  
 		  
-		  Calendar cal = Calendar.getInstance();
-		  int year = cal.get(Calendar.YEAR);
-		  String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-		  String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		  String subNum = "";
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		String subNum = "";
 		  
 		  
-		  for(int i = 1; i <= 6; i ++) {
-		   subNum += (int)(Math.random() * 10);
-		  }
+		for(int i = 1; i <= 6; i ++) {
+			subNum += (int)(Math.random() * 10);
+		}
 		  
 		  
-		  String orderId = ymd + "_" + subNum;
+		String orderId = ymd + "_" + subNum;
 		  
-		  order.setOrderId(orderId);
-		  order.setUserId(username);
+		order.setOrderId(orderId);
+		order.setUserId(username);
 		  
-		  service.orderInfo(order);
+		service.orderInfo(order);
 		  
-		  orderDetail.setOrderId(orderId);   
-		  service.orderInfo_Details(orderDetail);
+		orderDetail.setOrderId(orderId);   
+		service.orderInfo_Details(orderDetail);
 		  
-		  service.cartAllDelete(username);
+		service.cartAllDelete(username);
 		  
-		  return "redirect:/orderList";
-		  
-	  
-			/* return "/wmk_goods/goodsOrder"; */
-	  
+		return "redirect:/orderList";
+		    
 	 }
 	 
 	 
 	
-	 @RequestMapping(value = "/goodsOrderComplete", method = RequestMethod.GET)
-	 public String goodsOrderComplete(HttpSession session, OrderVO order, Model model) throws Exception {
+	@RequestMapping(value = "/goodsOrderComplete", method = RequestMethod.GET)
+	public String goodsOrderComplete(HttpSession session, OrderVO order, Model model) throws Exception {
 		
-		 log.info("/goodsOrderComplete");
+		log.info("/goodsOrderComplete");
 	  
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
-		 String username = ((UserDetails)principal).getUsername();
+		String username = ((UserDetails)principal).getUsername();
 	  
-	  order.setUserId(username);
+		order.setUserId(username);
 	  
-	  List<OrderVO> orderList = service.orderList(order);
+		List<OrderVO> orderList = service.orderList(order);
 	  
-	  model.addAttribute("orderList", orderList);
+		model.addAttribute("orderList", orderList);
 	  
-	  return "/wmk_goods/goodsOrderComplete";
+		return "/wmk_goods/goodsOrderComplete";
 	  
 	 }
 	
@@ -252,39 +232,36 @@ public class ShopController {
 		 
 		 String username = ((UserDetails)principal).getUsername();
 	  
-	  order.setUserId(username);
+		 order.setUserId(username);
 	  
-	  List<OrderVO> orderList = service.orderList(order);
+		 List<OrderVO> orderList = service.orderList(order);
 	  
-	  model.addAttribute("orderList", orderList);
+		 model.addAttribute("orderList", orderList);
 	  
-	  return "/wmk_goods/orderList";
+		 return "/wmk_goods/orderList";
 	  
 	 }
 	 
 	// ū �ֹ��� �� ��� ����
-	 @RequestMapping(value = "/orderView", method = RequestMethod.GET)
-	 public String getOrderList(HttpSession session, @RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
-		 log.info("get order view");
+	@RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	public String getOrderList(HttpSession session, @RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
+		log.info("get order view");
 	  
-		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
-		 String username = ((UserDetails)principal).getUsername();
+		String username = ((UserDetails)principal).getUsername();
 	  
-	  order.setUserId(username);
-	  order.setOrderId(orderId);
+		order.setUserId(username);
+		order.setOrderId(orderId);
 	  
-	  List<OrderListVO> orderView = service.orderView(order);
+		List<OrderListVO> orderView = service.orderView(order);
 	  
-	  model.addAttribute("orderView", orderView);
+		model.addAttribute("orderView", orderView);
 	  
-	  return "/wmk_goods/orderView";
+		return "/wmk_goods/orderView";
 	 }
 	 
-	 
 
-
-	 
-	 
 	 
 }
+

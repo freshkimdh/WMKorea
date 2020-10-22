@@ -6,21 +6,16 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.AdminService;
 import com.wmk.ex.service.ShopService;
-import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -35,8 +30,8 @@ public class GoodsController {
 	@Inject
 	AdminService adminService;
 	
-	 @Inject
-	 ShopService shopService;
+	@Inject
+	ShopService shopService;
 	
 	//��ǰ ���� ������
 	@RequestMapping(value = "/goodsIndex", method = RequestMethod.GET)
@@ -143,9 +138,6 @@ public class GoodsController {
 	}
 	
 	
-	//���� ������ ���� (����ä)
-	
-	
 	// ��ǰ ���
 	@RequestMapping(value = "/admin/goods_register", method = RequestMethod.GET)
 	public String getGoodsRegister2(Model model) throws Exception {
@@ -194,16 +186,9 @@ public class GoodsController {
 		 GoodsViewVO view = adminService.goodsView(gdsNum);
 		 model.addAttribute("view", view);
 		 
-//			List<CategoryVO> category = null;
-//			category = adminService.category();
-//			model.addAttribute("category", JSONArray.fromObject(category));
-		 
-		 
-		 
 		 return "/wmk_goods/goodsView";
 	 }
 	 
-
 	
 	@GetMapping("/goodsDetails") 
 	public String goodsDetails(Model model) {
@@ -220,22 +205,6 @@ public class GoodsController {
 		return "/wmk_goods/goodsDetails2";
 
 	}
-	
-/*	@GetMapping("/goodsOrder") 
-	public String goodsOrder(Model model) {
-		
-		log.info("goodsOrder");
-		return "/wmk_goods/goodsOrder";
-
-	} */
-	
-/*	@GetMapping("/goodsOrderComplete") 
-	public String goodsOrderComplete(Model model) {
-		
-		log.info("/goodsOrderComplete");
-		return "/wmk_goods/goodsOrderComplete";
-
-	} */
 	
 	
 	

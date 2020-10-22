@@ -3,19 +3,7 @@ package com.wmk.ex.vo;
 import java.util.Date;
 
 public class FreeBoardVO {
-	
 
-//fBoard_Num NUMBER(20) not null PRIMARY KEY,
-//fId varchar2(20) not null,
-//fTitle VARCHAR2(100) not null,
-//fContent VARCHAR2(255),
-//fDate DATE DEFAULT SYSDATE,
-//fHit NUMBER(10) DEFAULT 0,
-//fGroup NUMBER(4),
-//fStep NUMBER(4),
-//fIndent NUMBER(4),
-//FOREIGN KEY (fId) REFERENCES wmk_users (id) -- �ۼ��ڸ� id�� ��Ÿ����.
-	
 	private int fBoard_Num;
 	private String fId;
 	private String fTitle;
@@ -25,9 +13,9 @@ public class FreeBoardVO {
 	private int fGroup;
 	private int fStep;
 	private int fIndent;
-	
+
 	public FreeBoardVO() {
-		
+
 	}
 
 	public int getfBoard_Num() {
@@ -101,7 +89,5 @@ public class FreeBoardVO {
 	public void setfIndent(int fIndent) {
 		this.fIndent = fIndent;
 	}
-	
-	
-	
+
 }

@@ -1,16 +1,15 @@
 package com.wmk.ex.vo;
 
-
 import lombok.Data;
 
 @Data
 public class KakaoProfile {
-	
+
 	public Integer id;
 	public String connected_at;
 	public Properties properties;
 	public KakaoAccount kakao_account;
-	
+
 	@Data
 	public class Properties {
 
@@ -19,7 +18,7 @@ public class KakaoProfile {
 		public String thumbnail_image;
 
 	}
-	
+
 	@Data
 	public class KakaoAccount {
 		public Boolean profile_needs_agreement;
@@ -29,7 +28,7 @@ public class KakaoProfile {
 		public Boolean is_email_valid;
 		public Boolean is_email_verified;
 		public String email;
-		
+
 		@Data
 		public class Profile {
 
