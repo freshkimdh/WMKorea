@@ -32,36 +32,7 @@
 	}
 	
 	</style>
-	
-<style>
-
-	body, html {
-  height: 100%;
-  margin: 0;
-/*    font-family: Arial, Helvetica, sans-serif; */
-}
-
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
-  height: 20%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-</style>
-	
-
-  
+		
 
 </head>
 
@@ -165,50 +136,127 @@
 
 </nav>
 
+<p>
+	<p align="center" class="display-3" id="login_f">My Order View</p>
+
 	<div class="container">
-	
-
-	<section id="content">
-
- <div class="orderInfo">
-  <c:forEach items="${orderView}" var="orderView" varStatus="status">
-   
-   <c:if test="${status.first}">
-    <p><span>수령인</span>${orderView.orderRec}</p>
-    <p><span>주소</span>(${orderView.userAddr1}) ${orderView.userAddr2} ${orderView.userAddr3}</p>
-    <p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.amount}" /> 원</p>
-   </c:if>
-   
-  </c:forEach>
- </div>
- 
- <ul class="orderView">
-  <c:forEach items="${orderView}" var="orderView">     
-  <li>
-   <div class="thumb">
-    <img src="${orderView.gdsImg}" width="250"/>
-   </div>
-   <div class="gdsInfo">
-    <p>
-     <span>상품명</span>${orderView.gdsName}<br />
-     <span>개당 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice}" /> 원<br />
-     <span>구입 수량</span>${orderView.cartStock} 개<br />
-     <span>최종 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice * orderView.cartStock}" /> 원                  
-    </p>
-   </div>
-  </li>     
-  </c:forEach>
- </ul>
-</section>
-	
+	<img class="mx-auto d-block" src="goods/profile.png" width="150"><br>
+	<h3 align="center"> <sec:authentication property="principal.user.nickname"/> 님의 주문상세내역입니다.</h3>
 	
 	</div>
+	<br>
 	
- 	<footer id="footer">
-		<div id="footer_box">
-			<%@ include file="include/footer.jsp" %>
-		</div>		
-	</footer> 
+	<div class="container">
+		
+ 
+		<div class="row">
+		
+			<div class="col-sm-3">
+	
+			</div>
+			
+			<div class="col-sm-8">
+			
+			</div>
+		
+		
+		
+		</div>
+	
+	</div>
+
+<div class="container">
+
+<h5><strong>배송지 정보</strong></h5>
+  <table class="table">
+  	<tbody>
+  	
+  	<tr align="center">
+  		<td>수령인</td>
+  		<td>주소</td>
+  		<td>연락처</td>
+  		<td>총 결제금액</td>
+  	
+  	</tr>
+  	
+  	  <c:forEach items="${orderView}" var="orderView" varStatus="status">
+  	 	 <c:if test="${status.first}">
+  	 <tr align="center">
+  		<td>${orderView.orderRec}</td>
+  		<td>(${orderView.userAddr1}) ${orderView.userAddr2} ${orderView.userAddr3}</td>
+  		<td>${orderView.orderPhon}</td>
+  		<td><fmt:formatNumber pattern="###,###,###" value="${orderView.amount}" /> 원</td>
+  	
+  	</tr>
+  		</c:if>
+  	  </c:forEach>
+  	
+  	
+  	</tbody>
+  
+  </table>
+
+	
+</div>
+
+<div class="container">
+
+			<h5><strong>주문상품 정보</strong></h5>
+		  <table class="table">
+
+		    <tbody>
+		    
+		      <tr align="center">
+		        <td>상품 정보</td>
+		        <td>상품 금액</td>
+		        <td>할인 금액</td>
+		        <td>배송비</td>
+		        <td>주문 금액</td>
+		        
+
+		      </tr>		    
+		    
+			<c:set var="sum" value="0" />
+			
+			<c:forEach items="${orderView}" var="orderView">      
+					      <tr>
+					      	<td>
+					      	
+					      	<div class="container">
+					      		<div class="row">
+					      		
+					      		<div class="col-sm-3">
+					      		
+					      		<img src="${orderView.gdsImg}" class="mx-auto d-block" width="100">
+					      		</div>
+					      		
+								<div class="col-sm-7">
+					      		<h5>${orderView.gdsName}</h5>
+					      		색상: ${cartList.gdsColor}  / 사이즈: ${cartList.gdsSize} / 수량: ${orderView.cartStock}개 <br>
+					      		     		
+					      		
+					      		</div>
+					      	
+					      		</div>
+					      	</div>
+					      	
+					      	</td>
+					      
+					        <td><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice}" /> 원</td>
+					        <td>0 원</td>
+					        <td>무료 배송</td>
+					        <td><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice * orderView.cartStock}" /> 원</td> 
+					      </tr>
+			  
+			  <c:set var="sum" value="${sum + (cartList.gdsPrice * cartList.cartStock)}" />
+			  </c:forEach>
+					    </tbody>
+					    
+					  </table>
+					  
+	</div>
+	
+
 
 </body>
 </html>

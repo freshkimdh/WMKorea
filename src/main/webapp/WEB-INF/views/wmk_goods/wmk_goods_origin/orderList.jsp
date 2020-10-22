@@ -33,33 +33,7 @@
 	
 	</style>
 	
-<style>
 
-	body, html {
-  height: 100%;
-  margin: 0;
-/*    font-family: Arial, Helvetica, sans-serif; */
-}
-
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img/banner2.jpg");
-  height: 20%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-</style>
-	
 
   
 
@@ -164,37 +138,44 @@
 </div>
 
 </nav>
+ 	<p>
+	<p align="center" class="display-3" id="login_f">My Orders</p>
 
 	<div class="container">
-	
-	<section id="content">
- 
-	 <ul class="orderList">
-	  <c:forEach items="${orderList}" var="orderList">
-	  <li>
-	  <div>
-	   <p><span>주문번호</span><a href="${pageContext.request.contextPath}/orderView?n=${orderList.orderId}">${orderList.orderId}</a></p>
-	   
-	   
-	   <p><span>수령인</span>${orderList.orderRec}</p>
-	   <p><span>주소</span>(${orderList.userAddr1}) ${orderList.userAddr2} ${orderList.userAddr3}</p>
-	   <p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderList.amount}" /> 원</p>
-	  </div>
-	  </li>
-	  </c:forEach>
-	 </ul>
-
-	</section>
-	
-	
+	<img class="mx-auto d-block" src="goods/profile.png" width="150"><br>
+	<h3 align="center"> <sec:authentication property="principal.user.nickname"/> 님의 주문 내역입니다.</h3>
+	<p align="center">주문번호를 누르면 주문내역을 확인할 수 있습니다.</p>
 	
 	</div>
+	<br>
 	
- 	<footer id="footer">
-		<div id="footer_box">
-			<%@ include file="include/footer.jsp" %>
-		</div>		
-	</footer> 
+	
+<div class="container">
+        
+  <table class="table table-hover">
+    <thead align="center">
+      <tr>
+        <th>주문번호</th>
+        <th>총 결제금액</th>
+        <th>주문 상태</th>
+      </tr>
+    </thead>
+    <tbody align="center">
+<c:forEach items="${orderList}" var="orderList" varStatus="last">	
+      <tr>
+        <td><a href="${pageContext.request.contextPath}/orderView?n=${orderList.orderId}">${orderList.orderId}</a></td>
+        <td>${orderList.amount} 원</td>
+        <td><button type="button" class="btn btn-outline-dark btn-sm">배송 준비중</button></td>
+      </tr>
+</c:forEach>
+    </tbody>
+  </table>
+  <br>
+</div>
+	
+	
+	
+
 
 </body>
 </html>

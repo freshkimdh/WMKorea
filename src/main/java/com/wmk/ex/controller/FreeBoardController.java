@@ -33,7 +33,7 @@ public class FreeBoardController {
 	
 	//게시판 목록 read
 	@GetMapping("/boardList")
-	public void BoardList(Model model, Criteria cri) throws Exception {
+	public String BoardList(Model model, Criteria cri) throws Exception {
 		
 		int total = freeService.getTotalCount(cri);
 		
@@ -44,24 +44,29 @@ public class FreeBoardController {
 		model.addAttribute("list", freeService.getListWithPaging(cri));	
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
+		return "/free_board/boardList";
 	}
 	
 	
 	//게시판 내용 read
 	@GetMapping("/contentView")
-	public void ContentView(FreeBoardVO freeBoardVO, Model model) throws Exception {
+	public String ContentView(FreeBoardVO freeBoardVO, Model model) throws Exception {
 		
 	   log.info("contentView...");
 	   model.addAttribute("contentView", freeService.getNum(freeBoardVO.getfBoard_Num()));
-	   model.addAttribute("list", freeService.getList());	   	  
+	   model.addAttribute("list", freeService.getList());
+	   
+	   return "/free_board/contentView"; 
 	}
 	
 	
 	//게시판 작성 뷰 read
 	@GetMapping("/writeView")
-	public void WriteView() throws Exception {
+	public String WriteView() throws Exception {
 		
-		log.info("writeView...");		
+		log.info("writeView...");
+		
+		return "/free_board/writeView";
 	}
 	
 	
@@ -78,10 +83,14 @@ public class FreeBoardController {
 	
 	//게시판 수정 뷰 read
 	@GetMapping("/modifyView") 
-	public void ModifyView(FreeBoardVO freeBoardVO, Model model) throws Exception {
+	public String ModifyView(FreeBoardVO freeBoardVO, Model model) throws Exception {
 	
 		log.info("modifyView...");	
 		model.addAttribute("modifyView", freeService.getNum(freeBoardVO.getfBoard_Num()));
+	
+		
+		return "/free_board/modifyView";
+	
 	}
 	
 	

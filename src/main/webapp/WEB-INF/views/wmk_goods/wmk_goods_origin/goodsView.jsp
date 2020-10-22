@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> <!-- 시큐리티 전용 태그 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
@@ -25,6 +26,11 @@
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!--  Library for Dragabble effect  -->
   
   <script src="js/jquery-3.3.1.min.js"></script> <!-- Library for text input -->
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script> <!-- div 캡처 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script> <!-- div 캡처 영역 저장 -->
+  
+  
   
  
 <%--   <style>
@@ -246,12 +252,38 @@
 		
 
 	<div class="container">
+	
+		<button class="btn btn-secondary" onclick='sample();'>저장하기</button> 
+		
+			<script type="text/javascript">
+		    function sample() {
+		        
+		        var background = document.getElementById('example').style.background;
+		        if(background == "") {
+		            document.getElementById('example').style.background = "#fff"; 
+		        }
+		            
+		        html2canvas(document.getElementById('example'), {
+		            useCORS: true, // 다른사이트의리소스가있을때활성화(그러나...Access-Control-Allow-Origin 필요)
+		            onrendered: function(canvas) {
+		                canvas.toBlob(function(blob) {
+		                    saveAs(blob, 'download.png');
+		                });
+		                
+		                // $("#test").html('<img src=' + canvas.toDataURL("image/png") + '>');
+		            }
+		        });
+		    }
+		    </script>
+
+
 
 		<div class="row">
+		
 				
-			<div class="col-sm-6">
+			<div class="col-sm-6" id="example">
 			
-			<div class="image-stack col-sm-6" id="example"> <!-- character viewer -->
+			<div class="image-stack col-sm-6">
 			
 				<div class="layer0">	
 				<img id="bg" alt="" src="${pageContext.request.contextPath}/${view.gdsImg}" width="500">
@@ -260,6 +292,10 @@
 				<div class="layer1">
 
 					<div id="draggable"><img id="faces" alt="" src="goods/profile2.png" width="150"></div>
+					
+					<!-- <div id="draggable"><img id="faces" alt="" src="img/avatar2.jpg" width="150"></div> -->
+					
+
 
 				</div>
 				
@@ -293,8 +329,10 @@
 			
 			
 			<h2>${view.gdsName}</h2>
-			<h5>(${view.gdsPrice}원)</h5> <br>
-
+<%-- 			<h5>(${view.gdsPrice}원)</h5> <br> --%>
+	
+			<h5><fmt:formatNumber pattern="###,###,###" value="${view.gdsPrice}" />원</h5><br>
+ 
 			
 			<label for="selDistrict">색상 선택:</label>
 			<select class="form-control" id="gdsColor" name="gdsColor">
@@ -480,11 +518,7 @@
 	
 	<br><br>
 
- 	<footer id="footer">
-		<div id="footer_box">
-			<%@ include file="include/footer2.jsp" %>
-		</div>		
-	</footer>
+
 
 </div>
 

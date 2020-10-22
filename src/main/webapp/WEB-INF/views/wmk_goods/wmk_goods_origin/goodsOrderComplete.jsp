@@ -10,6 +10,9 @@
 <html lang="en">
 
 <head>
+  <title>굿즈: 구매하기</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 
 </head>
 
@@ -112,7 +115,14 @@
 	</p>
 	  
 	</form>
-
+	
+<!-- <table border=1 width=230 height=60>
+<tr>
+<td valign=top>이름</td>
+<td valign=middle>학년 </td>
+<td valign=bottom>제목</td>
+</tr>
+</table> -->
 
 
 
@@ -121,6 +131,8 @@
 
 	
 	<br><br>
+
+
 
 </div>
 
