@@ -266,6 +266,7 @@
         	     		<c:if test="${hotList.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${hotList.rCategory eq '4'}">기타</c:if>
         	     		<br>
+          <span class="badge  badge-pill badge-primary">지역</span>${hotList.rArea}
 	    </div>
 	  </div>
 	  <br>

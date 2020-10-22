@@ -59,7 +59,7 @@
             	   sTxt += 			'</div>';
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
-            	   sTxt += 				'<span class="badge  badge-pill badge-danger ">Like</span>' + order.like_Cnt;
+            	   sTxt += 					'<span class="badge  badge-pill badge-danger">좋아요</span>'+order.like_Cnt;
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
             	   }else if(order.rCategory == 1){
@@ -71,6 +71,7 @@
             	   }else if(order.rCategory == 4){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 기타';
             	   }
+            	   sTxt += 					'<span class="badge  badge-pill badge-primary">지역</span>'+order.rArea;
             	   sTxt += 			'</div>';
             	   sTxt += 		'</div>';
             	   sTxt += 		'<br>';
@@ -322,13 +323,14 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
-	      <span class="badge  badge-pill badge-danger ">Like</span> ${userList.like_Cnt}
-	     <span class="badge  badge-pill badge-success "  style="font-size:13px">분류</span>
+	      <span class="badge  badge-pill badge-danger">좋아요</span>${userList.like_Cnt}
+	     <span class="badge  badge-pill badge-success">분류</span>
 	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
         	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
         	     		<br>
+        <span class="badge  badge-pill badge-primary">지역</span>${userList.rArea}
        </div>
 	  </div>
 	  <br>
