@@ -5,7 +5,6 @@
 <mapper namespace="com.wmk.ex.mapper.ReviewBoardMapper">
 	
 	<!--게시판 목록  -->
-	
 	<select id="getReviewList" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select
@@ -18,12 +17,14 @@
 	]]>
  	</select>
 	
+	
 	<select id="getHotList" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select * from Review_BOARD 
 	    	order by like_cnt desc 
 	]]>
  	</select>
+ 	
  	
  	<select id="getReviewListAjax" resultType="com.wmk.ex.vo.ReviewBoardVO" parameterType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
@@ -37,9 +38,7 @@
 	    	order by rBoardNum desc
 	
 	]]>
- 	</select>
-<!-- 	    	order by rBoardNum desc -->
- 	
+ 	</select>	
  	
  	<!--게시판 번호-->
  	<select id="getrBoardNum" resultType="com.wmk.ex.vo.ReviewBoardVO">
@@ -48,12 +47,14 @@
 	]]>
 	</select>	
 	
+	
 	<!--게시판 VO의 회원 get id  -->
 	<select id="getrId" resultType="com.wmk.ex.vo.ReviewBoardVO">
 	<![CDATA[ 
 		select * from Review_BOARD where rId = #{rId} 
 	]]>
 	</select> 
+	
 	
 	<!--게시판 작성-->
 	<insert id="rWriteBoard">
@@ -68,12 +69,14 @@
 	]]>
 	</insert>
 	
+	
 	<!--게시판 삭제  -->
 	<insert id="deleterBoard" >
 	<![CDATA[
 		delete from Review_BOARD where rBoardNum = #{rBoardNum}
 	]]>
 	</insert>
+	
 	
 	<!--조회수  -->
 	<insert id="addUprHit" >
@@ -82,9 +85,10 @@
 	]]>
 	</insert>
 	
+	
 	<!-- 첨부파일 업로드    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
 	<insert id="insertFile" parameterType="hashMap" >
-		<![CDATA[
+	<![CDATA[
 		insert into Review_Img_File (
 	        file_no
 	        , rBoardNum
@@ -106,7 +110,7 @@
 	
 	<!-- 첨부파일 업데이트    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
 	<update id="updateFile" parameterType="hashMap" >
-		<![CDATA[
+	<![CDATA[
 		UPDATE Review_Img_File 
 			SET
 		        ORIGINAL_FILE_NAME = #{ORIGINAL_FILE_NAME ,jdbcType=VARCHAR}
@@ -117,9 +121,10 @@
 	]]>
 	</update>
 	
+	
 	<!-- 첨부파일 삭제    parameterType="hashMap"인 경우 value에 대문자로 들어가야한다. -->
 	<update id="deleteFile" parameterType="hashMap" >
-		<![CDATA[
+	<![CDATA[
 		DELETE From Review_Img_File 
 			WHERE FILE_NO  = #{rBoardNum}
 	]]>
@@ -136,40 +141,42 @@
 		 WHERE rBoardNum = #{rBoardNum} and FILE_NO=#{FILE_NO}
 	</select>
 	
-	
-	
-	
-	<!--아래는 댓글 부분 -->
+
 	<!--댓글 목록  -->
 	<select id="replyList" resultType="com.wmk.ex.vo.ReviewReplyVO">	
-	select rBoardNum, id, repNum, repCon, repDate
-	from review_reply 
-	where rBoardNum = #{rBoardNum}
+		select rBoardNum, id, repNum, repCon, repDate
+		from review_reply 
+		where rBoardNum = #{rBoardNum}
 	</select>
+	
 	
 	<!--댓글 작성 -->
 	<insert id="registReply">
-	insert into review_reply (rBoardNum, id, repNum, repCon)
- 		values (#{rBoardNum}, #{id}, review_reply_seq.nextval, #{repCon})
+		insert into review_reply (rBoardNum, id, repNum, repCon)
+	 		values (#{rBoardNum}, #{id}, review_reply_seq.nextval, #{repCon})
 	</insert>
+	
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteReply">
-	 delete review_reply
-	     where repNum = #{repNum}
-	         and id = #{id}
+		 delete review_reply
+		     where repNum = #{repNum}
+		         and id = #{id}
 	</delete>
+	
 	
 	<!-- 아이디 체크 -->
 	<select id="replyUserIdCheck" resultType="String">
-	 select id
-	  from review_reply
-	      where repNum = #{repNum}
+		 select id
+		  from review_reply
+		      where repNum = #{repNum}
 	</select>
 	
-		<select id="getTotalCount" resultType="int">
+	
+	<select id="getTotalCount" resultType="int">
 		select count(*)	from Review_BOARD where rBoardNum > 0
 	</select>
+	
 	
 	<!-- 좋아요   -->
 	<update id="updateLike">
@@ -182,7 +189,7 @@
 		insert into likeTo(likeNo, RBOARDNUM, id) values(like_to_seq.nextval, #{RBOARDNUM},#{id})
 	</insert>
 	
-	
+
 	<!-- 좋아요 해제 -->
 	<update id="updateUnLike">
 		update REVIEW_BOARD set LIKE_CNT = LIKE_CNt -1 where RBOARDNUM = #{RBOARDNUM}
@@ -201,7 +208,7 @@
 	</select>
 	
 	<select id="cntLike">
-	select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}
+		select Like_CNT from REVIEW_BOARD where RBOARDNUM = #{RBOARDNUM}
 	</select>
 
 </mapper>
