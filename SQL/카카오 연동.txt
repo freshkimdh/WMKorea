@@ -29,7 +29,6 @@ client_id=af9546b83fbd65051801d2e327f8c259
 redirect_uri=http://localhost:8282/ex/auth/kakao/callback
 code={동적임}
 
-
 9. 토큰을 통한 사용자 정보 조회 (POST)
 
 요청 주소 : https://kapi.kakao.com
