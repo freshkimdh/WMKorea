@@ -104,9 +104,9 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 	
 	@Override
-	public void deleterBoard(int reviewBoardNum) {
+	public void deleteBoard(int reviewBoardNum) {
 		
-		reviewBoardMapper.deleterBoard(reviewBoardNum);		
+		reviewBoardMapper.deleteBoard(reviewBoardNum);		
 	}
 	
 	@Override

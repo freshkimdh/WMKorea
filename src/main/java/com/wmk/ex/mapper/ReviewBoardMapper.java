@@ -20,7 +20,7 @@ public interface ReviewBoardMapper {
 	
 	public void updaterModify(ReviewBoardVO reviewBoardVO);
 	
-	public void deleterBoard(int reviewBoardNum);
+	public void deleteBoard(int reviewBoardNum);
 	
 	public void addUprHit(int reviewBoardNum);
 	
