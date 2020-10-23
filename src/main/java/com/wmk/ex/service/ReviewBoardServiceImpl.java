@@ -104,7 +104,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 	}
 	
 	@Override
-	public void deleteBoard(int reviewBoardNum) {
+	public void deleteBoard(ReviewBoardVO reviewBoardNum) {
 		
 		reviewBoardMapper.deleteBoard(reviewBoardNum);		
 	}
@@ -204,6 +204,13 @@ public class ReviewBoardServiceImpl implements ReviewBoardService {
 		log.info("reviewBoardByTitle...");
 
 		return reviewBoardMapper.findReviewBoardByTitle(reviweBoardVO);
+	}
+	
+	//리뷰 게시판 아이디 확인
+	@Override
+	public String reviewBoardUserId(int reviewBoardNum) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewBoardMapper.reviewBoardUserId(reviewBoardNum);
 	}
 		
 
