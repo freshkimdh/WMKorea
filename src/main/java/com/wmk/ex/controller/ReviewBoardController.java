@@ -205,7 +205,7 @@ public class ReviewBoardController {
 	    String rContent = getDetail.getrContent();
 	    
 	    if(rContent == null || "".equals(rContent)) {  //rContent의 값이 없거나 빈값이라면
-	    	reviewService.deleterBoard(reviewBoardVO.getrBoardNum());
+	    	reviewService.deleteBoard(reviewBoardVO.getrBoardNum());
 	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
 	  
 	    }else{//rContent의 값이 존재하면
@@ -234,7 +234,7 @@ public class ReviewBoardController {
 	    	    	}
 	    	    }
 	    	}
-	    	reviewService.deleterBoard(reviewBoardVO.getrBoardNum());
+	    	reviewService.deleteBoard(reviewBoardVO.getrBoardNum());
 	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
 	    }
 		

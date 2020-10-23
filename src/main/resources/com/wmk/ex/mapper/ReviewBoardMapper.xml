@@ -73,11 +73,11 @@
 	</insert>
 	
 	<!--게시판 삭제  -->
-	<insert id="deleterBoard" >
+	<delete id="deleteBoard" >
 	<![CDATA[
 		delete from Review_BOARD where rBoardNum = #{rBoardNum}
 	]]>
-	</insert>
+	</delete>
 	
 	<!--조회수  -->
 	<insert id="addUprHit" >

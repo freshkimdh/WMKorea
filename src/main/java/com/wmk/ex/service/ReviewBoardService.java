@@ -26,7 +26,7 @@ public interface ReviewBoardService {
 	public void updaterModify(ReviewBoardVO reviweBoardVO, MultipartHttpServletRequest mpRequest) throws Exception;
 
 	//여행 게시판 삭제
-	public void deleterBoard(int reviewBoardNum);
+	public void deleteBoard(int reviewBoardNum);
 	
 	//업로드 파일 list로 뿌려주기
 	public List<Map<String, Object>> selectFileList(int reviewBoardNum) throws Exception;
