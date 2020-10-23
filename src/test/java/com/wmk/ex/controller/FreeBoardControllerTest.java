@@ -47,4 +47,12 @@ public class FreeBoardControllerTest {
         .andExpect(forwardedUrl("/WEB-INF/wmk_home/index.jsp"));
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 }

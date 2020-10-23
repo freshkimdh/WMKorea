@@ -12,7 +12,7 @@ import com.wmk.ex.vo.ReviewReplyVO;
 public interface ReviewBoardService {
 	
 	//여행 게시판 목록
-	public List<ReviewBoardVO> getrList(ReviewBoardVO reviweBoardVO);
+	public List<ReviewBoardVO> getrList(ReviewBoardVO reviewBoardVO);
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviweBoardVO);
 	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviweBoardVO);
 	
