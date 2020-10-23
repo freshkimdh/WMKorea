@@ -3,7 +3,6 @@ package com.wmk.ex.controller;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,6 +88,11 @@ public class HomeController {
 	@RequestMapping(value="/loginFail", method = RequestMethod.GET)
 	public String loginFail(Model model) {
 		return "loginFail";
+	}
+	
+	@RequestMapping(value="/modifyFail", method = RequestMethod.GET)
+	public String modifyFail() {
+		return "modifyFail";
 	}
 	
 	

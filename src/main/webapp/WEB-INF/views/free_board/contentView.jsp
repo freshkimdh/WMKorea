@@ -90,27 +90,6 @@
          + "</div>"
          
          + "</div>" //row end 
-         + "<hr>"
-         
-         
-         <!-- 김대환 작업 댓글 디자인 코드 -->
-/*         str += "<div>"
-            + "<div class='userInfo'>"
-            + "<span class='id'>" + this.id + "</span>"
-            + "<span class='date'>" + repDate + "</span>"
-            + "</div>"
-            + "<div class='replyContent'>" + this.repCon + "</div>"
-            + "</div>"
-            
-            
-            + "<div class='replyFooter'>"
-            + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-            + "</div>"
-            
-            + "<hr>"
-            
-            ; */
-
         
      });
      
@@ -196,9 +175,15 @@
      <!-- <hr> -->
     
    <p align="right">
-   <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
-   		<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
-   <a href="" class="btn btn-outline-dark btn-sm" role="button">답변<br></a>
+    
+    
+    <sec:authorize access="isAuthenticated()">
+	        <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
+    </sec:authorize>
+ 		<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
+<%--     <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="modifyCheck1 btn btn-outline-dark btn-sm" role="button" >수정2</a> 	
+   		<button type="button" class="modifyCheck2 btn btn-outline-dark btn-sm" data-modify_Num="${contentView.fBoard_Num}">수정3</button> --%>
+   		
    </p>
    
    <hr> 
@@ -347,7 +332,51 @@
       });
       
       </script>
-   
+      
+      
+       <%--  <script>
+      //게시판 수정
+      
+      $(document).on("click", ".modifyCheck2", function(){
+        
+        var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+      
+        if(modifyConfirm){
+           
+           var data = {fBoard_Num : $(this).attr("data-modify_Num")};
+           //modifyView?fBoard_Num=${contentView.fBoard_Num}
+           
+           $.ajax({
+              url : "${pageContext.request.contextPath}/free_board/modifyIdCheck",
+              type : "get",
+              //data : data,
+              success : function(result){
+               
+               console.log("result: " + result);
+               
+               console.log("data: " + data);
+               
+               if(result == 1) {
+                 window.location.href = "${pageContext.request.contextPath}/free_board/modifyView?";
+               }
+               
+               if(result == 0) {
+                alert("작성자 본인만 수정 할 수 있습니다.");    
+               }
+              },
+              error : function(){
+               alert("로그인하셔야합니다.")
+              }
+            });
+           }
+      });
+      
+      </script>
+ --%>      
+      
+      
+      
+               
    
 </section>
 
