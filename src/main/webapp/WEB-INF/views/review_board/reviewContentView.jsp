@@ -459,7 +459,9 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 <div class="container">
 <p align="right">
 <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a>
- <a href="review_delete?rBoardNum=${rContentView.rBoardNum}&rArea=${rContentView.rArea}" class="btn btn-dark" role="button">삭제</a>
+<%--  <a href="review_delete?rBoardNum=${rContentView.rBoardNum}&rArea=${rContentView.rArea}" class="btn btn-dark" role="button">삭제</a> --%>
+ <button type="button" class="boardDelete btn btn-dark" data-rBoardNum="${rContentView.rBoardNum}">삭제</button>
+ 
 </p>
 <br>
 </div>
@@ -620,6 +622,51 @@ console.log("aaa"+isSelectLike);
                 	
                 	
 </script>
+
+
+   <script>
+      //리뷰 게시판 삭제
+      
+      $(document).on("click", ".boardDelete", function(){
+        
+        var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+      
+        if(deleteConfirm){
+           
+           var data = {rBoardNum : $(this).attr("data-rBoardNum")};
+           
+           
+           $.ajax({
+              url : "${pageContext.request.contextPath}/review_delete",
+              type : "get",
+              data : data,
+              success : function(result){
+               
+               console.log("result: " + result);
+               
+               console.log("data: " + data);
+               
+               if(result == 1) {
+                 window.location.href = "${pageContext.request.contextPath}/review_boardList?rArea=${rContentView.rArea}";
+               }
+               
+               if(result == 0) {
+                alert("작성자 본인만 삭제 할 수 있습니다.");    
+               }
+              },
+              error : function(){
+               alert("로그인하셔야합니다.")
+              }
+            });
+           }
+      });
+      
+      </script>
+
+
+
+
+
 
 
 </div>
