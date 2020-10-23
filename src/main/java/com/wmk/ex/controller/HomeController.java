@@ -80,6 +80,7 @@ public class HomeController {
 		return "layout";
 	}
 	
+
 	@RequestMapping(value="/accessDenied", method = RequestMethod.GET)
 	public String accessDenied(Model model) {
 		return "accessDenied";
@@ -93,6 +94,16 @@ public class HomeController {
 	@RequestMapping(value="/modifyFail", method = RequestMethod.GET)
 	public String modifyFail() {
 		return "modifyFail";
+	}
+	
+	@RequestMapping(value="seoulList", method = RequestMethod.GET)
+	public String seoulList(Model model) {
+		return "seoulList";
+	}
+	
+	@RequestMapping(value="seoulCotentView", method = RequestMethod.GET)
+	public String seoulCotentView(Model model) {
+		return "seoulCotentView";
 	}
 	
 	

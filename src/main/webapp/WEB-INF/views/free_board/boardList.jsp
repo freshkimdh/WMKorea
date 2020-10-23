@@ -62,7 +62,7 @@
 
 <div class="container" id="free_board">
   <h2>자유게시판</h2> 
-  
+  <hr>
   <br>
           
   <table class="table table-hover">
