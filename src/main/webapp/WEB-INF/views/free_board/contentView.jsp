@@ -178,12 +178,10 @@
     
     
     <sec:authorize access="isAuthenticated()">
-	        <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="btn btn-outline-dark btn-sm" role="button" >수정</a>
+	        <button type="button" class="modifyCheck2 btn btn-outline-dark btn-sm" data-modify_Num="${contentView.fBoard_Num}">수정</button> 
     </sec:authorize>
  		<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
-<%--     <a href="modifyView?fBoard_Num=${contentView.fBoard_Num}" class="modifyCheck1 btn btn-outline-dark btn-sm" role="button" >수정2</a> 	
-   		<button type="button" class="modifyCheck2 btn btn-outline-dark btn-sm" data-modify_Num="${contentView.fBoard_Num}">수정3</button> --%>
-   		
+  	
    </p>
    
    <hr> 
@@ -334,7 +332,7 @@
       </script>
       
       
-       <%--  <script>
+ <script>
       //게시판 수정
       
       $(document).on("click", ".modifyCheck2", function(){
@@ -349,7 +347,7 @@
            $.ajax({
               url : "${pageContext.request.contextPath}/free_board/modifyIdCheck",
               type : "get",
-              //data : data,
+              data : data,
               success : function(result){
                
                console.log("result: " + result);
@@ -357,7 +355,7 @@
                console.log("data: " + data);
                
                if(result == 1) {
-                 window.location.href = "${pageContext.request.contextPath}/free_board/modifyView?";
+                 window.location.href = "${pageContext.request.contextPath}/free_board/modifyView?fBoard_Num=${contentView.fBoard_Num}";
                }
                
                if(result == 0) {
@@ -372,7 +370,7 @@
       });
       
       </script>
- --%>      
+
       
       
       

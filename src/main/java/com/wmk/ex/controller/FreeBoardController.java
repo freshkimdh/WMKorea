@@ -81,8 +81,10 @@ public class FreeBoardController {
 	}
 		
 
+	
 	// 게시판 수정 뷰 read
-	@GetMapping("/modifyView")
+	@ResponseBody
+	@GetMapping("/modifyIdCheck")
 	public String ModifyView(FreeBoardVO freeBoardVO, Model model) throws Exception {
 		
 		int result = 0;
@@ -104,18 +106,32 @@ public class FreeBoardController {
 			result = 1;
 			 
 			log.info("수정 접속 성공");
-			log.info(result);
-			
-			return "/free_board/modifyView";
+			log.info(result);			
 
 		}
 
 		log.info(result);
-		
-		return "/modifyFail";	   
-		//return String.valueOf(result);
+		 
+		return String.valueOf(result);
 
 	}
+	
+	
+	
+	@GetMapping("/modifyView")
+	public String ModifyView2(FreeBoardVO freeBoardVO, Model model) throws Exception {
+
+		log.info("ModifyView...");
+
+	
+		model.addAttribute("modifyView", freeService.getNum(freeBoardVO.getfBoard_Num()));
+		
+		return "/free_board/modifyView";
+
+	}
+	
+	
+	
 	
 	//게시판 수정 작성 완료 update
 	@PutMapping("/modify")
