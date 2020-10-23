@@ -6,8 +6,22 @@
 <html>
 
 
+	<style type="text/css">
+	
+	 #no-drag {
+ 
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none; 
+	user-select:none;
+	} 
+	   
+	</style>
 
-<div class="container"> <!-- table -->
+
+
+<div class="container" id="no-drag"> <!-- table -->
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
@@ -32,7 +46,7 @@
 </div>
 
 <!-- <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top"> -->
-<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top" id="no-drag">
 	
 	<!-- Brand Logo -->
 	<a class="navbar-brand" href="#">MENU</a>
