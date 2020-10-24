@@ -156,33 +156,76 @@ public class ReviewBoardController {
 	
 	
 	//여행지 게시판 수정 뷰 read
+	@ResponseBody
+	@GetMapping("/ReviewModifyIdCheck") 
+	public String ReviewModifyIdCheck(ReviewBoardVO reviewBoardVO, Model model, String area) throws Exception {
+	
+		int result = 0;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		log.info("ReviewModifyIdCheck...");
+		
+		String username = ((UserDetails)principal).getUsername();
+		String userId = reviewService.reviewBoardUserId(reviewBoardVO.getrBoardNum());
+		
+		log.info("username:" + username);
+		log.info("userid:" + userId);
+		
+		
+		if (username.equals(userId)) {				
+			
+			reviewBoardVO.setrId(username);
+			model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
+			model.addAttribute("area", area);
+			
+			List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
+			model.addAttribute("file", fileList);
+			
+			result = 1;
+			 
+			log.info("수정 접속 성공");
+			log.info(result);	
+			
+		}
+		
+		log.info(result);
+				
+		//return "/review_board/modifyView";
+		return String.valueOf(result);
+	}
+	
+	
+	
 	@GetMapping("/review_modifyView") 
 	public String ReviewModifyView(ReviewBoardVO reviewBoardVO, Model model, String area) throws Exception {
 	
-		log.info("review_modifyView...");	
-		log.info("rboardVO.getrArea()=" + reviewBoardVO.getrArea());
-		model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
-		model.addAttribute("area", area);
-		
-		List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
-		model.addAttribute("file", fileList);
-		
+					
+			
+			model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
+			model.addAttribute("area", area);
+			
+			List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
+			model.addAttribute("file", fileList);
+			
+	
 		return "/review_board/modifyView";
+		
 	}
+	
+	
+	
+	
+	
 	
 	
 	//여행지 게시판 수정 update
 	@RequestMapping("/review_modify")
 	public String reviewModify(ReviewBoardVO reviewBoardVO, RedirectAttributes redirect, MultipartHttpServletRequest mpRequest) throws Exception {
-		
-		log.info("review_modify...");
-		log.info("rboardVO!!!=" + reviewBoardVO);
+			
+		log.info("review_modify...");	
 		
 		reviewService.updaterModify(reviewBoardVO, mpRequest);
-		
-		log.info("수정내용 보여줘"+ reviewBoardVO.toString());
-		
-		
+				
 		redirect.addAttribute("area", reviewBoardVO.getrArea());
 		redirect.addAttribute("rBoardNum", reviewBoardVO.getrBoardNum());
 		

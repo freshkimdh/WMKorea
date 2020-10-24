@@ -24,8 +24,7 @@
 	<div class="row"> <!-- td -->
 	
 		<div class="col-sm-6" id="s1">
-<%-- 			<a href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/img/main_logo2.png"></a> --%>
-			<a href="${pageContext.request.contextPath}/seoulList"><img src="${pageContext.request.contextPath}/img/main_logo2.png"></a> 
+			<a href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/img/main_logo2.png"></a>	
 			<!-- 여행지게시판 디자인 참고로 해당링크 잠시 필요 -->
 		</div> <!-- tr -->
 		
@@ -105,7 +104,7 @@
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
-		<a class="btn btn-dark">김대환 엉덩이 짱! <sec:authentication property="principal.user.nickname"/> 님</a>
+		<a class="btn btn-dark">환영합니다. <sec:authentication property="principal.user.nickname"/> 님</a>
    		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
    			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
    		</form:form> 

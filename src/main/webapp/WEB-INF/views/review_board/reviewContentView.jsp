@@ -286,8 +286,13 @@ function replyList() {
 <!--  board buttons --> 
 <div class="container">
 <p align="right">
-<a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a>
-<%--  <a href="review_delete?rBoardNum=${rContentView.rBoardNum}&rArea=${rContentView.rArea}" class="btn btn-dark" role="button">삭제</a> --%>
+
+<%-- <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a> --%>
+
+<sec:authorize access="isAuthenticated()">
+	<button type="button" class="modifyCheck btn btn-dark" data-modify_Num="${rContentView.rBoardNum}">수정</button> 
+</sec:authorize>
+
  <button type="button" class="boardDelete btn btn-dark" data-rBoardNum="${rContentView.rBoardNum}">삭제</button>
  
 </p>
@@ -393,7 +398,8 @@ $(document).on("click", ".delete", function(){
 		   }
 		  },
 		  error : function(){
-		   alert("로그인하셔야합니다.")
+		   alert("로그인이 필요합니다.")
+		   window.location.href = "${pageContext.request.contextPath}/loginForm";
 		  }
 		});
 	}
@@ -483,7 +489,8 @@ console.log("aaa"+isSelectLike);
                }
               },
               error : function(){
-               alert("로그인하셔야합니다.")
+               alert("로그인이 필요합니다.")
+               window.location.href = "${pageContext.request.contextPath}/loginForm";
               }
             });
            }
@@ -492,8 +499,46 @@ console.log("aaa"+isSelectLike);
       </script>
 
 
-
-
+ <script>
+      //리뷰 게시판 수정
+      /* <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a> */
+      
+      $(document).on("click", ".modifyCheck", function(){
+        
+        var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+      
+        if(modifyConfirm){
+           
+           var data = {rBoardNum : $(this).attr("data-modify_Num")};
+           //modifyView?fBoard_Num=${contentView.fBoard_Num}
+           
+           $.ajax({
+              url : "${pageContext.request.contextPath}/ReviewModifyIdCheck",
+              type : "get",
+              data : data,
+              success : function(result){
+               
+               console.log("result: " + result);
+               
+               console.log("data: " + data);
+               
+               if(result == 1) {
+                 window.location.href = "${pageContext.request.contextPath}/review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}";
+               }
+               
+               if(result == 0) {
+                alert("작성자 본인만 수정 할 수 있습니다.");    
+               }
+              },
+              error : function(){
+               alert("로그인이 필요합니다.")
+               window.location.href = "${pageContext.request.contextPath}/loginForm";
+              }
+            });
+           }
+      });
+      
+  </script>
 
 
 

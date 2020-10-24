@@ -178,7 +178,7 @@
     
     
     <sec:authorize access="isAuthenticated()">
-	        <button type="button" class="modifyCheck2 btn btn-outline-dark btn-sm" data-modify_Num="${contentView.fBoard_Num}">수정</button> 
+	        <button type="button" class="modifyCheck btn btn-outline-dark btn-sm" data-modify_Num="${contentView.fBoard_Num}">수정</button> 
     </sec:authorize>
  		<button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-fBoard_Num="${contentView.fBoard_Num}">삭제</button>
   	
@@ -284,7 +284,8 @@
             }
            },
            error : function(){
-            alert("로그인하셔야합니다.")
+        	 alert("로그인이 필요합니다.")
+             window.location.href = "${pageContext.request.contextPath}/loginForm";
            }
          });
       }
@@ -323,7 +324,8 @@
                }
               },
               error : function(){
-               alert("로그인하셔야합니다.")
+            	alert("로그인이 필요합니다.")
+                window.location.href = "${pageContext.request.contextPath}/loginForm";
               }
             });
            }
@@ -335,7 +337,7 @@
  <script>
       //게시판 수정
       
-      $(document).on("click", ".modifyCheck2", function(){
+      $(document).on("click", ".modifyCheck", function(){
         
         var modifyConfirm = confirm("정말로 수정하시겠습니까?");
       
@@ -363,13 +365,14 @@
                }
               },
               error : function(){
-               alert("로그인하셔야합니다.")
+            	alert("로그인이 필요합니다.")
+                window.location.href = "${pageContext.request.contextPath}/loginForm";
               }
             });
            }
       });
       
-      </script>
+  </script>
 
       
       
