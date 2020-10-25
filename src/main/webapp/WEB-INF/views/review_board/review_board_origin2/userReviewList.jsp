@@ -13,16 +13,7 @@
   <title>Wemade Korea</title>
   <meta charset="utf-8">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-<style>
-.checked {
-  color: orange;
-}
-</style>
-
+   
   <script type="text/javascript">
   
 	$(document).ready(function(){
@@ -216,27 +207,14 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
 
-
-
-
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span> <a>(1)</a> <br>
-
-
-
- 	     <span class="badge  badge-pill badge-danger">Like</span> ${userList.like_Cnt}
-<%-- 			&#10084; ${userList.like_Cnt} --%>
+	      <span class="badge  badge-pill badge-danger">좋아요</span>${userList.like_Cnt}
 	     <span class="badge  badge-pill badge-success">분류</span>
-	     				${userList.rArea} &#187;
 	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
         	     		<c:if test="${userList.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
         	     		<br>
-<%--         <span class="badge  badge-pill badge-primary">지역</span>${userList.rArea} --%>
+        <span class="badge  badge-pill badge-primary">지역</span>${userList.rArea}
        </div>
 	  </div>
 	  <br>
@@ -245,8 +223,6 @@
 	
       </div> 
 
-  </div>
-  
   </div>
  
 	<!--  board buttons --> 

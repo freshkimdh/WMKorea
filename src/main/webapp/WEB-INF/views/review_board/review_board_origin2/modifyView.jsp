@@ -69,14 +69,14 @@
 
 <p>
 <div class="container">
-<p align="center" class="display-3" id="disf">Travel Info</p>
+<p align="center" class="display-3" id="disf">Community</p>
 </div>
 
 
 
 
 <div class="container" id="rModify_view">
-  <h2>여행지 게시판(수정)</h2> <br>
+  <h2>여행지 게시판</h2> <br>
  
 
 
@@ -85,89 +85,60 @@
 	<input type="hidden" name="rId" value="${rModifyView.rId}">
 	<input type="hidden" name="rBoardNum" value="${rModifyView.rBoardNum}">
 
-	<div class="row">
+		<div class="form-group">
+    <label for="rCategory">분류:</label>
+     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
+     <select name="rCategory">
+    	<option value="1">관광지</option>
+    	<option value="2">행사</option>
+    	<option value="3">맛집</option>
+    	<option value="4">기타</option>
+	</select>
 	
-		<div class="col">
-		
-			<label for="rArea">지역 :</label>
-		     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
-		     <select class="form-control" id="rArea" name="rArea">
-		    	<option value="서울·경기·인천">서울·경기·인천</option>
-		    	<option value="강원도">강원도</option>
-		    	<option value="충청북도">충청북도</option>
-		    	<option value="충청남도">충청남도</option>
-		    	<option value="경상북도">경상북도</option>
-		    	<option value="경상남도">경상남도</option>
-		    	<option value="전라북도">전라북도</option>
-		    	<option value="전라남도">전라남도</option>
-		    	<option value="제주도">제주도</option>
-			</select>		
-		
+	
+	<label for="rArea">지역 :</label>
+     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
+     <select name="rArea">
+    	<option value="서울·경기·인천">서울·경기·인천</option>
+    	<option value="강원도">강원도</option>
+    	<option value="충청북도">충청북도</option>
+    	<option value="충청남도">충청남도</option>
+    	<option value="경상북도">경상북도</option>
+    	<option value="경상남도">경상남도</option>
+    	<option value="전라북도">전라북도</option>
+    	<option value="전라남도">전라남도</option>
+    	<option value="제주도">제주도</option>
+	</select>
+	
+	</div>
+	
+		<div class="form-group">
+    		<label for="rTitle">제목:</label>
+      		<input type="text" class="form-control" id="rTitle" name="rTitle" value="${rModifyView.rTitle}"> <p>
 		</div>
 		
+		<div class="form-group">
+    		<label for="rOpenTime">운영시간:</label>
+     		 <input type="text" class="form-control" id="rOpenTime" name="rOpenTime" value="${rModifyView.rOpenTime}"> <p>
+		</div>
 		
-		<div class="col">
+		<div class="form-group">
+    		<label for="rAdress">위치정보:</label>
+    		<input type="text" class="form-control" id="rAdress" name="rAdress" value="${rModifyView.rAdress}"> <p>
+		</div>
 		
-		    <label for="rCategory">분류:</label>
-		    
-		     <select class="form-control" id="rCategory" name="rCategory">
-		    	<option value="1">관광지</option>
-		    	<option value="2">행사</option>
-		    	<option value="3">맛집</option>
-		    	<option value="4">기타</option>
-			</select> <p>
-		
-		
-		</div>		
-		
-
-	</div>
-	
-	<div class="row">
-	
-		<div class="col">
-		
-			<label for="rTitle">여행지명:</label>
-			<input type="text" class="form-control" id="rTitle" placeholder="" name="rTitle" value="${rModifyView.rTitle}">
-      
-      	</div>
-      	
-      	<div class="col">
-		
-			<label for="rInShort">개요:</label>
-			<input type="text" class="form-control" id="rInShort" placeholder="" name="rInShort" value="${rModifyView.rInShort}"> <p>
-      
-      	</div>
-      	
-	</div>
-	
-	<div class="row">
-	
-		<div class="col">
-		
-			<label for="rOpenTime">운영시간:</label>
-			<input type="text" class="form-control" id="rOpenTime" placeholder="" name="rOpenTime" value="${rModifyView.rOpenTime}"> <p>
-      
-      	</div>
-      	
-      	<div class="col">
-		
-			<label for="rAdress">위치정보:</label>
-			<input type="text" class="form-control" id="rAdress" placeholder="" name="rAdress" value="${rModifyView.rAdress}"> <p>
-      
-      	</div>
-      	
-	</div>
-	
-	
+		<div class="form-group">
+    		<label for="rInShort">피셜:</label>
+      		<input type="text" class="form-control" id="rInShort" name="rInShort" value="${rModifyView.rInShort}"> <p>
+		</div>
 		
 		<div class="form-group" >
-    		<label for="Thumbnail">대표 이미지:</label>
+    		<label for="Thumbnail">썸네일용 이미지:</label>
       		<input type="file" class="form-control" id="uploadImg" name ="uploadImg" accept="image/*" onchange="setThumbnail(event);"> <p>
 		</div>
 		
 		<div class="form-group">
-<!--     		<label for="fileImage">썸네일용 이미지 미리보기:</label><br> -->
+    		<label for="fileImage">썸네일용 이미지 미리보기:</label><br>
     		<div id="image_container"> </div>
 		</div>
 	

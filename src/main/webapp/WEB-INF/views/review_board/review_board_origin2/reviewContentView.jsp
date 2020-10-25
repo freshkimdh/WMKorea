@@ -12,11 +12,6 @@
 <head>
   <title>Wemade Korea</title>
   <meta charset="utf-8">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
-  
 
 
 	<style>
@@ -58,13 +53,12 @@
 
 
 	
-/*    .list_picture img {
-   
-    width: 500px;
-	height: 300px;
   
-  } */
-	  
+  .content_picture img {
+    width: 500px;
+	height: 100%;
+  
+  }
   
   </style>	
   
@@ -74,13 +68,6 @@
 		.checked {
 		  color: orange;
 		}
-		
-		
-		#introimg{
-	  
-	    width: 450px;
-		height: 280px;
-	  	}
 		
 	</style>
 	
@@ -105,7 +92,7 @@
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
  
- section.replyList div#replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
+ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 </style>
 
 
@@ -126,21 +113,20 @@ function replyList() {
    var repDate = new Date(this.repDate);
    repDate = repDate.toLocaleDateString("ko-US")
    
-      str += "<div class='container' id='comment_view'>"
-         + "<div class='row'>"
-         + "<div class='col-md-1' align='right'>"
-         + "<img src='img/avatar2.jpg' width='50'/>"
-         + "</div>"
-         + "<div class='col-md-11'>"
-        + "<div class='userInfo' id='replyFooter'>"
-        + "<span class='id'>" + "<strong>" + this.id + "</strong>" + "</span>"
-        + "<span class='date'>" + repDate + "</span>"
-        +  "&nbsp;" + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-        + "</div>" //userInfro End
-        + this.repCon
-        + "</div>"
-         + "</div>" + "<hr>"
-         + "</div>" //row end 
+   str += "<div>"
+	     + "<div class='userInfo'>"
+	     + "<span class='id'>" + this.id + "</span>"
+	     + "<span class='date'>" + repDate + "</span>"
+	     + "</div>"
+	     + "<div class='replyContent'>" + this.repCon + "</div>"
+	     + "</div>"   
+	     
+	     
+	     + "<div class='replyFooter'>"
+	     + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+	     + "</div>"
+	     
+	     + "<hr>"
   });
   
   $("section.replyList ol").html(str);
@@ -175,7 +161,7 @@ function replyList() {
 <table class="table">
     <thead>
 	<tr>
-		<th align="center"><h3 align="center">[${rContentView.rTitle}] ${rContentView.rInShort}</h3></th>
+		<th align="center"><h3 align="center">${rContentView.rTitle}</h3></th>
 	</tr>
     </thead>
 
@@ -185,26 +171,23 @@ function replyList() {
         <p><span class="badge badge-pill badge-secondary">No</span> ${rContentView.rBoardNum}
         <span class="badge badge-pill badge-secondary">조회수</span> ${rContentView.rHit}
         <span class="badge badge-pill badge-secondary">좋아요</span> ${rContentView.like_Cnt}
-        <span class="badge badge-pill badge-secondary">등록일 </span><fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
+                <span class="badge badge-pill badge-secondary">등록일 </span><fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
         </p>
         
 		<div class="card">
 			<div class="card-body">
 	        	<div class="row">
         			<div class="col-md-5">
-        				<div class="list_picture">
+        				<div class="content_picture">
         	       		<c:forEach var="files" items="${file}" >
         	       			<c:if test="${files.STORED_FILE_NAME eq null || files.STORED_FILE_NAME eq ' '}" >
-        	       				<!-- <img src="/filePath/null.jpg" class="img-fluid mx-auto d-block rounded"/> -->
-        	       				<img src="/filePath/null.jpg" id="introimg" class="rounded mx-auto d-block img-fluid"/>
+        	       				<img src="/filePath/null.jpg" class="rounded img-fluid"/>
         	       			</c:if>	
         	       			<c:if test="${files.STORED_FILE_NAME ne null && files.STORED_FILE_NAME ne ' ' }" >
-<%--         	       				<img src="/filePath/${files.STORED_FILE_NAME}" class="rounded img-fluid"/> --%>
-								<img src="/filePath/${files.STORED_FILE_NAME}" id="introimg" class="rounded mx-auto d-block img-fluid"/>
-
+        	       				<img src="/filePath/${files.STORED_FILE_NAME}" class="rounded img-fluid"/>
         	       			</c:if>
         	       		</c:forEach>
-        	       		</div>
+        	       		</div><br>
         	    	</div>
         	    
         	     	<div class="col-md-7">
@@ -214,70 +197,48 @@ function replyList() {
         	     		<c:if test="${rContentView.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${rContentView.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${rContentView.rCategory eq '4'}">기타</c:if>
-        	     		 (${rContentView.rArea})
-
         	     		<br>
         	     		
         	     		<strong>댓글 평가</strong>
 						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span> <a>(1)</a> <br>
-						
+						<span class="fa fa-star"></span> <a>(3)</a> <br>
 						<strong>개장 시간</strong> ${rContentView.rOpenTime} <!-- 09:00~21:00(연중 무휴) --></br>
 						<strong>위치 정보</strong> ${rContentView.rAdress} <!-- 서울특별시 종로구 세종로 사직로 161 -->
 						<hr class="new3">
-						<strong>개요</strong><br>${rContentView.rInShort}
+						<strong>피셜</strong><br>${rContentView.rInShort}
 			
 							
 					</div>
 	       	 	</div>	
 			</div>	
 		</div>
-		
-				<br>
-		
+        
         </td>
       </tr>
-      
     </tbody>
 </table>
 
-	<div class="container" align="center">
-	${rContentView.rContent}
-	</div>
-	<hr>
-	
+
 </div>
 
+<div class="container">
+	<div align="center">
+		<br>${rContentView.rContent}
+	</div>
+	<hr> <br>
+</div>
 
 <!-- Like -->
 <div class="container">
 <div align="center">
 <!-- <img src="img/travel_board_img/like_1.png" class="img-rounded img-fluid" id="like"> -->
-
-
-   <sec:authorize access="isAnonymous()">
-         <br>
-<!--          <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">등록</button></p> -->
-         
-        	<div class="col-sm-2">
-	            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
-	                <button type="button" id="likeBtn" class="btn btn-danger btn-lg">&nbsp;
- 	                    <span id="like"> &nbsp;</span>
-	                    <c:out value="${rContentView.like_Cnt}"/>
-	                </button>
-	            </div>
-	        </div>
-                
-   </sec:authorize>
-
-
 	<sec:authorize access="isAuthenticated()">
 		        <div class="col-sm-2">
 		            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
-		                <button type="button" id="likeBtn" class="btn btn-danger btn-lg">&nbsp;
+		                <button type="button" id="likeBtn" class="btn btn-info">&nbsp;
 		                    <span id="like"> &nbsp;</span>
 		                    <c:out value="${rContentView.like_Cnt}"/>
 		                </button>
@@ -287,7 +248,38 @@ function replyList() {
 
 </div>
 
+<hr> <br>
 </div>
+
+
+<!--  Comment view -->
+<%-- <div class="container" id="comment_view">
+
+ 	<table>     
+		<tr>
+		<div class="row">
+		<div class="col-md-1" align="right">
+			<img src="img/avatar2.jpg" width="50"/>
+		</div>
+		<div class="col-md-11">
+			<strong>김대환</strong> 
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span> <a>(3)</a>
+<span class="badge badge-secondary"><a href="http://google.com" class="text-white"> 삭제</a></span><br>
+			<p>경복궁 가봤는데 아주 좋아요.<br>제 엉덩이만큼 끝내주는 관광지입니다..</p>
+			<p class="text-dark" align="right">${contentView.bDate}</p>					
+		</div>
+					
+
+		</div>
+		</tr>
+	</table>
+	
+</div> --%>
+
 
 
  
@@ -298,42 +290,30 @@ function replyList() {
 <%-- <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a> --%>
 
 <sec:authorize access="isAuthenticated()">
-	<button type="button" class="modifyCheck btn btn-outline-dark btn-sm" data-modify_Num="${rContentView.rBoardNum}">수정</button> 
+	<button type="button" class="modifyCheck btn btn-dark" data-modify_Num="${rContentView.rBoardNum}">수정</button> 
 </sec:authorize>
 
- <button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-rBoardNum="${rContentView.rBoardNum}">삭제</button>
+ <button type="button" class="boardDelete btn btn-dark" data-rBoardNum="${rContentView.rBoardNum}">삭제</button>
+ 
 </p>
-
 <br>
 </div>
 
-<!-- ` 작성 -->
-
 <div class="container" id="reply">
 
-
-
-  <form:form role="form" method="post" autocomplete="off">
-     <input type="hidden" name="rBoardNum" id="rBoardNum" value="${rContentView.rBoardNum}">
-     
+ <section class="replyForm">
+  <form role="form" method="post" autocomplete="off">
+  
+  <input type="hidden" name="rBoardNum" id="rBoardNum" value="${rContentView.rBoardNum}">
+  
    <div class="input_area">
-   <label for="Content">댓글:</label>
+    <label for="Content">댓글 내용:</label>
       <textarea class="form-control" rows="5" id="repCon" name="repCon"></textarea>
    </div>
    
    <div class="input_area">
-   <sec:authorize access="isAnonymous()">
-         <br>
-         <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">등록</button></p>
-   </sec:authorize>
-   
-   <sec:authorize access="isAuthenticated()">
-         <br>   
-      <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">등록</button></p>
-   </sec:authorize>
-   
-   
-         
+    <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">댓글 작성</button></p>
+    
     <script>
 		 $("#reply_btn").click(function(){
 		  
@@ -358,9 +338,16 @@ function replyList() {
 		 });
 	</script>
     
+    
+    
+    
+    
+    
+    
    </div>
    
-  </form:form>
+  </form>
+ </section>
 
  
 <section class="replyList">
@@ -427,7 +414,6 @@ var boardNo = '${rContentView.rBoardNum}';
 console.log('${isSelectLike}');
 console.log("boardNo"+boardNo);
 // 처음에 유저가 좋아요 눌렀는지 판단 유무
-
 var isSelectLike = '${isSelectLike}';
 isSelectLike = isSelectLike === 'true';
 console.log("aaa"+isSelectLike);
@@ -460,7 +446,7 @@ console.log("aaa"+isSelectLike);
                 error: function(err) {
                 	console.log(JSON.stringify(err));
                      console.log("제발ㅡㅡ"+err); 
-                    alert("로그인시 이용 가능합니다.");
+                    alert("알수 없는 에러 발생 아 제발 ");
                 }
             })
         });
@@ -554,13 +540,11 @@ console.log("aaa"+isSelectLike);
       
   </script>
 
-<p align="right">
-<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
-<a href="javascript:history.back();" class="btn btn-dark" role="button">목록</a>
-</p>
-<br>
+
 
 </div>
+
+<p>
 
 
 </body>

@@ -78,7 +78,7 @@
 
 <p>
 <div class="container">
-<p align="center" class="display-3" id="disf">Travel Info</p>
+<p align="center" class="display-3" id="disf">Community</p>
 </div>
 
 
@@ -96,95 +96,67 @@
 
 </sec:authorize> 
 
-	<div class="row">
-	
-		<div class="col">
-		
-			<label for="rArea">지역 :</label>
-		     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
-		     <select class="form-control" id="rArea" name="rArea">
-		    	<option value="서울·경기·인천">서울·경기·인천</option>
-		    	<option value="강원도">강원도</option>
-		    	<option value="충청북도">충청북도</option>
-		    	<option value="충청남도">충청남도</option>
-		    	<option value="경상북도">경상북도</option>
-		    	<option value="경상남도">경상남도</option>
-		    	<option value="전라북도">전라북도</option>
-		    	<option value="전라남도">전라남도</option>
-		    	<option value="제주도">제주도</option>
-			</select>		
-		
-		</div>
-		
-		
-		<div class="col">
-		
-		    <label for="rCategory">분류:</label>
-		    
-		     <select class="form-control" id="rCategory" name="rCategory">
-		    	<option value="1">관광지</option>
-		    	<option value="2">행사</option>
-		    	<option value="3">맛집</option>
-		    	<option value="4">기타</option>
-			</select>
-		
-		
-		</div>		
-		
 
-	</div>
+	<div class="form-group">
+    <label for="rCategory">분류:</label>
+    
+     <select id="rCategory" name="rCategory">
+    	<option value="1">관광지</option>
+    	<option value="2">행사</option>
+    	<option value="3">맛집</option>
+    	<option value="4">기타</option>
+	</select>
 	
 	
-	<div class="row">
+	<label for="rArea">지역 :</label>
+     <!--  <input type="" class="form-control" id="rCategory" placeholder="" name="rCategory"> <p> -->
+     <select id="rArea" name="rArea">
+    	<option value="서울·경기·인천">서울·경기·인천</option>
+    	<option value="강원도">강원도</option>
+    	<option value="충청북도">충청북도</option>
+    	<option value="충청남도">충청남도</option>
+    	<option value="경상북도">경상북도</option>
+    	<option value="경상남도">경상남도</option>
+    	<option value="전라북도">전라북도</option>
+    	<option value="전라남도">전라남도</option>
+    	<option value="제주도">제주도</option>
+	</select>
 	
-		<div class="col">
-		
-			<label for="rTitle">여행지명:</label>
-			<input type="text" class="form-control" id="rTitle" placeholder="예: 남산 서울타워" name="rTitle" value="남산 서울타워">
-      
-      	</div>
-      	
-      	<div class="col">
-		
-			<label for="rInShort">개요:</label>
-			<input type="text" class="form-control" id="rInShort" placeholder="예: 도시의 전경을 조망할 수 있는 타워 & 레스토랑" name="rInShort" value="도시의 전경을 조망할 수 있는 타워 & 레스토랑"> <p>
-      
-      	</div>
-      	
-	</div>
-	
-	
-	<div class="row">
-	
-		<div class="col">
-		
-			<label for="rOpenTime">운영시간:</label>
-			<input type="text" class="form-control" id="rOpenTime" placeholder="예: 09:00~21:00" name="rOpenTime" value="09:00~21:00"> <p>
-      
-      	</div>
-      	
-      	<div class="col">
-		
-			<label for="rAdress">위치정보:</label>
-			<input type="text" class="form-control" id="rAdress" placeholder="예: 서울특별시 용산구 남산공원길 105(용산동2가)" name="rAdress" value="서울특별시 용산구 남산공원길 105"> <p>
-      
-      	</div>
-      	
 	</div>
 	
 	
 	<div class="form-group">
-    <label for="Thumbnail">대표 이미지:</label>
+    <label for="rTitle">제목:</label>
+      <input type="text" class="form-control" id="rTitle" placeholder="" name="rTitle"> <p>
+	</div>
+	
+	<div class="form-group">
+    <label for="rOpenTime">운영시간:</label>
+      <input type="text" class="form-control" id="rOpenTime" placeholder="" name="rOpenTime"> <p>
+	</div>
+	
+	<div class="form-group">
+    <label for="rAdress">위치정보:</label>
+      <input type="text" class="form-control" id="rAdress" placeholder="" name="rAdress"> <p>
+	</div>
+	
+	<div class="form-group">
+    <label for="rTitle">피셜:</label>
+      <input type="text" class="form-control" id="rInShort" placeholder="" name="rInShort"> <p>
+	</div>
+	
+	<div class="form-group">
+    <label for="Thumbnail">썸네일용 이미지:</label>
       <input type="file" class="form-control" name="uploadImg" accept="image/*" onchange="setThumbnail(event);"> <p>
 	</div>
 	
 	<div class="form-group" id="image_container">
-<!--      <label for="fileImage">이미지 미리보기:</label><br> -->
+    <label for="fileImage">썸네일용 이미지 미리보기:</label><br>
 	</div>
 	
     <div class="form-group" >
-      <label for="rContent">상세 내용:</label>
-      <textarea class="form-control" rows="10" id="rContent" name="rContent" placeholder=""></textarea>
+      <label for="rContent">내용:</label>
+      <textarea class="form-control" rows="10" id="rContent" name="rContent"></textarea>
       	 <script>
 			CKEDITOR.replace('rContent',{filebrowserUploadUrl:'${pageContext.request.contextPath}/img/imageUpload.do'});
 		</script> 
