@@ -20,13 +20,13 @@ create sequence wmk_goods_seq;
 --제품 등록
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'Picture frame', 101, 30000, 50, '나만의 홈인테리어를 꾸며줄 작은 데코레이션', 'goods/picture_frame.png');
+values (wmk_goods_seq.nextval, 'Picture frame', 101, 30000, 50, '나만의 홈인테리어를 꾸며줄 작은 데코레이션', 'goods/frame_550.png');
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'T-shirts', 201, 15000, 50, '스타일과 편안함을 모두 갖춘 프리미엄 원단 100% 티셔츠', 'goods/t-shirts.png');
+values (wmk_goods_seq.nextval, 'T-shirts', 201, 15000, 50, '스타일과 편안함을 모두 갖춘 프리미엄 원단 100% 티셔츠', 'goods/white_shirts_550.png');
 
 insert into wmk_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg) 
-values (wmk_goods_seq.nextval, 'Mug-cup', 301, 8000, 50, '모던하고 세련된 스타일의 나만을 위한 시그니처 아이템', 'goods/mug_cup.png');
+values (wmk_goods_seq.nextval, 'Mug-cup', 301, 8000, 50, '모던하고 세련된 스타일의 나만을 위한 시그니처 아이템', 'goods/mug_cup_550.png');
 
 --제품 카테고리 생성
 create table goods_category (

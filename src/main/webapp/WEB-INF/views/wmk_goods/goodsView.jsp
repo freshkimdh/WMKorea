@@ -138,11 +138,8 @@
 				
 				<div class="layer1">
 
-					<div id="draggable"><img id="faces" alt="" src="goods/profile2.png" width="150"></div>
-					
-					<!-- <div id="draggable"><img id="faces" alt="" src="img/avatar2.jpg" width="150"></div> -->
-					
-
+					<div id="draggable"><img id="faces" alt="" src="goods/avatar_null.png" width="150"></div>
+				
 
 				</div>
 				

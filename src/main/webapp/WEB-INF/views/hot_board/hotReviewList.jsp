@@ -88,62 +88,7 @@
 </div>
 
 
-<!-- District Button -->
-
-<div class="container" align="center" id="cate1">
-<br><br>
-	<button type="button" class="btn btn-dark">서울·경기·인천</button>
-	<button type="button" class="btn btn-dark">강원도</button>
-	<button type="button" class="btn btn-dark">충청북도</button>
-	<button type="button" class="btn btn-dark">충청남도</button>
-	<button type="button" class="btn btn-dark">경상북도</button>
-	<button type="button" class="btn btn-dark">경상남도</button>
-	<button type="button" class="btn btn-dark">전라북도</button>
-	<button type="button" class="btn btn-dark">전라남도</button>
-	<button type="button" class="btn btn-dark">제주도</button>
-	
-
-</div>
-
-<!-- Group button -->
-
-<div class="container" id="cate2">
-<p>
-  <div class="row">
-  
-  	<div class="col-sm-2">
-  	</div>
-  	
-  	
-  	<div class="col-sm-8" align="center">
-    
-  	
-		<!-- Group button details-->
-		<div class="btn-group btn-group btn-block" id="cate">
-		
-			<button id="cate2" type="button" class="btn btn-secondary cate2" value="0">전체</button>
-			<button id="cate2" type="button" class="btn btn-secondary cate2" value="1">관광지</button>
-		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="2">행사</button>
-		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="3">맛집</button>
-		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="4">기타</button>
- 
-		</div>  
-		
-		
-			
-  	</div> 	
-  	
-  	
-  	
-  	 	  	
-  	
-  	<div class="col-sm-2">
-  	</div>
-  
-  </div>
-  
-  
-</div>
+<br>
 
 
   <div class="album py-5">
@@ -180,10 +125,11 @@
         </div>
      	</c:forEach>        
       </div> 
+  	</div>
   </div>
   
 
-<br><br>
+
 
 </body>
 </html>
