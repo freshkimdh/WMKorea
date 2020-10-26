@@ -30,24 +30,10 @@
 		     from wmk_goods
 		         where gdsNum = #{gdsNum}
 	</select>
-		
-	<!-- 장바구니 담기-->
-	<insert id="addCart">
-		insert into tbl_cart (cartNum, userId, gdsNum, gdsColor, gdsSize, gdsText, cartStock)
-			values (tbl_cart_seq.nextval, #{userId}, #{gdsNum}, #{gdsColor}, #{gdsSize}, #{gdsText}, #{cartStock})
-	</insert>	
-	
-	<!-- 상품 수정 -->
-	<update id="goodsModify">
-		update tbl_goods
-			set gdsName = #{gdsName}, cateCode = #{cateCode}, gdsPrice = #{gdsPrice}, gdsStock = #{gdsStock}, gdsDes = #{gdsDes},
-				gdsImg = #{gdsImg}, gdsThumbImg = #{gdsThumbImg} 
-					where gdsNum = ${gdsNum}
-	</update>
 	
 	<!-- 상품 삭제 -->
 	<delete id="goodsDelete">
-	 	delete tbl_goods
+	 	delete wmk_goods
 	 		where gdsNum = #{gdsNum}
 	</delete>
 
