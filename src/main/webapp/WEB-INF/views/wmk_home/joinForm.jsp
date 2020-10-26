@@ -84,6 +84,7 @@ function isValidJoinForm() {
 	var checkPw = $("#pw2").val() || '';
 	var email = $("#email").val() || '';
 	var nickname = $("#nickname").val() || '';
+	var spe = /^.*(?=^.{5,10}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 	console.log("id:	"+id);
 	console.log("pw:	"+pw);
 	console.log("checkPw:	"+checkPw);
@@ -99,8 +100,11 @@ function isValidJoinForm() {
 		console.log("Pw:	"+pw);
 		alert('비밀번호를 입력해 주세요');
 		return false;
-	}
-	
+	}else if($("#pw").val().length < 6) {
+		alert("비밀번호는 6자 이상으로 설정해야 합니다.");
+		$("#pw").val("").focus();
+		return false;
+	}	
 	if(nickname.trim() === '') {
 		console.log("nickname:	"+nickname);
 		alert('닉네임을 입력해 주세요');

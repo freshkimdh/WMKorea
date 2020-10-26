@@ -72,8 +72,8 @@
 				$("#pw").val("").focus();
 				$("#pw2").val("");
 				return false;
-			}else if ($("#pw").val().length < 3) {
-				alert("비밀번호는 3자 이상으로 설정해야 합니다.");
+			}else if ($("#pw").val().length < 6) {
+				alert("비밀번호는 6자 이상으로 설정해야 합니다.");
 				$("#pw").val("").focus();
 				return false;
 			}else if($.trim($("#pw").val()) !== $("#pw").val()) {
