@@ -62,7 +62,7 @@
 
 <div class="container" id="free_board">
   <h2>자유게시판</h2> 
-  
+  <hr>
   <br>
           
   <table class="table table-hover">
@@ -120,16 +120,16 @@
 	<ul class="pagination justify-content-center">
     	
     	<c:if test="${pageMaker.prev}">
-    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
+    		<li class="page-item"><a class="page-link text-dark" href="boardList${pageMaker.makeQuery(pageMaker.startPage - 1) }">Previous</a></li>
     	</c:if>
     	
     	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
     		<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
+    		<li class="page-item"><a class="page-link text-dark" href="boardList${pageMaker.makeQuery(idx)}">${idx}</a></li>
     	</c:forEach>
     	
     	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-    		<li class="page-item"><a class="page-link text-dark" href="free_boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
+    		<li class="page-item"><a class="page-link text-dark" href="boardList${pageMaker.makeQuery(pageMaker.endPage +1) }">Next</a></li> <br>
     	</c:if> 
 	</ul> 
 </div>

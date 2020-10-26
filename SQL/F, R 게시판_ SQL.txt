@@ -107,7 +107,6 @@ alter table review_reply
 --test
 insert into review_reply (rBoardNum, id, repNum, repCon) values (22, 'the3536', review_reply_seq.nextval, '내용');
 
-
 --------------------------------------------------------------------좋아요-------------------------
 create table LIKETO(
 	LIKENO NUMBER(5) not null

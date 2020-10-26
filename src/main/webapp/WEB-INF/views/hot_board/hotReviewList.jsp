@@ -11,8 +11,22 @@
 <html lang="en">
 <head>
   <title>Wemade Korea</title>
+  <meta charset="utf-8">
 
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+
+
+
+
+<style>
+.checked {
+  color: orange;
+}
+</style>  
 
 	
 <style>
@@ -68,19 +82,59 @@
 <!-- This is banner -->
 <div class="hero-image">
   <div class="hero-text">
-	<p style="font-size:80px" class="display-3">Hot place</p>
+	<p style="font-size:80px" class="display-3">Hot Place</p>
 	<p> We made Korea </p>
   </div>
 </div>
 
-<!-- Group button -->
-<p><br>
-<div class="container" id="district">
 
+<!-- District Button -->
+
+<div class="container" align="center" id="cate1">
+<br><br>
+	<button type="button" class="btn btn-dark">서울·경기·인천</button>
+	<button type="button" class="btn btn-dark">강원도</button>
+	<button type="button" class="btn btn-dark">충청북도</button>
+	<button type="button" class="btn btn-dark">충청남도</button>
+	<button type="button" class="btn btn-dark">경상북도</button>
+	<button type="button" class="btn btn-dark">경상남도</button>
+	<button type="button" class="btn btn-dark">전라북도</button>
+	<button type="button" class="btn btn-dark">전라남도</button>
+	<button type="button" class="btn btn-dark">제주도</button>
+	
+
+</div>
+
+<!-- Group button -->
+
+<div class="container" id="cate2">
+<p>
   <div class="row">
   
   	<div class="col-sm-2">
   	</div>
+  	
+  	
+  	<div class="col-sm-8" align="center">
+    
+  	
+		<!-- Group button details-->
+		<div class="btn-group btn-group btn-block" id="cate">
+		
+			<button id="cate2" type="button" class="btn btn-secondary cate2" value="0">전체</button>
+			<button id="cate2" type="button" class="btn btn-secondary cate2" value="1">관광지</button>
+		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="2">행사</button>
+		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="3">맛집</button>
+		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="4">기타</button>
+ 
+		</div>  
+		
+		
+			
+  	</div> 	
+  	
+  	
+  	
   	 	  	
   	
   	<div class="col-sm-2">
@@ -104,14 +158,22 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${hotList.rTitle}</strong><br>${hotList.rInShort}</p>
 
-	      <span class="badge  badge-pill badge-danger "  style="font-size:15px">좋아요</span>${hotList.like_Cnt}
-	      <span class="badge  badge-pill badge-success "  style="font-size:15px">분류</span>
+		<span class="fa fa-star checked"></span>
+		<span class="fa fa-star"></span>
+		<span class="fa fa-star"></span>
+		<span class="fa fa-star"></span>
+		<span class="fa fa-star"></span> <a>(1)</a> <br>
+
+
+		<span class="badge  badge-pill badge-danger">Like</span> ${hotList.like_Cnt}
+	     <span class="badge  badge-pill badge-success">분류</span>
+	     				${hotList.rArea} &#187;
 	      				<c:if test="${hotList.rCategory eq '1'}">관광지</c:if>
         	     		<c:if test="${hotList.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${hotList.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${hotList.rCategory eq '4'}">기타</c:if>
         	     		<br>
-          <span class="badge  badge-pill badge-primary">지역</span>${hotList.rArea}
+<%--           <span class="badge  badge-pill badge-primary">지역</span>${hotList.rArea} --%>
 	    </div>
 	  </div>
 	  <br>
@@ -120,9 +182,8 @@
       </div> 
   </div>
   
-<!-- <img src="others/s1.PNG"> -->
 
-
+<br><br>
 
 </body>
 </html>

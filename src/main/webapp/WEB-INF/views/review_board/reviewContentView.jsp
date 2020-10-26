@@ -12,25 +12,13 @@
 <head>
   <title>Wemade Korea</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형에 반드시 필요한태그 -->
-      
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>  
   
-  
-	
-<!-- 	<style> /* Font responsive  */
-	body {font-size: 16px;}
-	#district {font-size: 1rem;}
-	#disf {
-	/* font-size: 4rem; */
-	font-size: 4vw;}
-	</style> -->
-	
-  
+
+
 	<style>
  	#s1 {
 	/* background: blue; */
@@ -68,41 +56,39 @@
   transform: translate(-50%, -50%);
   color: white;
 
-</style>
+
 	
-	
-<%-- 	<style>
-	
-  /* Make the image fully responsive */
-  #imginfo {
-    width: 200;
-    height: 100;
-  }
-  </style> --%>
-  
-  	<style>
-	
-  
-  .content_picture img {
+/*    .list_picture img {
+   
     width: 500px;
-	height: 100%;
+	height: 300px;
   
-  }
+  } */
+	  
   
   </style>	
   
-  
 
 	<style>
-	.checked {
-	  color: orange;
+	
+		.checked {
+		  color: orange;
+		}
+		
+		
+		#introimg{
+	  
+	    width: 450px;
+		height: 280px;
+	  	}
+		
+	</style>
+	
+	<style>	
+	hr.new3 {
+	  border-top: 1px dotted grey;
 	}
 	</style>
-<style>	
-hr.new3 {
-  border-top: 1px dotted grey;
-}
-</style>
 
 
 <style>
@@ -119,7 +105,7 @@ hr.new3 {
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
  
- section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
+ section.replyList div#replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 </style>
 
 
@@ -140,20 +126,21 @@ function replyList() {
    var repDate = new Date(this.repDate);
    repDate = repDate.toLocaleDateString("ko-US")
    
-   str += "<div>"
-	     + "<div class='userInfo'>"
-	     + "<span class='id'>" + this.id + "</span>"
-	     + "<span class='date'>" + repDate + "</span>"
-	     + "</div>"
-	     + "<div class='replyContent'>" + this.repCon + "</div>"
-	     + "</div>"   
-	     
-	     
-	     + "<div class='replyFooter'>"
-	     + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
-	     + "</div>"
-	     
-	     + "<hr>"
+      str += "<div class='container' id='comment_view'>"
+         + "<div class='row'>"
+         + "<div class='col-md-1' align='right'>"
+         + "<img src='img/avatar2.jpg' width='50'/>"
+         + "</div>"
+         + "<div class='col-md-11'>"
+        + "<div class='userInfo' id='replyFooter'>"
+        + "<span class='id'>" + "<strong>" + this.id + "</strong>" + "</span>"
+        + "<span class='date'>" + repDate + "</span>"
+        +  "&nbsp;" + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+        + "</div>" //userInfro End
+        + this.repCon
+        + "</div>"
+         + "</div>" + "<hr>"
+         + "</div>" //row end 
   });
   
   $("section.replyList ol").html(str);
@@ -172,101 +159,6 @@ function replyList() {
 
 <body>
 
-<div class="container"> <!-- table -->
-	<div class="row"> <!-- td -->
-	
-		<div class="col-sm-6" id="s1">
-			<a href="index"><img src="img/main_logo2.png"></a>
-		</div> <!-- tr -->
-		
-		<div class="col-sm-6" id="s2">
-			<!-- Search Bar -->
-<!-- 			<p>Search Bar</p> -->
-		<p>
- 		<div class="input-group mb-3">
-  			<input type="text" class="form-control" placeholder="Search">
-  			<div class="input-group-append">
-    			<button class="btn btn-danger" type="submit">Go</button>
-  			</div>
-		</div>
-			<!-- Search Bar End -->
-		</div>
-	</div>
-</div>
-
-<!-- <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top"> -->
-<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-	
-	<!-- Brand Logo -->
-	<a class="navbar-brand" href="#">MENU</a>
-	
-	<!-- Toggler -->
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	
-	<!-- Content -->
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-	<ul class="navbar-nav">
-
-		<li class="nav-item">
-			<a class="nav-link" href="index">메인</a>
-		</li>
-				
-		<li class="nav-item">
-			<a class="nav-link" href="#">핫플레이스</a>
-		</li>
-				
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			내 캐릭터 만들기
-			</a>
-			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="characterMaking">내 캐릭터 만들기</a>
-        	<a class="dropdown-item" href="goodsList">굿즈</a>
-      		</div>
-		</li>
-		
-		<!-- Dropdown -->				
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			커뮤니티
-			</a>
-			<div class="dropdown-menu">
-        	<a class="dropdown-item" href="free_boardList">자유 게시판</a>
-        	<a class="dropdown-item" href="areaIndex">여행지 게시판</a>
-        	<a class="dropdown-item" href="${pageContext.request.contextPath}/list">테스트용 게시판</a>
-      		</div>
-		</li>
-		
-	</ul>
-	
-	</div>
-
-<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
- 	<ul class="navbar-nav"> 
-	<div class="btn-group btn-group-sm"> 
-	
-<sec:authorize access="isAnonymous()"> <!-- isAnonumous: 누구나 다 access 할 수있다 -->
-   		<a href="loginForm" class="btn btn-secondary" type="button">Login</a>
-		<a href="joinForm" class="btn btn-secondary" type="button">Join</a> 
-		<a href="http://google.com" class="btn btn-secondary" type="button">My Page</a>
-</sec:authorize>
-
-<sec:authorize access="isAuthenticated()">
-		<a class="btn btn-dark">환영합니다, <sec:authentication property="principal.user.nickname"/> 님!</a>
-   		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-   			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
-   		</form:form> 
-		<a href="mypage" class="btn btn-secondary" type="button">My Page</a>
-</sec:authorize>
-
-	</div>
-
- 	</ul>
-</div>
-
-</nav>
 
 
 <!-- This is banner -->
@@ -283,7 +175,7 @@ function replyList() {
 <table class="table">
     <thead>
 	<tr>
-		<th align="center"><h3 align="center">${rContentView.rTitle}</h3></th>
+		<th align="center"><h3 align="center">[${rContentView.rTitle}] ${rContentView.rInShort}</h3></th>
 	</tr>
     </thead>
 
@@ -293,23 +185,26 @@ function replyList() {
         <p><span class="badge badge-pill badge-secondary">No</span> ${rContentView.rBoardNum}
         <span class="badge badge-pill badge-secondary">조회수</span> ${rContentView.rHit}
         <span class="badge badge-pill badge-secondary">좋아요</span> ${rContentView.like_Cnt}
-                <span class="badge badge-pill badge-secondary">등록일 </span><fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
+        <span class="badge badge-pill badge-secondary">등록일 </span><fmt:formatDate value="${rContentView.rDate}" pattern="yyyy-MM-dd"/>  
         </p>
         
 		<div class="card">
 			<div class="card-body">
 	        	<div class="row">
         			<div class="col-md-5">
-        				<div class="content_picture">
+        				<div class="list_picture">
         	       		<c:forEach var="files" items="${file}" >
         	       			<c:if test="${files.STORED_FILE_NAME eq null || files.STORED_FILE_NAME eq ' '}" >
-        	       				<img src="/filePath/null.jpg" class="rounded img-fluid"/>
+        	       				<!-- <img src="/filePath/null.jpg" class="img-fluid mx-auto d-block rounded"/> -->
+        	       				<img src="/filePath/null.jpg" id="introimg" class="rounded mx-auto d-block img-fluid"/>
         	       			</c:if>	
         	       			<c:if test="${files.STORED_FILE_NAME ne null && files.STORED_FILE_NAME ne ' ' }" >
-        	       				<img src="/filePath/${files.STORED_FILE_NAME}" class="rounded img-fluid"/>
+<%--         	       				<img src="/filePath/${files.STORED_FILE_NAME}" class="rounded img-fluid"/> --%>
+								<img src="/filePath/${files.STORED_FILE_NAME}" id="introimg" class="rounded mx-auto d-block img-fluid"/>
+
         	       			</c:if>
         	       		</c:forEach>
-        	       		</div><br>
+        	       		</div>
         	    	</div>
         	    
         	     	<div class="col-md-7">
@@ -319,175 +214,126 @@ function replyList() {
         	     		<c:if test="${rContentView.rCategory eq '2'}">행사</c:if>
         	     		<c:if test="${rContentView.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${rContentView.rCategory eq '4'}">기타</c:if>
+        	     		 (${rContentView.rArea})
+
         	     		<br>
         	     		
         	     		<strong>댓글 평가</strong>
 						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span> <a>(3)</a> <br>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span> <a>(1)</a> <br>
+						
 						<strong>개장 시간</strong> ${rContentView.rOpenTime} <!-- 09:00~21:00(연중 무휴) --></br>
 						<strong>위치 정보</strong> ${rContentView.rAdress} <!-- 서울특별시 종로구 세종로 사직로 161 -->
 						<hr class="new3">
-						<strong>피셜</strong><br>${rContentView.rInShort}
-<!-- 						 <div class="bg-light"> -->
-						<!-- 경복궁은 대한민국 서울 세종로에 있는 조선 왕조의 법궁이다. 
-						근정전을 중심으로 하고 있다. 1395년에 창건하였다.
-						 ‘경복’은 시경에 나오는 말로 왕과 그 자손, 온 백성들이 태평성대의 큰 복을 누리기를 축원한다는 의미다.
-						 풍수지리적으로도 백악산을 뒤로 하고 좌우에는 낙산과 인왕산으로 둘러싸여 있어 길지의 요건를 갖추고 있다. 
-						1592년, 임진왜란으로 인해 불탄 이후 그 임무를 창덕궁에 넘겨주었다가 1865년에 흥선대원군의 명으로 중건되었다. 
-						일제 강점기에는 조선총독부 건물을 짓는 등 많은 전각들이 훼손되었으나, 
-						1990년대부터 총독부 건물을 철거하는 등 복원사업을 벌인 덕분에 복원 작업은 현재 부분 완료된 상태다. -->
-<!-- 						</div>	 -->					
-						
+						<strong>개요</strong><br>${rContentView.rInShort}
 			
+							
 					</div>
 	       	 	</div>	
 			</div>	
 		</div>
-        
+		
+				<br>
+		
         </td>
       </tr>
+      
     </tbody>
 </table>
 
-<%-- <p align="right">
-<a href="delete2?bId=${contentView.bId}" class="btn btn-outline-dark btn-sm" role="button">삭제</a>
-<a href="modifyView?bId=${contentView.bId}" class="btn btn-outline-dark btn-sm" role="button">수정</a>
-</p> --%>
-
-</div>
-
-<div class="container">
-	<div align="center">
-		<br>${rContentView.rContent}
+	<div class="container" align="center">
+	${rContentView.rContent}
 	</div>
-	<hr> <br>
+	<hr>
+	
 </div>
+
 
 <!-- Like -->
 <div class="container">
 <div align="center">
 <!-- <img src="img/travel_board_img/like_1.png" class="img-rounded img-fluid" id="like"> -->
-<sec:authorize access="isAuthenticated()">
-	        <div class="col-sm-2">
+
+
+   <sec:authorize access="isAnonymous()">
+         <br>
+<!--          <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">등록</button></p> -->
+         
+        	<div class="col-sm-2">
 	            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
-	                <button type="button" id="likeBtn" class="btn btn-info">&nbsp;
-	                    <span id="like"> &nbsp;</span>
+	                <button type="button" id="likeBtn" class="btn btn-danger btn-lg">&nbsp;
+ 	                    <span id="like"> &nbsp;</span>
 	                    <c:out value="${rContentView.like_Cnt}"/>
 	                </button>
 	            </div>
 	        </div>
-        </sec:authorize>
-<%-- 
-<img src="img/travel_board_img/like_1.png" width="70" onmouseover="this.src='img/travel_board_img/like_2.png'" 
-onmouseout="this.src='img/travel_board_img/like_2.png'">
-<h4 align="center"><strong>15</strong></h4> 
---%>
+                
+   </sec:authorize>
+
+
+	<sec:authorize access="isAuthenticated()">
+		        <div class="col-sm-2">
+		            <div class="btn-group mx-auto my-2" role="group" aria-label="Basic example">
+		                <button type="button" id="likeBtn" class="btn btn-danger btn-lg">&nbsp;
+		                    <span id="like"> &nbsp;</span>
+		                    <c:out value="${rContentView.like_Cnt}"/>
+		                </button>
+		            </div>
+		        </div>
+	</sec:authorize>
+
 </div>
 
-<hr> <br>
 </div>
 
 
-<!--  Comment view -->
-<%-- <div class="container" id="comment_view">
-
- 	<table>     
-		<tr>
-		<div class="row">
-		<div class="col-md-1" align="right">
-			<img src="img/avatar2.jpg" width="50"/>
-		</div>
-		<div class="col-md-11">
-			<strong>김대환</strong> 
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-<span class="fa fa-star"></span> <a>(3)</a>
-<span class="badge badge-secondary"><a href="http://google.com" class="text-white"> 삭제</a></span><br>
-			<p>경복궁 가봤는데 아주 좋아요.<br>제 엉덩이만큼 끝내주는 관광지입니다..</p>
-			<p class="text-dark" align="right">${contentView.bDate}</p>					
-		</div>
-					
-
-		</div>
-		</tr>
-	</table>
-	
-</div> --%>
-
-
-
-<!-- Comment write -->
-<%-- <div class="container" id="comment_write">
-
-<form action="">
-<br>
-	<div class="row">
-    	<div class="col">
-    
-		<label for="bName">이름:</label>
-      	<input type="text" class="form-control" id="name" placeholder="" name="rName">
-    
-    	</div>
-    	
-    	<div class="col">
-    	<label for="bPw">비밀번호:</label>
-      	<input type="password" class="form-control" id="pw" placeholder="" name="bPw"> <p>
-    	</div>
-    	
-    	<div class="col">
-		<label for="sel1">평가:</label>
-		<select class="form-control" id="sel1" name="sellist1">
-			<option>★☆☆☆☆(1)</option>
-			<option>★★☆☆☆(2)</option>
-			<option>★★★☆☆(3)</option>
-			<option>★★★★☆(4)</option>
-			<option>★★★★★(5)</option>
-		</select>
-    	</div>
-    	
-	</div>
-
-    <div class="form-group">
-      <label for="comment">댓글:</label>
-      <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
-    </div>
-    
-    <!-- <button type="submit" class="btn btn-outline-dark btn-sm">등록</button> -->
-    <a href="review_contentView" class="btn btn-outline-dark btn-sm" role="button">등록</a>
-</form>
-<hr>
-<br>
-</div> --%>
  
 <!--  board buttons --> 
 <div class="container">
 <p align="right">
-<a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a>
- <a href="review_delete?rBoardNum=${rContentView.rBoardNum}&rArea=${rContentView.rArea}" class="btn btn-dark" role="button">삭제</a>
+
+<%-- <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a> --%>
+
+<sec:authorize access="isAuthenticated()">
+	<button type="button" class="modifyCheck btn btn-outline-dark btn-sm" data-modify_Num="${rContentView.rBoardNum}">수정</button> 
+</sec:authorize>
+
+ <button type="button" class="boardDelete btn btn-outline-dark btn-sm" data-rBoardNum="${rContentView.rBoardNum}">삭제</button>
 </p>
+
 <br>
 </div>
 
+<!-- ` 작성 -->
+
 <div class="container" id="reply">
 
- <section class="replyForm">
-  <form role="form" method="post" autocomplete="off">
-  
-  <input type="hidden" name="rBoardNum" id="rBoardNum" value="${rContentView.rBoardNum}">
-  
+
+
+  <form:form role="form" method="post" autocomplete="off">
+     <input type="hidden" name="rBoardNum" id="rBoardNum" value="${rContentView.rBoardNum}">
+     
    <div class="input_area">
-    <label for="Content">댓글 내용:</label>
+   <label for="Content">댓글:</label>
       <textarea class="form-control" rows="5" id="repCon" name="repCon"></textarea>
    </div>
    
    <div class="input_area">
-    <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">댓글 작성</button></p>
-    
+   <sec:authorize access="isAnonymous()">
+         <br>
+         <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn" onclick="return confirm('로그인시 작성 가능합니다.');">등록</button></p>
+   </sec:authorize>
+   
+   <sec:authorize access="isAuthenticated()">
+         <br>   
+      <p align="right"><button type="button" class="btn btn-outline-dark btn-sm" id="reply_btn">등록</button></p>
+   </sec:authorize>
+   
+   
+         
     <script>
 		 $("#reply_btn").click(function(){
 		  
@@ -512,16 +358,9 @@ onmouseout="this.src='img/travel_board_img/like_2.png'">
 		 });
 	</script>
     
-    
-    
-    
-    
-    
-    
    </div>
    
-  </form>
- </section>
+  </form:form>
 
  
 <section class="replyList">
@@ -572,7 +411,8 @@ $(document).on("click", ".delete", function(){
 		   }
 		  },
 		  error : function(){
-		   alert("로그인하셔야합니다.")
+		   alert("로그인이 필요합니다.")
+		   window.location.href = "${pageContext.request.contextPath}/loginForm";
 		  }
 		});
 	}
@@ -587,6 +427,7 @@ var boardNo = '${rContentView.rBoardNum}';
 console.log('${isSelectLike}');
 console.log("boardNo"+boardNo);
 // 처음에 유저가 좋아요 눌렀는지 판단 유무
+
 var isSelectLike = '${isSelectLike}';
 isSelectLike = isSelectLike === 'true';
 console.log("aaa"+isSelectLike);
@@ -619,7 +460,7 @@ console.log("aaa"+isSelectLike);
                 error: function(err) {
                 	console.log(JSON.stringify(err));
                      console.log("제발ㅡㅡ"+err); 
-                    alert("알수 없는 에러 발생 아 제발 ");
+                    alert("로그인시 이용 가능합니다.");
                 }
             })
         });
@@ -631,13 +472,95 @@ console.log("aaa"+isSelectLike);
 </script>
 
 
+   <script>
+      //리뷰 게시판 삭제
+      
+      $(document).on("click", ".boardDelete", function(){
+        
+        var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
+      
+        if(deleteConfirm){
+           
+           var data = {rBoardNum : $(this).attr("data-rBoardNum")};
+           
+           
+           $.ajax({
+              url : "${pageContext.request.contextPath}/review_delete",
+              type : "get",
+              data : data,
+              success : function(result){
+               
+               console.log("result: " + result);
+               
+               console.log("data: " + data);
+               
+               if(result == 1) {
+                 window.location.href = "${pageContext.request.contextPath}/review_boardList?rArea=${rContentView.rArea}";
+               }
+               
+               if(result == 0) {
+                alert("작성자 본인만 삭제 할 수 있습니다.");    
+               }
+              },
+              error : function(){
+               alert("로그인이 필요합니다.")
+               window.location.href = "${pageContext.request.contextPath}/loginForm";
+              }
+            });
+           }
+      });
+      
+      </script>
+
+
+ <script>
+      //리뷰 게시판 수정
+      /* <a href="review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}" class="btn btn-dark" role="button">수정</a> */
+      
+      $(document).on("click", ".modifyCheck", function(){
+        
+        var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+      
+        if(modifyConfirm){
+           
+           var data = {rBoardNum : $(this).attr("data-modify_Num")};
+           //modifyView?fBoard_Num=${contentView.fBoard_Num}
+           
+           $.ajax({
+              url : "${pageContext.request.contextPath}/ReviewModifyIdCheck",
+              type : "get",
+              data : data,
+              success : function(result){
+               
+               console.log("result: " + result);
+               
+               console.log("data: " + data);
+               
+               if(result == 1) {
+                 window.location.href = "${pageContext.request.contextPath}/review_modifyView?rBoardNum=${rContentView.rBoardNum}&area=${rContentView.rArea}";
+               }
+               
+               if(result == 0) {
+                alert("작성자 본인만 수정 할 수 있습니다.");    
+               }
+              },
+              error : function(){
+               alert("로그인이 필요합니다.")
+               window.location.href = "${pageContext.request.contextPath}/loginForm";
+              }
+            });
+           }
+      });
+      
+  </script>
+
+<p align="right">
+<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
+<a href="javascript:history.back();" class="btn btn-dark" role="button">목록</a>
+</p>
+<br>
+
 </div>
-
-<p>
-
-<div class="jumbotron text-center" style="margin-bottom:0">
-<p>Copyright © 2020 Wemade Korea All rights reserved</p>
-</div>  
 
 
 </body>

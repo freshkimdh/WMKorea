@@ -158,33 +158,76 @@ public class ReviewBoardController {
 	
 	
 	//여행지 게시판 수정 뷰 read
+	@ResponseBody
+	@GetMapping("/ReviewModifyIdCheck") 
+	public String ReviewModifyIdCheck(ReviewBoardVO reviewBoardVO, Model model, String area) throws Exception {
+	
+		int result = 0;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		log.info("ReviewModifyIdCheck...");
+		
+		String username = ((UserDetails)principal).getUsername();
+		String userId = reviewService.reviewBoardUserId(reviewBoardVO.getrBoardNum());
+		
+		log.info("username:" + username);
+		log.info("userid:" + userId);
+		
+		
+		if (username.equals(userId)) {				
+			
+			reviewBoardVO.setrId(username);
+			model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
+			model.addAttribute("area", area);
+			
+			List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
+			model.addAttribute("file", fileList);
+			
+			result = 1;
+			 
+			log.info("수정 접속 성공");
+			log.info(result);	
+			
+		}
+		
+		log.info(result);
+				
+		//return "/review_board/modifyView";
+		return String.valueOf(result);
+	}
+	
+	
+	
 	@GetMapping("/review_modifyView") 
 	public String ReviewModifyView(ReviewBoardVO reviewBoardVO, Model model, String area) throws Exception {
 	
-		log.info("review_modifyView...");	
-		log.info("rboardVO.getrArea()=" + reviewBoardVO.getrArea());
-		model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
-		model.addAttribute("area", area);
-		
-		List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
-		model.addAttribute("file", fileList);
-		
+					
+			
+			model.addAttribute("rModifyView", reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
+			model.addAttribute("area", area);
+			
+			List<Map<String, Object>> fileList = reviewService.selectFileList(reviewBoardVO.getrBoardNum());
+			model.addAttribute("file", fileList);
+			
+	
 		return "/review_board/modifyView";
+		
 	}
+	
+	
+	
+	
+	
 	
 	
 	//여행지 게시판 수정 update
 	@RequestMapping("/review_modify")
 	public String reviewModify(ReviewBoardVO reviewBoardVO, RedirectAttributes redirect, MultipartHttpServletRequest mpRequest) throws Exception {
-		
-		log.info("review_modify...");
-		log.info("rboardVO!!!=" + reviewBoardVO);
+			
+		log.info("review_modify...");	
 		
 		reviewService.updaterModify(reviewBoardVO, mpRequest);
-		
-		log.info("수정내용 보여줘"+ reviewBoardVO.toString());
-		
-		
+				
 		redirect.addAttribute("area", reviewBoardVO.getrArea());
 		redirect.addAttribute("rBoardNum", reviewBoardVO.getrBoardNum());
 		
@@ -192,60 +235,104 @@ public class ReviewBoardController {
 	}
 
 	
+//	//여행지 게시판 삭제 delete
+//	@GetMapping("/review_delete") 
+//	public String ReviewDelete(ReviewBoardVO reviewBoardVO, RedirectAttributes redirect) throws Exception{
+//		
+//	    log.info("review_delete...");
+//	    log.info("rboardVO="+ reviewBoardVO);
+//
+//	    ReviewBoardVO getDetail = reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()); //글번호를 넣어서 db에 해당 글번호에 해당하는 한줄을 가져온다.
+//	    log.info("getDetail=" + reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
+//	    
+//	    //rContent를 가져와서 ckeditor에 넣었던 값들의 이름을 분리하여 배열에 담는다.
+//	    //위의 getDetail 한줄 안에 있는 글내용을 선언하여 저장한다. 
+//	    String rContent = getDetail.getrContent();
+//	    
+//	    if(rContent == null || "".equals(rContent)) {  //rContent의 값이 없거나 빈값이라면
+//	    	reviewService.deleteBoard(reviewBoardVO);
+//	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
+//	  
+//	    }else{//rContent의 값이 존재하면
+//	    	int imgFindIndex = rContent.indexOf("uid=");
+//	    	
+//	    	if(imgFindIndex == -1) { //rContent 내용중 이미지가 존재하는경우
+//	    		String[] rContArr = rContent.split("uid=|#");
+//		    	//이미지가 없을 때 배열의 길이가 1로 출력됨. 1보다 클 경우로 if문 작성한다.
+//	    	    if(rContArr.length > 1) {
+//	    	    	for(int i=0; i<=rContArr.length-1; i++) {
+//	    	    		if(i%2 != 0) {
+//	    	    			
+//	    	    			String realName= rContArr[i];
+//	    	    			String realName2;
+//	    	    			String realName3;
+//	    	    			realName2 = realName.replace("&amp;", "");
+//	    					realName3= realName2.replace("fileName=", "_");
+//	    					log.info("realName3=" + realName3);
+//	    					
+//	    					File existFile = new File( "C:\\Review\\" + "ckImage/" + realName3); 
+//	    					if(existFile.exists()){
+//	    						existFile.delete(); 
+//	    					}
+//	    	    		}
+//	    	    		
+//	    	    	}
+//	    	    }
+//	    	}
+//	    	reviewService.deleteBoard(reviewBoardVO);
+//	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
+//	    }
+//		
+//		redirect.addAttribute("rArea", reviewBoardVO.getrArea());
+//	    
+//		return "redirect:review_boardList";
+//	}
+
+	
+
+	
+	
+	
 	//여행지 게시판 삭제 delete
+	@ResponseBody
 	@GetMapping("/review_delete") 
 	public String ReviewDelete(ReviewBoardVO reviewBoardVO, RedirectAttributes redirect) throws Exception{
 		
 	    log.info("review_delete...");
-	    log.info("rboardVO="+ reviewBoardVO);
-
-	    ReviewBoardVO getDetail = reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()); //글번호를 넣어서 db에 해당 글번호에 해당하는 한줄을 가져온다.
-	    log.info("getDetail=" + reviewService.getrBoardNum(reviewBoardVO.getrBoardNum()));
 	    
-	    //rContent를 가져와서 ckeditor에 넣었던 값들의 이름을 분리하여 배열에 담는다.
-	    //위의 getDetail 한줄 안에 있는 글내용을 선언하여 저장한다. 
-	    String rContent = getDetail.getrContent();
+	    int result = 0;
+	   
+	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    
-	    if(rContent == null || "".equals(rContent)) {  //rContent의 값이 없거나 빈값이라면
-	    	reviewService.deleterBoard(reviewBoardVO.getrBoardNum());
-	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
-	  
-	    }else{//rContent의 값이 존재하면
-	    	int imgFindIndex = rContent.indexOf("uid=");
-	    	
-	    	if(imgFindIndex == -1) { //rContent 내용중 이미지가 존재하는경우
-	    		String[] rContArr = rContent.split("uid=|#");
-		    	//이미지가 없을 때 배열의 길이가 1로 출력됨. 1보다 클 경우로 if문 작성한다.
-	    	    if(rContArr.length > 1) {
-	    	    	for(int i=0; i<=rContArr.length-1; i++) {
-	    	    		if(i%2 != 0) {
-	    	    			
-	    	    			String realName= rContArr[i];
-	    	    			String realName2;
-	    	    			String realName3;
-	    	    			realName2 = realName.replace("&amp;", "");
-	    					realName3= realName2.replace("fileName=", "_");
-	    					log.info("realName3=" + realName3);
-	    					
-	    					File existFile = new File( "C:\\Review\\" + "ckImage/" + realName3); 
-	    					if(existFile.exists()){
-	    						existFile.delete(); 
-	    					}
-	    	    		}
-	    	    		
-	    	    	}
-	    	    }
-	    	}
-	    	reviewService.deleterBoard(reviewBoardVO.getrBoardNum());
-	    	reviewService.removerBoard(reviewBoardVO.getrBoardNum());
-	    }
+	    String username = ((UserDetails)principal).getUsername();
+		String userId = reviewService.reviewBoardUserId(reviewBoardVO.getrBoardNum());
 		
-		redirect.addAttribute("rArea", reviewBoardVO.getrArea());
+		log.info("username:" + username);
+		log.info("userid:" + userId);
+		
+		if (username.equals(userId)) {
+			
+			log.info("삭제 성공");
+			
+			reviewBoardVO.setrId(username);
+			redirect.addAttribute("rArea", reviewBoardVO.getrArea());
+			
+			reviewService.deleteBoard(reviewBoardVO);
+			
+			result = 1;		
+			log.info(result);
+		}
 	    
-		return "redirect:review_boardList";
+		log.info(result);
+		
+		return String.valueOf(result);
 	}
-
 	
+	
+	
+	
+
+
 	
 	//ckeditor 이미지 저장 create
 	@RequestMapping("/img/imageUpload.do")

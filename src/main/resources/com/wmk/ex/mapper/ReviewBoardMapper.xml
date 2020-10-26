@@ -73,11 +73,21 @@
 	</insert>
 	
 	<!--게시판 삭제  -->
-	<insert id="deleterBoard" >
+	<delete id="deleteBoard" >
 	<![CDATA[
-		delete from Review_BOARD where rBoardNum = #{rBoardNum}
+		delete from Review_BOARD where rBoardNum = #{rBoardNum} and rId = #{rId}
 	]]>
-	</insert>
+	</delete>
+	
+	<!-- 게시판 아이디 체크 -->
+	<select id="reviewBoardUserId" resultType="String">
+	<![CDATA[
+	 	select rId
+	 		from Review_BOARD
+	 			where rBoardNum = #{rBoardNum}
+	 ]]>
+	</select>
+
 	
 	<!--조회수  -->
 	<insert id="addUprHit" >

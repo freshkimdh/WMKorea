@@ -7,7 +7,7 @@
 header {
   position: relative;
   background-color: black;
-  height: 35vh;
+  height:40vh;
   min-height: 20rem;
   width: 100%;
   overflow: hidden;
@@ -105,6 +105,27 @@ header .overlay {
 	}
 		
 	</style>
+	
+	<style>
+
+		#px {
+			font-size: 20px;
+		}
+
+	</style>
+
+	<style type="text/css">
+	
+	 #no-drag {
+ 
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none; 
+	user-select:none;
+	} 
+	   
+	</style>
 
 
 
@@ -113,10 +134,10 @@ header .overlay {
 	<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
 		<!--     <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4"> -->
 
-		<source src="img/M1.mp4" type="video/mp4">
+		<source src="img/M2.mp4" type="video/mp4">
 
 	</video>
-	<div class="container h-100">
+	<div class="container h-100" id="no-drag">
 		<div class="d-flex h-100 text-center align-items-center">
 			<div class="w-100 text-white">
 				<h1 class="display-3">Wemade Korea</h1>
@@ -128,14 +149,12 @@ header .overlay {
 
 
 <p>
-<div class="container">
+<div class="container" id="no-drag">
 	<p align="center" class="display-3" id="disf">City Display</p>
 </div>
 <br>
 
-
-
-<div class="container" id="district">
+<div class="container" id="no-drag">
 	<div class="row">
 
 		<div class="col-sm-4">
@@ -154,12 +173,14 @@ header .overlay {
 				</div>
 			</div>
 
-			<h4 align="center">
-				<a href="review_boardList?rArea='서울 ·경기·인천'" style="color: black">서울·경기·인천
-				</a>
-			</h4>
-			<p align="center">
-				(Seoul·Gyeonggi·Incheon) <br>
+
+ 			<p align="center">
+ 			
+			<a href="review_boardList?rArea='서울·경기·인천'"><img
+			src="img/seoul_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+			
+			</p>
 		</div>
 
 
@@ -178,11 +199,14 @@ header .overlay {
 			</div>
 
 
-			<h4 align="center">
-				<a href="review_boardList?rArea='강원도'" style="color: black">강원도</a>
-			</h4>
-			<p align="center">(Gangwon)</p>
-			<br>
+			<p align="center">
+			
+			<a href="review_boardList?rArea='강원도'"><img
+			src="img/gangwon_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
+			
 		</div>
 
 
@@ -200,12 +224,15 @@ header .overlay {
 					<span><h5>자세히 보기</h5></span>
 				</div>
 			</div>
+			
+			<p align="center">
+			
+			<a href="review_boardList?rArea='충청북도'"><img
+			src="img/chung-cheong_bukdo_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
 
-			<h4 align="center">
-				<a href="review_boardList?rArea='충청북도'" style="color: black">충청북도</a>
-			</h4>
-			<p align="center">(Chung-cheong bukdo)</p>
-			<br>
+			</p>
+			
 		</div>
 
 
@@ -225,11 +252,13 @@ header .overlay {
 			</div>
 
 
-			<h4 align="center">
-				<a href="review_boardList?rArea='충청남도'" style="color: black">충청남도</a>
-			</h4>
-			<p align="center">(Chungcheongnam-do)</p>
-			<br>
+			<p align="center">
+			
+			<a href="review_boardList?rArea='충청남도'"><img
+			src="img/chung-cheong_namdo_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
 		</div>
 
 		<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Second Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
@@ -249,11 +278,13 @@ header .overlay {
 
 			</div>
 
-			<h4 align="center">
-				<a href="review_boardList?rArea='경상북도'" style="color: black">경상북도</a>
-			</h4>
-			<p align="center">(Gyeongsangbuk-do)</p>
-			<br>
+			<p align="center">
+			
+			<a href="review_boardList?rArea='경상북도'"><img
+			src="img/gyeongsangbuk-do_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
 		</div>
 
 
@@ -275,12 +306,19 @@ header .overlay {
 					<span><h5>자세히 보기</h5></span>
 				</div>
 
+
+
 			</div>
-			<h4 align="center">
-				<a href="review_boardList?rArea='서울 ·경기·인천'" style="color: black">경상남도</a>
-			</h4>
-			<p align="center">(Gyeongsangnam-do)</p>
-			<br>
+
+			<p align="center">
+			
+			<a href="review_boardList?rArea='경상남도'"><img
+			src="img/gyeongsangnam-do_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
+
+
 		</div>
 
 		<!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Third Line >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
@@ -299,11 +337,16 @@ header .overlay {
 					<span><h5>자세히 보기</h5></span>
 				</div>
 			</div>
-			<h4 align="center">
-				<a href="review_boardList?rArea='전라북도'" style="color: black">전라북도</a>
-			</h4>
-			<p align="center">(Jeollabuk do)</p>
-			<br>
+			
+			
+			
+			<p align="center">
+			
+			<a href="review_boardList?rArea='전라북도'"><img
+			src="img/Jeollabuk do_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
 		</div>
 
 
@@ -320,11 +363,19 @@ header .overlay {
 					<span><h5>자세히 보기</h5></span>
 				</div>
 			</div>
-			<h4 align="center">
-				<a href="review_boardList?rArea='전라남도'" style="color: black">전라남도</a>
-			</h4>
-			<p align="center">(Jeollanam do)</p>
-			<br>
+			
+			
+			
+			
+			<p align="center">
+			
+			<a href="review_boardList?rArea='전라남도'"><img
+			src="img/Jeollanam_do_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
+			
+			
 		</div>
 
 
@@ -342,14 +393,18 @@ header .overlay {
 					<span><h5>자세히 보기</h5></span>
 				</div>
 			</div>
-			<h4 align="center">
-				<a href="review_boardList?rArea='제주도'" style="color: black">제주도</a>
-			</h4>
-			<p align="center">(Jeju do)</p>
-			<br>
+			
+			
+			<p align="center">
+			
+			<a href="review_boardList?rArea='제주도'"><img
+			src="img/jeju_intro.png"
+			class="img-fluid mx-auto d-block" width="280px" height="300px"></a>
+
+			</p>
 		</div>
 
 
 	</div>
 </div>
-
+<br><br>

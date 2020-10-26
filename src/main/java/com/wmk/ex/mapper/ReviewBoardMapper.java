@@ -20,7 +20,10 @@ public interface ReviewBoardMapper {
 	
 	public void updaterModify(ReviewBoardVO reviewBoardVO);
 	
-	public void deleterBoard(int reviewBoardNum);
+	public void deleteBoard(ReviewBoardVO reviewBoardVO);
+	
+	//리뷰 게시판 id
+	public String reviewBoardUserId(int reviewBoardNum) throws Exception;
 	
 	public void addUprHit(int reviewBoardNum);
 	

@@ -174,7 +174,55 @@
 			value="/WEB-INF/views/hot_board/hotReviewList.jsp" />
 
 	</definition>
+	
+	
+	
+	
+	
 	<!-- hot board end -->
+	
+	
+	
+	<!-- review board pages -->
+	
+	<definition name="/review_board/areaIndex" extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/review_board/areaIndex.jsp" />
+
+	</definition>
+	
+	<definition name="/review_board/userReviewList" extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/review_board/userReviewList.jsp" />
+
+	</definition>
+	
+	<definition name="/review_board/reviewContentView" extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/review_board/reviewContentView.jsp" />
+
+	</definition>
+	
+	<definition name="/review_board/modifyView" extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/review_board/modifyView.jsp" />
+
+	</definition>
+
+	<definition name="/review_board/writeView" extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/review_board/writeView.jsp" />
+
+	</definition>	
+	
+	
+		
+	<!-- review board pages end -->
 	
 	
 

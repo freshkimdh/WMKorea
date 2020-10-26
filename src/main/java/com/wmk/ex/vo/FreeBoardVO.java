@@ -14,6 +14,19 @@ public class FreeBoardVO {
 	private int fStep;
 	private int fIndent;
 
+	public FreeBoardVO(int fBoard_Num, String fId, String fTitle, String fContent, Date fDate, int fHit, int fGroup,
+			int fStep, int fIndent) {
+		this.fBoard_Num = fBoard_Num;
+		this.fId = fId;
+		this.fTitle = fTitle;
+		this.fContent = fContent;
+		this.fDate = fDate;
+		this.fHit = fHit;
+		this.fGroup = fGroup;
+		this.fStep = fStep;
+		this.fIndent = fIndent;
+	}
+
 	public FreeBoardVO() {
 
 	}

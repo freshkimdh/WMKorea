@@ -58,7 +58,15 @@
 					class="fab fa-google fa-fw"></i> <img src="img/kakao_icon.jpg"
 					width="25"><strong> 카카오톡 로그인 </strong>
 				</a>
-
+				
+				<a class="btn btn-success btn-user btn-block" onclick="return confirm('서비스 지원 예정입니다.');">
+					<i class="fab fa-facebook-f fa-fw"></i> <img src="img/naver_icon.png" width="25"><strong> 네이버 로그인 </strong>
+				</a>
+				
+				
+<!-- 	<p align="right"><a class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a></p>	 -->
+	
+				
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 
