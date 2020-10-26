@@ -4,7 +4,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
 
 
 	<style type="text/css">
@@ -20,24 +19,6 @@
 	   
 	</style>
 	
-	<script type="text/javascript">
-	 	$(document).ready(function(){
-	 		$("#findReviewBtn").on("click", function(){  
-	 			var form = document.review_boardByTitle;
-	 			var empty = "";
-	 			if( $("#rTitle").val().trim() == null || $("#rTitle").val().trim() == empty || $("#rTitle").val().trim() == undefined ) {
-	 				alert("검색어를 입력해주세요");
-	 				$("#rTitle").val("");
-	 			}else{
-	 				form.submit();
-	 			}
-	 			
-	 		});
- 		});
-	 		 
-	</script> 
-</head>
-
 <div class="container" id="no-drag"> <!-- table -->
 	<div class="row"> <!-- td -->
 	
@@ -134,4 +115,20 @@
  	</ul>
 </div>
 
+	<script type="text/javascript">
+	 	$(document).ready(function(){
+	 		$("#findReviewBtn").on("click", function(){  
+	 			var form = document.review_boardByTitle;
+	 			var empty = "";
+	 			if( $("#rTitle").val().trim() == null || $("#rTitle").val().trim() == empty || $("#rTitle").val().trim() == undefined ) {
+	 				alert("검색어를 입력해주세요");
+	 				$("#rTitle").val("");
+	 			}else{
+	 				form.submit();
+	 			}
+	 			
+	 		});
+ 		});
+	 		 
+	</script> 
 </nav>

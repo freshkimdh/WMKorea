@@ -41,23 +41,6 @@
 		}
 	</style>
 	
-	<script type="text/javascript">
-	 	$(document).ready(function(){
-	 		$("#findBtn").on("click", function(){  
-	 			var form = document.boardByTitle;
-	 			var empty = "";
-	 			if( $("#fTitle").val().trim() == null || $("#fTitle").val().trim() == empty || $("#fTitle").val().trim() == undefined ) {
-	 				alert("검색어를 입력해주세요");
-	 				$("#fTitle").val("");
-	 			}else{
-	 				form.submit();
-	 			}
-	 			
-	 		});
- 		});
-	 		 
-	</script> 
-
 </head>
 
 <body>
@@ -178,6 +161,24 @@
 	</div>
 <br>
 </div>
+
+
+	<script type="text/javascript">
+	 	$(document).ready(function(){
+	 		$("#findBtn").on("click", function(){  
+	 			var form = document.boardByTitle;
+	 			var empty = "";
+	 			if( $("#fTitle").val().trim() == null || $("#fTitle").val().trim() == empty || $("#fTitle").val().trim() == undefined ) {
+	 				alert("검색어를 입력해주세요");
+	 				$("#fTitle").val("");
+	 			}else{
+	 				form.submit();
+	 			}
+	 			
+	 		});
+ 		});
+	 		 
+	</script> 
 
 
 
