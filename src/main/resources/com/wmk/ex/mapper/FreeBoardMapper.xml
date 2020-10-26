@@ -96,7 +96,7 @@
 	<!--댓글 입력  -->
 	<insert id="registReply">
 		insert into free_reply (fBoard_Num, id, repNum, repCon)
- 			values (#{fBoard_Num}, #{id}, tbl_reply_seq.nextval, #{repCon})
+ 			values (#{fBoard_Num}, #{id}, FREE_REPLY_SEQ.nextval, #{repCon})
 	</insert>
 	
 	<!-- 댓글 삭제 -->
