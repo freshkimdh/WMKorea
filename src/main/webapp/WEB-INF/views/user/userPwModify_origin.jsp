@@ -28,7 +28,7 @@
 
  <fieldset>
  
-<form:form id="modifyForm" action="update" method="POST">
+<form:form id="PWmodifyForm" action="pwupdate" method="POST">
  <table border="1" id="modifyTable">
 
   	<div class="form-group">
@@ -65,7 +65,7 @@
 			location.href = "/ex/index";
 
 		});
-		if($("#modifyForm").submit(function() {
+		if($("#PWmodifyForm").submit(function() {
 			alert("수정하시겠습니까?");
 			if($("#pw").val() !== $("#pw2").val()){
 				alert("비밀번호가 다릅니다.");

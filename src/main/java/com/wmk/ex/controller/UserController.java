@@ -240,7 +240,7 @@ public class UserController {
 
 	@GetMapping("/userPwModify")
 	public String Pwmodify() {
-		log.info("modify personal information");
+		log.info("password modify personal information");
 		return "user/userPwModify";
 	}
 
@@ -260,4 +260,16 @@ public class UserController {
 		return "redirect:/index";
 	}
 
+	@PostMapping("/pwupdate")
+	public String userPwModify(UserVO userVO, HttpSession session) {
+		log.info("to Modify user information");
+
+		log.info(userVO.getId());
+		log.info(userVO.getPw());
+
+		userService.pwModifyUser(userVO);
+		session.invalidate();
+
+		return "redirect:/index";
+	}
 }

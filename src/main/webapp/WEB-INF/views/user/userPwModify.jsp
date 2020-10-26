@@ -138,7 +138,7 @@
 	
  <fieldset>
  
-<form:form id="modifyForm" action="update" method="POST">
+<form:form id="PWmodifyForm" action="pwupdate" method="POST">
  <table border="1" id="modifyTable">
 
   	<div class="form-group">
@@ -190,7 +190,7 @@
 			location.href = "/ex/index";
 
 		});
-		if($("#modifyForm").submit(function() {
+		if($("#PWmodifyForm").submit(function() {
 			alert("수정하시겠습니까?");
 			if($("#pw").val() !== $("#pw2").val()){
 				alert("비밀번호가 다릅니다.");
@@ -205,27 +205,11 @@
 				alert("공백은 입력이 불가능합니다.");
 				return false;
 			}
-			else if($("#id").val()==""){
-				alert("아이디를 입력해주세요.");
-				$("#id").focus();
-				return false;
-			}
 			else if($("#pw").val()==""){
 				alert("비밀번호를 입력해주세요.");
 				$("#pw").focus();
 				return false;
 			}
-			else if($("#nickName").val()==""){
-				alert("성명을 입력해주세요.");
-				$("#nickName").focus();
-				return false;
-			}
-			else if($("#email").val()==""){
-				alert("이메일을 입력해주세요.");
-				$("#name").focus();
-				return false;
-			}
-			
 			
 		}));
 		
