@@ -13,6 +13,7 @@ public interface ReviewBoardService {
 	
 	//여행 게시판 목록
 	public List<ReviewBoardVO> getHotReviewList(ReviewBoardVO reviweBoardVO);
+
 	public List<ReviewBoardVO> getReviewList(ReviewBoardVO reviweBoardVO);
 	public List<ReviewBoardVO> getReviewListAjax(ReviewBoardVO reviweBoardVO);
 	
