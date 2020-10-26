@@ -16,17 +16,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 public class HomeController {
-	
-
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	  public String hello(Locale locale, Model model) {
-
-	  
-	  return "tiles";
-	  }
 
 	
-	@RequestMapping(value="index", method = RequestMethod.GET)
+	@GetMapping(value="index")
 	public String index(Model model) {
 		log.info("index...");
 		
@@ -59,49 +51,35 @@ public class HomeController {
 		log.info("mypage...");
 		return "/wmk_home/myPage";
 	}
+		
 	
-	//아래 코드 삭제 예정
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
-	}
-	
-	@RequestMapping(value="tiles", method = RequestMethod.GET)
+	@GetMapping("tiles")
 	public String layout(Model model) {
 		return "layout";
 	}
 	
 
-	@RequestMapping(value="/accessDenied", method = RequestMethod.GET)
+	@GetMapping("/accessDenied")
 	public String accessDenied(Model model) {
 		return "accessDenied";
 	}
 	
-	@RequestMapping(value="/loginFail", method = RequestMethod.GET)
+	@GetMapping("/loginFail")
 	public String loginFail(Model model) {
 		return "loginFail";
 	}
 	
-	@RequestMapping(value="/modifyFail", method = RequestMethod.GET)
+	@GetMapping("/modifyFail")
 	public String modifyFail() {
 		return "modifyFail";
 	}
 	
-	@RequestMapping(value="seoulList", method = RequestMethod.GET)
+	@GetMapping("seoulList")
 	public String seoulList(Model model) {
 		return "seoulList";
 	}
 	
-	@RequestMapping(value="seoulCotentView", method = RequestMethod.GET)
+	@GetMapping("seoulCotentView")
 	public String seoulCotentView(Model model) {
 		return "seoulCotentView";
 	}

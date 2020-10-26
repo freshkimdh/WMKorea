@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,9 +41,10 @@ public class ShopController {
 	@Inject
 	ShopService service;
     
-	 
+	
+	//장바구니 추가
 	@ResponseBody
-	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
+	@PostMapping("/addCart")
 	public void addCart(CartVO cart, HttpSession session) throws Exception {
 		 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,8 +55,8 @@ public class ShopController {
 	}	 	 
 	 
 	 
-	//��ٱ��� ����
-	@RequestMapping(value = "/cartList", method = RequestMethod.GET)
+	//장바구니 리스트
+	@GetMapping("/cartList")
 	public String getCartList(HttpSession session, Model model) throws Exception {
 		log.info("get cart list");
 		 
@@ -70,9 +72,9 @@ public class ShopController {
 	}
 
 	
-	// ��ٱ��� ����
+	//장바구니 삭제
 	@ResponseBody
-	@RequestMapping(value = "/shop/cartList/deleteCart", method = RequestMethod.POST)
+	@PostMapping("/shop/cartList/deleteCart")
 	public int deleteCart(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
 		
 		log.info("delete cart");	  	  
@@ -97,7 +99,8 @@ public class ShopController {
 		return result;  
 	 }
 	 
-	 
+	
+	//제품 주문 (get)
 	@GetMapping("/goodsOrder") 
 	public String goodsOrder(Model model) throws Exception {
 			
@@ -117,8 +120,8 @@ public class ShopController {
 	}
 		
 		
-	// goodsOrder�� �ִ� ��ǰ �ֹ��ϱ�
-	@RequestMapping(value = "/goodsOrder", method = RequestMethod.POST)
+	//제품 주문 (post)
+	@PostMapping("/goodsOrder")
 	public String goodsOrder(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 			 
 		log.info("order");
@@ -158,8 +161,8 @@ public class ShopController {
 		 	 
 	 	 
 	 
-	// ��ٱ��Ͽ� �ִ� ��ǰ �ֹ��ϱ�
-	@RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	//Cart 리스트
+	@PostMapping("/cartList")
 	public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
 		 
 		log.info("order");
@@ -198,8 +201,8 @@ public class ShopController {
 	 }
 	 
 	 
-	
-	@RequestMapping(value = "/goodsOrderComplete", method = RequestMethod.GET)
+	//구매 완료
+	@GetMapping("/goodsOrderComplete")
 	public String goodsOrderComplete(HttpSession session, OrderVO order, Model model) throws Exception {
 		
 		log.info("/goodsOrderComplete");
@@ -222,8 +225,8 @@ public class ShopController {
 	
 	
 	 
-	// Ư�� ������ �ֹ� ��Ϻ���
-	 @RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	 //주문 모록
+	 @GetMapping("/orderList")
 	 public String getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
 		
 		 log.info("get order list");
@@ -242,8 +245,8 @@ public class ShopController {
 	  
 	 }
 	 
-	// ū �ֹ��� �� ��� ����
-	@RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	//주문목록 뷰
+	@GetMapping("/orderView")
 	public String getOrderList(HttpSession session, @RequestParam("n") String orderId, OrderVO order, Model model) throws Exception {
 		log.info("get order view");
 	  
