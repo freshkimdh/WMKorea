@@ -554,11 +554,27 @@ console.log("aaa"+isSelectLike);
       
   </script>
 
-<p align="right">
-<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
-<a href="javascript:history.back();" class="btn btn-dark" role="button">목록</a>
-</p>
-<br>
+
+
+
+
+
+<sec:authorize access="isAnonymous()">
+	<p align="right">
+	<a href="" class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a>
+	<a href="javascript:history.back();" class="btn btn-dark" role="button">목록</a>
+	</p>
+	<br>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">	
+	<p align="right">
+	<a href="review_writeView?rArea=${rArea}" class="btn btn-dark" role="button">글 작성</a>
+	<a href="javascript:history.back();" class="btn btn-dark" role="button">목록</a>
+	</p>
+	<br>
+</sec:authorize>
+
 
 </div>
 
