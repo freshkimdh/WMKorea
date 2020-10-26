@@ -9,13 +9,15 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
 	<!-- Application Loggers -->
+<!-- 
 	<logger name="com.wmk.ex">
 		<level value="info" />
 	</logger>
+ -->	
 	
-	<!-- 3rdparty Loggers -->
+	
+	 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>	
@@ -34,7 +36,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
 	

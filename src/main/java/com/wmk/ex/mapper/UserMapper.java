@@ -36,7 +36,7 @@ public interface UserMapper {
 	public void delMember(UserVO userVO);
 	
 	//UpdateUsers
-	@Update("update wmk_users set pw = #{pw}, nickname = #{nickname}, email =#{email}, nationality =#{nationality}  where id = #{id}")
+	@Update("update wmk_users set pw = #{pw}, nickname = #{nickname,jdbcType=VARCHAR}, email =#{email,jdbcType=VARCHAR}, nationality =#{nationality,jdbcType=VARCHAR}  where id = #{id}")
 	public void modifyUser(UserVO userVO);
 	//UserIdCheck
 	@Select("select count(*) from wmk_users where id = #{id}")

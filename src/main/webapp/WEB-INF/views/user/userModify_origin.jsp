@@ -8,64 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>사용자 홈</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-    $(function() {
-    	$("#cancel").on("click", function(){
-
-			location.href = "/ex/index";
-
-		});
-		if($("#modifyForm").submit(function() {
-			alert("수정하시겠습니까?");
-			if($("#pw").val() !== $("#pw2").val()){
-				alert("비밀번호가 다릅니다.");
-				$("#pw").val("").focus();
-				$("#pw2").val("");
-				return false;
-			}else if ($("#pw").val().length < 8) {
-				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-				$("#pw").val("").focus();
-				return false;
-			}else if($.trim($("#pw").val()) !== $("#pw").val()) {
-				alert("공백은 입력이 불가능합니다.");
-				return false;
-			}
-			else if($("#id").val()==""){
-				alert("아이디를 입력해주세요.");
-				$("#id").focus();
-				return false;
-			}
-			else if($("#pw").val()==""){
-				alert("비밀번호를 입력해주세요.");
-				$("#pw").focus();
-				return false;
-			}
-			else if($("#nickName").val()==""){
-				alert("성명을 입력해주세요.");
-				$("#nickName").focus();
-				return false;
-			}
-			else if($("#email").val()==""){
-				alert("이메일을 입력해주세요.");
-				$("#name").focus();
-				return false;
-			}
-			
-			
-		}));
-		
-	});
-    </script>
-    <script>
-    function onlyNumber(){
-
-        if((event.keyCode<48)||(event.keyCode>57))
-
-           event.returnValue=false;
-
-	}
-
-    </script>
 </head>
 
 <body>
@@ -137,6 +79,62 @@
 
 </body>
 
+ <script>
+    $(function() {
+    	$("#cancel").on("click", function(){
 
-</body>
+			location.href = "/ex/index";
+
+		});
+		if($("#modifyForm").submit(function() {
+			alert("수정하시겠습니까?");
+			if($("#pw").val() !== $("#pw2").val()){
+				alert("비밀번호가 다릅니다.");
+				$("#pw").val("").focus();
+				$("#pw2").val("");
+				return false;
+			}else if ($("#pw").val().length < 3) {
+				alert("비밀번호는 3자 이상으로 설정해야 합니다.");
+				$("#pw").val("").focus();
+				return false;
+			}else if($.trim($("#pw").val()) !== $("#pw").val()) {
+				alert("공백은 입력이 불가능합니다.");
+				return false;
+			}
+			else if($("#id").val()==""){
+				alert("아이디를 입력해주세요.");
+				$("#id").focus();
+				return false;
+			}
+			else if($("#pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#pw").focus();
+				return false;
+			}
+			else if($("#nickName").val()==""){
+				alert("성명을 입력해주세요.");
+				$("#nickName").focus();
+				return false;
+			}
+			else if($("#email").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#name").focus();
+				return false;
+			}
+			
+			
+		}));
+		
+	});
+    </script>
+    <script>
+    function onlyNumber(){
+
+        if((event.keyCode<48)||(event.keyCode>57))
+
+           event.returnValue=false;
+
+	}
+
+    </script>
 </html>
