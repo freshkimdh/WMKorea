@@ -247,10 +247,9 @@
 		
 			<a href="" class="btn btn-dark" role="button" onclick="return confirm('회원가입시 이용가능합니다.');">구매하기</a>
 			<a href="" class="btn btn-dark" role="button" onclick="return confirm('회원가입시 이용가능합니다.');">장바구니 담기</a>
-		
+			
 		</sec:authorize>
-		
-
+			
 		<sec:authorize access="isAuthenticated()">			
 			
 			<a href="goodsOrder" class="btn btn-dark addCart_btn2" role="button">구매하기</a>
@@ -359,6 +358,9 @@
 		
 		<br><br>
 		<h3 align="center">이 곳은 제품의 상세정보가 들어갑니다.</h3>
+		<sec:authorize access="isAuthenticated()">
+			<a href="admin/goodsDelete?gdsNum=${view.gdsNum}" class="btn btn-dark" role="button">상품 삭제</a>
+		</sec:authorize>	
 		<br>
 	
 	</div>
