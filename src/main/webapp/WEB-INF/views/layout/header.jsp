@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html>
+<head>
 
 
 	<style type="text/css">
@@ -18,7 +19,24 @@
 	} 
 	   
 	</style>
-
+	
+	<script type="text/javascript">
+	 	$(document).ready(function(){
+	 		$("#findReviewBtn").on("click", function(){  
+	 			var form = document.review_boardByTitle;
+	 			var empty = "";
+	 			if( $("#rTitle").val().trim() == null || $("#rTitle").val().trim() == empty || $("#rTitle").val().trim() == undefined ) {
+	 				alert("검색어를 입력해주세요");
+	 				$("#rTitle").val("");
+	 			}else{
+	 				form.submit();
+	 			}
+	 			
+	 		});
+ 		});
+	 		 
+	</script> 
+</head>
 
 <div class="container" id="no-drag"> <!-- table -->
 	<div class="row"> <!-- td -->
@@ -32,11 +50,11 @@
 			<!-- Search Bar -->
 <!-- 			<p>Search Bar</p> -->
 		<p>
-		<form action="review_boardByTitle" method="get">
+		<form name="review_boardByTitle" action="review_boardByTitle" method="get">
 	 		<div class="input-group mb-3">
 	  			<input type="text" name="rTitle" id="rTitle" class="form-control" placeholder="Search">
 	  			<div class="input-group-append">
-	    			<button class="btn btn-danger" type="submit">Go</button>
+	    			<button id="findReviewBtn" class="btn btn-danger" type="button">Go</button>
 	  			</div>
 			</div>
 		</form>

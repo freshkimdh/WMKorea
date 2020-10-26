@@ -40,6 +40,23 @@
 			color: white;
 		}
 	</style>
+	
+	<script type="text/javascript">
+	 	$(document).ready(function(){
+	 		$("#findBtn").on("click", function(){  
+	 			var form = document.boardByTitle;
+	 			var empty = "";
+	 			if( $("#fTitle").val().trim() == null || $("#fTitle").val().trim() == empty || $("#fTitle").val().trim() == undefined ) {
+	 				alert("검색어를 입력해주세요");
+	 				$("#fTitle").val("");
+	 			}else{
+	 				form.submit();
+	 			}
+	 			
+	 		});
+ 		});
+	 		 
+	</script> 
 
 </head>
 
@@ -135,7 +152,7 @@
 </div>
 
 
-<div class="container" id="boardByTitle">
+<div class="container">
 
 	<div class="row">
 		
@@ -144,11 +161,11 @@
 
 		<div class="col-sm-4">
 <!-- Board Search Bar -->
-		<form action="boardByTitle" method="get">
+		<form name="boardByTitle" action="boardByTitle" method="get">
  			<div class="input-group mb-3">
   				<input type="text" name="fTitle" id="fTitle" class="form-control" placeholder="">
   				<div class="input-group-append">
-    				<button class="btn btn-danger btn-dark" type="submit">검색</button>
+    				<button id="findBtn" class="btn btn-danger btn-dark " type="button">검색</button>
   				</div>
 			</div>
 		</form>	
@@ -161,7 +178,6 @@
 	</div>
 <br>
 </div>
-
 
 
 
