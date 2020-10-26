@@ -104,7 +104,7 @@
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
-		<a class="btn btn-dark">환영합니다. <sec:authentication property="principal.user.nickname"/> 님</a>
+		<a class="btn btn-dark">반갑습니다.<sec:authentication property="principal.user.nickname"/> 님</a>
    		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
    			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
    		</form:form> 
