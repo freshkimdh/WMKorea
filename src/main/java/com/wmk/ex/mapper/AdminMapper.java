@@ -2,33 +2,24 @@ package com.wmk.ex.mapper;
 
 import java.util.List;
 
-import com.wmk.ex.vo.CartVO;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
 
 public interface AdminMapper {
 	
-	//Ä«Å×°í¸®
+	//ìƒí’ˆ ì¹´í…Œê³ ë¦¬
 	public List<CategoryVO> category() throws Exception; 
 	
-	//»óÇ°µî·Ï
+	//ìƒí’ˆ ë“±ë¡
 	public void register(GoodsVO vo) throws Exception; 
 	
-	//»óÇ° ¸ñ·Ï
+	//ìƒí’ˆ ë¦¬ìŠ¤íŠ¸
 	public List<GoodsViewVO> goodslist() throws Exception;
 	
-	//»óÇ° Á¶È¸
-	public GoodsViewVO goodsView(int gdsNum) throws Exception;
+	//ìƒí’ˆ ë‚´ìš©
+	public GoodsViewVO goodsView(int gdsNum) throws Exception;	
 	
-	//»óÇ° ¼öÁ¤
-	public void goodsModify(GoodsVO vo) throws Exception; 
-	
-	//»óÇ° »èÁ¦
-	public void goodsDelete(int gdsNum) throws Exception;
-	
-	//Àå¹Ù±¸´Ï ´ã±â
-	public void addCart(CartVO cart) throws Exception; 
-	
-	
+	//ìƒí’ˆì‚­ì œ
+	public void goodsDelete(GoodsViewVO goodsViewVO) throws Exception;
 }

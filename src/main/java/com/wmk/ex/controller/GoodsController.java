@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wmk.ex.service.AdminService;
 import com.wmk.ex.service.ShopService;
 import com.wmk.ex.vo.CategoryVO;
+import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
 
@@ -115,27 +117,7 @@ public class GoodsController {
 		category = adminService.category();
 		model.addAttribute("category", JSONArray.fromObject(category));
 		
-	}
-		
-	// ��ǰ ����
-	@RequestMapping(value = "/admin_goods/goods/modify", method = RequestMethod.POST)
-	public String postGoodsModify(GoodsVO vo) throws Exception {
-		log.info("post goods modify");
-
-		adminService.goodsModify(vo);
-		 
-		return "redirect:/admin_goods/index";
-	}
-		
-	// ��ǰ ����
-	@RequestMapping(value = "/admin_goods/goods/delete", method = RequestMethod.POST)
-	public String postGoodsDelete(@RequestParam("n") int gdsNum) throws Exception {
-		log.info("post goods delete");
-
-		adminService.goodsDelete(gdsNum);
-		 
-		return "redirect:/admin_goods/index";
-	}
+	}		
 	
 	
 	// ��ǰ ���
@@ -206,6 +188,16 @@ public class GoodsController {
 
 	}
 	
+	//상품 삭제
+	@GetMapping("/admin/goodsDelete") 
+	public String goodsDelete(GoodsViewVO goodsViewVO) throws Exception {
+		
+		log.info("goodsDelete...");
+		adminService.goodsDelete(goodsViewVO);
+		   
+	    return "redirect:goodsList";
+	
+	}
 	
 	
 	

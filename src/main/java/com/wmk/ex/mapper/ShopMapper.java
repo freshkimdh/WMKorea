@@ -13,19 +13,17 @@ public interface ShopMapper {
 	
 
 	public UserVO userIdread(String id) throws Exception;
-	
-	
+		
 	//장바구니 담기
 	public void addCart(CartVO cart) throws Exception;
 	
-	
-	//��ٱ��� ����
+	//카트 리스트
 	public List<CartListVO> cartList(String username);
 	
-	//��ٱ��� ����
+	//카트 삭제
 	public void deleteCart(CartVO cart) throws Exception;
 	
-	//�ֹ�����
+	//주문
 	public void orderInfo(OrderVO order) throws Exception;
 		
 	//�ֹ� ������

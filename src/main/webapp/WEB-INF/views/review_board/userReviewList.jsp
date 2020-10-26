@@ -63,19 +63,29 @@
             	   sTxt += 			'</div>';
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
-            	   sTxt += 					'<span class="badge  badge-pill badge-danger">좋아요</span>'+order.like_Cnt;
+            	   sTxt +=					'<span class="fa fa-star checked"></span>';
+            	   sTxt +=					'<span class="fa fa-star"></span>';
+            	   sTxt +=					'<span class="fa fa-star"></span>';
+            	   sTxt +=					'<span class="fa fa-star"></span>';
+            	   sTxt +=					'<span class="fa fa-star"></span> <a>(1)</a> <br>';            	   
+            	   
+            	   
+            	   
+            	   
+            	   
+            	   sTxt += 					'<span class="badge  badge-pill badge-danger">Like</span>&nbsp'+ order.like_Cnt + '&nbsp';
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
             	   }else if(order.rCategory == 1){
-            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 관광지';
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>&nbsp'+order.rArea+' &#187 '+'관광지';
             	   }else if(order.rCategory == 2){
-            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 행사';
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>&nbsp'+order.rArea+' &#187 '+'행사';
             	   }else if(order.rCategory == 3){
-            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 맛집';
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>&nbsp'+order.rArea+' &#187 '+'맛집';
             	   }else if(order.rCategory == 4){
-            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 기타';
+            	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span>&nbsp'+order.rArea+' &#187 '+'기타';
             	   }
-            	   sTxt += 					'<span class="badge  badge-pill badge-primary">지역</span>'+order.rArea;
+
             	   sTxt += 			'</div>';
             	   sTxt += 		'</div>';
             	   sTxt += 		'<br>';
@@ -166,27 +176,30 @@
   	
   	<div class="col-sm-8" align="center">
   	
-		<!-- Group button details-->
-		<div class="btn-group btn-group btn-block" id="cate">
-		
-<!--   			<ul id="cate">
+  	
+  		  	<ul id="cate">
 
-				<li id="cate2" class="btn btn-secondary cate2" value="0">전체</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="1">관광지</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="2">행사</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="3">맛집</li> 
-				<li id="cate2" class="btn btn-secondary cate2" value="4">기타</li>
+				<li id="cate2" class="btn btn-secondary btn-lg cate2" value="0">전체</li> 
+				<li id="cate2" class="btn btn-secondary btn-lg cate2" value="1">관광지</li> 
+				<li id="cate2" class="btn btn-secondary btn-lg cate2" value="2">행사</li> 
+				<li id="cate2" class="btn btn-secondary btn-lg cate2" value="3">맛집</li> 
+				<li id="cate2" class="btn btn-secondary btn-lg cate2" value="4">기타</li>
 	 
-		    </ul>	   	 -->	        
+		    </ul>
+  	
+		<!-- Group button details-->
+<!-- 		<div class="btn-group btn-group btn-block" id="cate">
 		
-			<button id="cate2" type="button" class="btn btn-secondary cate2" value="0">전체</button>
+
+  			<button id="cate2" type="button" class="btn btn-secondary cate2" value="0">전체</button>
 			<button id="cate2" type="button" class="btn btn-secondary cate2" value="1">관광지</button>
 		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="2">행사</button>
 		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="3">맛집</button>
 		    <button id="cate2" type="button" class="btn btn-secondary cate2" value="4">기타</button>
-	    
+
 		    
-		</div>  	
+		</div> -->
+		  	
   	</div>
   	
   	
@@ -228,7 +241,7 @@
 
 
  	     <span class="badge  badge-pill badge-danger">Like</span> ${userList.like_Cnt}
-<%-- 			&#10084; ${userList.like_Cnt} --%>
+
 	     <span class="badge  badge-pill badge-success">분류</span>
 	     				${userList.rArea} &#187;
 	      				<c:if test="${userList.rCategory eq '1'}">관광지</c:if>
@@ -236,7 +249,7 @@
         	     		<c:if test="${userList.rCategory eq '3'}">맛집</c:if>
         	     		<c:if test="${userList.rCategory eq '4'}">기타</c:if>
         	     		<br>
-<%--         <span class="badge  badge-pill badge-primary">지역</span>${userList.rArea} --%>
+
        </div>
 	  </div>
 	  <br>
@@ -250,6 +263,15 @@
   </div>
  
 	<!--  board buttons --> 
+	
+	<sec:authorize access="isAnonymous()">
+ 	<div class="container">
+		<p align="right">
+		<a href="" class="btn btn-dark" role="button" onclick="return confirm('로그인시 작성 가능합니다.');">글 작성</a>
+		</p>
+	</div>
+	</sec:authorize>	
+	
 	<sec:authorize access="isAuthenticated()">
  	<div class="container">
 	<p align="right">
