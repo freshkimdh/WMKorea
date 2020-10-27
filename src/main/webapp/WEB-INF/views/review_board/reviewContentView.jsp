@@ -432,7 +432,7 @@ var isSelectLike = '${isSelectLike}';
 isSelectLike = isSelectLike === 'true';
 console.log("aaa"+isSelectLike);
     $(document).ready(function () {
-    	var likeMessage = isSelectLike ? 'UnLike' : 'Like';
+    	var likeMessage = isSelectLike ? 'Unlike' : 'Like';
     	$("#like").text(likeMessage);
 		
         $("#likeBtn").on("click", function () {
@@ -446,7 +446,7 @@ console.log("aaa"+isSelectLike);
                 dataType : "text",
                 contentType: "application/json",
                 success: function(isSuccess) {
-                	$("#like").text();isSelectLike? "Like" : "UnLike" 
+                	$("#like").text();isSelectLike? "Like" : "Unlike" 
                 	isSelectLike = !isSelectLike;
 
                 	if(isSuccess){

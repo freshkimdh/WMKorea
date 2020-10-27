@@ -84,6 +84,9 @@ public class UserController {
 		CustomUser loginInfo = (CustomUser) authentication.getPrincipal();
 		log.info("loginInfo:  " + loginInfo);
 		boolean isValidPassword = passEncoder.matches(userVO.getPw(), loginInfo.getUser().getPw());
+		
+		log.info("userVO.getPw()   :  " + userVO.getPw());
+		log.info("loginInfo.getUser().getPw()   :  " +  loginInfo.getUser().getPw());
 		log.info("true & fail isValidPassword   :  " + isValidPassword);
 		log.info("login ID      :  " + loginInfo.getUser().getId());
 		log.info("login password   :  " + userVO.getPw());
@@ -142,7 +145,7 @@ public class UserController {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
+		
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "af9546b83fbd65051801d2e327f8c259");
@@ -200,16 +203,25 @@ public class UserController {
 		String socialUserId = kakaoProfile.getId().toString();
 		UserVO loginUserInfo = userService.getUserByIdAndLoginType(socialUserId, "kakao");
 
+		log.info("socialUserId    :"+socialUserId);
+		log.info("loginUserInfo   :"+loginUserInfo);
 		log.info("테스트");
-		log.info(loginUserInfo);
 
 		if (loginUserInfo == null) {
-			// 여기도 카카오 로그인 타입을 추가해야지
-			UserVO socialRegisterUser = UserVO.builder().id(socialUserId).pw(kakaoProfile.getId() + "kakao")
-					.nickname(kakaoProfile.getProperties().getNickname())
-					.email(" ").nationality("nationality").enabled(1).login_Type("kakao").build();
-			log.info("  여기까지 왔낭  	;" + gson.toJson(socialRegisterUser));
+			// 여기 카카오 로그인 타입을 추가
+			UserVO socialRegisterUser = UserVO.builder()
+					.id(socialUserId)	//카카오에서 제공하는 아이디 
+					.pw(kakaoProfile.getId() + "kakao")
+					.nickname(kakaoProfile.getProperties()//카카오에 설정된 닉네임
+					.getNickname())
+					.email(" ")
+					.nationality("nationality")
+					.enabled(1)
+					.login_Type("kakao")//로그인 타입에 kakao넣어줌 
+					.build();
+			log.info(" 정보를 넣어줌!! 	;" + gson.toJson(socialRegisterUser));
 			userService.addUser(socialRegisterUser);
+			//service통해서 유저 추가 
 		}
 
 		// 시큐리티 제공하는 유저 정보 조회 서비스를 통한 유저 정보 조회
