@@ -23,6 +23,8 @@
 		select * from wmk_users where login_Type = #{login_Type}
 	</select>
 	
+	
+	
 	<select id="readUserByIdAndLoginType" resultType="com.wmk.ex.vo.UserVO">
 		select * from wmk_users where id = #{id} and login_Type = #{login_Type}
 	</select>

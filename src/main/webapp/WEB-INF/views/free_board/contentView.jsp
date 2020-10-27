@@ -60,7 +60,7 @@
 
 
   <script> 
-  //댓글 삭제
+  //댓글 리스트, 삭제
   function replyList() {
     var fBoard_Num = ${contentView.fBoard_Num};
     $.getJSON("${pageContext.request.contextPath}/free_board/replyList" + "?n=" + fBoard_Num, function(data){

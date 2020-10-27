@@ -23,7 +23,9 @@ public class UserService {
 	private UserMapper userMapper;
 
 	public void addUser(UserVO userVO) {
-
+		
+		log.info("addUser");
+		
 		String pw = userVO.getPw();
 
 		String encode = passEncoder.encode(pw);
@@ -40,6 +42,8 @@ public class UserService {
 		userMapper.insertAuthorities(userVO);
 
 	}
+	
+	
 
 	@Transactional
 	public void userDelete(UserVO userVO) throws Exception {
