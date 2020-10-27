@@ -107,7 +107,7 @@
    		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
    			<input type="submit" class="btn btn-secondary btn-sm" value="Logout">
    		</form:form> 
-		<a href="mypage" class="btn btn-secondary" type="button">My Page</a>
+		<a href="${pageContext.request.contextPath}/mypage" class="btn btn-secondary" type="button">My Page</a>
 </sec:authorize>
 
 	</div>
