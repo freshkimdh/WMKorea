@@ -48,6 +48,7 @@ public class UserService {
 		log.info("login ID   :   " + userVO.getId());
 		log.info("login PW   :   " + userVO.getPw());
 		userMapper.authori(userId);
+		log.info("userVO   :"+userVO);
 		userMapper.delMember(userVO);
 
 		log.info("delete end");
