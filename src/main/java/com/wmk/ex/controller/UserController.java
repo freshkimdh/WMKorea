@@ -1,6 +1,8 @@
 package com.wmk.ex.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -284,4 +289,50 @@ public class UserController {
 
 		return "redirect:/index";
 	}
+	
+	@GetMapping("/uploadProfile")
+	public String uploadProfile() {
+		log.info("upload Profile Img");
+		return "user/userUploadProfile";
+	}
+
+	@PostMapping("/uploadProfileImg")
+	public String uploadProfileImg(UserVO userVO, Model model, MultipartHttpServletRequest mpRequest)  throws Exception {
+
+		  Iterator<String> iterator = mpRequest.getFileNames();
+		  
+		  MultipartFile multipartFile; String originalFileName = null; 
+		  String originalFileExtension; String storedFileName = null;
+		  
+		  String filePath = "C:\\WMKOREA\\ThumbnailImg\\"; // 이미지 저장경로
+		  
+		  File file = new File(filePath); 
+		  if (file.exists() == false) { 
+			  file.mkdirs();
+		  }
+		  
+		  multipartFile = mpRequest.getFile(iterator.next()); 
+		  if(multipartFile.isEmpty() == false) { 
+		  originalFileName = multipartFile.getOriginalFilename(); 
+		  originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
+		  storedFileName = getRandomString() + originalFileExtension;
+		  
+		  file = new File(filePath + storedFileName); 
+		  multipartFile.transferTo(file);
+		  
+		  }
+		  
+		  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		  String userId = ((UserDetails)principal).getUsername(); 
+		  userVO.setId(userId);
+		  userVO.setProfile(originalFileName);
+		  userVO.setImgName(storedFileName);
+		  userService.uploadProfileImg(userVO);
+		return "redirect:/mypage";
+	}
+
+	public static String getRandomString() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
 }

@@ -26,5 +26,8 @@ public interface UserMapper {
 
 	//UserIdCheck
 	public int idChk(String id);
-	}
+	
+	//UpdateUsers
+	public void uploadProfileImg(UserVO userVO);
+}
 	

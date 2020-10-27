@@ -110,5 +110,12 @@ public class UserService {
 	public int getUser(String member_id) {
 		return userMapper.idChk(member_id);
 	}
-
+	
+	public void uploadProfileImg(UserVO userVO) {
+		userMapper.uploadProfileImg(userVO);
+	}
+	
+	public UserVO readUser(String id) {
+		return userMapper.readUser(id);
+	}
 }

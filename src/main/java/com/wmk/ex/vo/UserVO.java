@@ -21,7 +21,8 @@ public class UserVO {
 	private String nationality;	//NATIONALITY	VARCHAR2(50 BYTE)
 	private int enabled;		//ENABLED		CHAR(1 BYTE)
 	private String login_Type;	//LOGIN_TYPE	VARCHAR2(100 BYTE)
-	
+	private String profile;     //PROFILE       VARCHAR2(50 BYTE)
+	private String imgName;     //IMGNAME       VARCHAR2(50 BYTE)
 	
 	
 	public String getAuthorities() {
@@ -35,5 +36,11 @@ public class UserVO {
 		return authorities;
 	}
 
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", pw=" + pw + ", nickname=" + nickname + ", email=" + email + ", nationality="
+				+ nationality + ", enabled=" + enabled + ", login_Type=" + login_Type + ", profile=" + profile
+				+ ", imgName=" + imgName + "]";
+	}
 	
 }

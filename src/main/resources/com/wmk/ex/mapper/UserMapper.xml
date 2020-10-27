@@ -53,7 +53,10 @@
 		select * from wmk_users where id = #{id} and login_Type = #{login_Type}
 	</select>
 	
-	
+	<!-- UpdateUsers -->
+	<update id="uploadProfileImg" parameterType="com.wmk.ex.vo.UserVO">
+		update wmk_users set profile = #{profile} , imgName = #{imgName} where id = #{id}
+	</update>
 	
 	
 	

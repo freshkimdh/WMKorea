@@ -22,3 +22,7 @@ create table wmk_authorities (
 
 --유니크 키 인덱스 생성
 create unique index ix_auth_id on wmk_authorities (id,authority);
+
+--프로필 사진 컬럼 생성
+alter table wmk_users add PROFILE VARCHAR2(50 BYTE);  --파일 이름
+alter table wmk_users add IMGNAME VARCHAR2(50 BYTE);  --바뀐 파일이름
