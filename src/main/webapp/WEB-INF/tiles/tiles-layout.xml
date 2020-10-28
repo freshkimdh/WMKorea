@@ -75,7 +75,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/wmk_home/allAreaContentView.jsp" />
 
-	</definition>
+	</definition>	
+	
 	<!-- wmk_home folder end -->
 
 
@@ -226,6 +227,51 @@
 	
 	
 
+	<!--  user folder -->
+
+	<definition name="user/UserDeleteView"
+		extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/UserDeleteView.jsp" />
+
+	</definition>		
+	
+	
+	<definition name="user/userUploadProfile"
+		extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/userUploadProfile.jsp" />
+
+	</definition>
+	
+	<definition name="user/userModify"
+		extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/userModify.jsp" />
+
+	</definition>			
+
+	<definition name="user/userModify"
+		extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/userModify.jsp" />
+
+	</definition>
+	
+	<definition name="user/userPwModify"
+		extends="baseForm">
+
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/userPwModify.jsp" />
+
+	</definition>
+
+
+	<!-- user folder ends -->
 
 </tiles-definitions>
 

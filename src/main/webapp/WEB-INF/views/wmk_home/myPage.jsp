@@ -26,7 +26,7 @@
 					<!-- Group button details-->
 					<div class="btn-group btn-group btn-block">
 						<a href="userModify" class="btn btn-secondary" role="button">회원정보 수정</a>
-						<a href="uploadProfile" class="btn btn-secondary" role="button">프로필 사진 등록</a>
+<!-- 						<a href="uploadProfile" class="btn btn-secondary" role="button">프로필 사진 등록</a> -->
 						<a href="userPwModify" class="btn btn-secondary" role="button">비밀번호 수정</a> 
 						<a href="cartList" class="btn btn-secondary" role="button">장바구니 보기</a> 
 						<a href="orderList" class="btn btn-secondary" role="button">주문내역 보기</a> 
