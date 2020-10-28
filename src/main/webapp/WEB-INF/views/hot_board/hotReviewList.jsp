@@ -103,12 +103,6 @@
 	    <div class="card-body">
 	      <p class="card-text"><strong>${hotList.rTitle}</strong><br>${hotList.rInShort}</p>
 
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span> <a>(1)</a> <br>
-
 
 		<span class="badge  badge-pill badge-danger">Like</span> ${hotList.like_Cnt}
 	     <span class="badge  badge-pill badge-success">분류</span>

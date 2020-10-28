@@ -63,16 +63,6 @@
             	   sTxt += 			'</div>';
             	   sTxt += 			'<div class="card-body">';
             	   sTxt += 				'<p class="card-text"><strong>' + order.rTitle + '</strong><br>'+ order.rInShort + '</p>';
-            	   sTxt +=					'<span class="fa fa-star checked"></span>';
-            	   sTxt +=					'<span class="fa fa-star"></span>';
-            	   sTxt +=					'<span class="fa fa-star"></span>';
-            	   sTxt +=					'<span class="fa fa-star"></span>';
-            	   sTxt +=					'<span class="fa fa-star"></span> <a>(1)</a> <br>';            	   
-            	   
-            	   
-            	   
-            	   
-            	   
             	   sTxt += 					'<span class="badge  badge-pill badge-danger">Like</span>&nbsp'+ order.like_Cnt + '&nbsp';
             	   if(order.rCategory == 0){
             	   	sTxt += 				'<span class="badge  badge-pill badge-success">분류</span> 전체';
@@ -228,16 +218,6 @@
 	    </div>
 	    <div class="card-body">
 	      <p class="card-text"><strong>${userList.rTitle}</strong><br>${userList.rInShort}</p>
-
-
-
-
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span> <a>(1)</a> <br>
-
 
 
  	     <span class="badge  badge-pill badge-danger">Like</span> ${userList.like_Cnt}
