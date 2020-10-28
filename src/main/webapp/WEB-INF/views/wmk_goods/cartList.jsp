@@ -183,7 +183,8 @@
 		  
 		<p align="center">
 			<a href="goodsOrder" class="btn btn-dark btn-lg" role="button">주문하기</a>
-			<a href="goodsList" class="btn btn-dark btn-lg" role="button">취소</a>
+			<a href="javascript:history.back();" class="btn btn-dark btn-lg" role="button">취소</a>
+			
 		</p>
 		 </div>
 		</div>
