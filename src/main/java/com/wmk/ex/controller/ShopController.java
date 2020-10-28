@@ -7,8 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -242,7 +240,13 @@ public class ShopController {
 		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
 		 String username = ((UserDetails)principal).getUsername();
-	  
+		 
+		 if (principal instanceof UserDetails) { // user id 가져오기 성공
+				model.addAttribute("profileImg", userService.readUser(username));
+		 } else { //user id 가져오기 실패
+				model.addAttribute("profileImg", "");
+		 }
+		 
 		 order.setUserId(username);
 	  
 		 List<OrderVO> orderList = service.orderList(order);
