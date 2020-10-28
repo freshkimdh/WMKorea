@@ -81,13 +81,14 @@ body, html {
 		</div>
 	</div>
 
-	<div class="col-sm-2">
+	<div class="container">
 		<br>
 		<p style="text-align: center">'${title}' 을 입력한 결과입니다.</p>
 	</div>
 
 	<div class="album py-5">
 		<div class="container" id="review_boardByTitle">
+
 			<div class="row">
 				<c:forEach items="${reviewBoardByTitle}" var="userSearchList">
 					<div class="col-md-4">
