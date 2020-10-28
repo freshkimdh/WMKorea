@@ -446,7 +446,8 @@ console.log("aaa"+isSelectLike);
                 dataType : "text",
                 contentType: "application/json",
                 success: function(isSuccess) {
-                	$("#like").text();isSelectLike? "Like" : "UnLike" 
+                	$("#like").text();
+                	isSelectLike? "Like" : "UnLike" 
                 	isSelectLike = !isSelectLike;
 
                 	if(isSuccess){
