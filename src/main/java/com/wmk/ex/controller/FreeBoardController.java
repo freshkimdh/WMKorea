@@ -2,6 +2,7 @@ package com.wmk.ex.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wmk.ex.page.Criteria;
 import com.wmk.ex.page.PageDTO;
 import com.wmk.ex.service.FreeBoardService;
+import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.FreeReplyVO;
 
@@ -30,6 +32,9 @@ import lombok.extern.log4j.Log4j;
 public class FreeBoardController {
 	
 	private FreeBoardService freeService;
+	
+	@Autowired
+	private UserService userService;
 	
 	//게시판 목록 read
 	@GetMapping("/boardList")
@@ -55,6 +60,18 @@ public class FreeBoardController {
 	   log.info("contentView...");
 	   model.addAttribute("contentView", freeService.getNum(freeBoardVO.getfBoard_Num()));
 	   model.addAttribute("list", freeService.getList());
+	   
+	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	   if (principal instanceof UserDetails) { // user id 가져오기 성공
+		   String userId = ((UserDetails)principal).getUsername(); 
+		   model.addAttribute("userDetail", userService.readUser(userId));
+		} else { //user id 가져오기 실패
+			model.addAttribute("userDetail", "");  
+		}
+	   
+	   FreeBoardVO fBoardVO = freeService.getNum(freeBoardVO.getfBoard_Num());
+	   userService.readUser(fBoardVO.getfId());
+	   model.addAttribute("profileImg", userService.readUser(fBoardVO.getfId()));  
 	   
 	   return "/free_board/contentView"; 
 	}

@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wmk.ex.service.AdminService;
 import com.wmk.ex.service.ShopService;
+import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.CategoryVO;
 import com.wmk.ex.vo.GoodsVO;
 import com.wmk.ex.vo.GoodsViewVO;
@@ -28,6 +32,9 @@ public class GoodsController {
 
 	@Inject
 	ShopService shopService;
+	
+	@Autowired
+	UserService userService;
 
 	// 상품 등록 (Get)
 	@GetMapping("/admin/goods_register")
@@ -74,7 +81,17 @@ public class GoodsController {
 		GoodsViewVO view = adminService.goodsView(gdsNum);
 		model.addAttribute("view", view);
 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal).getUsername();
+
+		if (principal instanceof UserDetails) { // user id 가져오기 성공
+			model.addAttribute("profileImg", userService.readUser(username));
+		} else { //user id 가져오기 실패
+			model.addAttribute("profileImg", "");
+		}
+		
 		return "/wmk_goods/goodsView";
+		
 	}
 
 	// 상품 삭제

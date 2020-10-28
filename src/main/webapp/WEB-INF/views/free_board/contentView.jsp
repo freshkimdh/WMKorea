@@ -153,7 +153,12 @@
             <div class="card-body">
                  <div class="row">
                     <div class="col-md-2">
-                           <img src="img/avatar2.jpg" class="img img-rounded img-fluid"/>
+                    	<c:if test="${profileImg eq null || profileImg eq '' }">
+							<img class="mx-auto d-block" src="img/avatar2.jpg" width="150" />
+						</c:if>
+						<c:if test="${profileImg ne null && profileImg ne '' }">
+							<img class="mx-auto d-block" src="/filePath/${profileImg.imgName}" width="150" />
+						</c:if>
                      </div>
                   
                       <div class="col-md-10">

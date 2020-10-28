@@ -26,7 +26,13 @@
 
 	
 	<div class="container">
-		<img class="mx-auto d-block" src="goods/avatar_null.png" width="150"><br>
+		<c:if test="${profileImg eq null || profileImg eq '' }">
+			<img class="mx-auto d-block" src="goods/avatar_null.png" width="150" /><br>
+		</c:if>
+		<c:if test="${profileImg ne null && profileImg ne '' }">
+			<img class="mx-auto d-block" src="/filePath/${profileImg.imgName}" width="150" /><br>
+		</c:if>
+		
 		<h3 align="center"> <sec:authentication property="principal.user.nickname"/> 님의 상품주문을 진행합니다.</h3>
 		<p align="center">배송지 정보를 빠짐없이 입력해주세요.</p>
 		

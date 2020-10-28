@@ -1,17 +1,11 @@
 package com.wmk.ex.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wmk.ex.service.UserService;
 
@@ -58,14 +52,13 @@ public class HomeController {
 	public String myPage(Model model) {
 		log.info("mypage...");
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-		String userId = ((UserDetails)principal).getUsername(); 
-		System.out.println("userIduserId" + userId);
 		
-		if(userId == null || userId.equals("")) {
-			model.addAttribute("userDetail", "");  
-		}else{
-			model.addAttribute("userDetail", userService.readUser(userId));  
-		}
+		if (principal instanceof UserDetails) { // user id 가져오기 성공
+			String userId = ((UserDetails)principal).getUsername(); 
+			   model.addAttribute("userDetail", userService.readUser(userId));
+			} else { //user id 가져오기 실패
+				model.addAttribute("userDetail", "");  
+			}
 		return "/wmk_home/myPage";
 	}
 		

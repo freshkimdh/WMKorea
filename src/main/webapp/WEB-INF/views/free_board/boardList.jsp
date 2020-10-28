@@ -78,7 +78,7 @@
     <tbody>
     	<!-- 검색어의 값이 null일 경우  -->
    		<c:if test="${boardByTitle eq null}">
-   			<c:forEach items="${list}" var="list">
+   			<c:forEach items="${list}" var="list"> 
       		<tr>
         		<td align="center">${list.fBoard_Num}</td>
         		<td align="center">${list.fId}</td>

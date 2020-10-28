@@ -9,27 +9,23 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wmk.ex.service.ShopService;
+import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.CartListVO;
 import com.wmk.ex.vo.CartVO;
-import com.wmk.ex.vo.CommentListVO;
-import com.wmk.ex.vo.CommentVO;
-import com.wmk.ex.vo.GoodsViewVO;
 import com.wmk.ex.vo.OrderDetailVO;
 import com.wmk.ex.vo.OrderListVO;
 import com.wmk.ex.vo.OrderVO;
-import com.wmk.ex.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -40,7 +36,9 @@ public class ShopController {
  
 	@Inject
 	ShopService service;
-    
+	
+	@Autowired 
+	UserService userService;
 	
 	//장바구니 추가
 	@ResponseBody
@@ -104,11 +102,15 @@ public class ShopController {
 	@GetMapping("/goodsOrder") 
 	public String goodsOrder(Model model) throws Exception {
 			
-			
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = ((UserDetails)principal).getUsername();
 
-		  
+		if (principal instanceof UserDetails) { // user id 가져오기 성공
+			model.addAttribute("profileImg", userService.readUser(username));
+		} else { //user id 가져오기 실패
+			model.addAttribute("profileImg", "");
+		}
+		
 		List<CartListVO> cartList = service.cartList(username);
 		  
 		model.addAttribute("cartList", cartList);
@@ -211,6 +213,12 @@ public class ShopController {
 		 
 		String username = ((UserDetails)principal).getUsername();
 	  
+		if (principal instanceof UserDetails) { // user id 가져오기 성공
+			model.addAttribute("profileImg", userService.readUser(username));
+		} else { //user id 가져오기 실패
+			model.addAttribute("profileImg", "");
+		}
+		
 		order.setUserId(username);
 	  
 		List<OrderVO> orderList = service.orderList(order);
@@ -225,7 +233,7 @@ public class ShopController {
 	
 	
 	 
-	 //주문 모록
+	 //주문 목록
 	 @GetMapping("/orderList")
 	 public String getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
 		

@@ -138,8 +138,14 @@
 				
 				<div class="layer1">
 
-					<div id="draggable"><img id="faces" alt="" src="goods/avatar_null.png" width="150"></div>
-				
+					<div id="draggable">
+						<c:if test="${profileImg eq null || profileImg eq '' }">
+							<img id="faces" src="goods/avatar_null.png"  width="150" /><br>
+						</c:if>
+						<c:if test="${profileImg ne null && profileImg ne '' }">
+							<img id="faces" src="/filePath/${profileImg.imgName}" width="150" /><br>
+						</c:if>
+					</div>
 
 				</div>
 				
