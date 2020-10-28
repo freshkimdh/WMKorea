@@ -301,8 +301,10 @@ public class UserController {
 
 		  Iterator<String> iterator = mpRequest.getFileNames();
 		  
-		  MultipartFile multipartFile; String originalFileName = null; 
-		  String originalFileExtension; String storedFileName = null;
+		  MultipartFile multipartFile; 
+		  String originalFileName = null; 
+		  String originalFileExtension; 
+		  String storedFileName = null;
 		  
 		  String filePath = "C:\\WMKOREA\\ThumbnailImg\\"; // 이미지 저장경로
 		  
