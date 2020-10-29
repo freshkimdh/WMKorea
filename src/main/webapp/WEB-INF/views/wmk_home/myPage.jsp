@@ -42,10 +42,11 @@
 		</div>
 		<!-- <img class="mx-auto d-block" src="goods/profile.png" width="150"><br> -->
 		<!-- <img class="mx-auto d-block" src="img/avatar2.jpg" width="150"> -->
-		<c:if test="${userDetail eq null || userDetail eq '' }">
+			
+		<c:if test="${userDetail.imgName eq null || userDetail.imgName eq '' }">
 			<img class="mx-auto d-block" src="img/avatar2.jpg" id="introimg" width="150" />
 		</c:if>
-		<c:if test="${userDetail ne null && userDetail ne '' }">
+		<c:if test="${userDetail.imgName ne null && userDetail.imgName ne '' }">
 			<img class="mx-auto d-block" src="/filePath/${userDetail.imgName}" id="introimg" width="150" />
 		</c:if>
 		<br>
