@@ -88,7 +88,7 @@
         + this.repCon
         + "</div>"
          + "</div>"
-         
+         + "</div>" + "<hr>"
          + "</div>" //row end 
         
      });
