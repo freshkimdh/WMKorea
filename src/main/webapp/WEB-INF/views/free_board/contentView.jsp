@@ -153,10 +153,10 @@
             <div class="card-body">
                  <div class="row">
                     <div class="col-md-2">
-                    	<c:if test="${profileImg eq null || profileImg eq '' }">
+                    	<c:if test="${profileImg.imgName eq null || profileImg.imgName eq '' }">
 							<img class="mx-auto d-block" src="img/avatar2.jpg" width="150" />
 						</c:if>
-						<c:if test="${profileImg ne null && profileImg ne '' }">
+						<c:if test="${profileImg.imgName ne null && profileImg.imgName ne '' }">
 							<img class="mx-auto d-block" src="/filePath/${profileImg.imgName}" width="150" />
 						</c:if>
                      </div>

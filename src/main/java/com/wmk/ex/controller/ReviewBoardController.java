@@ -32,7 +32,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wmk.ex.service.ReviewBoardService;
+import com.wmk.ex.service.UserService;
 import com.wmk.ex.vo.CustomUser;
+import com.wmk.ex.vo.FreeBoardVO;
 import com.wmk.ex.vo.ReviewBoardVO;
 import com.wmk.ex.vo.ReviewReplyVO;
 
@@ -46,6 +48,9 @@ public class ReviewBoardController {
 	
 	@Autowired
 	private ReviewBoardService reviewService;
+	
+	@Autowired
+	private UserService userService;
 	
 	//여행지 메인 read
 	@RequestMapping("/areaIndex")
@@ -74,8 +79,26 @@ public class ReviewBoardController {
 		log.info("rList" + reviewService.getReviewList(reviewBoardVO));
 		log.info("rArea" + reviewBoardVO.getrArea());
 		
+		
+		//
+//		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		   if (principal instanceof UserDetails) { // user id 가져오기 성공
+//			   String userId = ((UserDetails)principal).getUsername(); 
+//			   model.addAttribute("userDetail", userService.readUser(userId));
+//			} else { //user id 가져오기 실패
+//				model.addAttribute("userDetail", "");  
+//			}
+//		   
+//		   ReviewBoardVO rBoardVO = reviewService.getrBoardNum(reviewBoardVO.getrBoardNum());
+//		   userService.readUser(rBoardVO.getrId());
+//		   model.addAttribute("profileImg", userService.readUser(rBoardVO.getrId()));  
+		//
+		   
+		   
 		return "/review_board/userReviewList";
 	}
+	
+	
 	
 	
 	//Ajax 목록 read
@@ -126,6 +149,24 @@ public class ReviewBoardController {
 			log.info("like Count	:"+likeCount);
 			model.addAttribute("isSelectLike", likeCount > 0);
 		}
+		
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) { // user id 가져오기 성공
+			String userId = ((UserDetails) principal).getUsername();
+			model.addAttribute("userDetail", userService.readUser(userId));
+		} else { // user id 가져오기 실패
+			model.addAttribute("userDetail", "");
+		}
+
+		ReviewBoardVO rBoardVO = reviewService.getrBoardNum(reviewBoardVO.getrBoardNum());
+		userService.readUser(rBoardVO.getrId());
+		model.addAttribute("profileImg", userService.readUser(rBoardVO.getrId()));
+
+		
+		
+		
+		
 		
 		return "/review_board/reviewContentView";
 	}
